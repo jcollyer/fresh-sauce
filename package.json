@@ -3,16 +3,19 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/jcollyer/freshsauce",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "scrape": "casperjs scrape.js"
   },
-  "author": "",
+  "author": "Jeremy Collyer",
   "license": "ISC",
   "dependencies": {
     "casperjs": "^1.1.0",
     "file-loader": "^0.8.4",
+    "firebase": "^2.4.2",
     "jsx-loader": "^0.13.2",
     "node-libs-browser": "^0.5.2",
+    "phantomjs": "^2.1.7",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "reactfire": "^0.4.0",

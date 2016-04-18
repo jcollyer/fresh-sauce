@@ -1,8 +1,12 @@
-var ids = [];
 
-var casper = require('casper').create({
-   verbose: true
-});
+// var React = require('react');
+var React = phantom.injectJs('react/dist/react.min.js');
+// var Firebase = phantom.injectJs('node_modules/firebase/lib/firebase-node.js');
+// var dataRef = new Firebase('https://fresh-sauce.firebaseio.com/');
+var fs = require('fs');
+var casper = require('casper').create();
+var ids = [];
+var path = 'scrapes/ids.text';
 
 
 function getSCids() {
@@ -16,13 +20,22 @@ casper.start('http://www.mugatunes.com/homestream');
 
 casper.then(function() {
   ids = this.evaluate(getSCids);
-  // this.echo(ids);
+  this.echo(ids);
 });
 
 casper.run(function() {
+    fs.write(path, ids, 'w');
     this.echo(ids.length + ' ids found:');
     this.echo(' - ' + ids.join('\n - ')).exit();
 });
+
+
+
+// fs.writeFile('ids.txt', 'hit me!', function (err) {
+//   if (err) return console.log(err);
+//   console.log('Sound Cloud IDs > ids.json');
+// });
+
 
 
 
