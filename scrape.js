@@ -1,12 +1,8 @@
 
-// var React = require('react');
-var React = phantom.injectJs('react/dist/react.min.js');
-// var Firebase = phantom.injectJs('node_modules/firebase/lib/firebase-node.js');
-// var dataRef = new Firebase('https://fresh-sauce.firebaseio.com/');
 var fs = require('fs');
 var casper = require('casper').create();
 var ids = [];
-var path = 'scrapes/ids.text';
+var path = 'scrapes/ids.txt';
 
 
 function getSCids() {
