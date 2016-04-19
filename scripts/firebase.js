@@ -4,22 +4,17 @@ var Firebase = require('firebase');
 var ref = new Firebase('https://fresh-sauce.firebaseio.com');
 var usersRef = ref.child("items");
 var ids = {id: 88888};
-fs.readFile('./scrapes/ids.txt', function(err, data) {
+fs.readFile('./scrapes/ids.json', function(err, data) {
   // if (err) throw err;
-  for(var i=0;i<data.length;i++){
-    console.log(i + data[0] + "\n");
-  }
-  // ids = data;
+
+
+    usersRef.set({data});
+    console.log(data);
 });
 
-console.log("------- " + ids.id);
 
-// usersRef.set({
-//   track: {
-//     id: ids,
-//     favorites: 0
-//   }
-// });
+
+
 //
 //
 //

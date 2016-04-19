@@ -5,8 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/jcollyer/freshsauce",
   "scripts": {
-    "scrape": "casperjs scrape.js",
-    "push": "node push.js"
+    "scrape": "casperjs scripts/scrape.js",
+    "firebase": "node scripts/firebase.js"
   },
   "author": "Jeremy Collyer",
   "license": "ISC",
