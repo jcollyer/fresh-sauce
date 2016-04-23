@@ -2,3 +2,5 @@
 node_modules
 .DS_Store
 scrapes/*
+scripts/*
+npm-debug.log
