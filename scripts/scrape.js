@@ -23,13 +23,10 @@ casper.start('http://www.mugatunes.com/homestream');
 casper.then(function() {
   // get list of Sound Cloud IDs
   ids = this.evaluate(getSCids);
-
-  // stringify SC IDs to be consumed more easily
-  stringifyedIds = JSON.stringify(ids);
 });
 
 casper.run(function() {
-    fs.write(path, stringifyedIds, 'w');
+    fs.write(path, ids, 'w');
     this.echo(ids.length + ' scrape success! ids found:');
     this.echo(' - ' + ids.join('\n - ')).exit();
 });

@@ -3,23 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
-  <script>
-
-    var redirectUri = '';
-    if (window.location.hostname == 'localhost'){
-      var redirectUri = "http://localhost:3000/callback.html";
-      var clientId = "b5e21578d92314bc753b90ea7c971c1e";
-    } else {
-      var redirectUri = "http://jcollyer.com/callback.html";
-      var clientId = "ec96411931160ac8d82285862bf910e4";
-    }
-
-    SC.initialize({
-      client_id: clientId,
-      redirect_uri: redirectUri
-    });
-  </script>
 </head>
 
 <body>
