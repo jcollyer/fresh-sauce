@@ -10,7 +10,6 @@ var Home =
     render: function() {
       return (
         <div>
-          <h3>this is the home page :)</h3>
           <Player />
           <Playlist />
         </div>

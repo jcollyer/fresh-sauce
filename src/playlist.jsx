@@ -4,43 +4,28 @@ var ReactFireMixin = require('../node_modules/reactfire/dist/reactfire.js');
 
 var Playlist =
   React.createClass({
-    firebaseItems: [],
     mixins: [ReactFireMixin],
     getInitialState: function() {
       return {items: []};
     },
     componentWillMount: function() {
-
       // connect to firebase data
-      this.firebaseRef = new Firebase("https://fresh-sauce.firebaseio.com/items");
-
-      // onload and when added - loop through each child of "/items"
-      this.firebaseRef.on("child_added", function(dataSnapshot) {
-
-        // array of items from firebase
-        var itemArray = dataSnapshot.val().newData;
-
-        // loops through array and adds each track id
-        for(i=0;i<itemArray.length;i++){
-          this.firebaseItems.push(dataSnapshot.val().newData[i]);
-        }
-
-        // set track ids to this.state.items
-        this.setState({
-          items: this.firebaseItems
-        });
-      }.bind(this));
+      ref = new Firebase("https://fresh-sauce.firebaseio.com/items");
+      // set firesbase items to this.state.items
+      this.bindAsArray(ref, "items");
     },
     componentWillUnmount: function() {
       this.firebaseRef.off();
     },
     render: function() {
       return (
-        <div>
+        <div id="track-list">
           {this.state.items.map(function(item, index) {
             return (
-              <div key={index}>
-                {item}
+              <div className="track" key={index}>
+                <img src={item['track'].artwork_url} />
+                {item['track'].artist} -
+                <b>{item['track'].title}</b>
               </div>
             );
           })}
