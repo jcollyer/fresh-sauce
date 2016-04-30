@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/jcollyer/freshsauce",
   "scripts": {
-    "scrape": "casperjs scripts/scrape.js",
+    "scrapeweb": "node scripts/scrapeweb.js",
     "soundcloud": "node scripts/soundcloud.js"
   },
   "author": "Jeremy Collyer",
