@@ -6,6 +6,9 @@ var idsRef = ref.child("ids");
 var hrefs = [];
 var ids = [];
 
+// clear existing ids from firebase
+idsRef.remove();
+
 request({
     method: 'GET',
     url: 'https://bound2hiphop.com/category/singles/'
@@ -32,9 +35,12 @@ var getTrack = function(href){
       if (url.split(".")[1] === "soundcloud") {
         // get soundcloud id
         var id = url.substr(url.lastIndexOf("/")+1, 9);
-        // push to firebase
-        idsRef.push({id});
-
+        // to prevent duplicates
+        if(ids.indexOf(id) == -1){
+          ids.push(id);
+          // push to firebase
+          idsRef.push({id});
+        }
         console.log("success! added id: " + id);
       }
     });
