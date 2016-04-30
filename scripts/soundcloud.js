@@ -5,7 +5,6 @@ var ref = new Firebase('https://fresh-sauce.firebaseio.com');
 var usersRef = ref.child("items");
 
 var idsFile = './scrapes/ids.js';
-var jsonFile = './scrapes/formattedIds.json'
 
 fs.readFile(idsFile, 'utf8', function(err, data) {
   console.log(JSON.stringify(data));
@@ -15,7 +14,7 @@ fs.readFile(idsFile, 'utf8', function(err, data) {
       var url = 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e';
 
       request(url, function (error, response, body) {
-        formattedBody = JSON.parse(body);
+        var formattedBody = JSON.parse(body);
         // console.log("body: " + body);
         if (!error && response.statusCode == 200) {
           var track = {};
@@ -40,4 +39,4 @@ fs.readFile(idsFile, 'utf8', function(err, data) {
 setTimeout(function() {
   console.log("bye...");
   process.exit();
-},2500);
+},3500);
