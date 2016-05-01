@@ -12,7 +12,7 @@ idsRef.remove();
 
 request({
     method: 'GET',
-    url: 'http://carolinaontherise.com/page/3/'
+    url: 'http://carolinaontherise.com'
 }, function(err, response, body) {
      if (err) return console.error(err);
      $ = cheerio.load(body);

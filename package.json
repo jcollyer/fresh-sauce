@@ -5,9 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/jcollyer/freshsauce",
   "scripts": {
-    "scrapeweb": "node scripts/scrapeweb.js",
-    "soundcloud": "node scripts/soundcloud.js",
-    "youtube": "node scripts/youtube.js",
+    "firebase": "node scripts/firebase.js",
+    "bound2hiphop": "node scripts/bound2hiphop.js",
     "carolinaontherise": "node scripts/carolinaontherise.js"
   },
   "author": "Jeremy Collyer",
