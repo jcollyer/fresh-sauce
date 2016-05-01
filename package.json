@@ -6,7 +6,9 @@
   "repository": "https://github.com/jcollyer/freshsauce",
   "scripts": {
     "scrapeweb": "node scripts/scrapeweb.js",
-    "soundcloud": "node scripts/soundcloud.js"
+    "soundcloud": "node scripts/soundcloud.js",
+    "youtube": "node scripts/youtube.js",
+    "carolinaontherise": "node scripts/carolinaontherise.js"
   },
   "author": "Jeremy Collyer",
   "license": "ISC",

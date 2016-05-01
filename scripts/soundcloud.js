@@ -23,6 +23,7 @@ idsRef.on("value", function(snapshot) {
         track.title = formattedBody.title;
         track.artwork_url = formattedBody.artwork_url;
         track.artist = formattedBody.user.username;
+        track.likes = 0;
 
         // Add data to firebase
         tracksRef.push({track});
