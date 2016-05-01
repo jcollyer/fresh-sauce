@@ -8,6 +8,9 @@ var Playlist =
     getInitialState: function() {
       return {items: []};
     },
+    clickTrack: function() {
+      alert("hi");
+    },
     componentWillMount: function() {
       // connect to firebase data
       ref = new Firebase("https://fresh-sauce.firebaseio.com/items");
@@ -18,12 +21,13 @@ var Playlist =
       this.firebaseRef.off();
     },
     render: function() {
+      var that = this;
       return (
         <div id="track-list">
           {this.state.items.map(function(item, index) {
             return (
               <div className="track" key={index}>
-                <img src={item['track'].artwork_url} />
+                <img src={item['track'].artwork_url} onClick={that.clickTrack} />
                 {item['track'].artist} -
                 <b>{item['track'].title}</b>
               </div>
