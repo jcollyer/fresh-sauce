@@ -13,12 +13,13 @@ var Playlist =
     },
     componentWillMount: function() {
       // connect to firebase data
-      ref = new Firebase("https://fresh-sauce.firebaseio.com/items");
+
+      var tracksRef = new Firebase("https://fresh-sauce.firebaseio.com/items");
       // set firesbase items to this.state.items
-      this.bindAsArray(ref, "items");
+      this.bindAsArray(tracksRef, "items");
     },
     componentWillUnmount: function() {
-      this.firebaseRef.off();
+      this.firebaseTrackRef.off();
     },
     render: function() {
       var that = this;
