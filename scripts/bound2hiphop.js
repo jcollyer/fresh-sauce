@@ -39,7 +39,7 @@ var getTrack = function(href){
         if(ids.indexOf(id) == -1){
           ids.push(id);
           // push to firebase
-          idsRef.push({id});
+          idsRef.push({id: id, type: 'sc'});
         }
         console.log("success! added id: " + id);
       }

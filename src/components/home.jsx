@@ -1,6 +1,7 @@
-var React = require('react');
-var Playlist = require('./playlist.jsx');
-var Player = require('./player.jsx');
+import React from 'react'
+import Playlist from './playlist.jsx'
+import Player from './player.jsx'
+import Tracks from './tracks'
 
 // require('./style/grid.min.less');
 // require('./style/home.less');
@@ -11,6 +12,7 @@ var Home =
       return (
         <div>
           <Player />
+          <Tracks />
           <Playlist />
         </div>
       );
