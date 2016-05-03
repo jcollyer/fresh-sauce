@@ -1,6 +1,6 @@
 var React = require('react');
-require('../node_modules/firebase/lib/firebase-web.js');
-var ReactFireMixin = require('../node_modules/reactfire/dist/reactfire.js');
+require('../../node_modules/firebase/lib/firebase-web.js');
+var ReactFireMixin = require('../../node_modules/reactfire/dist/reactfire.js');
 
 var Playlist =
   React.createClass({

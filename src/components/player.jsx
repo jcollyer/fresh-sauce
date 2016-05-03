@@ -1,5 +1,5 @@
 var React = require('react');
-require('./style/player.less');
+require('../style/player.less');
 var Player =
   React.createClass({
     render: function() {

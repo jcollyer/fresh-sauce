@@ -41,5 +41,8 @@ module.exports = {
         loader: 'url-loader?limit=10000&minetype=image/png'
     }]
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   plugins: [new Webpack.HotModuleReplacementPlugin()]
 };
