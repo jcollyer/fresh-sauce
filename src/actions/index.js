@@ -1,13 +1,5 @@
-export function addTrack(track) {
-  return {
-    type: 'addTrack',
-    track
-  }
-}
+var authActions = require("./auth"),
+	quotesActions = require("./quotes"),
+	feedbackActions = require("./feedback");
 
-export function deleteTrack(index) {
-  return {
-    type: 'deletTrack',
-    index
-  }
-}
+module.exports = Object.assign({},authActions,quotesActions,feedbackActions);
