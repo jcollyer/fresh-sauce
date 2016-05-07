@@ -4,7 +4,7 @@ This file contains all would-be-magic-strings in the app.
 
 module.exports = {
 	// MISC
-	FIREBASE: "https://reduxfirebase.firebaseio.com/",
+	FIREBASE: "https://fresh-sauce.firebaseio.com/",
 
 	// UI FEEDBACK ACTIONS
 	DISPLAY_ERROR: "DISPLAY_ERROR",

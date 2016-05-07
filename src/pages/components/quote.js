@@ -27,7 +27,10 @@ var Quote = React.createClass({
 		} else {
 			button = <span><button onClick={p.edit}>Edit</button><button onClick={p.delete}>Delete</button></span>;
 		}
-		return <div className="quote"><span className="author">{q.username+" said: "}</span>{q.content} {button}</div>;
+		return <div className="quote">
+							<span className="artwork_url"><img src={q.track.artwork_url} /></span>
+							<span className="title"><b>{q.track.title}</b> -- </span>
+							<span className="artist">{q.track.artist}</span></div>;
 	}
 });
 
