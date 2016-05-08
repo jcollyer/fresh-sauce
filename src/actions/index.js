@@ -1,4 +1,4 @@
 var authActions = require("./auth");
-var quotesActions = require("./quotes");
+var tracksActions = require("./tracks");
 
-module.exports = Object.assign({},authActions,quotesActions);
+module.exports = Object.assign({},authActions,tracksActions);

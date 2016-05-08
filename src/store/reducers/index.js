@@ -1,10 +1,10 @@
 var Redux = require("redux");
 var	authReducer = require("./auth")
-var	quotesReducer = require("./quotes");
+var	tracksReducer = require("./tracks");
 
 var rootReducer = Redux.combineReducers({
 	auth: authReducer,
-	quotes: quotesReducer
+	tracks: tracksReducer
 });
 
 module.exports = rootReducer;

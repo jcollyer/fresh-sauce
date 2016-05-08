@@ -10,7 +10,7 @@ module.exports = {
 		username: null,
 		uid: null
 	},
-	quotes: {
+	tracks: {
 		hasreceiveddata: false,
 		submittingnew: false,
 		states: {}, // this will store per quote id if we're reading, editing or awaiting DB response

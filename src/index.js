@@ -27,5 +27,5 @@ ReactDOM.render(
 // setup Firebase listeners
 setTimeout(function(){
 	store.dispatch( actions.startListeningToAuth() );
-	store.dispatch( actions.startListeningToQuotes() );
+	store.dispatch( actions.startListeningToTracks() );
 });

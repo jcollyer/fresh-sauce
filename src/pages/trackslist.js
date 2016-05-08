@@ -1,12 +1,11 @@
-var React = require("react"),
-	ptypes = React.PropTypes,
-	ReactRedux = require("react-redux"),
-	C = require("../constants"),
-	_ = require("lodash"),
-	actions = require("../actions/"),
-	Quote = require("./components/quote");
+var React = require("react");
+var ReactRedux = require("react-redux");
+var C = require("../constants");
+var _ = require("lodash");
+var actions = require("../actions/");
+var Track = require("./components/quote");
 
-var Quoteslist = React.createClass({
+var Trackslist = React.createClass({
 	newQuote: function(e){
 		if (!this.props.quotes.submitting){
 			e.preventDefault();
@@ -15,9 +14,9 @@ var Quoteslist = React.createClass({
 		}
 	},
 	render: function(){
-		var p = this.props, rows = _.map(p.quotes.data,function(quote,qid){
-			var quotestate = p.quotes.states[qid];
-			return <Quote
+		var p = this.props, rows = _.map(p.tracks.data,function(quote,qid){
+			var quotestate = p.tracks.states[qid];
+			return <Track
 				key={qid}
 				quote={quote}
 				qid={qid}
@@ -29,12 +28,12 @@ var Quoteslist = React.createClass({
 				mayedit={p.auth.uid === quote.uid}
 			/>;
 		}).reverse();
-		return (<div className="quoteslist">
+		return (<div className="trackslist">
 			{p.auth.uid ? <form className="newquoteform" onSubmit={this.newQuote}>
 				<input ref="newquote" placeholder="write something clever!"/>
-				<button type="submit" disabled={p.quotes.submittingnew}>{p.quotes.submittingnew ? "Submitting..." : "Submit"}</button>
+				<button type="submit" disabled={p.tracks.submittingnew}>{p.tracks.submittingnew ? "Submitting..." : "Submit"}</button>
 			</form> : <p>Log in to add a new quote of your own!</p>}
-			{p.quotes.hasreceiveddata ? rows : "Loading quotes..."}
+			{p.tracks.hasreceiveddata ? rows : "Loading quotes..."}
 		</div>);
 	}
 });
@@ -43,7 +42,7 @@ var Quoteslist = React.createClass({
 
 var mapStateToProps = function(appState){
 	return {
-		quotes: appState.quotes,
+		tracks: appState.tracks,
 		auth: appState.auth
 	};
 };
@@ -58,4 +57,4 @@ var mapDispatchToProps = function(dispatch){
 	}
 };
 
-module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(Quoteslist);
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(Trackslist);

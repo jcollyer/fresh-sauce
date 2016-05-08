@@ -1,19 +1,18 @@
 /*
-This module contains action creators dealing with `appState.quotes`
+This module contains action creators dealing with `appState.tracks`
 */
-
-var C = require("../constants"),
-	Firebase = require("firebase"),
-	quotesRef = new Firebase(C.FIREBASE).child("items"),
-	utils = require("../utils");
+var C = require("../constants");
+var Firebase = require("firebase");
+var tracksRef = new Firebase(C.FIREBASE).child("items");
+var utils = require("../utils");
 
 module.exports = {
-	// called when the app starts. this means we immediately download all quotes, and
-	// then receive all quotes again as soon as anyone changes anything.
-	startListeningToQuotes: function(){
+	// called when the app starts. this means we immediately download all tracks, and
+	// then receive all tracks again as soon as anyone changes anything.
+	startListeningToTracks: function(){
 		return function(dispatch,getState){
-			quotesRef.on("value",function(snapshot){
-				dispatch({ type: C.RECEIVE_QUOTES_DATA, data: snapshot.val() });
+			tracksRef.on("value",function(snapshot){
+				dispatch({ type: C.RECEIVE_TRACKS_DATA, data: snapshot.val() });
 			});
 		}
 	},
@@ -26,7 +25,7 @@ module.exports = {
 	deleteQuote: function(qid){
 		return function(dispatch,getState){
 			dispatch({type:C.SUBMIT_QUOTE_EDIT,qid});
-			quotesRef.child(qid).remove(function(error){
+			tracksRef.child(qid).remove(function(error){
 				dispatch({type:C.FINISH_QUOTE_EDIT,qid});
 				if (error){
 					dispatch({type:C.DISPLAY_ERROR,error:"Deletion failed! "+error});
@@ -46,7 +45,7 @@ module.exports = {
 				dispatch({type:C.DISPLAY_ERROR,error});
 			} else {
 				dispatch({type:C.SUBMIT_QUOTE_EDIT,qid});
-				quotesRef.child(qid).set({content,username,uid},function(error){
+				tracksRef.child(qid).set({content,username,uid},function(error){
 					dispatch({type:C.FINISH_QUOTE_EDIT,qid});
 					if (error){
 						dispatch({type:C.DISPLAY_ERROR,error:"Update failed! "+error});
@@ -67,7 +66,7 @@ module.exports = {
 				dispatch({type:C.DISPLAY_ERROR,error});
 			} else {
 				dispatch({type:C.AWAIT_NEW_QUOTE_RESPONSE});
-				quotesRef.push({content,username,uid},function(error){
+				tracksRef.push({content,username,uid},function(error){
 					dispatch({type:C.RECEIVE_NEW_QUOTE_RESPONSE});
 					if (error){
 						dispatch({type:C.DISPLAY_ERROR,error:"Submission failed! "+error});
