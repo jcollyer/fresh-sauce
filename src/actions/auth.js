@@ -2,16 +2,16 @@
 This module contains action creators dealing with `appState.auth`
 */
 
-var C = require("../constants"),
-	Firebase = require("firebase"),
-	fireRef = new Firebase(C.FIREBASE);
+var C = require("../constants");
+var Firebase = require("firebase");
+var fireRef = new Firebase(C.FIREBASE);
 
 module.exports = {
 	// called at app start
 	startListeningToAuth: function(){
 		return function(dispatch,getState){
 			fireRef.onAuth(function(authData){
-				if (authData){ 
+				if (authData){
 					dispatch({
 						type: C.LOGIN_USER,
 						uid: authData.uid,

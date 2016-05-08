@@ -1,12 +1,14 @@
-var React = require("react"),
-	ReactRedux = require("react-redux"),
-	actions = require("../../actions"),
-	C = require("../../constants"),
-	Link = require("react-router").Link;
+var React = require("react");
+var ReactRedux = require("react-redux");
+var actions = require("../../actions");
+var C = require("../../constants");
+var Link = require("react-router").Link;
 
 var Authpanel = React.createClass({
 	render: function(){
-		var p = this.props, auth = p.auth;
+		var p = this.props;
+		var auth = p.auth;
+
 		switch(auth.currently){
 			case C.LOGGED_IN: return (
 				<div className="authpanel">

@@ -1,14 +1,8 @@
-var C = require("../../constants"),
-	initialState = require("../initialstate");
+var C = require("../../constants");
+var initialState = require("../initialstate");
 
-/*
-A reducer is a function that takes the current state and an action, and then returns a
-new state. This reducer is responsible for appState.auth data.
-See `initialstate.js` for a clear view of what it looks like!
-*/
-
-module.exports = function(currentstate,action){
-	switch(action.type){
+module.exports = function(currentstate, action) {
+	switch(action.type) {
 		case C.ATTEMPTING_LOGIN:
 			return {
 				currently: C.AWAITING_AUTH_RESPONSE,
