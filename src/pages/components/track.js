@@ -31,8 +31,8 @@ var Track = React.createClass({
 		}
 		return <div className="track">
 							<span className="artwork_url"><img src={q.track.artwork_url} /></span>
-							<span className="title"><b>{q.track.title}</b> -- </span>
-							<span className="artist">{q.track.artist}</span></div>;
+							<span className="title">{q.track.title} </span>
+							<span className="artist"><b>{q.track.artist}</b></span></div>;
 	}
 });
 

@@ -2,20 +2,24 @@ var C = require("../../constants");
 var initialState = require("../initialstate");
 var	_ = require("lodash");
 
-module.exports = function(currentstate,action){
+module.exports = function(currentstate, action) {
 	var newstate;
 	switch(action.type){
 		case C.RECEIVE_TRACKS_DATA:
-			return Object.assign({},currentstate,{
+			return Object.assign({}, currentstate, {
 				hasreceiveddata: true,
 				data: action.data
 			});
+		case C.PLAY_TRACK:
+			return Object.assign({}, currentstate, {
+				trackId: action.tid
+			});
 		case C.AWAIT_NEW_TRACK_RESPONSE:
-			return Object.assign({},currentstate,{
+			return Object.assign({}, currentstate, {
 				submittingnew: true
 			});
 		case C.RECEIVE_NEW_TRACK_RESPONSE:
-			return Object.assign({},currentstate,{
+			return Object.assign({}, currentstate, {
 				submittingnew: false
 			});
 		case C.START_TRACK_EDIT:

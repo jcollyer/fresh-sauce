@@ -3,21 +3,27 @@ var ReactRedux = require("react-redux");
 var C = require("../constants");
 var _ = require("lodash");
 var actions = require("../actions/");
-var Track = require("./components/quote");
+var Track = require("./components/track");
+var store = require('../store');
 
 var Trackslist = React.createClass({
-	newQuote: function(e){
-		if (!this.props.quotes.submitting){
-			e.preventDefault();
-			this.props.submitNewQuote(this.refs.newquote.value);
-			this.refs.newquote.value = '';
-		}
-	},
-	render: function(){
-		var p = this.props, rows = _.map(p.tracks.data,function(track,qid){
-			var quotestate = p.tracks.states[qid];
-			return <Track
-				key={qid}
+	 handleClick: function(tid) {
+			store.dispatch(actions.playTrack(tid));
+	 },
+	 newQuote: function(e) {
+		 if (!this.props.quotes.submitting){
+			 e.preventDefault();
+			 this.props.submitNewQuote(this.refs.newquote.value);
+			 this.refs.newquote.value = '';
+		 }
+	 },
+	 render: function(){
+		 var that = this;
+		 var p = this.props;
+		 var rows = _.map(p.tracks.data,function(track,qid){
+			 var quotestate = p.tracks.states[qid];
+			 return <div key={qid} onClick={that.handleClick.bind(null, track.track.id)}>
+			 <Track
 				track={track}
 				qid={qid}
 				state={quotestate}
@@ -26,7 +32,7 @@ var Trackslist = React.createClass({
 				submit={p.submitEdit.bind(this,qid)}
 				delete={p.deleteQuote.bind(this,qid)}
 				mayedit={p.auth.uid === track.uid}
-			/>;
+			/></div>;
 		}).reverse();
 		return (<div className="trackslist">
 			{p.auth.uid ? <form className="newquoteform" onSubmit={this.newQuote}>
