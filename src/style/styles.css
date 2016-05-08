@@ -1,0 +1,27 @@
+body {
+	padding-top: 1em;
+}
+
+input {
+	min-width: 300px;
+	margin-right: 1em;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.authpanel, .newquoteform, .quote {
+	margin-bottom: 1em;
+	padding: 3px;
+}
+
+.authpanel {
+	border-bottom: 1px solid #CCC;
+}
+
+.author {
+	font-size: 0.85em;
+	color: #555;
+}
