@@ -3,9 +3,8 @@ This is our top-level component. Sub-components matching specific routes will be
 contained in `this.props.children` and rendered out.
 */
 
-var React = require('react'),
-    Authpanel = require('./components/authpanel'),
-    Feedbackpanel = require('./components/feedbackpanel');
+var React = require('react');
+var Authpanel = require('./components/authpanel');
 
 var Wrapper = React.createClass({
     render: function() {
@@ -13,7 +12,6 @@ var Wrapper = React.createClass({
             <div className="wrapper">
                 <Authpanel />
                 <div className="center">
-                    <Feedbackpanel />
                     {this.props.children}
                 </div>
             </div>

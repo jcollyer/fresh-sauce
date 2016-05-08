@@ -1,12 +1,10 @@
-var Redux = require("redux"),
-	authReducer = require("./auth"),
-	quotesReducer = require("./quotes"),
-	feedbackReducer = require("./feedback");
+var Redux = require("redux");
+var	authReducer = require("./auth")
+var	quotesReducer = require("./quotes");
 
 var rootReducer = Redux.combineReducers({
 	auth: authReducer,
-	quotes: quotesReducer,
-	feedback: feedbackReducer
+	quotes: quotesReducer
 });
 
 module.exports = rootReducer;
