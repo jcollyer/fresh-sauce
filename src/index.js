@@ -11,15 +11,15 @@ var store = require('./store');
 var routes = require('./routes');
 var actions = require('./actions');
 
-
-
+// import { hashHistory } from 'react-router';
+var hashHistory = require('react-router').hashHistory;
 require('./style/styles.css');
 
 ReactDOM.render(
 	// The top-level Provider is what allows us to `connect` components to the store
 	// using ReactRedux.connect
 	<Provider store={store}>
-		<Router routes={routes}/>
+		<Router history={hashHistory} routes={routes}/>
 	</Provider>,
 	document.getElementById("root")
 );
