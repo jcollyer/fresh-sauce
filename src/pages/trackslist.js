@@ -14,18 +14,18 @@ var Trackslist = React.createClass({
 		}
 	},
 	render: function(){
-		var p = this.props, rows = _.map(p.tracks.data,function(quote,qid){
+		var p = this.props, rows = _.map(p.tracks.data,function(track,qid){
 			var quotestate = p.tracks.states[qid];
 			return <Track
 				key={qid}
-				quote={quote}
+				track={track}
 				qid={qid}
 				state={quotestate}
 				edit={p.startEdit.bind(this,qid)}
 				cancel={p.cancelEdit.bind(this,qid)}
 				submit={p.submitEdit.bind(this,qid)}
 				delete={p.deleteQuote.bind(this,qid)}
-				mayedit={p.auth.uid === quote.uid}
+				mayedit={p.auth.uid === track.uid}
 			/>;
 		}).reverse();
 		return (<div className="trackslist">

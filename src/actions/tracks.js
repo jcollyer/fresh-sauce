@@ -1,6 +1,3 @@
-/*
-This module contains action creators dealing with `appState.tracks`
-*/
 var C = require("../constants");
 var Firebase = require("firebase");
 var tracksRef = new Firebase(C.FIREBASE).child("items");
