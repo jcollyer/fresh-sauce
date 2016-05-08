@@ -6,13 +6,11 @@ then use React and React-DOM to render it.
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Router = require('react-router').Router;
+var hashHistory = require('react-router').hashHistory;
 var Provider = require('react-redux').Provider;
 var store = require('./store');
 var routes = require('./routes');
 var actions = require('./actions');
-
-// import { hashHistory } from 'react-router';
-var hashHistory = require('react-router').hashHistory;
 require('./style/styles.css');
 
 ReactDOM.render(
