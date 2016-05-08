@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "repository": "https://github.com/jcollyer/freshsauce",
+  "engines": {
+    "node": "4.1.1"
+  },
   "scripts": {
     "firebase": "node scripts/firebase.js",
     "bound2hiphop": "node scripts/bound2hiphop.js",

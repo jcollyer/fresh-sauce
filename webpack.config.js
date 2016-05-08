@@ -2,7 +2,7 @@ var Webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
-  entry: ['./src/main.jsx'],
+  entry: ['./src/main.js'],
   output: {
     path: '/build',
     filename: 'bundle.js'
