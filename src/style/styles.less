@@ -1,0 +1,96 @@
+body {
+	margin: 0px;
+}
+
+input {
+	min-width: 300px;
+	margin-right: 1em;
+}
+
+.wrapper {
+  padding: 0px 20px;
+  max-width: 600px;
+}
+
+.authpanel, .newquoteform, .quote {
+	margin-bottom: 1em;
+	padding: 3px;
+}
+
+.authpanel {
+	border-bottom: 1px solid #CCC;
+}
+
+.author {
+	font-size: 0.85em;
+	color: #555;
+}
+
+#soundcloud_widget {
+  // display:none;
+  position: absolute;
+  left: -99999px;
+}
+
+.hide {
+	display: none;
+}
+
+#player {
+	background: white;
+	position: fixed;
+	width: 100%;
+	height: 110px;
+	border-bottom: 1px solid #ddd;
+	z-index: 1;
+	.player-image {
+		background: #ddd;
+		float: left;
+		height: 110px;
+		width: 140px;
+		img {
+			float: left;
+			height: 100%;
+			width: 100%;
+		}
+	}
+	.player-detail {
+		float: left;
+		height: 110px;
+		.player-interaction{
+			height: 100px;
+			.player-controls{
+				float: left;
+				width: 100px;
+			}
+			.player-info {
+				float: left;
+				width: 20%;
+				p {
+
+				}
+			}
+		}
+		.player-progress {
+			background: #ddd;
+			float: left;
+			height: 10px;
+			width: 100%;
+			.progress-bar {
+				background: #666;
+				height: 10px;
+				width: 30%;
+			}
+		}
+	}
+}
+#player-buffer {
+	position: relative;
+	width: 100%;
+	height: 110px;
+}
+
+#ytPlayer-container {
+	position: absolute;
+	top: 0px;
+}
