@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
 import store from './store'
 import router from './router'
-import actions from './actions'
+import { startListeningToTracks } from './actions/tracks'
 
 import './style/styles.less'
 
@@ -15,6 +15,6 @@ ReactDOM.render(
 
 // setup Firebase listeners
 setTimeout(function(){
-	store.dispatch(actions.startListeningToAuth())
-	store.dispatch(actions.startListeningToTracks())
+	// store.dispatch(actions.startListeningToAuth())
+	store.dispatch(startListeningToTracks())
 })

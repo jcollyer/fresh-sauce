@@ -1,7 +1,7 @@
-var C = require("../../constants");
-var initialState = require("../initialstate");
+import C from '../constants'
+import initialState from '../api/initial-state'
 
-module.exports = function(currentstate, action) {
+export default (state = initialState.auth, action) => {
 	switch(action.type) {
 		case C.ATTEMPTING_LOGIN:
 			return {
@@ -21,6 +21,6 @@ module.exports = function(currentstate, action) {
 				username: action.username,
 				uid: action.uid
 			};
-		default: return currentstate || initialState.auth;
+		default: return state;
 	}
 };

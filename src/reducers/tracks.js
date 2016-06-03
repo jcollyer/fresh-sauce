@@ -1,5 +1,5 @@
-import C from '../../constants'
-import initialState from '../initial-state'
+import C from '../constants'
+import initialState from '../api/initial-state'
 import _ from 'lodash'
 
 export default (state = initialState.tracks, action) => {
@@ -11,8 +11,6 @@ export default (state = initialState.tracks, action) => {
 				tracks: action.tracks
 			});
 		case C.SET_TRACK:
-			// debugger;
-
 			return Object.assign({}, state, {
 				currentTrack: action.track
 			});

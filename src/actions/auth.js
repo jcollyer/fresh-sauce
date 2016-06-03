@@ -1,14 +1,10 @@
-/*
-This module contains action creators dealing with `appState.auth`
-*/
+import C from '../constants'
+import Firebase from 'firebase'
+const fireRef = new Firebase(C.FIREBASE)
 
-var C = require("../constants");
-var Firebase = require("firebase");
-var fireRef = new Firebase(C.FIREBASE);
-
-module.exports = {
+export default {
 	// called at app start
-	startListeningToAuth: function(){
+	startListeningToAuth() {
 		return function(dispatch,getState){
 			fireRef.onAuth(function(authData){
 				if (authData){
@@ -25,7 +21,7 @@ module.exports = {
 			});
 		}
 	},
-	attemptLogin: function(){
+	attemptLogin() {
 		return function(dispatch,getState){
 			dispatch({type:C.ATTEMPTING_LOGIN});
 			fireRef.authWithOAuthPopup("github", function(error, authData) {
@@ -38,7 +34,7 @@ module.exports = {
 			});
 		}
 	},
-	logoutUser: function(){
+	logoutUser() {
 		return function(dispatch,getState){
 			dispatch({type:C.LOGOUT}); // don't really need to do this, but nice to get immediate feedback
 			fireRef.unauth();
