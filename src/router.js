@@ -1,8 +1,7 @@
 import React from 'react'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
-import Wrapper from './pages/wrapper'
-import Trackslist from './pages/trackslist'
-
+import Wrapper from './components/wrapper'
+import Trackslist from './containers/trackslist'
 
 export default (
   <Router history={hashHistory}>

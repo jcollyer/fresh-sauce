@@ -3,7 +3,7 @@ var ReactRedux = require("react-redux");
 var C = require("../constants");
 var _ = require("lodash");
 var actions = require("../actions/");
-var Track = require("./components/track");
+var Track = require("../components/track");
 var store = require('../store');
 
 var Trackslist = React.createClass({

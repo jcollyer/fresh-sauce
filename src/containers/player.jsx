@@ -1,6 +1,6 @@
 var React = require("react");
-var C = require("../../constants");
-var store = require('../../store');
+var C = require("../constants");
+var store = require('../store');
 var ReactRedux = require("react-redux");
 
 var Player = React.createClass({

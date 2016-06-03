@@ -1,6 +1,6 @@
 var React = require('react');
-var Authpanel = require('./components/authpanel');
-var Player = require('./components/player');
+var Authpanel = require('../containers/authpanel');
+var Player = require('../containers/player');
 
 var Wrapper = React.createClass({
     render: function() {

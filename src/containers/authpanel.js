@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactRedux = require("react-redux");
-var actions = require("../../actions");
-var C = require("../../constants");
+var actions = require("../actions");
+var C = require("../constants");
 var Link = require("react-router").Link;
 
 var Authpanel = React.createClass({

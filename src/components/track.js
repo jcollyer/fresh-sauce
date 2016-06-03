@@ -1,5 +1,5 @@
 var React = require("react");
-var C = require("../../constants");
+var C = require("../constants");
 
 var Track = React.createClass({
 	submit: function(e){
