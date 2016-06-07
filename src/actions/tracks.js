@@ -18,5 +18,14 @@ export function startListeningToTracks() {
 }
 
 export function setTrack(track) {
+	var player;
+	var widgetIframe = document.getElementById('soundcloud_widget');
+	player = SC.Widget(widgetIframe);
+
+	player.bind(SC.Widget.Events.READY, function(){
+		player.load("https://api.soundcloud.com/tracks/"+track.id, {
+			auto_play: true
+		});
+	});
 	return { type: C.SET_TRACK, track: track }
 }

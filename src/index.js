@@ -5,8 +5,16 @@ import { Router, hashHistory } from 'react-router'
 import store from './store'
 import router from './router'
 import { startListeningToTracks } from './actions/tracks'
+import SC from 'soundcloud' // soundcloud object
 
 import './style/styles.less'
+import './soundcloud' // soundcloud player widget
+
+// initialize soundcloud
+SC.initialize({
+	client_id: '480b42686dbd3b48da099bed50e6af72',
+	redirect_uri: 'http://localhost:3000/callback.html'
+});
 
 ReactDOM.render(
 	<Provider store={store}>{router}</Provider>,

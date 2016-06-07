@@ -6,9 +6,6 @@ import Track from '../components/track'
 import store from '../store'
 
 class Trackslist extends Component {
- 	handleClick(track) {
-		store.dispatch(actions.setTrack(track));
- 	}
  	render() {
    	const { tracks, hasreceiveddata } = this.props
  		const rows = tracks.map((track) => {

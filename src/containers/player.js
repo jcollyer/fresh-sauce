@@ -4,7 +4,6 @@ import C from '../constants'
 import store from '../store'
 
 class Player extends Component {
-
 	toggleTrack() {
     var that = this;
     player.isPaused(function(paused){
@@ -14,27 +13,6 @@ class Player extends Component {
         that.pauseTrack();
       }
     });
-  }
-	getPlayer() {
-    // var that = this;
-    // if (this.state.playbackInterval) clearInterval(this.state.playbackInterval);
-
-    var widgetIframe = document.getElementById('soundcloud_widget');
-    player = SC.Widget(widgetIframe);
-
-    player.bind(SC.Widget.Events.READY, function(){
-      player.load("https://api.soundcloud.com/tracks/"+that.state.id, {
-        auto_play: true
-      });
-    });
-
-    // player.bind(SC.Widget.Events.FINISH, function() {
-    //   clearInterval(that.state.playbackInterval);
-    //   that.clickNextTrack();
-    // });
-
-
-    // this.getCurrentTimeInterval();
   }
   playTrack() {
     player.play();
@@ -57,8 +35,10 @@ class Player extends Component {
 		return (
 				<div>
 					<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src}></iframe>
+					<img src={track.artwork_url} />
+					<hr />
 				</div>
-    );
+    )
 	}
 }
 
