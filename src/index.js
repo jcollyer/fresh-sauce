@@ -16,6 +16,13 @@ SC.initialize({
 	redirect_uri: 'http://localhost:3000/callback.html'
 });
 
+// initialize youtube
+ var tag = document.createElement('script');
+ tag.src = "https://www.youtube.com/iframe_api";
+ var firstScriptTag = document.getElementsByTagName('script')[0];
+ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
 ReactDOM.render(
 	<Provider store={store}>{router}</Provider>,
 	document.getElementById("root")

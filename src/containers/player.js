@@ -35,6 +35,7 @@ class Player extends Component {
 		return (
 				<div>
 					<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src}></iframe>
+					<div id="yt-player"></div>
 					<img src={track.artwork_url} />
 					<button onClick={() => this.toggleTrack(player)}>toggle</button>
 					<hr />
