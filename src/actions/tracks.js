@@ -27,5 +27,5 @@ export function setTrack(track) {
 			auto_play: true
 		});
 	});
-	return { type: C.SET_TRACK, track: track }
+	return { type: C.SET_TRACK, track: track, player: player }
 }

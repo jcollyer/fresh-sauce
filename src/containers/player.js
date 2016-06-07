@@ -4,13 +4,13 @@ import C from '../constants'
 import store from '../store'
 
 class Player extends Component {
-	toggleTrack() {
-    var that = this;
+	toggleTrack(player) {
+		var that = this;
     player.isPaused(function(paused){
       if(paused == true ) {
-        that.playTrack();
+        player.play();
       } else {
-        that.pauseTrack();
+        player.pause();
       }
     });
   }
@@ -30,12 +30,13 @@ class Player extends Component {
     player.pause();
   }
 	render() {
-		const { track } = this.props
+		const { track, player } = this.props
 		const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
 		return (
 				<div>
 					<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src}></iframe>
 					<img src={track.artwork_url} />
+					<button onClick={() => this.toggleTrack(player)}>toggle</button>
 					<hr />
 				</div>
     )
@@ -44,7 +45,8 @@ class Player extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    track: appState.tracks.currentTrack
+    track: appState.tracks.currentTrack,
+		player: appState.tracks.player
   }
 }
 
