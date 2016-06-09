@@ -8,7 +8,7 @@ class Tracklist extends Component {
    	const { tracks, hasreceiveddata, player } = this.props
  		const rows = tracks.map((track) => {
 		 	return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track, player)} />
-		 })
+    }).reverse()
 
 		return (
  	 		<div id="tracklist" className={player ? "player-padding" : ""}>
