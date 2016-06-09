@@ -17,7 +17,12 @@ export function startListeningToTracks() {
 	}
 }
 
-export function setTrack(track) {
+export function setTrack(track, player) {
+
+	if (player && player.a) {
+		player.destroy();
+	}
+
 	if (track.kind === "sc") {
 		var player;
 		var widgetIframe = document.getElementById('soundcloud_widget');
@@ -33,14 +38,18 @@ export function setTrack(track) {
 
 	} else {
 
-		var player
-
-    player = new YT.Player('yt-player', {
-      height: '100',
-      width: '200',
-      videoId: track.id,
-			playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
-    })
-		return { type: C.SET_TRACK, track: track, player: player }
+		if (player && player.a) {
+			player.destroy()
+			player.loadVideoById(track.id)
+			player.playVideo()
+		} else {
+			player = new YT.Player('yt-player', {
+				height: '100',
+				width: '200',
+				videoId: track.id,
+				playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
+			})
+			return { type: C.SET_TRACK, track: track, player: player }
+		}
 	}
 }

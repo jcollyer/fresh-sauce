@@ -7,7 +7,7 @@ class Tracklist extends Component {
  	render() {
    	const { tracks, hasreceiveddata, player } = this.props
  		const rows = tracks.map((track) => {
-		 	return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track)} />
+		 	return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track, player)} />
 		 })
 
 		return (
