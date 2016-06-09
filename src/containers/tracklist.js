@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import C from '../constants'
 import { setTrack } from '../actions/tracks'
 import Track from '../components/track'
-import store from '../store'
 
-class Trackslist extends Component {
+class Tracklist extends Component {
  	render() {
-   	const { tracks, hasreceiveddata } = this.props
+   	const { tracks, hasreceiveddata, player } = this.props
  		const rows = tracks.map((track) => {
 		 	return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track)} />
 		 })
 
 		return (
- 	 		<div className="trackslist">
+ 	 		<div id="tracklist" className={player ? "player-padding" : ""}>
  				{hasreceiveddata ? rows : "Loading tracks..."}
 			</div>
 		)
@@ -24,8 +22,9 @@ const mapStateToProps = (appState) => {
 	return {
 		tracks: appState.tracks.tracks,
 		hasreceiveddata: appState.tracks.hasreceiveddata,
-		auth: appState.auth
+		auth: appState.auth,
+    player: appState.tracks.player
 	}
 }
 
-export default connect(mapStateToProps, {setTrack})(Trackslist)
+export default connect(mapStateToProps, {setTrack})(Tracklist)

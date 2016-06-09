@@ -7,10 +7,13 @@ input {
 	margin-right: 1em;
 }
 
-#soundcloud_widget {
-  // display:none;
+.offscreen {
   position: absolute;
   left: -99999px;
+}
+
+.hide {
+	display: none;
 }
 
 .wrapper {
@@ -30,4 +33,24 @@ input {
 .author {
 	font-size: 0.85em;
 	color: #555;
+}
+
+#player {
+	background: white;
+	height: 100px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	#track-artwork {
+		float: left;
+	}
+	#track-info {
+		float: left;
+	}
+}
+
+#tracklist {
+	&.player-padding {
+		margin-top: 100px;
+	}
 }

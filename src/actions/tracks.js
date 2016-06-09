@@ -21,6 +21,7 @@ export function setTrack(track) {
 	if (track.kind === "sc") {
 		var player;
 		var widgetIframe = document.getElementById('soundcloud_widget');
+
 		player = SC.Widget(widgetIframe);
 
 		player.bind(SC.Widget.Events.READY, () => {
@@ -31,16 +32,15 @@ export function setTrack(track) {
 		return { type: C.SET_TRACK, track: track, player: player }
 
 	} else {
-		var player;
-    // function onYouTubeIframeAPIReady() {
-			debugger;
-      player = new YT.Player('yt-player', {
-        height: '100',
-        width: '200',
-        videoId: track.id,
-				playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
-      });
-    // }
+
+		var player
+
+    player = new YT.Player('yt-player', {
+      height: '100',
+      width: '200',
+      videoId: track.id,
+			playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
+    })
 		return { type: C.SET_TRACK, track: track, player: player }
 	}
 }
