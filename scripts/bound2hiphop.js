@@ -1,13 +1,7 @@
-var cheerio = require('cheerio');
 var request = require('request');
-var Firebase = require('firebase');
-var ref = new Firebase('https://fresh-sauce.firebaseio.com');
-var idsRef = ref.child("ids");
+var cheerio = require('cheerio');
+var getTrack = require('./get-track.js');
 var hrefs = [];
-var ids = [];
-
-// clear existing ids from firebase
-idsRef.remove();
 
 request({
     method: 'GET',
@@ -16,36 +10,18 @@ request({
      if (err) return console.error(err);
      $ = cheerio.load(body);
      // get list of urls
-     $('.post-gallery').each(function() {
+     $('.small-12.medium-4.columns').each(function() {
        var href = $('a', this).attr('href');
        hrefs.push(href);
     });
-    //get sound cloud ids from tracks
+    //get soundcloud ids from tracks
     hrefs.forEach(function(href) {
       getTrack(href);
+      console.log("hrefs " + href)
     });
 });
 
-var getTrack = function(href){
-  request({url: href}, function(err, response, body) {
-    if (err) return console.error(err);
-    $ = cheerio.load(body);
-    $('.entry-content').each(function() {
-      var url = $('iframe', this).attr('src');
-      if (url.split(".")[1] === "soundcloud") {
-        // get soundcloud id
-        var id = url.substr(url.lastIndexOf("/")+1, 9);
-        // to prevent duplicates
-        if(ids.indexOf(id) == -1){
-          ids.push(id);
-          // push to firebase
-          idsRef.push({id: id, type: 'sc'});
-        }
-        console.log("success! added id: " + id);
-      }
-    });
-  });
-};
+
 
 setTimeout(function() {
   console.log("bye...");
