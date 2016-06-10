@@ -1,6 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var getTrack = require('./get-track.js');
+var pushTrack = require('./push-track-id')
 var hrefs = [];
 
 request({
@@ -21,9 +21,14 @@ request({
     });
 });
 
-
-
-setTimeout(function() {
-  console.log("bye...");
-  process.exit();
-},3500);
+var getTrack = function(href) {
+  // get new ids
+  request({url: href}, function(err, response, body) {
+    if (err) return console.error(err);
+    $ = cheerio.load(body);
+    $('.entry-content').each(function() {
+      var url = $('iframe', this).attr('src');
+      pushTrack(url);
+    });
+  });
+};
