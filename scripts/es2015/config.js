@@ -1,0 +1,99 @@
+import request from 'request'
+import Firebase from 'firebase'
+const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
+const idsRef = ref.child('ids')
+const tracksRef = ref.child('items')
+
+export function getAllIds(callback) {
+
+  idsRef.once('value', (snapshot) => {
+    getIds(snapshot.val())
+  })
+
+  function getIds(obj) {
+    const ids = []
+    Object.keys(obj).map((track) => {
+      ids.push(obj[track].id)
+    })
+
+    duplicatesFilter(ids);
+  }
+
+  function duplicatesFilter(ids) {
+    const filteredIds = ids.filter((item, pos, self) => {
+      return self.indexOf(item) == pos
+    })
+
+    callback(filteredIds)
+  }
+}
+
+export function pushTrack(url, ids) {
+  let idLength, thisType
+  if (url.split(".")[1] === "soundcloud") {
+    idLength = 9
+    const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
+    if(ids.indexOf(parseInt(thisId)) < 0) {
+      requestSoundCloud(thisId)
+    }
+  } else if (url.split(".")[1] === "youtube") {
+    idLength = 11
+    const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
+    if(ids.indexOf(parseInt(thisId)) < 0) {
+      requestYouTube(thisId)
+    }
+  }
+
+
+  setTimeout(() => {
+    console.log("bye...")
+    process.exit()
+  },3500)
+}
+
+export function requestSoundCloud(id) {
+  let url = 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e'
+  request(url, function (error, response, body) {
+    let formattedBody = JSON.parse(body)
+    if (!error && response.statusCode == 200) {
+      let track = {}
+      track.id = formattedBody.id
+      track.original_content_size = formattedBody.original_content_size
+      track.tag_list = formattedBody.tag_list
+      track.permalink = formattedBody.permalink
+      track.genre = formattedBody.genre
+      track.title = formattedBody.title
+      track.artwork_url = formattedBody.artwork_url
+      track.artist = formattedBody.user.username
+      track.likes = 0
+      track.kind = 'sc'
+
+      // Add data to firebase
+      tracksRef.push({track})
+      idsRef.push({id: track.id})
+      console.log('Added Track ID: ' + id + ' TYPE: sc')
+    }
+  })
+}
+
+export function requestYouTube(id) {
+  let url = 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet'
+  request(url, function (error, response, body) {
+    let formattedBody = JSON.parse(body)
+    if (!error && response.statusCode == 200) {
+      let track = {}
+      track.id = id
+      track.tag_list = formattedBody.items[0].snippet.tags
+      track.title = formattedBody.items[0].snippet.title
+      track.description = formattedBody.items[0].snippet.description
+      track.artwork_url = formattedBody.items[0].snippet.thumbnails.default.url
+      track.likes = 0
+      track.kind = 'yt'
+
+      // Add data to firebase
+      tracksRef.push({track})
+      idsRef.push({id: track.id})
+      console.log('Added Track ID: ' + id + ' TYPE: yt')
+    }
+  })
+}

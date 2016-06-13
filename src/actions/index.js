@@ -1,4 +1,4 @@
-var authActions = require("./auth");
-var tracksActions = require("./tracks");
+import authActions from './auth'
+import tracksActions from './tracks'
 
-module.exports = Object.assign({},authActions,tracksActions);
+export default Object.assign({},authActions,tracksActions);
