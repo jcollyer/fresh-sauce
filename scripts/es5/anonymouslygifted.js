@@ -22,7 +22,7 @@ var $ = void 0;
 function requestMainSite(ids) {
   (0, _request2.default)({
     method: 'GET',
-    url: 'https://bound2hiphop.com/category/singles/'
+    url: 'http://anonymouslygifted.com/'
   }, function (err, response, body) {
 
     if (err) return console.error(err);
@@ -30,8 +30,8 @@ function requestMainSite(ids) {
     $ = _cheerio2.default.load(body);
 
     // get list of urls
-    $('.small-12.medium-4.columns').each(function () {
-      var href = $('.post-gallery a', this).attr('href');
+    $('.postMain .post .more-link').each(function () {
+      var href = $(this).attr('href');
       hrefs.push(href);
     });
 
@@ -46,9 +46,11 @@ var getTrack = function getTrack(href, ids) {
   (0, _request2.default)({ url: href }, function (err, response, body) {
     if (err) return console.error(err);
     $ = _cheerio2.default.load(body);
-    $('.entry-content').each(function () {
+    $('.postMain .post').each(function () {
       var url = $('iframe', this).attr('src');
-      (0, _config.pushTrack)(url, ids);
+      if (url) {
+        (0, _config.pushTrack)(url, ids);
+      }
     });
   });
 };

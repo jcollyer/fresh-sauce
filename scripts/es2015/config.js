@@ -5,7 +5,6 @@ const idsRef = ref.child('ids')
 const tracksRef = ref.child('items')
 
 export function getAllIds(callback) {
-
   idsRef.once('value', (snapshot) => {
     getIds(snapshot.val())
   })
@@ -16,10 +15,10 @@ export function getAllIds(callback) {
       ids.push(obj[track].id)
     })
 
-    duplicatesFilter(ids);
+    filterOutDuplicates(ids);
   }
 
-  function duplicatesFilter(ids) {
+  function filterOutDuplicates(ids) {
     const filteredIds = ids.filter((item, pos, self) => {
       return self.indexOf(item) == pos
     })
@@ -35,13 +34,20 @@ export function pushTrack(url, ids) {
     const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
     if(ids.indexOf(parseInt(thisId)) < 0) {
       requestSoundCloud(thisId)
+    } else {
+      console.log("ID already added")
     }
   } else if (url.split(".")[1] === "youtube") {
     idLength = 11
     const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
-    if(ids.indexOf(parseInt(thisId)) < 0) {
+    if(ids.indexOf(thisId) < 0) {
       requestYouTube(thisId)
+    } else {
+      console.log("ID already added")
     }
+  } else {
+    console.log("Not soundcloud or youtube ID")
+    return
   }
 
 
@@ -54,8 +60,8 @@ export function pushTrack(url, ids) {
 export function requestSoundCloud(id) {
   let url = 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e'
   request(url, function (error, response, body) {
-    let formattedBody = JSON.parse(body)
     if (!error && response.statusCode == 200) {
+      let formattedBody = JSON.parse(body)
       let track = {}
       track.id = formattedBody.id
       track.original_content_size = formattedBody.original_content_size
@@ -79,8 +85,8 @@ export function requestSoundCloud(id) {
 export function requestYouTube(id) {
   let url = 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet'
   request(url, function (error, response, body) {
-    let formattedBody = JSON.parse(body)
     if (!error && response.statusCode == 200) {
+      let formattedBody = JSON.parse(body)
       let track = {}
       track.id = id
       track.tag_list = formattedBody.items[0].snippet.tags

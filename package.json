@@ -9,7 +9,8 @@
   },
   "scripts": {
     "bound2hiphop": "node scripts/es5/bound2hiphop.js",
-    "carolinaontherise": "node scripts/es5/carolinaontherise.js"
+    "carolinaontherise": "node scripts/es5/carolinaontherise.js",
+    "anonymouslygifted": "node scripts/es5/anonymouslygifted.js"
   },
   "author": "Jeremy Collyer",
   "license": "ISC",

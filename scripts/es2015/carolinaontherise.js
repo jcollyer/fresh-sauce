@@ -1,6 +1,6 @@
 import request from 'request'
 import cheerio from 'cheerio'
-import { getAllIds, pushTrack, requestSoundCloud, requestYouTube } from './config'
+import { getAllIds, pushTrack } from './config'
 const hrefs = []
 let $
 

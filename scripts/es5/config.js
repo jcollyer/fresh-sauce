@@ -23,7 +23,6 @@ var idsRef = ref.child('ids');
 var tracksRef = ref.child('items');
 
 function getAllIds(callback) {
-
   idsRef.once('value', function (snapshot) {
     getIds(snapshot.val());
   });
@@ -34,10 +33,10 @@ function getAllIds(callback) {
       ids.push(obj[track].id);
     });
 
-    duplicatesFilter(ids);
+    filterOutDuplicates(ids);
   }
 
-  function duplicatesFilter(ids) {
+  function filterOutDuplicates(ids) {
     var filteredIds = ids.filter(function (item, pos, self) {
       return self.indexOf(item) == pos;
     });
@@ -54,13 +53,20 @@ function pushTrack(url, ids) {
     var thisId = url.substr(url.lastIndexOf("/") + 1, idLength);
     if (ids.indexOf(parseInt(thisId)) < 0) {
       requestSoundCloud(thisId);
+    } else {
+      console.log("ID already added");
     }
   } else if (url.split(".")[1] === "youtube") {
     idLength = 11;
     var _thisId = url.substr(url.lastIndexOf("/") + 1, idLength);
-    if (ids.indexOf(parseInt(_thisId)) < 0) {
+    if (ids.indexOf(_thisId) < 0) {
       requestYouTube(_thisId);
+    } else {
+      console.log("ID already added");
     }
+  } else {
+    console.log("Not soundcloud or youtube ID");
+    return;
   }
 
   setTimeout(function () {
@@ -72,8 +78,8 @@ function pushTrack(url, ids) {
 function requestSoundCloud(id) {
   var url = 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e';
   (0, _request2.default)(url, function (error, response, body) {
-    var formattedBody = JSON.parse(body);
     if (!error && response.statusCode == 200) {
+      var formattedBody = JSON.parse(body);
       var track = {};
       track.id = formattedBody.id;
       track.original_content_size = formattedBody.original_content_size;
@@ -97,8 +103,8 @@ function requestSoundCloud(id) {
 function requestYouTube(id) {
   var url = 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet';
   (0, _request2.default)(url, function (error, response, body) {
-    var formattedBody = JSON.parse(body);
     if (!error && response.statusCode == 200) {
+      var formattedBody = JSON.parse(body);
       var track = {};
       track.id = id;
       track.tag_list = formattedBody.items[0].snippet.tags;
