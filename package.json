@@ -8,7 +8,12 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "dev": "babel scripts/es2015/anonymouslygifted.js -o scripts/es5/anonymouslygifted.js scripts/es2015/bound2hiphop.js -o scripts/es5/bound2hiphop.js scripts/es2015/carolinaontherise.js -o scripts/es5/carolinaontherise.js scripts/es2015/config.js -o scripts/es5/config.js scripts/es2015/run-scrapes.js -o scripts/es5/run-scrapes.js -w",
+    "watch-scripts": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run config & npm run run-scrapes",
+    "anonymouslygifted": "babel scripts/es2015/anonymouslygifted.js -o scripts/es5/anonymouslygifted.js -w",
+    "bound2hiphop": "babel scripts/es2015/bound2hiphop.js -o scripts/es5/bound2hiphop.js -w",
+    "carolinaontherise": "babel scripts/es2015/carolinaontherise.js -o scripts/es5/carolinaontherise.js -w",
+    "config": "babel scripts/es2015/config.js -o scripts/es5/config.js -w",
+    "run-scrapes": "babel scripts/es2015/run-scrapes.js -o scripts/es5/run-scrapes.js -w",
     "scrape": "node scripts/es5/run-scrapes.js"
   },
   "author": "Jeremy Collyer",
