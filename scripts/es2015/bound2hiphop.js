@@ -1,45 +1,13 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import { getAllIds, pushTrack } from './config'
-const hrefs = []
-let $
+import { getAllIds, requestMainSite } from './config'
+
+const siteInfo = {
+  mainSite: 'https://bound2hiphop.com/category/singles/',
+  mainSiteElements: '.small-12.medium-4.columns .post-gallery a',
+  subSiteElements: '.entry-content'
+}
 
 export function bound2hiphop() {
   getAllIds((ids) => {
-    requestMainSite(ids)
+    requestMainSite(ids, siteInfo)
   })
-
-  function requestMainSite(ids) {
-    request({
-      method: 'GET',
-      url: 'https://bound2hiphop.com/category/singles/'
-    }, function (err, response, body) {
-
-      if (err) return console.error(err);
-
-      $ = cheerio.load(body);
-
-      // get list of urls
-      $('.small-12.medium-4.columns').each(function() {
-        var href = $('.post-gallery a', this).attr('href');
-        hrefs.push(href);
-      })
-
-      //get ids from soundcloud and youtube
-      hrefs.map((href) => {
-        getTrack(href, ids);
-      });
-    })
-  }
-
-  var getTrack = function(href, ids) {
-    request({url: href}, function(err, response, body) {
-      if (err) return console.error(err);
-      $ = cheerio.load(body);
-      $('.entry-content').each(function() {
-        var url = $('iframe', this).attr('src');
-        pushTrack(url, ids);
-      });
-    });
-  };
 }

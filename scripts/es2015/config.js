@@ -1,8 +1,11 @@
 import request from 'request'
+import cheerio from 'cheerio'
 import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
 const tracksRef = ref.child('items')
+const hrefs = []
+let $
 
 export function getAllIds(callback) {
   idsRef.once('value', (snapshot) => {
@@ -27,7 +30,43 @@ export function getAllIds(callback) {
   }
 }
 
-export function pushTrack(url, ids) {
+export function requestMainSite(ids, siteInfo) {
+  request({
+    method: 'GET',
+    url: siteInfo.mainSite
+  }, function (err, response, body) {
+
+    if (err) return console.error(err);
+
+    $ = cheerio.load(body);
+
+    // get list of urls
+    $(siteInfo.mainSiteElements).each(function() {
+      var href = $(this).attr('href');
+      hrefs.push(href);
+    })
+
+    //get ids from soundcloud and youtube
+    hrefs.map((href) => {
+      getTrack(href, ids, siteInfo);
+    });
+  })
+}
+
+function getTrack(href, ids, siteInfo) {
+  request({url: href}, function(err, response, body) {
+    if (err) return console.error(err);
+    $ = cheerio.load(body);
+    $(siteInfo.subSiteElements).each(function() {
+      var url = $('iframe', this).attr('src');
+      if (url) {
+        pushTrack(url, ids);
+      }
+    });
+  });
+};
+
+function pushTrack(url, ids) {
   let idLength, thisType
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9
