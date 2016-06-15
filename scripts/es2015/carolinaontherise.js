@@ -1,4 +1,4 @@
-import { getAllIds, requestMainSite } from './config'
+import { requestWebsite } from './config'
 
 const siteInfo = {
   mainSite: 'http://carolinaontherise.com/',
@@ -7,7 +7,5 @@ const siteInfo = {
 }
 
 export function carolinaontherise() {
-  getAllIds((ids) => {
-    requestMainSite(ids, siteInfo)
-  })
+  requestWebsite(siteData)
 }

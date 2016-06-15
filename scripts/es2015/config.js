@@ -7,7 +7,13 @@ const tracksRef = ref.child('items')
 const hrefs = []
 let $
 
-export function getAllIds(callback) {
+export function requestWebsite(siteData) {
+  getAllIds((ids) => {
+    requestMainSite(ids, siteData)
+  })
+}
+
+function getAllIds(callback) {
   idsRef.once('value', (snapshot) => {
     getIds(snapshot.val())
   })
@@ -30,10 +36,10 @@ export function getAllIds(callback) {
   }
 }
 
-export function requestMainSite(ids, siteInfo) {
+function requestMainSite(ids, siteData) {
   request({
     method: 'GET',
-    url: siteInfo.mainSite
+    url: siteData.mainSite
   }, function (err, response, body) {
 
     if (err) return console.error(err);
@@ -41,23 +47,23 @@ export function requestMainSite(ids, siteInfo) {
     $ = cheerio.load(body);
 
     // get list of urls
-    $(siteInfo.mainSiteElements).each(function() {
+    $(siteData.mainSiteElements).each(function() {
       var href = $(this).attr('href');
       hrefs.push(href);
     })
 
     //get ids from soundcloud and youtube
     hrefs.map((href) => {
-      getTrack(href, ids, siteInfo);
+      getTrack(href, ids, siteData);
     });
   })
 }
 
-function getTrack(href, ids, siteInfo) {
+function getTrack(href, ids, siteData) {
   request({url: href}, function(err, response, body) {
     if (err) return console.error(err);
     $ = cheerio.load(body);
-    $(siteInfo.subSiteElements).each(function() {
+    $(siteData.subSiteElements).each(function() {
       var url = $('iframe', this).attr('src');
       if (url) {
         pushTrack(url, ids);

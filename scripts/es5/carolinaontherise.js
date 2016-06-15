@@ -14,7 +14,5 @@ var siteInfo = {
 };
 
 function carolinaontherise() {
-  (0, _config.getAllIds)(function (ids) {
-    (0, _config.requestMainSite)(ids, siteInfo);
-  });
+  (0, _config.requestWebsite)(siteData);
 }

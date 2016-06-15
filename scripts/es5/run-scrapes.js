@@ -8,4 +8,4 @@ var _carolinaontherise = require('./carolinaontherise.js');
 
 (0, _anonymouslygifted.anonymouslygifted)();
 (0, _bound2hiphop.bound2hiphop)();
-(0, _carolinaontherise.carolinaontherise)();
+// carolinaontherise()

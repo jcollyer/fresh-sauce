@@ -3,14 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllIds = getAllIds;
-exports.pushTrack = pushTrack;
+exports.requestWebsite = requestWebsite;
 exports.requestSoundCloud = requestSoundCloud;
 exports.requestYouTube = requestYouTube;
 
 var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
+
+var _cheerio = require('cheerio');
+
+var _cheerio2 = _interopRequireDefault(_cheerio);
 
 var _firebase = require('firebase');
 
@@ -21,6 +24,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ref = new _firebase2.default('https://fresh-sauce.firebaseio.com/');
 var idsRef = ref.child('ids');
 var tracksRef = ref.child('items');
+var hrefs = [];
+var $ = void 0;
+
+function requestWebsite(siteData) {
+  getAllIds(function (ids) {
+    requestMainSite(ids, siteData);
+  });
+}
 
 function getAllIds(callback) {
   idsRef.once('value', function (snapshot) {
@@ -44,6 +55,42 @@ function getAllIds(callback) {
     callback(filteredIds);
   }
 }
+
+function requestMainSite(ids, siteData) {
+  (0, _request2.default)({
+    method: 'GET',
+    url: siteData.mainSite
+  }, function (err, response, body) {
+
+    if (err) return console.error(err);
+
+    $ = _cheerio2.default.load(body);
+
+    // get list of urls
+    $(siteData.mainSiteElements).each(function () {
+      var href = $(this).attr('href');
+      hrefs.push(href);
+    });
+
+    //get ids from soundcloud and youtube
+    hrefs.map(function (href) {
+      getTrack(href, ids, siteData);
+    });
+  });
+}
+
+function getTrack(href, ids, siteData) {
+  (0, _request2.default)({ url: href }, function (err, response, body) {
+    if (err) return console.error(err);
+    $ = _cheerio2.default.load(body);
+    $(siteData.subSiteElements).each(function () {
+      var url = $('iframe', this).attr('src');
+      if (url) {
+        pushTrack(url, ids);
+      }
+    });
+  });
+};
 
 function pushTrack(url, ids) {
   var idLength = void 0,
