@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.requestWebsite = requestWebsite;
-exports.requestSoundCloud = requestSoundCloud;
-exports.requestYouTube = requestYouTube;
 
 var _request = require('request');
 
@@ -36,7 +34,6 @@ function requestWebsite(siteData) {
 function getAllIds(callback) {
   idsRef.once('value', function (snapshot) {
     var filteredIds = [];
-    console.log("getAllIds " + snapshot.val());
 
     if (snapshot.val() === null) {
       callback(filteredIds);
@@ -154,7 +151,6 @@ function requestSoundCloud(id) {
       track.artist = formattedBody.user.username;
       track.likes = 0;
       track.kind = 'sc';
-      console.log("-------------tag_list " + track.tag_list);
 
       // Add data to firebase
       tracksRef.push({ track: track });
@@ -171,7 +167,7 @@ function requestYouTube(id) {
       var formattedBody = JSON.parse(body);
       var track = {};
       track.id = id;
-      track.tag_list = formattedBody.items[0].snippet.tags;
+      track.tag_list = formattedBody.items[0].snippet.tags || null;
       track.title = formattedBody.items[0].snippet.title;
       track.description = formattedBody.items[0].snippet.description;
       track.artwork_url = formattedBody.items[0].snippet.thumbnails.default.url;

@@ -16,7 +16,6 @@ export function requestWebsite(siteData) {
 function getAllIds(callback) {
   idsRef.once('value', (snapshot) => {
     let filteredIds = [];
-    console.log("getAllIds " + snapshot.val());
 
     if(snapshot.val() === null) {
       callback(filteredIds)
@@ -119,7 +118,7 @@ function pushTrack(url, ids) {
   },5500)
 }
 
-export function requestSoundCloud(id) {
+function requestSoundCloud(id) {
   let url = 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e'
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -135,7 +134,6 @@ export function requestSoundCloud(id) {
       track.artist = formattedBody.user.username
       track.likes = 0
       track.kind = 'sc'
-      console.log("-------------tag_list " + track.tag_list)
 
       // Add data to firebase
       tracksRef.push({track})
@@ -145,14 +143,14 @@ export function requestSoundCloud(id) {
   })
 }
 
-export function requestYouTube(id) {
+function requestYouTube(id) {
   let url = 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet'
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       let formattedBody = JSON.parse(body)
       let track = {}
       track.id = id
-      track.tag_list = formattedBody.items[0].snippet.tags
+      track.tag_list = formattedBody.items[0].snippet.tags || null
       track.title = formattedBody.items[0].snippet.title
       track.description = formattedBody.items[0].snippet.description
       track.artwork_url = formattedBody.items[0].snippet.thumbnails.default.url
