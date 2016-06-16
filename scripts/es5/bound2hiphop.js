@@ -10,7 +10,8 @@ var _config = require('./config');
 var siteData = {
   mainSite: 'https://bound2hiphop.com/category/singles/',
   mainSiteElements: '.small-12.medium-4.columns .post-gallery a',
-  subSiteElements: '.entry-content'
+  subSiteElements: '.entry-content',
+  noSubSite: false
 };
 
 function bound2hiphop() {

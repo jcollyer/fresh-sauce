@@ -57,26 +57,32 @@ function getAllIds(callback) {
 }
 
 function requestMainSite(ids, siteData) {
-  (0, _request2.default)({
-    method: 'GET',
-    url: siteData.mainSite
-  }, function (err, response, body) {
+  // skip url lookup if its not needed
+  if (siteData.noSubSite) {
+    getTrack(siteData.mainSite, ids, siteData);
+  } else {
+    (0, _request2.default)({
+      method: 'GET',
+      url: siteData.mainSite
+    }, function (err, response, body) {
 
-    if (err) return console.error(err);
+      if (err) return console.error(err);
 
-    $ = _cheerio2.default.load(body);
+      $ = _cheerio2.default.load(body);
 
-    // get list of urls
-    $(siteData.mainSiteElements).each(function () {
-      var href = $(this).attr('href');
-      hrefs.push(href);
+      // get list of urls
+      $(siteData.mainSiteElements).each(function () {
+        var href = $(this).attr('href');
+        // console.log(href);
+        hrefs.push(href);
+      });
+
+      //get ids from soundcloud and youtube
+      hrefs.map(function (href) {
+        getTrack(href, ids, siteData);
+      });
     });
-
-    //get ids from soundcloud and youtube
-    hrefs.map(function (href) {
-      getTrack(href, ids, siteData);
-    });
-  });
+  }
 }
 
 function getTrack(href, ids, siteData) {
@@ -93,12 +99,15 @@ function getTrack(href, ids, siteData) {
 };
 
 function pushTrack(url, ids) {
-  var idLength = void 0,
-      thisType = void 0;
+  var idLength = void 0;
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9;
-    var thisId = url.substr(url.lastIndexOf("/") + 1, idLength);
+    // const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
+    var formattedUrl = url.replace(/%2F/g, "/");
+    var thisId = formattedUrl.substr(formattedUrl.lastIndexOf("tracks") + 7, idLength);
+    // console.log(thisId)
     if (ids.indexOf(parseInt(thisId)) < 0) {
+      console.log(thisId);
       requestSoundCloud(thisId);
     } else {
       console.log("ID already added");
@@ -119,7 +128,7 @@ function pushTrack(url, ids) {
   setTimeout(function () {
     console.log("bye...");
     process.exit();
-  }, 3500);
+  }, 5500);
 }
 
 function requestSoundCloud(id) {

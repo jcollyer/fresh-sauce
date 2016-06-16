@@ -37,26 +37,32 @@ function getAllIds(callback) {
 }
 
 function requestMainSite(ids, siteData) {
-  request({
-    method: 'GET',
-    url: siteData.mainSite
-  }, function (err, response, body) {
+  // skip url lookup if its not needed
+  if(siteData.noSubSite) {
+    getTrack(siteData.mainSite, ids, siteData);
+  } else {
+    request({
+      method: 'GET',
+      url: siteData.mainSite
+    }, function (err, response, body) {
 
-    if (err) return console.error(err);
+      if (err) return console.error(err);
 
-    $ = cheerio.load(body);
+      $ = cheerio.load(body);
 
-    // get list of urls
-    $(siteData.mainSiteElements).each(function() {
-      var href = $(this).attr('href');
-      hrefs.push(href);
+      // get list of urls
+      $(siteData.mainSiteElements).each(function() {
+        var href = $(this).attr('href');
+        // console.log(href);
+        hrefs.push(href);
+      })
+
+      //get ids from soundcloud and youtube
+      hrefs.map((href) => {
+        getTrack(href, ids, siteData);
+      });
     })
-
-    //get ids from soundcloud and youtube
-    hrefs.map((href) => {
-      getTrack(href, ids, siteData);
-    });
-  })
+  }
 }
 
 function getTrack(href, ids, siteData) {
@@ -73,11 +79,15 @@ function getTrack(href, ids, siteData) {
 };
 
 function pushTrack(url, ids) {
-  let idLength, thisType
+  let idLength
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9
-    const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
+    // const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
+    const formattedUrl = url.replace(/%2F/g,"/")
+    const thisId = formattedUrl.substr(formattedUrl.lastIndexOf("tracks")+7, idLength)
+    // console.log(thisId)
     if(ids.indexOf(parseInt(thisId)) < 0) {
+      console.log(thisId)
       requestSoundCloud(thisId)
     } else {
       console.log("ID already added")
@@ -99,7 +109,7 @@ function pushTrack(url, ids) {
   setTimeout(() => {
     console.log("bye...")
     process.exit()
-  },3500)
+  },5500)
 }
 
 export function requestSoundCloud(id) {

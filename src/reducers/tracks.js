@@ -1,6 +1,5 @@
 import C from '../constants'
 import initialState from '../api/initial-state'
-import _ from 'lodash'
 
 export default (state = initialState.tracks, action) => {
 

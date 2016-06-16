@@ -7,10 +7,11 @@ exports.carolinaontherise = carolinaontherise;
 
 var _config = require('./config');
 
-var siteInfo = {
+var siteData = {
   mainSite: 'http://carolinaontherise.com/',
   mainSiteElements: '.item-list a',
-  subSiteElements: '.entry p'
+  subSiteElements: '.entry p',
+  noSubSite: false
 };
 
 function carolinaontherise() {

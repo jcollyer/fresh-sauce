@@ -1,9 +1,10 @@
 import { requestWebsite } from './config'
 
-const siteInfo = {
+const siteData = {
   mainSite: 'http://carolinaontherise.com/',
   mainSiteElements: '.item-list a',
-  subSiteElements: '.entry p'
+  subSiteElements: '.entry p',
+  noSubSite: false
 }
 
 export function carolinaontherise() {

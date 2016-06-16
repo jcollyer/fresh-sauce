@@ -10,7 +10,8 @@ var _config = require('./config');
 var siteData = {
   mainSite: 'http://anonymouslygifted.com/',
   mainSiteElements: '.postMain .post .more-link',
-  subSiteElements: '.postMain .post'
+  subSiteElements: '.postMain .post',
+  noSubSite: false
 };
 
 function anonymouslygifted() {
