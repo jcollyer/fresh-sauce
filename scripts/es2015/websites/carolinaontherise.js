@@ -1,4 +1,4 @@
-import { requestWebsite } from './config'
+import { requestWebsite } from '../config'
 
 const siteData = {
   mainSite: 'http://carolinaontherise.com/',

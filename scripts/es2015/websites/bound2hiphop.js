@@ -1,4 +1,4 @@
-import { requestWebsite } from './config'
+import { requestWebsite } from '../config'
 
 const siteData = {
   mainSite: 'https://bound2hiphop.com/category/singles/',

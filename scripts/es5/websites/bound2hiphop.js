@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.bound2hiphop = bound2hiphop;
 
-var _config = require('./config');
+var _config = require('../config');
 
 var siteData = {
   mainSite: 'https://bound2hiphop.com/category/singles/',

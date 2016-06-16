@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.goodmusicallday = goodmusicallday;
 
-var _config = require('./config');
+var _config = require('../config');
 
 var siteData = {
   mainSite: 'http://goodmusicallday.com/category/music/',

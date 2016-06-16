@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.carolinaontherise = carolinaontherise;
 
-var _config = require('./config');
+var _config = require('../config');
 
 var siteData = {
   mainSite: 'http://carolinaontherise.com/',

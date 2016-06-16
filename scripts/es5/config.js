@@ -35,7 +35,14 @@ function requestWebsite(siteData) {
 
 function getAllIds(callback) {
   idsRef.once('value', function (snapshot) {
-    getIds(snapshot.val());
+    var filteredIds = [];
+    console.log("getAllIds " + snapshot.val());
+
+    if (snapshot.val() === null) {
+      callback(filteredIds);
+    } else {
+      getIds(snapshot.val());
+    }
   });
 
   function getIds(obj) {
@@ -106,8 +113,8 @@ function pushTrack(url, ids) {
     var formattedUrl = url.replace(/%2F/g, "/");
     var thisId = formattedUrl.substr(formattedUrl.lastIndexOf("tracks") + 7, idLength);
     // console.log(thisId)
+    console.log("----------------- " + thisId);
     if (ids.indexOf(parseInt(thisId)) < 0) {
-      console.log(thisId);
       requestSoundCloud(thisId);
     } else {
       console.log("ID already added");
@@ -147,6 +154,7 @@ function requestSoundCloud(id) {
       track.artist = formattedBody.user.username;
       track.likes = 0;
       track.kind = 'sc';
+      console.log("-------------tag_list " + track.tag_list);
 
       // Add data to firebase
       tracksRef.push({ track: track });
