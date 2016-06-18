@@ -4,12 +4,12 @@ import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
 const tracksRef = ref.child('items')
-const hrefs = []
+const sessionIds = []
 let $
 
 export function requestWebsite(siteData) {
-  getAllIds((ids) => {
-    requestMainSite(ids, siteData)
+  getAllIds((allIds) => {
+    requestMainSite(allIds, sessionIds, siteData)
   })
 }
 
@@ -30,22 +30,15 @@ function getAllIds(callback) {
       ids.push(obj[track].id)
     })
 
-    filterOutDuplicates(ids);
+    callback(ids)
   }
 
-  function filterOutDuplicates(ids) {
-    const filteredIds = ids.filter((item, pos, self) => {
-      return self.indexOf(item) == pos
-    })
-
-    callback(filteredIds)
-  }
 }
 
-function requestMainSite(ids, siteData) {
+function requestMainSite(allIds, sessionIds, siteData) {
   // skip url lookup if its not needed
   if(siteData.noSubSite) {
-    getTrack(siteData.mainSite, ids, siteData);
+    getTrack(siteData.mainSite, allIds, sessionIds, siteData);
   } else {
     request({
       method: 'GET',
@@ -58,59 +51,53 @@ function requestMainSite(ids, siteData) {
 
       // get list of urls
       $(siteData.mainSiteElements).each(function() {
-        var href = $(this).attr('href');
-        // console.log(href);
-        hrefs.push(href);
+        getTrack($(this).attr('href'), allIds, sessionIds, siteData);
       })
-
-      //get ids from soundcloud and youtube
-      hrefs.map((href) => {
-        getTrack(href, ids, siteData);
-      });
     })
   }
 }
 
-function getTrack(href, ids, siteData) {
+function getTrack(href, allIds, sessionIds, siteData) {
   request({url: href}, function(err, response, body) {
     if (err) return console.error(err);
     $ = cheerio.load(body);
     $(siteData.subSiteElements).each(function() {
-      var url = $('iframe', this).attr('src');
+      const url = $('iframe', this).attr('src');
       if (url) {
-        pushTrack(url, ids);
+        // filter out duplicate IDs
+        const filteredIds = allIds.filter((item, pos, self) => {
+          return self.indexOf(item) == pos
+        })
+        pushTrack(url, sessionIds, filteredIds, allIds);
       }
     });
   });
 };
 
-function pushTrack(url, ids) {
+function pushTrack(url, sessionIds, filteredIds, allIds) {
   let idLength
+  let idType
+  let thisId = null
+
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9
-    // const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
-    const formattedUrl = url.replace(/%2F/g,"/")
-    const thisId = formattedUrl.substr(formattedUrl.lastIndexOf("tracks")+7, idLength)
-    // console.log(thisId)
-    console.log("----------------- " + thisId);
-    if(ids.indexOf(parseInt(thisId)) < 0) {
-      requestSoundCloud(thisId)
-    } else {
-      console.log("ID already added")
-    }
+    idType = "sc"
+    thisId = url.replace(/%2F/g,"/").substr(url.replace(/%2F/g,"/").lastIndexOf("tracks")+7, idLength)
   } else if (url.split(".")[1] === "youtube") {
     idLength = 11
-    const thisId = url.substr(url.lastIndexOf("/")+1, idLength)
-    if(ids.indexOf(thisId) < 0) {
-      requestYouTube(thisId)
-    } else {
-      console.log("ID already added")
-    }
+    idType = "yt"
+    thisId = url.substr(url.lastIndexOf("/")+1, idLength)
   } else {
     console.log("Not soundcloud or youtube ID")
     return
   }
 
+  if(thisId != null && sessionIds.indexOf(thisId) === -1 && allIds.indexOf(thisId) === -1) {
+    requestSoundCloudOrYouTube(thisId, idType)
+    sessionIds.push(thisId)
+  } else {
+    console.log("ID already added")
+  }
 
   setTimeout(() => {
     console.log("bye...")
@@ -118,49 +105,41 @@ function pushTrack(url, ids) {
   },5500)
 }
 
-function requestSoundCloud(id) {
-  let url = 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e'
+function requestSoundCloudOrYouTube(id, idType) {
+  const url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet'
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      let formattedBody = JSON.parse(body)
-      let track = {}
-      track.id = formattedBody.id
-      track.original_content_size = formattedBody.original_content_size
-      track.tag_list = formattedBody.tag_list
-      track.permalink = formattedBody.permalink
-      track.genre = formattedBody.genre
-      track.title = formattedBody.title
-      track.artwork_url = formattedBody.artwork_url
-      track.artist = formattedBody.user.username
-      track.likes = 0
-      track.kind = 'sc'
+      const data = JSON.parse(body)
+      const track = idType === 'sc' ? formatSCData({}, id, data) : formatYTData({}, id, data)
 
       // Add data to firebase
       tracksRef.push({track})
       idsRef.push({id: track.id})
-      console.log('Added Track ID: ' + id + ' TYPE: sc')
+      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind)
     }
   })
 }
 
-function requestYouTube(id) {
-  let url = 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet'
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      let formattedBody = JSON.parse(body)
-      let track = {}
-      track.id = id
-      track.tag_list = formattedBody.items[0].snippet.tags || null
-      track.title = formattedBody.items[0].snippet.title
-      track.description = formattedBody.items[0].snippet.description
-      track.artwork_url = formattedBody.items[0].snippet.thumbnails.default.url
-      track.likes = 0
-      track.kind = 'yt'
+function formatSCData(track, id, data) {
+  track.id = id
+  track.tag_list = data.tag_list
+  track.permalink = data.permalink
+  track.genre = data.genre
+  track.title = data.title
+  track.artwork_url = data.artwork_url
+  track.artist = data.user.username
+  track.likes = 0
+  track.kind = 'sc'
+  return track
+}
 
-      // Add data to firebase
-      tracksRef.push({track})
-      idsRef.push({id: track.id})
-      console.log('Added Track ID: ' + id + ' TYPE: yt')
-    }
-  })
+function formatYTData(track, id, data) {
+  track.id = id
+  track.tag_list = data.items[0].snippet.tags || null
+  track.title = data.items[0].snippet.title
+  track.description = data.items[0].snippet.description
+  track.artwork_url = data.items[0].snippet.thumbnails.default.url
+  track.likes = 0
+  track.kind = 'yt'
+  return track
 }
