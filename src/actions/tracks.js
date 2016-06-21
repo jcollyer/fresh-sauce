@@ -34,7 +34,8 @@ export function setTrack(track, player) {
 				auto_play: true
 			})
 		})
-		return { type: C.SET_TRACK, track: track, player: player }
+
+		return { type: C.SET_TRACK, track: track, player: player, trackPlaying: true }
 
 	} else {
 
@@ -49,7 +50,7 @@ export function setTrack(track, player) {
 				videoId: track.id,
 				playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
 			})
-			return { type: C.SET_TRACK, track: track, player: player }
+			return { type: C.SET_TRACK, track: track, player: player, trackPlaying: true }
 		}
 	}
 }

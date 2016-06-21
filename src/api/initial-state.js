@@ -7,6 +7,7 @@ export default {
 		uid: null
 	},
 	tracks: {
+		trackPlaying: false,
 		hasreceiveddata: false,
 		submittingnew: false,
 		states: {},

@@ -127,7 +127,7 @@ function requestSoundCloudOrYouTube(id, idType) {
   (0, _request2.default)(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
-      var track = idType === 'sc' ? formatSCData({}, id, data) : formatYTData({}, id, data);
+      var track = idType === 'sc' ? formatSCData({ id: id }, data) : formatYTData({ id: id }, data);
 
       // Add data to firebase
       tracksRef.push({ track: track });
@@ -137,21 +137,20 @@ function requestSoundCloudOrYouTube(id, idType) {
   });
 }
 
-function formatSCData(track, id, data) {
-  track.id = id;
+function formatSCData(track, data) {
   track.tag_list = data.tag_list;
   track.permalink = data.permalink;
   track.genre = data.genre;
   track.title = data.title;
   track.artwork_url = data.artwork_url;
+  track.permalink_url = data.permalink_url;
   track.artist = data.user.username;
   track.likes = 0;
   track.kind = 'sc';
   return track;
 }
 
-function formatYTData(track, id, data) {
-  track.id = id;
+function formatYTData(track, data) {
   track.tag_list = data.items[0].snippet.tags || null;
   track.title = data.items[0].snippet.title;
   track.description = data.items[0].snippet.description;
