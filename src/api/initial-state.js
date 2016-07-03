@@ -13,6 +13,7 @@ export default {
 		states: {},
 		tracks: [],
 		currentTrack: {id: 266853527},
-		trackId: 266853527
+		trackId: 266853527,
+		trackPosition: 0
 	}
 }

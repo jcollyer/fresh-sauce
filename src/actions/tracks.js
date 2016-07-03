@@ -54,3 +54,7 @@ export function setTrack(track, player) {
 		}
 	}
 }
+
+export function setTrackPosition(trackPosition) {
+  return { type: C.SET_TRACK_POSITION, trackPosition }
+}

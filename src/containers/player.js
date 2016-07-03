@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
 import store from '../store'
+import { setTrackPosition } from '../actions/tracks'
+
 let playingTrackInterval
 
 class Player extends Component {
@@ -15,22 +17,28 @@ class Player extends Component {
       }
     });
   }
-	pause(player) {
-		player.pause();
-		clearInterval(playingTrackInterval)
+	play(player) {
+		player.play()
+		this.whileTrackPlaying(player)
 	}
-	trackPlaying() {
+	pause(player) {
+		clearInterval(playingTrackInterval)
+		player.pause()
+	}
+	whileTrackPlaying(player) {
+		clearInterval(playingTrackInterval);
 		playingTrackInterval = setInterval(() => {
-			console.log('hi');
+			player.getPosition((position) => {
+				store.dispatch(setTrackPosition(position))
+			})
 		},1000)
 	}
 	render() {
-		const { track, player, trackPlaying } = this.props
+		const { track, player, trackPlaying, trackPosition } = this.props
 		const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
-		// updateTrackData(player)
 
 		if (trackPlaying) {
-			this.trackPlaying();
+			this.whileTrackPlaying(player);
 		}
 		return (
 				<div id="player" className={player ? "" : "hide"}>
@@ -46,6 +54,7 @@ class Player extends Component {
 					<div id="track-info">
 						<h3>{track.title}</h3>
 						<p>{track.artist}</p>
+						<p>{trackPosition}</p>
 					</div>
 				</div>
     )
@@ -53,10 +62,12 @@ class Player extends Component {
 }
 
 const mapStateToProps = (appState) => {
+	console.log(appState.tracks.trackPosition)
   return {
     track: appState.tracks.currentTrack,
 		player: appState.tracks.player,
-		trackPlaying: appState.tracks.trackPlaying
+		trackPlaying: appState.tracks.trackPlaying,
+		trackPosition: appState.tracks.trackPosition
   }
 }
 

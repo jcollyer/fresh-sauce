@@ -15,6 +15,10 @@ export default (state = initialState.tracks, action) => {
 				player: action.player,
 				trackPlaying: action.trackPlaying
 			});
+		case C.SET_TRACK_POSITION:
+			return Object.assign({}, state, {
+				trackPosition: action.trackPosition
+			});
 		default:
 			return state;
 	}
