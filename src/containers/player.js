@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
 import store from '../store'
-import { setTrackPosition } from '../actions/tracks'
+import { setTrackPosition, stopTrack } from '../actions/tracks'
 
-let playingTrackInterval
+let playingTrackInterval = undefined
+let oldTrackId = undefined
 
 class Player extends Component {
 	toggleSCTrack(player) {
 		var that = this;
     player.isPaused((paused) => {
       if(paused == true ) {
-        player.play();
+        this.play(player);
       } else {
         this.pause(player);
       }
@@ -23,12 +24,14 @@ class Player extends Component {
 	}
 	pause(player) {
 		clearInterval(playingTrackInterval)
+		store.dispatch(stopTrack())
 		player.pause()
 	}
 	whileTrackPlaying(player) {
 		clearInterval(playingTrackInterval);
 		playingTrackInterval = setInterval(() => {
 			player.getPosition((position) => {
+				console.log(position)
 				store.dispatch(setTrackPosition(position))
 			})
 		},1000)
@@ -37,8 +40,10 @@ class Player extends Component {
 		const { track, player, trackPlaying, trackPosition } = this.props
 		const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
 
-		if (trackPlaying) {
+		if (trackPlaying && track.id != oldTrackId) {
+			console.log('hit!');
 			this.whileTrackPlaying(player);
+			oldTrackId = track.id
 		}
 		return (
 				<div id="player" className={player ? "" : "hide"}>
@@ -62,7 +67,7 @@ class Player extends Component {
 }
 
 const mapStateToProps = (appState) => {
-	console.log(appState.tracks.trackPosition)
+	// debugger;
   return {
     track: appState.tracks.currentTrack,
 		player: appState.tracks.player,

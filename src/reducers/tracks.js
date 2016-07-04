@@ -19,6 +19,10 @@ export default (state = initialState.tracks, action) => {
 			return Object.assign({}, state, {
 				trackPosition: action.trackPosition
 			});
+		case C.STOP_TRACK:
+			return Object.assign({}, state, {
+				trackPlaying: false
+			});
 		default:
 			return state;
 	}
