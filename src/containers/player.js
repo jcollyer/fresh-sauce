@@ -6,6 +6,7 @@ import { setTrackPosition, stopTrack } from '../actions/tracks'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
+let player = undefined
 
 class Player extends Component {
 	toggleSCTrack(player) {
@@ -27,34 +28,95 @@ class Player extends Component {
 		store.dispatch(stopTrack())
 		player.pause()
 	}
-	whileTrackPlaying(player) {
+	whileSCTrackPlaying(player) {
 		clearInterval(playingTrackInterval);
 		playingTrackInterval = setInterval(() => {
 			player.getPosition((position) => {
-				console.log(position)
 				store.dispatch(setTrackPosition(position))
 			})
 		},1000)
 	}
+	updateYTPlayer(event) {
+		console.log('------ ', event.data)
+		if (event.data == "-1") {
+			// debugger;
+			// clearInterval(playingTrackInterval);
+		}
+		else if (event.data == "1") {
+			this.whileYTTrackPlaying(event.target)
+		}
+		else if (event.data == "2"){
+			clearInterval(playingTrackInterval)
+			store.dispatch(stopTrack())
+		}
+	}
+	whileYTTrackPlaying(player) {
+		clearInterval(playingTrackInterval);
+		playingTrackInterval = setInterval(() => {
+			let position = player.getCurrentTime();
+			// console.log(position)
+			store.dispatch(setTrackPosition(position))
+		},1000)
+	}
 	render() {
-		const { track, player, trackPlaying, trackPosition } = this.props
+		const { track, trackPlaying, trackPosition } = this.props
 		const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
 
 		if (trackPlaying && track.id != oldTrackId) {
-			console.log('hit!');
-			this.whileTrackPlaying(player);
-			oldTrackId = track.id
+			if (track.kind === "sc"){
+
+					if (player && player.a) {player.destroy()}
+					var widgetIframe = document.getElementById('soundcloud_widget')
+
+					player = SC.Widget(widgetIframe)
+
+					player.bind(SC.Widget.Events.READY, () => {
+						player.load("https://api.soundcloud.com/tracks/"+track.id, {
+							auto_play: true
+						})
+					})
+
+					this.whileSCTrackPlaying(player);
+					oldTrackId = track.id
+				} else {
+					var that = this;
+
+					function onPlayerReady(event) {
+						that.whileYTTrackPlaying(event.target)
+						oldTrackId = track.id
+					}
+
+					function onPlayerStateChange(event) {
+						that.updateYTPlayer(event)
+					}
+
+					if (player && player.a) {player.destroy()}
+
+					player = new YT.Player('yt-player', {
+						height: '100',
+						width: '200',
+						videoId: track.id,
+						playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' },
+						events: {
+	            'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+	          }
+					})
+				}
 		}
 		return (
 				<div id="player" className={player ? "" : "hide"}>
 					<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>
 					<div id="track-artwork">
-						<div id="yt-player" className={track.kind === "sc" ? "offscreen" : ""}></div>
+
+						<div id="yt-player" className={track.kind === "yt" ? "" : "offscreen"}></div>
+
 						<img
 							src={track.artwork_url}
 							className={track.kind === "sc" ? "" : "hide"}
 							onClick={() => this.toggleSCTrack(player)}
 						/>
+
 					</div>
 					<div id="track-info">
 						<h3>{track.title}</h3>
@@ -67,10 +129,9 @@ class Player extends Component {
 }
 
 const mapStateToProps = (appState) => {
-	// debugger;
   return {
     track: appState.tracks.currentTrack,
-		player: appState.tracks.player,
+
 		trackPlaying: appState.tracks.trackPlaying,
 		trackPosition: appState.tracks.trackPosition
   }

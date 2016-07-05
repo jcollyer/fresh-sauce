@@ -1,7 +1,5 @@
 import C from '../constants'
 import Firebase from 'firebase'
-import utils from '../utils'
-import initialState from '../api/initial-state'
 const tracksRef = new Firebase(C.FIREBASE).child('items')
 
 export function startListeningToTracks() {
@@ -19,40 +17,10 @@ export function startListeningToTracks() {
 
 export function setTrack(track, player) {
 
-	if (player && player.a) {
-		player.destroy();
-	}
 
-	if (track.kind === "sc") {
-		var player;
-		var widgetIframe = document.getElementById('soundcloud_widget');
+		return { type: C.SET_TRACK, track: track, trackPlaying: true }
 
-		player = SC.Widget(widgetIframe);
 
-		player.bind(SC.Widget.Events.READY, () => {
-			player.load("https://api.soundcloud.com/tracks/"+track.id, {
-				auto_play: true
-			})
-		})
-
-		return { type: C.SET_TRACK, track: track, player: player, trackPlaying: true }
-
-	} else {
-
-		if (player && player.a) {
-			player.destroy()
-			player.loadVideoById(track.id)
-			player.playVideo()
-		} else {
-			player = new YT.Player('yt-player', {
-				height: '100',
-				width: '200',
-				videoId: track.id,
-				playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' }
-			})
-			return { type: C.SET_TRACK, track: track, player: player, trackPlaying: true }
-		}
-	}
 }
 
 export function setTrackPosition(trackPosition) {
