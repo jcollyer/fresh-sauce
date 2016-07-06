@@ -1,38 +1,34 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import store from '../store'
-import { setTrackPosition, stopTrack } from '../actions/tracks'
+import { setTrackPosition, stopTrack, playNextTrack } from '../actions/tracks'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
 let player = undefined
 
 class Player extends Component {
+	playNextTrack() {
+		this.props.dispatch(playNextTrack())
+	}
 	toggleSCTrack(player) {
 		var that = this;
     player.isPaused((paused) => {
       if(paused == true ) {
-        this.play(player);
+				player.play()
+				this.whileSCTrackPlaying(player)
       } else {
-        this.pause(player);
+				clearInterval(playingTrackInterval)
+				this.props.dispatch(stopTrack())
+				player.pause()
       }
     });
   }
-	play(player) {
-		player.play()
-		this.whileTrackPlaying(player)
-	}
-	pause(player) {
-		clearInterval(playingTrackInterval)
-		store.dispatch(stopTrack())
-		player.pause()
-	}
 	whileSCTrackPlaying(player) {
 		clearInterval(playingTrackInterval);
 		playingTrackInterval = setInterval(() => {
 			player.getPosition((position) => {
-				store.dispatch(setTrackPosition(position))
+				this.props.dispatch(setTrackPosition(position))
 			})
 		},1000)
 	}
@@ -47,15 +43,14 @@ class Player extends Component {
 		}
 		else if (event.data == "2"){
 			clearInterval(playingTrackInterval)
-			store.dispatch(stopTrack())
+			this.props.dispatch(stopTrack())
 		}
 	}
 	whileYTTrackPlaying(player) {
 		clearInterval(playingTrackInterval);
 		playingTrackInterval = setInterval(() => {
 			let position = player.getCurrentTime();
-			// console.log(position)
-			store.dispatch(setTrackPosition(position))
+			this.props.dispatch(setTrackPosition(position))
 		},1000)
 	}
 	render() {
@@ -122,6 +117,7 @@ class Player extends Component {
 						<h3>{track.title}</h3>
 						<p>{track.artist}</p>
 						<p>{trackPosition}</p>
+						<button onClick={ () => this.playNextTrack() }>NEXT</button>
 					</div>
 				</div>
     )
@@ -131,7 +127,6 @@ class Player extends Component {
 const mapStateToProps = (appState) => {
   return {
     track: appState.tracks.currentTrack,
-
 		trackPlaying: appState.tracks.trackPlaying,
 		trackPosition: appState.tracks.trackPosition
   }

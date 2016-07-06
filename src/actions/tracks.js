@@ -16,11 +16,7 @@ export function startListeningToTracks() {
 }
 
 export function setTrack(track, player) {
-
-
-		return { type: C.SET_TRACK, track: track, trackPlaying: true }
-
-
+	return { type: C.SET_TRACK, track: track, trackPlaying: true }
 }
 
 export function setTrackPosition(trackPosition) {
@@ -29,4 +25,18 @@ export function setTrackPosition(trackPosition) {
 
 export function stopTrack() {
   return { type: C.STOP_TRACK }
+}
+
+export function playNextTrack() {
+	return function(dispatch, getState){
+		let currentTrack = getState().tracks.currentTrack.id;
+		let nextTrack;
+		getState().tracks.tracks.map((track, index) => {
+		  if(track.id === currentTrack) {
+				nextTrack = getState().tracks.tracks[index - 1] // minus one because tracks displayed in reverse chronological order
+			}
+		})
+		dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true });
+
+	}
 }
