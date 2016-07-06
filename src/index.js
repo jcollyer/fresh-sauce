@@ -12,8 +12,8 @@ import './soundcloud' // soundcloud player widget
 
 // initialize soundcloud
 SC.initialize({
-	client_id: '480b42686dbd3b48da099bed50e6af72',
-	redirect_uri: 'http://localhost:3000/callback.html'
+  client_id: '480b42686dbd3b48da099bed50e6af72',
+  redirect_uri: 'http://localhost:3000/callback.html'
 });
 
 // initialize youtube
@@ -24,12 +24,12 @@ SC.initialize({
 
 
 ReactDOM.render(
-	<Provider store={store}>{router}</Provider>,
-	document.getElementById("root")
+  <Provider store={store}>{router}</Provider>,
+  document.getElementById("root")
 );
 
 // setup Firebase listeners
 setTimeout(function(){
-	// store.dispatch(actions.startListeningToAuth())
-	store.dispatch(startListeningToTracks())
+  // store.dispatch(actions.startListeningToAuth())
+  store.dispatch(startListeningToTracks())
 })

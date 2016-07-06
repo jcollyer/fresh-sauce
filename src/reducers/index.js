@@ -3,8 +3,8 @@ import auth from './auth'
 import tracks from './tracks'
 
 const rootReducer = combineReducers({
-	auth,
-	tracks
+  auth,
+  tracks
 })
 
 export default rootReducer;
