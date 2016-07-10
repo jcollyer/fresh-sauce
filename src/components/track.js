@@ -1,5 +1,4 @@
 import React from 'react'
-import C from '../constants'
 
 export default (props) => {
   const { track } = props

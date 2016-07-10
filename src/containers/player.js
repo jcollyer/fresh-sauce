@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
 import { setTrackPosition, stopTrack, playNextTrack } from '../actions/tracks'
+import TrackProgress from '../components/track-progress'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
@@ -9,7 +10,7 @@ let player = undefined
 
 class Player extends Component {
   playNextTrack() {
-    this.props.dispatch(playNextTrack())
+    this.props.playNextTrack()
   }
   toggleSCTrack(player) {
     var that = this;
@@ -19,7 +20,7 @@ class Player extends Component {
         this.whileSCTrackPlaying(player)
       } else {
         clearInterval(playingTrackInterval)
-        this.props.dispatch(stopTrack())
+        this.props.stopTrack()
         player.pause()
       }
     });
@@ -28,7 +29,7 @@ class Player extends Component {
     clearInterval(playingTrackInterval);
     playingTrackInterval = setInterval(() => {
       player.getPosition((position) => {
-        this.props.dispatch(setTrackPosition(position))
+        this.props.setTrackPosition(position)
       })
     },1000)
   }
@@ -43,14 +44,14 @@ class Player extends Component {
     }
     else if (event.data == "2"){
       clearInterval(playingTrackInterval)
-      this.props.dispatch(stopTrack())
+      this.props.stopTrack()
     }
   }
   whileYTTrackPlaying(player) {
     clearInterval(playingTrackInterval);
     playingTrackInterval = setInterval(() => {
       let position = player.getCurrentTime();
-      this.props.dispatch(setTrackPosition(position))
+      this.props.setTrackPosition(position)
     },1000)
   }
   render() {
@@ -119,6 +120,9 @@ class Player extends Component {
             <p>{trackPosition}</p>
             <button onClick={ () => this.playNextTrack() }>NEXT</button>
           </div>
+
+          <TrackProgress />
+
         </div>
     )
   }
@@ -132,4 +136,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps)(Player)
+export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack })(Player)
