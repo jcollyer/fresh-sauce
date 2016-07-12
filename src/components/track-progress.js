@@ -1,12 +1,13 @@
 import React from 'react'
 
 export default (props) => {
-  const { track } = props
-
+  let progressStyle = {
+    width: props.progressPercentage
+  }
   return (
 		<div id="track-prgress">
-	    <div id="progress-container">
-	      <div id="progress" onClick={props.onPlayTrackClicked}></div>
+	    <div id="progress-container" onClick={props.onTrackProgressClicked}>
+	      <div id="progress" style={progressStyle}></div>
 	    </div>
 		</div>
   )

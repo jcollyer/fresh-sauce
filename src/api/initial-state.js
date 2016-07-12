@@ -13,6 +13,7 @@ export default {
     tracks: [],
     currentTrack: {id: 266853527},
     trackPosition: 0,
+    trackPercentage: 0,
     duration: 0
   }
 }

@@ -34,7 +34,6 @@ class Player extends Component {
     },1000)
   }
   updateYTPlayer(event) {
-    console.log('------ ', event.data)
     if (event.data == "-1") {
       // debugger;
       // clearInterval(playingTrackInterval);
@@ -48,14 +47,14 @@ class Player extends Component {
     }
   }
   whileYTTrackPlaying(player) {
-    clearInterval(playingTrackInterval);
+    clearInterval(playingTrackInterval)
     playingTrackInterval = setInterval(() => {
-      let position = player.getCurrentTime();
+      let position = player.getCurrentTime()
       this.props.setTrackPosition(position)
     },1000)
   }
   render() {
-    const { track, trackPlaying, trackPosition } = this.props
+    const { track, trackPlaying, trackPosition, trackPercentage } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
 
     if (trackPlaying && track.id != oldTrackId) {
@@ -100,6 +99,7 @@ class Player extends Component {
           })
         }
     }
+
     return (
         <div id="player" className={player ? "" : "hide"}>
           <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>
@@ -115,13 +115,13 @@ class Player extends Component {
 
           </div>
           <div id="track-info">
-            <h3>{track.title}</h3>
+            <p>{track.title}</p>
             <p>{track.artist}</p>
             <p>{trackPosition}</p>
             <button onClick={ () => this.playNextTrack() }>NEXT</button>
           </div>
 
-          <TrackProgress />
+          <TrackProgress progressPercentage={trackPercentage} onTrackProgressClicked={(event) => this.setTrackProgress(event)} />
 
         </div>
     )
@@ -132,7 +132,8 @@ const mapStateToProps = (appState) => {
   return {
     track: appState.tracks.currentTrack,
     trackPlaying: appState.tracks.trackPlaying,
-    trackPosition: appState.tracks.trackPosition
+    trackPosition: appState.tracks.trackPosition,
+    trackPercentage: appState.tracks.trackPercentage
   }
 }
 
