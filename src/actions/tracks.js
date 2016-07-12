@@ -10,8 +10,8 @@ export function startListeningToTracks() {
       for(var track in tracks){
         tracksArr.push(tracks[track].track)
       }
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr });
-    });
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr })
+    })
   }
 }
 
@@ -29,14 +29,13 @@ export function stopTrack() {
 
 export function playNextTrack() {
   return function(dispatch, getState){
-    let currentTrack = getState().tracks.currentTrack.id;
-    let nextTrack;
+    let currentTrack = getState().tracks.currentTrack.id
+    let nextTrack
     getState().tracks.tracks.map((track, index) => {
       if(track.id === currentTrack) {
         nextTrack = getState().tracks.tracks[index - 1] // minus one because tracks displayed in reverse chronological order
       }
     })
-    dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true });
-
+    dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
   }
 }

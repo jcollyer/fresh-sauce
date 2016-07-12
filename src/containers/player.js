@@ -53,6 +53,10 @@ class Player extends Component {
       this.props.setTrackPosition(position)
     },1000)
   }
+  trackProgressClick(position, player) {
+    this.props.setTrackPosition(position)
+    player.seekTo(position)
+  }
   render() {
     const { track, trackPlaying, trackPosition, trackPercentage } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
@@ -115,13 +119,13 @@ class Player extends Component {
 
           </div>
           <div id="track-info">
-            <p>{track.title}</p>
+            <p className="elipsis">{track.title}</p>
             <p>{track.artist}</p>
             <p>{trackPosition}</p>
             <button onClick={ () => this.playNextTrack() }>NEXT</button>
           </div>
 
-          <TrackProgress progressPercentage={trackPercentage} onTrackProgressClicked={(event) => this.setTrackProgress(event)} />
+          <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, player)} />
 
         </div>
     )
