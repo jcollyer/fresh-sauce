@@ -123,7 +123,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds) {
 }
 
 function requestSoundCloudOrYouTube(id, idType) {
-  var url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet';
+  var url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status';
   (0, _request2.default)(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
@@ -142,6 +142,7 @@ function formatSCData(track, data) {
   track.permalink = data.permalink;
   track.genre = data.genre;
   track.title = data.title;
+  track.duration = data.duration;
   track.artwork_url = data.artwork_url;
   track.permalink_url = data.permalink_url;
   track.artist = data.user.username;
@@ -154,6 +155,7 @@ function formatYTData(track, data) {
   track.tag_list = data.items[0].snippet.tags || null;
   track.title = data.items[0].snippet.title;
   track.description = data.items[0].snippet.description;
+  track.duration = data.items[0].contentDetails.duration;
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.likes = 0;
   track.kind = 'yt';

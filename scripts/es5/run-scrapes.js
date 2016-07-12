@@ -8,7 +8,7 @@ var _carolinaontherise = require('./websites/carolinaontherise.js');
 
 var _goodmusicallday = require('./websites/goodmusicallday.js');
 
-// anonymouslygifted()
-// bound2hiphop()
+(0, _anonymouslygifted.anonymouslygifted)();
+(0, _bound2hiphop.bound2hiphop)();
 (0, _carolinaontherise.carolinaontherise)();
 (0, _goodmusicallday.goodmusicallday)();
