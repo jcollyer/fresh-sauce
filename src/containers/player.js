@@ -41,17 +41,13 @@ class Player extends Component {
     },1000)
   }
   updateYTPlayer(event) {
-    switch(event) {
-      case event.data == "0":
-        that.playNextTrack()
-      case event.data == "1":
-       this.whileYTTrackPlaying(event.target)
-      case event.data == "2":
-        clearInterval(playingTrackInterval)
-        this.props.stopTrack()
+    switch(event.data) {
+      case 0:
+        this.playNextTrack()
+      case 1:
+        this.whileYTTrackPlaying(event.target)
       default: return console.log("updateYTPlayer", event.data)
     }
-
   }
   trackProgressClick(position, player) {
     this.props.setTrackPosition(position)

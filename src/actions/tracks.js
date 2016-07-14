@@ -15,7 +15,7 @@ export function startListeningToTracks() {
   }
 }
 
-export function setTrack(track, player) {
+export function setTrack(track) {
   return { type: C.SET_TRACK, track: track, trackPlaying: true }
 }
 
