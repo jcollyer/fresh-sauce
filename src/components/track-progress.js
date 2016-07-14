@@ -6,9 +6,9 @@ export default class TrackProgress extends Component {
     let width = element.clientWidth
     let xoffset = event.clientX - element.offsetLeft
     let duration = this.props.duration
-    let currentTime = (xoffset / width) * duration;
-
-    this.props.trackProgressClick(currentTime)
+    let position = (xoffset / width) * duration;
+    // console.log("dur", duration)
+    this.props.trackProgressClick(position)
   }
   render() {
     const { progressPercentage, trackProgressClick } = this.props

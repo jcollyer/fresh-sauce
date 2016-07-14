@@ -33,29 +33,35 @@ class Player extends Component {
       })
     },1000)
   }
-  updateYTPlayer(event) {
-    if (event.data == "-1") {
-      // debugger;
-      // clearInterval(playingTrackInterval);
-    }
-    else if (event.data == "1") {
-      this.whileYTTrackPlaying(event.target)
-    }
-    else if (event.data == "2"){
-      clearInterval(playingTrackInterval)
-      this.props.stopTrack()
-    }
-  }
   whileYTTrackPlaying(player) {
     clearInterval(playingTrackInterval)
     playingTrackInterval = setInterval(() => {
-      let position = player.getCurrentTime()
+      let position = player.getCurrentTime() * 1000
       this.props.setTrackPosition(position)
     },1000)
   }
+  updateYTPlayer(event) {
+    switch(event) {
+      case event.data == "0":
+        that.playNextTrack()
+      case event.data == "1":
+       this.whileYTTrackPlaying(event.target)
+      case event.data == "2":
+        clearInterval(playingTrackInterval)
+        this.props.stopTrack()
+      default: return console.log("updateYTPlayer", event.data)
+    }
+
+  }
   trackProgressClick(position, player) {
     this.props.setTrackPosition(position)
-    player.seekTo(position)
+    let trackPosition = position
+
+    if (player.playVideo) { // if player is YouTube
+      trackPosition = trackPosition / 1000
+    }
+
+    player.seekTo(trackPosition)
   }
   render() {
     const { track, trackPlaying, trackPosition, trackPercentage } = this.props
@@ -63,6 +69,7 @@ class Player extends Component {
 
     if (trackPlaying && track.id != oldTrackId) {
       if (track.kind === "sc"){
+          let that = this;
 
           if (player && player.a) {player.destroy()}
           var widgetIframe = document.getElementById('soundcloud_widget')
@@ -75,10 +82,16 @@ class Player extends Component {
             })
           })
 
+          player.bind(SC.Widget.Events.FINISH, () => {
+            that.playNextTrack()
+          })
+
           this.whileSCTrackPlaying(player);
           oldTrackId = track.id
-        } else {
-          var that = this;
+
+        } else { // else YouTube
+
+          let that = this;
 
           function onPlayerReady(event) {
             that.whileYTTrackPlaying(event.target)
