@@ -3,10 +3,29 @@ export function validateQuote() {
     return "A quote needs at least 10 characters to be worthy of sharing with the world!"
   }
 }
+
 export function YTDurationToSeconds(duration) {
   let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
   let hours = (parseInt(match[1]) || 0)
   let minutes = (parseInt(match[2]) || 0)
   let seconds = (parseInt(match[3]) || 0)
   return (hours * 3600 + minutes * 60 + seconds) * 1000
+}
+
+export function playTrack(track, players){
+  if(players.playerYT.a) { // if a YouTube video, pause, and clear.
+    players.playerYT.pauseVideo()
+    players.playerYT.clearVideo()
+  }
+
+  if(track.kind === 'sc'){ // if Soundcloud
+    players.playerSC.bind(SC.Widget.Events.READY, () => {
+     players.playerSC.load("https://api.soundcloud.com/tracks/"+track.id, {
+       auto_play: true
+     })
+   })
+  } else {
+    players.playerYT.cueVideoById(track.id)
+    players.playerYT.playVideo()
+  }
 }
