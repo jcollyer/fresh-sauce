@@ -5,13 +5,13 @@ import Track from '../components/track'
 
 class Tracklist extends Component {
   render() {
-    const { tracks, hasreceiveddata, player } = this.props
+    const { tracks, hasreceiveddata, trackPlaying } = this.props
     const rows = tracks.map((track) => {
-      return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track, player)} />
+      return <Track track={track} key={track.id} onPlayTrackClicked={() => this.props.setTrack(track)} />
     }).reverse()
 
     return (
-      <div id="tracklist" className={player ? "player-padding" : ""}>
+      <div id="tracklist" className={trackPlaying ? "player-padding" : ""}>
         {hasreceiveddata ? rows : "Loading tracks..."}
       </div>
     )
@@ -22,8 +22,8 @@ const mapStateToProps = (appState) => {
   return {
     tracks: appState.tracks.tracks,
     hasreceiveddata: appState.tracks.hasreceiveddata,
-    auth: appState.auth,
-    player: appState.tracks.player
+    trackPlaying: appState.tracks.trackPlaying,
+    auth: appState.auth
   }
 }
 

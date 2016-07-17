@@ -3,117 +3,72 @@ import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
 import { setTrackPosition, stopTrack, playNextTrack } from '../actions/tracks'
 import TrackProgress from '../components/track-progress'
+import { playTrack } from '../utils'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
-let player = undefined
 
 class Player extends Component {
   toggleSCTrack(player) {
-    var that = this;
+    let that = this
     player.isPaused((paused) => {
       if(paused == true ) {
         player.play()
-        this.whileTrackPlaying(player)
       } else {
         clearInterval(playingTrackInterval)
-        this.props.stopTrack()
+        // this.props.stopTrack()
         player.pause()
       }
     });
   }
-  whileTrackPlaying(player) {
-    let that = this;
-    clearInterval(playingTrackInterval);
-
+  whileTrackPlaying(players) {
+    clearInterval(playingTrackInterval)
     playingTrackInterval = setInterval(() => {
-      if(that.props.track.kind === 'sc'){ // if Soundcloud
-        player.getPosition((position) => {
-          this.props.setTrackPosition(position)
-        })
-
+      if(this.props.track.kind === 'sc'){ // if Soundcloud
+        let that = this
+        players.playerSC.getPosition((position) => {
+         that.props.setTrackPosition(position)
+       })
       } else { // else play YouTube
-        let position = player.getCurrentTime() * 1000
+        let position = players.playerYT.getCurrentTime() * 1000
         this.props.setTrackPosition(position)
       }
     },2000)
   }
-  trackProgressClick(position) {
+  trackProgressClick(position, players) {
     this.props.setTrackPosition(position)
+    // debugger;
     let trackPosition = position
 
-    if (player.playVideo) { // if player is YouTube
+    if (this.props.track.kind === 'yt') { // if player is YouTube
       trackPosition = trackPosition / 1000
+      players.playerYT.seekTo(trackPosition)
+    } else {
+      players.playerSC.seekTo(trackPosition)
     }
-
-    player.seekTo(trackPosition)
   }
   render() {
-    const { track, trackPlaying, trackPosition, trackPercentage } = this.props
+    const { track, trackPlaying, trackPosition, trackPercentage, players } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
 
-    if (trackPlaying && track.id != oldTrackId) {
-      let that = this;
-      if (track.kind === "sc"){
-          if (player && player.a) {player.destroy()}
-          var widgetIframe = document.getElementById('soundcloud_widget')
-
-          player = SC.Widget(widgetIframe)
-
-          player.bind(SC.Widget.Events.READY, () => {
-            player.load("https://api.soundcloud.com/tracks/"+track.id, {
-              auto_play: true
-            })
-          })
-
-          player.bind(SC.Widget.Events.FINISH, () => {
-            that.props.playNextTrack()
-          })
-
-          that.whileTrackPlaying(player);
-          oldTrackId = track.id
-
-        } else { // else YouTube
-
-          function onPlayerReady(event) {
-            that.whileTrackPlaying(event.target)
-            oldTrackId = track.id
-          }
-
-          function onPlayerStateChange(event) {
-            switch(event.data) {
-              case 0: // video finished
-                that.props.playNextTrack()
-              default: return console.log("updateYTPlayer", event.data)
-            }
-          }
-
-          if (player && player.a) {player.destroy()}
-
-          player = new YT.Player('yt-player', {
-            height: '100',
-            width: '200',
-            videoId: track.id,
-            playerVars: { 'autoplay': 1, 'controls': 0,'autohide':1,'wmode':'opaque' },
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-            }
-          })
-        }
+    if (trackPlaying && track.id != oldTrackId) { // if track is playing, with a new track ID
+      playTrack(track, players)
+      this.whileTrackPlaying(players)
+      oldTrackId = track.id
     }
-
     return (
-        <div id="player" className={player ? "" : "hide"}>
+        <div id="player" className={trackPlaying ? "" : "hide"}>
+
           <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>
+
           <div id="track-artwork">
 
-            <div id="yt-player" className={track.kind === "yt" ? "" : "offscreen"}></div>
+            <div id="yt_widget" className={track.kind === "yt" ? "" : "offscreen"}></div>
 
             <img
               src={track.artwork_url}
               className={track.kind === "sc" ? "" : "hide"}
-              onClick={() => this.toggleSCTrack(player)}
+              onClick={() => this.toggleSCTrack(players.playerSC)}
             />
 
           </div>
@@ -124,7 +79,7 @@ class Player extends Component {
             <button onClick={ () => this.props.playNextTrack() }>NEXT</button>
           </div>
 
-          <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position)} />
+          <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
 
         </div>
     )
@@ -136,7 +91,8 @@ const mapStateToProps = (appState) => {
     track: appState.tracks.currentTrack,
     trackPlaying: appState.tracks.trackPlaying,
     trackPosition: appState.tracks.trackPosition,
-    trackPercentage: appState.tracks.trackPercentage
+    trackPercentage: appState.tracks.trackPercentage,
+    players: appState.players.playerOptions
   }
 }
 

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import initialState from './api/initial-state'
 import ReduxThunk from 'redux-thunk'
@@ -12,4 +12,4 @@ const logger = store => next => action => {
   return result
 }
 
-module.exports = applyMiddleware(ReduxThunk)(createStore)(rootReducer,initialState);
+export default applyMiddleware(ReduxThunk)(createStore)(rootReducer,initialState)

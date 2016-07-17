@@ -15,5 +15,6 @@ export default {
     trackPosition: 0,
     trackPercentage: 0,
     duration: 0
-  }
+  },
+  players: {}
 }

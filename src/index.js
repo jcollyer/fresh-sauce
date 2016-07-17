@@ -5,6 +5,7 @@ import { Router, hashHistory } from 'react-router'
 import store from './store'
 import router from './router'
 import { startListeningToTracks } from './actions/tracks'
+import { setPlayers } from './actions/players'
 import SC from 'soundcloud' // soundcloud object
 
 import './style/styles.less'
@@ -32,4 +33,5 @@ ReactDOM.render(
 setTimeout(function(){
   // store.dispatch(actions.startListeningToAuth())
   store.dispatch(startListeningToTracks())
-})
+  store.dispatch(setPlayers())
+},500)
