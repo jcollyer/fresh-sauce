@@ -1,11 +1,12 @@
 import React from 'react'
-import Authpanel from '../containers/authpanel'
 import Player from '../containers/player'
+import Auth from '../containers/auth'
 
 export default function App({ children }) {
   return (
     <div id="wrapper">
       <Player />
+      <Auth />
       {children}
     </div>
   )

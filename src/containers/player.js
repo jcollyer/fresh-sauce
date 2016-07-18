@@ -37,7 +37,6 @@ class Player extends Component {
   }
   trackProgressClick(position, players) {
     this.props.setTrackPosition(position)
-    // debugger;
     let trackPosition = position
 
     if (this.props.track.kind === 'yt') { // if player is YouTube
