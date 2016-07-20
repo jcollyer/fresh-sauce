@@ -147,6 +147,7 @@ function formatSCData(track, data) {
   track.permalink_url = data.permalink_url;
   track.artist = data.user.username;
   track.likes = 0;
+  track.featured = false;
   track.kind = 'sc';
   return track;
 }
@@ -158,6 +159,7 @@ function formatYTData(track, data) {
   track.duration = data.items[0].contentDetails.duration;
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.likes = 0;
+  track.featured = false;
   track.kind = 'yt';
   return track;
 }
