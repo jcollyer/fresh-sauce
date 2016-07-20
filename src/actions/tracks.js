@@ -4,6 +4,10 @@ export function setTrack(track) {
   return { type: C.SET_TRACK, track: track, trackPlaying: true }
 }
 
+export function deleteTrack(track) {
+  return { type: C.DELETE_TRACK, track: track }
+}
+
 export function setTrackPosition(trackPosition) {
   return { type: C.SET_TRACK_POSITION, trackPosition }
 }
