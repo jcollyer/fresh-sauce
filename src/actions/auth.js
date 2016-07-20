@@ -1,26 +1,10 @@
 import C from '../constants'
 import Firebase from 'firebase'
-
 const fireRef = new Firebase(C.FIREBASE)
+const usersRef = fireRef.child("users");
 
 export const startListeningToAuth = () => {
   return (dispatch, getState) => {
-    // fireRef.onAuth((authData) => {
-    //   if (authData) {
-    //     dispatch({
-    //       type: C.AUTH_LOGIN,
-    //       uid: authData.uid,
-    //       username: authData.facebook.displayName || authData.facebook.username
-    //     })
-    //   } else {
-    //     if (getState().auth.status !== C.AUTH_ANONYMOUS) {
-    //       dispatch({ type: C.AUTH_LOGOUT })
-    //     }
-    //   }
-    // })
-
-    // Listening for auth state changes.
-    // [START authstatelistener]
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         let userDetails = {
@@ -33,27 +17,26 @@ export const startListeningToAuth = () => {
           refreshToken: user.refreshToken,
           providerData: user.providerData
         }
-        // [END_EXCLUDE]
+        let uid = user.uid
+        usersRef.child(user.uid).set({
+          displayName: user.displayName,
+          email: user.email,
+          role: "member"
+        })
+
         dispatch({
           type: C.AUTH_LOGIN,
           uid: user.uid,
           username: user.displayName
         })
+
       } else {
-        // User is signed out.
-        // [START_EXCLUDE]
-        // document.getElementById('quickstart-sign-in-status').textContent = 'Signed out'
-        // document.getElementById('quickstart-sign-in').textContent = 'Log in with Facebook'
-        // document.getElementById('quickstart-account-details').textContent = 'null'
-        // document.getElementById('quickstart-oauthtoken').textContent = 'null'
-        // [END_EXCLUDE]
-        // if (getState().auth.status !== C.AUTH_ANONYMOUS) {
-        //   dispatch({ type: C.AUTH_LOGOUT })
-        // }
+
+        if (getState().auth.status !== C.AUTH_ANONYMOUS) {
+          dispatch({ type: C.AUTH_LOGOUT })
+        }
+
       }
-      // [START_EXCLUDE]
-      // document.getElementById('quickstart-sign-in').disabled = false
-      // [END_EXCLUDE]
     })
   }
 }
@@ -98,12 +81,9 @@ export const openAuth = () => {
       // [END signin]
     } else {
       // [START signout]
-      firebase.auth().signOut()
+      dispatch({ type: C.AUTH_LOGOUT })
       // [END signout]
     }
-    // [START_EXCLUDE]
-    // document.getElementById('quickstart-sign-in').disabled = true
-    // [END_EXCLUDE]
   }
 }
 
