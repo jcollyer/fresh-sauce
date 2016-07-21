@@ -8,13 +8,15 @@ export default {
   },
   tracks: {
     trackPlaying: false,
-    hasreceiveddata: false,
     submittingnew: false,
-    tracks: [],
     currentTrack: {id: 266853527},
     trackPosition: 0,
     trackPercentage: 0,
     duration: 0
+  },
+  tracklist: {
+    tracks: [],
+    hasreceiveddata: false,
   },
   players: {}
 }

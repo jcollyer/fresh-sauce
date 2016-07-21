@@ -33,7 +33,7 @@ class Player extends Component {
         let position = players.playerYT.getCurrentTime() * 1000
         this.props.setTrackPosition(position)
       }
-    },2000)
+    }, 500)
   }
   trackProgressClick(position, players) {
     this.props.setTrackPosition(position)

@@ -8,7 +8,7 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "watch-scripts": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run goodmusicallday & npm run config & npm run run-scrapes",
+    "watch": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run goodmusicallday & npm run config & npm run run-scrapes",
     "anonymouslygifted": "babel scripts/es2015/websites/anonymouslygifted.js -o scripts/es5/websites/anonymouslygifted.js -w",
     "bound2hiphop": "babel scripts/es2015/websites/bound2hiphop.js -o scripts/es5/websites/bound2hiphop.js -w",
     "carolinaontherise": "babel scripts/es2015/websites/carolinaontherise.js -o scripts/es5/websites/carolinaontherise.js -w",

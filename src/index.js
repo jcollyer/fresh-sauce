@@ -5,7 +5,7 @@ import { Router, hashHistory } from 'react-router'
 import store from './store'
 import router from './router'
 import { startListeningToAuth } from './actions/auth'
-import { startListeningToTracks } from './actions/tracks'
+import { startListeningToTracks } from './actions/tracklist'
 import { setPlayers } from './actions/players'
 import SC from 'soundcloud' // soundcloud object
 

@@ -20,8 +20,8 @@ class Tracklist extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    tracks: appState.tracks.tracks,
-    hasreceiveddata: appState.tracks.hasreceiveddata,
+    tracks: appState.tracklist.tracks,
+    hasreceiveddata: appState.tracklist.hasreceiveddata,
     trackPlaying: appState.tracks.trackPlaying,
     auth: appState.auth
   }

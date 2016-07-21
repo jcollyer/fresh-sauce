@@ -4,7 +4,7 @@ import request from 'superagent'
 import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
-const tracksRef = ref.child('items')
+const tracksRef = ref.child('tracks')
 
 class AddTrack extends Component {
 

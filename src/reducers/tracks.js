@@ -3,13 +3,7 @@ import initialState from '../api/initial-state'
 import { YTDurationToSeconds } from '../utils'
 
 export default (state = initialState.tracks, action) => {
-
   switch(action.type){
-    case C.RECEIVE_TRACKS_DATA:
-      return Object.assign({}, state, {
-        hasreceiveddata: true,
-        tracks: action.tracks
-      });
     case C.SET_TRACK:
       if(typeof(action.track.duration) === "string") { //if track format is YoutTube. Example: "PT5M20S"
         var duration = action.track.kind === "sc" ? action.track.duration : YTDurationToSeconds(action.track.duration)

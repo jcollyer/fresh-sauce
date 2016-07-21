@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ref = new _firebase2.default('https://fresh-sauce.firebaseio.com/');
 var idsRef = ref.child('ids');
-var tracksRef = ref.child('items');
+var tracksRef = ref.child('tracks');
 var sessionIds = [];
 var $ = void 0;
 
@@ -128,10 +128,9 @@ function requestSoundCloudOrYouTube(id, idType) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
       var track = idType === 'sc' ? formatSCData({ id: id }, data) : formatYTData({ id: id }, data);
-
       // Add data to firebase
-      tracksRef.push({ track: track });
-      idsRef.push({ id: track.id });
+      tracksRef.child(track.id).set(track);
+      idsRef.child(track.id).set({ id: track.id, displaying: true });
       console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind);
     }
   });
