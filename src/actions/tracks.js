@@ -1,6 +1,7 @@
 import C from '../constants'
 import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
+const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
 
 
@@ -10,6 +11,7 @@ export function setTrack(track) {
 
 export function deleteTrack(track) {
   tracksRef.child(track.id).remove();
+  idsRef.child(track.id).remove();
   return { type: C.DELETE_TRACK, track: track }
 }
 
