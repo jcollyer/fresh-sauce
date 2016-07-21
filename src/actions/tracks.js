@@ -1,10 +1,15 @@
 import C from '../constants'
+import Firebase from 'firebase'
+const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
+const tracksRef = ref.child('tracks')
+
 
 export function setTrack(track) {
   return { type: C.SET_TRACK, track: track, trackPlaying: true }
 }
 
 export function deleteTrack(track) {
+  tracksRef.child(track.id).remove();
   return { type: C.DELETE_TRACK, track: track }
 }
 
