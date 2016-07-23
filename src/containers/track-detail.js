@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class TrackDetail extends Component {
   render() {
-    return (
-      <div>
-        hi there track detail page!
-      </div>
-    )
+    return <i>hi there track detail page!</i>
   }
 }
 
@@ -20,4 +17,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps)(TrackDetail)
+export default withRouter(connect(mapStateToProps)(TrackDetail))
