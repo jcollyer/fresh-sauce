@@ -5,8 +5,8 @@ import Track from '../components/track'
 
 class Tracklist extends Component {
   render() {
-    const { tracks, hasreceiveddata, trackPlaying } = this.props
-    const rows = tracks.map((track) => {
+    const { tracklist, hasreceiveddata, trackPlaying } = this.props
+    const rows = tracklist.map((track) => {
       return <Track
         track={track}
         key={track.id}
@@ -24,7 +24,7 @@ class Tracklist extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    tracks: appState.tracklist.tracks,
+    tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
     trackPlaying: appState.tracks.trackPlaying,
     auth: appState.auth

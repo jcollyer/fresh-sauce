@@ -28,20 +28,20 @@ SC.initialize({
 });
 
 // initialize youtube
- var tag = document.createElement('script');
- tag.src = "https://www.youtube.com/iframe_api";
- var firstScriptTag = document.getElementsByTagName('script')[0];
- firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-
+// inject react DOM into the root element
 ReactDOM.render(
   <Provider store={store}>{router}</Provider>,
   document.getElementById("root")
 );
+store.dispatch(setPlayers())
 
 // setup Firebase listeners
 setTimeout(function(){
   store.dispatch(startListeningToAuth())
   store.dispatch(startListeningToTracks())
-  store.dispatch(setPlayers())
-},500)
+},1000)

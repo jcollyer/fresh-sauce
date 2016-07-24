@@ -4,7 +4,6 @@ const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
 
-
 export function setTrack(track) {
   return { type: C.SET_TRACK, track: track, trackPlaying: true }
 }
@@ -33,5 +32,15 @@ export function playNextTrack() {
       }
     })
     dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+  }
+}
+
+export function setTrackDetail(id) {
+  return function(dispatch, getState){
+    let trackDetail = {}
+    tracksRef.orderByChild('id').equalTo(id).on("value", function(snapshot) {
+      trackDetail = snapshot.val()[Object.keys(snapshot.val())]
+      dispatch({ type: C.SET_TRACK_DETAIL, trackDetail })
+    })
   }
 }
