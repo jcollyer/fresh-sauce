@@ -17,12 +17,8 @@ export const startListeningToAuth = () => {
           refreshToken: user.refreshToken,
           providerData: user.providerData
         }
-        let uid = user.uid
-        usersRef.child(user.uid).set({
-          displayName: user.displayName,
-          email: user.email,
-          role: "member"
-        })
+
+        checkIfUserExists(user)
 
         dispatch({
           type: C.AUTH_LOGIN,
@@ -93,4 +89,31 @@ export const logoutUser = () => {
     // fireRef.unauth()
     firebase.auth().signOut()
   }
+}
+
+function userExistsCallback(user, exists) {
+  if (exists) {
+    usersRef.child(user.uid).update({
+      lastLogin: Date.now()
+    })
+
+  } else {
+
+    usersRef.child(user.uid).set({
+      displayName: user.displayName,
+      email: user.email,
+      role: "member",
+      favorites: {},
+      lastLogin: Date.now()
+    })
+
+  }
+}
+
+// Tests to see if /users/<userId> has any data.
+function checkIfUserExists(user) {
+  usersRef.child(user.uid).once('value', function(snapshot) {
+    var exists = (snapshot.val() !== null);
+    userExistsCallback(user, exists);
+  });
 }
