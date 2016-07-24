@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { logoutUser } from '../actions/auth'
+// import C from '../constants'
 
 export default class Auth extends Component {
-  render() {
-
+  componentWillMount(){
     var uiConfig = {
       'signInSuccessUrl': '/',
       'signInOptions': [
@@ -19,12 +21,23 @@ export default class Auth extends Component {
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
-
+  }
+  render() {
+    const { username } = this.props
     return (
       <div>
-        <h1>Welcome to My Awesome App</h1>
+        <h1>Welcome {username} to My Awesome App</h1>
+        <button onClick={() => this.props.logoutUser()}>log out</button>
         <div id="firebaseui-auth-container"></div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (appState) => {
+  return {
+    username: appState.auth.username
+  }
+}
+
+export default connect(mapStateToProps, { logoutUser })(Auth)
