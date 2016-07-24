@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 export default (props) => {
   const { track } = props
@@ -10,7 +11,8 @@ export default (props) => {
         <span className="title">{track.title} </span>
         <span className="artist"><b>{track.artist}</b></span>
       </div>
-      <p>{track.id}</p>
+
+      <Link to={`/tracks/${track.id}`}>{track.id}</Link>
       <button onClick={props.onDeleteTrackClicked}>Delete track</button>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 import { setTrackDetail, setTrack } from '../actions/tracks'
 
 class TrackDetail extends Component {
@@ -10,9 +10,11 @@ class TrackDetail extends Component {
   }
   render() {
     const { currentTrack } = this.props
+    // debugger;
     if (currentTrack.id) {
       return (
         <div>
+          <Link to={`/`}>Home</Link>
           <h2>{currentTrack.title}</h2>
           <img src={currentTrack.artwork_url} onClick={() => this.props.setTrack(currentTrack)} />
         </div>
