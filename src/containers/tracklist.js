@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTrack, deleteTrack } from '../actions/tracks'
+import { setTrack, deleteTrack, favoriteTrack } from '../actions/tracks'
 import Track from '../components/track'
 
 class Tracklist extends Component {
@@ -11,7 +11,8 @@ class Tracklist extends Component {
         track={track}
         key={track.id}
         onPlayTrackClicked={() => this.props.setTrack(track)}
-        onDeleteTrackClicked={() => this.props.deleteTrack(track)} />
+        onDeleteTrackClicked={() => this.props.deleteTrack(track)}
+        onFavoriteTrackClicked={() => this.props.favoriteTrack(track)} />
     }).reverse()
 
     return (
@@ -31,4 +32,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, deleteTrack })(Tracklist)
+export default connect(mapStateToProps, { setTrack, deleteTrack, favoriteTrack })(Tracklist)

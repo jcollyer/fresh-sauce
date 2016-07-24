@@ -14,6 +14,7 @@ export default (props) => {
 
       <Link to={`/tracks/${track.id}`}>{track.id}</Link>
       <button onClick={props.onDeleteTrackClicked}>Delete track</button>
+      <button onClick={props.onFavoriteTrackClicked}>Favorite track</button>
     </div>
   )
 }

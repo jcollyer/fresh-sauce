@@ -3,6 +3,8 @@ import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
+const favoritesRef = ref.child('favorites')
+const usersRef = ref.child('users')
 
 export function setTrack(track) {
   return { type: C.SET_TRACK, track: track, trackPlaying: true }
@@ -12,6 +14,14 @@ export function deleteTrack(track) {
   tracksRef.child(track.id).remove();
   idsRef.child(track.id).remove();
   return { type: C.DELETE_TRACK, track: track }
+}
+
+export function favoriteTrack(track) {
+  return function(dispatch, getState) {
+    // debugger;
+    let uid = getState().auth.uid
+    usersRef.child(uid).child('favorites').push({id: track.id})
+  }
 }
 
 export function setTrackPosition(trackPosition) {
