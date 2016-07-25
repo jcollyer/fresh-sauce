@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setTrack, deleteTrack, toggleFavoriteTrack } from '../actions/tracks'
 import Track from '../components/track'
+import AddTrack from './add-track'
 
 class Tracklist extends Component {
   isTrackFavoritedByUser(trackId){
@@ -37,8 +38,9 @@ class Tracklist extends Component {
     }).reverse()
 
     return (
-      <div id="tracklist" className={trackPlaying ? "player-padding" : ""}>
-        {hasreceiveddata ? rows : "Loading tracks..."}
+      <div id='tracklist' className={trackPlaying ? 'player-padding' : ''}>
+        <span className={this.isUserAdmin() ? '' : 'hide'}><AddTrack /></span>
+        {hasreceiveddata ? rows : 'Loading tracks...'}
       </div>
     )
   }
