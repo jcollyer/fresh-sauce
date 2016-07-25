@@ -37,6 +37,12 @@ export const logoutUser = () => {
   }
 }
 
+export const showLogInPanel = () => {
+  return (dispatch) => {
+    dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
+  }
+}
+
 function userExistsCallback(user, exists) {
   if (exists) {
     usersRef.child(user.uid).update({

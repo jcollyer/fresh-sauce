@@ -5,6 +5,7 @@ export default {
     currently: C.ANONYMOUS,
     username: null,
     uid: null,
+    displayingLogInPanel: false,
     favorites: {}
   },
   tracks: {

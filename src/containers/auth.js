@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { logoutUser } from '../actions/auth'
+import { logoutUser, showLogInPanel } from '../actions/auth'
 // import C from '../constants'
 
 export default class Auth extends Component {
@@ -23,12 +23,14 @@ export default class Auth extends Component {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
   render() {
-    const { username } = this.props
+    const { username, displayingLogInPanel } = this.props
+    // debugger;
     return (
       <div>
         <h1>Welcome {username} to My Awesome App</h1>
-        <button onClick={() => this.props.logoutUser()}>log out</button>
-        <div id="firebaseui-auth-container"></div>
+        <button onClick={() => this.props.logoutUser()} className={ username === "guest" ? "hide" : ""}>Log Out</button>
+        <button onClick={() => this.props.showLogInPanel()} className={ username === "guest" ? "" : "hide"} >Log In</button>
+        <div id="firebaseui-auth-container" className={ displayingLogInPanel ? "" : "hide"}></div>
       </div>
     )
   }
@@ -36,8 +38,9 @@ export default class Auth extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    username: appState.auth.username
+    username: appState.auth.username,
+    displayingLogInPanel: appState.auth.displayingLogInPanel
   }
 }
 
-export default connect(mapStateToProps, { logoutUser })(Auth)
+export default connect(mapStateToProps, { logoutUser, showLogInPanel })(Auth)

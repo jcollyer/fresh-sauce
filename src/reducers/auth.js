@@ -14,9 +14,10 @@ export default (state = initialState.auth, action) => {
     case C.AUTH_LOGIN:
       return {
         status: C.AUTH_LOGGED_IN,
-        username: action.username,
-        uid: action.uid,
-        favorites: action.favorites
+        username: action.username || state.username,
+        uid: action.uid || state.uid,
+        favorites: action.favorites || state.favorites,
+        displayingLogInPanel: action.displayingLogInPanel || false
       };
     case C.AUTH_LOGOUT:
       return {
