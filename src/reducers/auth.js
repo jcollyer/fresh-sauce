@@ -16,6 +16,7 @@ export default (state = initialState.auth, action) => {
         status: C.AUTH_LOGGED_IN,
         username: action.username || state.username,
         uid: action.uid || state.uid,
+        role: action.role || state.role,
         favorites: action.favorites || state.favorites,
         displayingLogInPanel: action.displayingLogInPanel || false
       };

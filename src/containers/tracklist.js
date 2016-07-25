@@ -17,6 +17,12 @@ class Tracklist extends Component {
       }
     }
   }
+  isUserAdmin() {
+    if(this.props.user.username != 'guest' && this.props.user.role === 'admin'){
+      return true
+    }
+    return false
+  }
   render() {
     const { tracklist, hasreceiveddata, trackPlaying, user } = this.props
     const rows = tracklist.map((track, i) => {
@@ -26,7 +32,8 @@ class Tracklist extends Component {
         onPlayTrackClicked={() => this.props.setTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
         onToggleFavoriteTrackClicked={(event) => this.props.toggleFavoriteTrack(event, track)}
-        isFavoritedByUser={this.isTrackFavoritedByUser(track.id)} />
+        isFavoritedByUser={this.isTrackFavoritedByUser(track.id)}
+        isAdmin={this.isUserAdmin()} />
     }).reverse()
 
     return (

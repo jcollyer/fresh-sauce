@@ -11,15 +11,10 @@ export function setTrack(track) {
 }
 
 export function deleteTrack(track) {
-  let uid = getState().auth.uid
-
-  // if user is not logged in
-  if (uid === null) {
-    dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
-  } else {
+  return function(dispatch) {
     tracksRef.child(track.id).remove();
     idsRef.child(track.id).remove();
-    return { type: C.DELETE_TRACK, track: track }
+    dispatch({ type: C.DELETE_TRACK, track: track })
   }
 }
 

@@ -1,7 +1,7 @@
 import C from '../constants'
 import Firebase from 'firebase'
 const fireRef = new Firebase(C.FIREBASE)
-const usersRef = fireRef.child("users")
+const usersRef = fireRef.child('users')
 
 export const startListeningToAuth = () => {
   return (dispatch, getState) => {
@@ -12,13 +12,14 @@ export const startListeningToAuth = () => {
         // set user properties
         usersRef.child(user.uid).once('value', function(snapshot) {
           let favorites = snapshot.val().favorites || {}
-          dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites })
+          let role = snapshot.val().role || ''
+          dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites, role: role })
         });
 
         // listen for changes
-        usersRef.on("child_changed", function(snapshot) {
+        usersRef.on('child_changed', function(snapshot) {
           let favorites = snapshot.val().favorites || {}
-          dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites })
+          dispatch({ type: C.AUTH_LOGIN, favorites: favorites })
         })
 
       } else {
@@ -52,7 +53,7 @@ function userExistsCallback(user, exists) {
     usersRef.child(user.uid).set({
       displayName: user.displayName,
       email: user.email,
-      role: "member",
+      role: 'member',
       favorites: {},
       lastLogin: Date.now()
     })
