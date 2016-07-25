@@ -18,9 +18,8 @@ export function deleteTrack(track) {
 
 export function favoriteTrack(track) {
   return function(dispatch, getState) {
-    // debugger;
     let uid = getState().auth.uid
-    usersRef.child(uid).child('favorites').push({id: track.id})
+    usersRef.child(uid).child('favorites').child(track.id).set({ id: track.id, timestamp: Date.now() })
   }
 }
 

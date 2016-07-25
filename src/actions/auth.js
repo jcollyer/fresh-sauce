@@ -7,8 +7,14 @@ export const startListeningToAuth = () => {
   return (dispatch, getState) => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+
         checkIfUserExists(user)
-        dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName })
+        // set user properties
+        usersRef.child(user.uid).once('value', function(snapshot) {
+          let favorites = snapshot.val().favorites || {}
+          dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites })
+        });
+
       } else {
         if (getState().auth.status !== C.AUTH_ANONYMOUS) {
           dispatch({ type: C.AUTH_LOGOUT })

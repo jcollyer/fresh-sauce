@@ -4,7 +4,8 @@ export default {
   auth: {
     currently: C.ANONYMOUS,
     username: null,
-    uid: null
+    uid: null,
+    favorites: {}
   },
   tracks: {
     trackPlaying: false,

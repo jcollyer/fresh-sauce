@@ -4,15 +4,27 @@ import { setTrack, deleteTrack, favoriteTrack } from '../actions/tracks'
 import Track from '../components/track'
 
 class Tracklist extends Component {
+  isTrackFavoritedByUser(trackId){
+    let userFavorites = this.props.userFavorites;
+    // make sure user favorites is not an empty object
+    if(Object.keys(userFavorites).length > 0){
+      let userFavArray = []
+      for(let fav in userFavorites) {
+        userFavArray.push(fav)
+      }
+      return userFavArray.indexOf(trackId) > -1
+    }
+  }
   render() {
-    const { tracklist, hasreceiveddata, trackPlaying } = this.props
+    const { tracklist, hasreceiveddata, trackPlaying, userFavorites } = this.props
     const rows = tracklist.map((track) => {
       return <Track
         track={track}
         key={track.id}
         onPlayTrackClicked={() => this.props.setTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
-        onFavoriteTrackClicked={() => this.props.favoriteTrack(track)} />
+        onFavoriteTrackClicked={() => this.props.favoriteTrack(track)}
+        isFavoritedByUser={this.isTrackFavoritedByUser(track.id)} />
     }).reverse()
 
     return (
@@ -24,11 +36,12 @@ class Tracklist extends Component {
 }
 
 const mapStateToProps = (appState) => {
+  // debugger;
   return {
     tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
     trackPlaying: appState.tracks.trackPlaying,
-    auth: appState.auth
+    userFavorites: appState.auth.favorites || {}
   }
 }
 
