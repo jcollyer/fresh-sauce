@@ -23,6 +23,13 @@ export function favoriteTrack(track) {
   }
 }
 
+export function unFavoriteTrack(track) {
+  return function(dispatch, getState) {
+    let uid = getState().auth.uid
+    usersRef.child(uid).child('favorites').child(track.id).remove()
+  }
+}
+
 export function setTrackPosition(trackPosition) {
   return { type: C.SET_TRACK_POSITION, trackPosition }
 }
