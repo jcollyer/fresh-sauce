@@ -24,6 +24,7 @@ export default (state = initialState.auth, action) => {
         username: 'guest',
         uid: null
       };
-    default: return state || initialState;
+    default:
+      return state;
   }
 };

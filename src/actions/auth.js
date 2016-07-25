@@ -15,6 +15,12 @@ export const startListeningToAuth = () => {
           dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites })
         });
 
+        // listen for changes
+        usersRef.on("child_changed", function(snapshot) {
+          let favorites = snapshot.val().favorites || {}
+          dispatch({ type: C.AUTH_LOGIN, uid: user.uid, username: user.displayName, favorites: favorites })
+        })
+
       } else {
         if (getState().auth.status !== C.AUTH_ANONYMOUS) {
           dispatch({ type: C.AUTH_LOGOUT })

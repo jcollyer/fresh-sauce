@@ -17,10 +17,10 @@ class Tracklist extends Component {
   }
   render() {
     const { tracklist, hasreceiveddata, trackPlaying, userFavorites } = this.props
-    const rows = tracklist.map((track) => {
+    const rows = tracklist.map((track, i) => {
       return <Track
         track={track}
-        key={track.id}
+        key={i}
         onPlayTrackClicked={() => this.props.setTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
         onFavoriteTrackClicked={() => this.props.favoriteTrack(track)}
@@ -37,7 +37,6 @@ class Tracklist extends Component {
 }
 
 const mapStateToProps = (appState) => {
-  // debugger;
   return {
     tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
