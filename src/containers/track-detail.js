@@ -10,7 +10,6 @@ class TrackDetail extends Component {
   }
   render() {
     const { currentTrack } = this.props
-    // debugger;
     if (currentTrack.id) {
       return (
         <div>
@@ -20,7 +19,7 @@ class TrackDetail extends Component {
         </div>
       )
     } else {
-      return <i>hi there track detail page!</i>
+      return <i>hi there track detail page</i>
     }
   }
 }

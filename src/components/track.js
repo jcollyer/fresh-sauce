@@ -9,13 +9,11 @@ export default (props) => {
         <span className="artwork_url"><img src={track.artwork_url} /></span>
         <span className="title">{track.title} </span>
         <span className="artist"><b>{track.artist}</b></span>
-        <p>favorited? <input type="checkbox" checked={ isFavoritedByUser} /> </p>
       </div>
+      <p>favorited? <input type="checkbox" checked={ isFavoritedByUser} onClick={(event) => props.onToggleFavoriteTrackClicked(event)} /> </p>
 
       <Link to={`/tracks/${track.id}`}>{track.id}</Link>
       <button onClick={props.onDeleteTrackClicked}>Delete track</button>
-      <button onClick={props.onFavoriteTrackClicked}>Favorite track</button>
-      <button onClick={props.onUnFavoriteTrackClicked}>Un-Favorite track</button>
     </div>
   )
 }

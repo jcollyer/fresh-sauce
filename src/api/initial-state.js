@@ -3,7 +3,7 @@ import C from '../constants'
 export default {
   auth: {
     currently: C.ANONYMOUS,
-    username: null,
+    username: 'guest',
     uid: null,
     displayingLogInPanel: false,
     favorites: {}

@@ -11,22 +11,42 @@ export function setTrack(track) {
 }
 
 export function deleteTrack(track) {
-  tracksRef.child(track.id).remove();
-  idsRef.child(track.id).remove();
-  return { type: C.DELETE_TRACK, track: track }
-}
+  let uid = getState().auth.uid
 
-export function favoriteTrack(track) {
-  return function(dispatch, getState) {
-    let uid = getState().auth.uid
-    usersRef.child(uid).child('favorites').child(track.id).set({ id: track.id, timestamp: Date.now() })
+  // if user is not logged in
+  if (uid === null) {
+    dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
+  } else {
+    tracksRef.child(track.id).remove();
+    idsRef.child(track.id).remove();
+    return { type: C.DELETE_TRACK, track: track }
   }
 }
 
-export function unFavoriteTrack(track) {
+export function toggleFavoriteTrack(event, track) {
   return function(dispatch, getState) {
     let uid = getState().auth.uid
-    usersRef.child(uid).child('favorites').child(track.id).remove()
+
+    // if user is not logged in
+    if (uid === null) {
+      event.preventDefault()
+      dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
+    } else {
+
+      // convert favorites object to array
+      let favArray = []
+      for (let fav in getState().auth.favorites){
+        if(fav === track.id) {
+          favArray.push(fav)
+        }
+      }
+      // check if track is already favorited
+      if (favArray.indexOf(track.id) > -1){
+        usersRef.child(uid).child('favorites').child(track.id).remove()
+      } else {
+        usersRef.child(uid).child('favorites').child(track.id).set({ id: track.id, timestamp: Date.now() })
+      }
+    }
   }
 }
 
