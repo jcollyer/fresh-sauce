@@ -8,6 +8,7 @@ import { setPlayers } from './actions/players'
 import SC from 'soundcloud' // soundcloud object
 
 import './style/styles.less'
+import './style/icon-font-style.css'
 import './soundcloud' // soundcloud player widget
 
 // initialize Firebase

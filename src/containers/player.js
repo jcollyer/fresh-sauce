@@ -56,11 +56,11 @@ class Player extends Component {
       oldTrackId = track.id
     }
     return (
-        <div id="player" className={trackPlaying ? "" : "hide"}>
+        <div id="player">
 
           <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>
 
-          <div id="track-artwork">
+          <div id="player-track-artwork">
 
             <div id="yt_widget" className={track.kind === "yt" ? "" : "offscreen"}></div>
 
@@ -71,7 +71,7 @@ class Player extends Component {
             />
 
           </div>
-          <div id="track-info">
+          <div id="player-track-info">
             <p className="elipsis">{track.title}</p>
             <p>{track.artist}</p>
             <p>{trackPosition}</p>

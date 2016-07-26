@@ -25,7 +25,7 @@ class Tracklist extends Component {
     return false
   }
   render() {
-    const { tracklist, hasreceiveddata, trackPlaying, user } = this.props
+    const { tracklist, hasreceiveddata, user } = this.props
     const rows = tracklist.map((track, i) => {
       return <Track
         track={track}
@@ -38,7 +38,7 @@ class Tracklist extends Component {
     })//.reverse()
 
     return (
-      <div id='tracklist' className={trackPlaying ? 'player-padding' : ''}>
+      <div id='tracklist'>
         <span className={this.isUserAdmin() ? '' : 'hide'}><AddTrack /></span>
         {hasreceiveddata ? rows : 'Loading tracks...'}
       </div>
@@ -50,7 +50,6 @@ const mapStateToProps = (appState) => {
   return {
     tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
-    trackPlaying: appState.tracks.trackPlaying,
     user: appState.auth
   }
 }

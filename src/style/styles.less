@@ -39,15 +39,23 @@ input {
   top: 0px;
   width: 100%;
   #player {
-    #track-artwork {
+    #yt_widget {
+      position: relative;
+      left: 0px;
+    }
+    #yt_widget.offscreen {
+      position: absolute;
+      left: -99999px;
+    }
+    #player-track-artwork {
       float: left;
     }
-    #track-info {
+    #player-track-info {
       float: left;
       padding: 10px;
       width: 200px;
     }
-    #track-prgress {
+    #player-track-prgress {
       float: left;
       width: 30%;
       #progress-container {
@@ -67,17 +75,18 @@ input {
 }
 
 #tracklist {
-  &.player-padding {
-    margin-top: 100px;
+  background: #333;
+  margin: 100px auto 0px;
+  max-width: 930px;
+  width: 70%;
+  .track-item {
+    .track-item-info {
+      float: left;
+      width: 80%;
+    }
+    .track-item-actions {
+      float: left;
+      width: 20%;
+    }
   }
-}
-
-#yt_widget {
-  position: relative;
-  left: 0px;
-}
-
-#yt_widget.offscreen {
-  position: absolute;
-  left: -99999px;
 }

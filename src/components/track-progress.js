@@ -17,7 +17,7 @@ export default class TrackProgress extends Component {
     }
 
     return (
-      <div id="track-prgress">
+      <div id="player-track-prgress">
         <div id="progress-container" data-progress="true" onClick={(event) => this.onTrackProgressClicked(event)}>
           <div id="progress" style={progressStyle}></div>
         </div>
