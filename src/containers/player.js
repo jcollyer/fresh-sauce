@@ -3,7 +3,7 @@ import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
 import { setTrackPosition, stopTrack, playNextTrack } from '../actions/tracks'
 import TrackProgress from '../components/track-progress'
-import { playTrack } from '../utils'
+import { playTrack, toHHMMSS } from '../utils'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
@@ -54,6 +54,9 @@ class Player extends Component {
       players.playerSC.seekTo(trackPosition)
     }
   }
+  convertToPrettyTime(time) {
+    return toHHMMSS(time) || '0:00'
+  }
   render() {
     const { track, trackPlaying, trackPosition, trackPercentage, players } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
@@ -81,8 +84,8 @@ class Player extends Component {
           <div id="player-track-info">
             <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
             <h3 className="elipsis">{track.title}</h3>
-            <p>by: {this.checkPlayerArtistKind()} </p>
-            <p>{trackPosition}</p>
+            <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
+            <div id='track-time'>{this.convertToPrettyTime(trackPosition)}</div>
             <span onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-media-fast-forward-outline'></span>
           </div>
 
