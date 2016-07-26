@@ -105,7 +105,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds) {
     idType = "yt";
     thisId = url.substr(url.lastIndexOf("/") + 1, idLength);
   } else {
-    console.log("Not soundcloud or youtube ID");
+    console.log(url, " Not soundcloud or youtube ID");
     return;
   }
 
@@ -128,9 +128,10 @@ function requestSoundCloudOrYouTube(id, idType) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
       var track = idType === 'sc' ? formatSCData({ id: id }, data) : formatYTData({ id: id }, data);
+
       // Add data to firebase
-      tracksRef.child(track.id).set(track);
-      idsRef.child(track.id).set({ id: track.id, displaying: true });
+      tracksRef.child(track.id).setWithPriority(track, Date.now());
+      idsRef.child(track.id).setWithPriority({ id: track.id, displaying: true }, Date.now());
       console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind);
     }
   });
@@ -147,6 +148,7 @@ function formatSCData(track, data) {
   track.artist = data.user.username;
   track.likes = 0;
   track.featured = false;
+  track.timestamp = Date.now();
   track.kind = 'sc';
   return track;
 }
@@ -159,6 +161,7 @@ function formatYTData(track, data) {
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.likes = 0;
   track.featured = false;
+  track.timestamp = Date.now();
   track.kind = 'yt';
   return track;
 }

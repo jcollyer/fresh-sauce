@@ -59,7 +59,7 @@ export function playNextTrack() {
     let nextTrack
     getState().tracklist.tracks.map((track, index) => {
       if(track.id === currentTrack) {
-        nextTrack = getState().tracklist.tracks[index - 1] // minus one because tracks displayed in reverse chronological order
+        nextTrack = getState().tracklist.tracks[index + 1]
       }
     })
     dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })

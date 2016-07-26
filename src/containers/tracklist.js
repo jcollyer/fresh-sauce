@@ -35,7 +35,7 @@ class Tracklist extends Component {
         onToggleFavoriteTrackClicked={(event) => this.props.toggleFavoriteTrack(event, track)}
         isFavoritedByUser={this.isTrackFavoritedByUser(track.id)}
         isAdmin={this.isUserAdmin()} />
-    }).reverse()
+    })//.reverse()
 
     return (
       <div id='tracklist' className={trackPlaying ? 'player-padding' : ''}>

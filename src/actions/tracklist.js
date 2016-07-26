@@ -4,17 +4,16 @@ const tracksRef = new Firebase(C.FIREBASE).child('tracks')
 
 export function startListeningToTracks() {
   return function(dispatch, getState){
-    tracksRef.on("value",function(snapshot) {
-      const tracksArr = []
-      const tracks = snapshot.val()
-      for(var track in tracks){
-        tracksArr.push(tracks[track])
-      }
-      // set tracks array
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr })
 
+    tracksRef.orderByChild("timestamp").on("value", (snapshot) => {
+      const tracksArr = []
+      snapshot.forEach((track) => {
+        tracksArr.push(track.val())
+      })
+
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr })
       // set first track in tracklist
-      dispatch({ type: C.SET_TRACK, track: tracksArr.slice(-1)[0], trackPlaying: true })
+      dispatch({ type: C.SET_TRACK, track: tracksArr[0], trackPlaying: true })
     })
   }
 }
