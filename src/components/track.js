@@ -11,7 +11,7 @@ export default (props) => {
     <div className='track-item'>
       <div className='track-item-info'>
         <div className='track-item-info-artwork' onClick={props.onPlayTrackClicked}>
-          <i className='icon icon-media-play-outline'></i>
+          <i className='icon icon-play'></i>
           <img src={props.track.artwork_url} />
         </div>
         <div className='track-item-info-detail' onClick={props.onPlayTrackClicked}>
@@ -20,9 +20,9 @@ export default (props) => {
         </div>
       </div>
       <div className='track-item-actions'>
-        <i className="icon icon-heart"></i>
+        <i className="icon icon-heart-outlined"></i>
         <input type='checkbox' checked={ props.isFavoritedByUser} onClick={(event) => props.onToggleFavoriteTrackClicked(event)} />
-        <Link to={`/tracks/${props.track.id}`}><i className='icon icon-arrow-right-outline'></i></Link>
+        <Link to={`/tracks/${props.track.id}`}><i className='icon icon-arrow-right'></i></Link>
         <button onClick={props.onDeleteTrackClicked} className={props.isAdmin ? '' : 'hide'}>Delete track</button>
       </div>
     </div>
