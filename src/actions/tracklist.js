@@ -10,7 +10,11 @@ export function startListeningToTracks() {
       for(var track in tracks){
         tracksArr.push(tracks[track])
       }
+      // set tracks array
       dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr })
+
+      // set first track in tracklist
+      dispatch({ type: C.SET_TRACK, track: tracksArr.slice(-1)[0], trackPlaying: true })
     })
   }
 }

@@ -20,53 +20,47 @@ input {
   display: none;
 }
 
+.elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .wrapper {
   margin: 0 auto;
   max-width: 600px;
 }
 
-.authpanel, .newquoteform, .quote {
-  margin-bottom: 1em;
-  padding: 3px;
-}
-
-.authpanel {
-  border-bottom: 1px solid #CCC;
-}
-
-.author {
-  font-size: 0.85em;
-  color: #555;
-}
-
-#player {
+#top-bar{
   background: white;
   border-bottom: 1px solid;
   height: 100px;
   position: fixed;
   top: 0px;
   width: 100%;
-  #track-artwork {
-    float: left;
-  }
-  #track-info {
-    float: left;
-    padding: 10px;
-    width: 200px;
-  }
-  #track-prgress {
-    float: left;
-    width: 30%;
-    #progress-container {
-      background: #333;
-      height: 20px;
-      position: relative;
-      width: 90%;
-      #progress {
-        background: #aaa;
-        height: 100%;
-        position: absolute;
-        width: 13%;
+  #player {
+    #track-artwork {
+      float: left;
+    }
+    #track-info {
+      float: left;
+      padding: 10px;
+      width: 200px;
+    }
+    #track-prgress {
+      float: left;
+      width: 30%;
+      #progress-container {
+        background: #333;
+        height: 20px;
+        position: relative;
+        width: 90%;
+        #progress {
+          background: #aaa;
+          height: 100%;
+          position: absolute;
+          width: 13%;
+        }
       }
     }
   }
@@ -86,10 +80,4 @@ input {
 #yt_widget.offscreen {
   position: absolute;
   left: -99999px;
-}
-
-.elipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

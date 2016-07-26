@@ -1,6 +1,8 @@
 import C from '../constants'
 import store from '../store'
-import { playNextTrack } from '../actions/tracks'
+import { startListeningToAuth } from './auth'
+import { startListeningToTracks } from './tracklist'
+import { playNextTrack } from './tracks'
 
 let playerSC
 
@@ -19,10 +21,11 @@ function setSoundCloud(){
 
 function setYouTube(callback){
 
-  // function onPlayerReady(event) {
-  //    that.whileTrackPlaying(event.target)
-  //    oldTrackId = track.id
-  //  }
+  function onPlayerReady(event) {
+    // setup Firebase listeners
+    store.dispatch(startListeningToAuth())
+    store.dispatch(startListeningToTracks())
+   }
 
    function onPlayerStateChange(event) {
      switch(event.data) {
@@ -40,7 +43,7 @@ function setYouTube(callback){
       videoId: '2a4Uxdy9TQY', //some randome ID
       playerVars: { 'autoplay': 0, 'controls': 0,'autohide':1,'wmode':'opaque' },
       events: {
-        // 'onReady': onPlayerReady,
+        'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
       }
     })

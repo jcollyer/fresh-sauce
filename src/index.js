@@ -4,8 +4,6 @@ import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
 import store from './store'
 import router from './router'
-import { startListeningToAuth } from './actions/auth'
-import { startListeningToTracks } from './actions/tracklist'
 import { setPlayers } from './actions/players'
 import SC from 'soundcloud' // soundcloud object
 
@@ -39,9 +37,3 @@ ReactDOM.render(
   document.getElementById("root")
 );
 store.dispatch(setPlayers())
-
-// setup Firebase listeners
-setTimeout(function(){
-  store.dispatch(startListeningToAuth())
-  store.dispatch(startListeningToTracks())
-},1000)
