@@ -66,6 +66,19 @@ export function playNextTrack() {
   }
 }
 
+export function playPrevTrack() {
+  return function(dispatch, getState){
+    let currentTrack = getState().tracks.currentTrack.id
+    let prevTrack
+    getState().tracklist.tracks.map((track, index) => {
+      if(track.id === currentTrack) {
+        prevTrack = getState().tracklist.tracks[index - 1]
+      }
+    })
+    dispatch({ type: C.SET_TRACK, track: prevTrack, trackPlaying: true })
+  }
+}
+
 export function setTrackDetail(id) {
   return function(dispatch, getState){
     let trackDetail = {}
