@@ -35,6 +35,14 @@ class Player extends Component {
       }
     }, 500)
   }
+  checkPlayerArtistKind() {
+    if(this.props.track && this.props.track.kind === 'sc'){ // if Soundcloud
+      return this.props.track.artist
+    } else if (this.props.track.kind === 'yt'){
+      return this.props.track.tag_list[0]
+    }
+    return ''
+  }
   trackProgressClick(position, players) {
     this.props.setTrackPosition(position)
     let trackPosition = position
@@ -49,7 +57,6 @@ class Player extends Component {
   render() {
     const { track, trackPlaying, trackPosition, trackPercentage, players } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
-
     if (trackPlaying && track.id != oldTrackId) { // if track is playing, with a new track ID
       playTrack(track, players)
       this.whileTrackPlaying(players)
@@ -72,13 +79,13 @@ class Player extends Component {
 
           </div>
           <div id="player-track-info">
-            <p className="elipsis">{track.title}</p>
-            <p>{track.artist}</p>
+            <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
+            <h3 className="elipsis">{track.title}</h3>
+            <p>by: {this.checkPlayerArtistKind()} </p>
             <p>{trackPosition}</p>
-            <button onClick={ () => this.props.playNextTrack() }>NEXT</button>
+            <span onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-media-fast-forward-outline'></span>
           </div>
 
-          <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
 
         </div>
     )

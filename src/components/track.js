@@ -2,18 +2,27 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export default (props) => {
-  // const { track, isFavoritedByUser, isAdmin } = props
+
+  //set player track artist depending if its a SC or YT track
+  var trackArtist = ''
+  props.track && props.track.kind === 'sc' ? trackArtist = props.track.artist : trackArtist = props.track.tag_list[0]
+
   return (
     <div className='track-item'>
       <div className='track-item-info'>
-        <span className='artwork_url' onClick={props.onPlayTrackClicked}><img src={props.track.artwork_url} /></span>
-        <span className='title'>{props.track.title} </span>
-        <span className='artist'><b>{props.track.artist}</b></span>
+        <div className='track-item-info-artwork' onClick={props.onPlayTrackClicked}>
+          <i className='icon icon-media-play-outline'></i>
+          <img src={props.track.artwork_url} />
+        </div>
+        <div className='track-item-info-detail' onClick={props.onPlayTrackClicked}>
+          <h3 className='title elipsis'>{props.track.title}</h3>
+          <p className='artist'>by: {props.track.artist}{trackArtist}</p>
+        </div>
       </div>
       <div className='track-item-actions'>
         <i className="icon icon-heart"></i>
         <input type='checkbox' checked={ props.isFavoritedByUser} onClick={(event) => props.onToggleFavoriteTrackClicked(event)} />
-        <Link to={`/tracks/${props.track.id}`}>{props.track.id}</Link>
+        <Link to={`/tracks/${props.track.id}`}><i className='icon icon-arrow-right-outline'></i></Link>
         <button onClick={props.onDeleteTrackClicked} className={props.isAdmin ? '' : 'hide'}>Delete track</button>
       </div>
     </div>

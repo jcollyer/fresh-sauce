@@ -5,8 +5,8 @@ body {
   margin: 0px;
 }
 
-p {
-  margin: 0px;
+p, h3 {
+  margin: 3px;
 }
 
 input {
@@ -41,6 +41,7 @@ input {
   position: fixed;
   top: 0px;
   width: 100%;
+  z-index: 1;
   #player {
     #yt_widget {
       position: relative;
@@ -55,15 +56,13 @@ input {
     }
     #player-track-info {
       float: left;
-      padding: 10px;
-      width: 200px;
+      width: 50%;
     }
     #player-track-prgress {
-      float: left;
-      width: 30%;
+      width: 100%;
       #progress-container {
         background: #333;
-        height: 20px;
+        height: 3px;
         position: relative;
         width: 90%;
         #progress {
@@ -86,6 +85,32 @@ input {
     .track-item-info {
       float: left;
       width: 80%;
+      .track-item-info-artwork {
+        cursor: pointer;
+        float: left;
+        width: 70px;
+        position: relative;
+        i {
+          color: white;
+          font-size: 70px;
+          opacity: 0.6;
+          position: absolute;
+        }
+        img {
+          width: 70px;
+        }
+      }
+      .track-item-info-detail {
+        float: left;
+        padding: 10px;
+        width: ~"calc(100% - 90px)";
+        .title {
+
+        }
+        .detail {
+
+        }
+      }
     }
     .track-item-actions {
       float: left;
