@@ -26,11 +26,15 @@ export default class Auth extends Component {
     const { username, displayingLogInPanel } = this.props
     // debugger;
     return (
-      <div>
-        <h1>Welcome {username} to My Awesome App</h1>
-        <button onClick={() => this.props.logoutUser()} className={ username === "guest" ? "hide" : ""}>Log Out</button>
-        <button onClick={() => this.props.showLogInPanel()} className={ username === "guest" ? "" : "hide"} >Log In</button>
-        <div id="firebaseui-auth-container" className={ displayingLogInPanel ? "" : "hide"}></div>
+      <div id='auth'>
+        <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>
+          <p><i className='icon icon-head'></i>{username}</p>
+          <button onClick={() => this.props.logoutUser()}>Log Out</button>
+        </div>
+        <div id='logged-out' className={ username === 'guest' ? '' : 'hide'}>
+          <button onClick={() => this.props.showLogInPanel()}>Log In</button>
+        </div>
+        <div id='firebaseui-auth-container' className={ displayingLogInPanel ? '' : 'hide'}></div>
       </div>
     )
   }

@@ -73,10 +73,12 @@ class Player extends Component {
             <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
             <h3 className="elipsis">{track.title}</h3>
             <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
-            <div id='track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
-            <i onClick={() => this.props.playPrevTrack()} id='play-prev-track' className='icon icon-skip-back'></i>
-            <i onClick={() => this.props.playToggleTrack()} id='toggle-track' className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
-            <i onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-skip-forward'></i>
+            <div id='player-track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
+            <div id='player-track-controls'>
+              <i onClick={() => this.props.playPrevTrack()} id='play-prev-track' className='icon icon-skip-back'></i>
+              <i onClick={() => this.props.playToggleTrack()} id='toggle-track' className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
+              <i onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-skip-forward'></i>
+            </div>
           </div>
 
 

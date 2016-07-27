@@ -36,10 +36,7 @@ input {
 
 #top-bar{
   background: white;
-  border-bottom: 1px solid;
-  height: 100px;
   position: fixed;
-  top: 0px;
   width: 100%;
   z-index: 1;
   #player {
@@ -55,20 +52,8 @@ input {
       float: left;
     }
     #player-track-info {
-      float: left;
-      width: 50%;
-      h3 {
-        margin: 0px;
-        padding: 10px 10px 0px;
-      }
-      h4 {
-        padding: 4px 7px;
-      }
-      #track-time {
+      #player-track-time {
         float: right;
-      }
-      i.icon {
-        font-size: 30px;
       }
     }
     #player-track-prgress {
@@ -87,11 +72,15 @@ input {
       }
     }
   }
+  #auth {
+    float: right;
+    padding: 20px;
+  }
 }
 
 #tracklist {
   background: #333;
-  margin: 100px auto 0px;
+  height: 100vh;
   max-width: 930px;
   width: 70%;
   .track-item {
@@ -130,4 +119,119 @@ input {
       width: 20%;
     }
   }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+   #top-bar {
+     border-top: 1px solid;
+     bottom: 0px;
+     height: 60px;
+     top: auto;
+     #player {
+       float: auto;
+       width: 100%;
+       #player-track-artwork {
+         display: none;
+       }
+       #player-track-info {
+         float: auto;
+         width: 100%;
+         h3 {
+           font-size: 12px;
+           text-align: center;
+         }
+         h4 {
+           font-size: 10px;
+           text-align: center;
+         }
+         #player-track-controls {
+           margin: 0 auto;
+           width: 90px;
+           i.icon {
+             font-size: 25px;
+           }
+         }
+         #player-track-time {
+           display: none;
+         }
+         #player-track-controls {
+
+         }
+       }
+     }
+     #auth{
+       background: #ddd;
+       float: auto;
+       position: fixed;
+       top: 0px;
+       width: 100%;
+     }
+   }
+   #tracklist {
+     margin: 0px auto 100px;
+   }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  #top-bar {
+    border-bottom: 1px solid;
+    bottom: auto;
+    height: 100px;
+    top: 0px;
+    #player {
+      float: left;
+      width: 50%;
+      #player-track-artwork {
+        display: block;
+      }
+      #player-track-info {
+        float: left;
+        width: ~"calc(100% - 100px)";
+        h3 {
+          margin: 0px;
+          padding: 10px 10px 0px;
+          text-align: left;
+        }
+        h4 {
+          padding: 4px 7px;
+          text-align: left;
+        }
+        #player-track-controls {
+          i.icon {
+            font-size: 30px;
+          }
+        }
+        #player-track-time {
+          display: block;
+        }
+      }
+    }
+    #auth{
+      background: none;
+      float: right;
+      position: relative;
+      top: auto;
+      width: auto;
+    }
+  }
+  #tracklist {
+    margin: 100px auto 0px;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }
