@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
+import { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser, toggleShuffleTracks } from '../actions/tracks'
 import TrackProgress from '../components/track-progress'
 import { playTrack, toHHMMSS } from '../utils'
 
@@ -46,7 +46,7 @@ class Player extends Component {
     return toHHMMSS(time) || '0:00'
   }
   render() {
-    const { track, trackPlaying, trackPosition, trackPercentage, players } = this.props
+    const { track, trackPlaying, shuffle, trackPosition, trackPercentage, players } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
     if (trackPlaying && track.id != oldTrackId) { // if track is playing, with a new track ID
       playTrack(track, players)
@@ -88,10 +88,11 @@ const mapStateToProps = (appState) => {
   return {
     track: appState.tracks.currentTrack,
     trackPlaying: appState.tracks.trackPlaying,
+    shuffle: appState.tracks.shuffle,
     trackPosition: appState.tracks.trackPosition,
     trackPercentage: appState.tracks.trackPercentage,
     players: appState.players.playerOptions
   }
 }
 
-export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser })(Player)
+export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser, toggleShuffleTracks })(Player)

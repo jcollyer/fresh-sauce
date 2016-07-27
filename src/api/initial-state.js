@@ -14,7 +14,8 @@ export default {
     currentTrack: {id: 266853527},
     trackPosition: 0,
     trackPercentage: 0,
-    duration: 0
+    duration: 0,
+    shuffle: false
   },
   tracklist: {
     tracks: [],

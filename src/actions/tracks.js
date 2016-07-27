@@ -7,7 +7,9 @@ const favoritesRef = ref.child('favorites')
 const usersRef = ref.child('users')
 
 export function setTrack(track) {
-  return { type: C.SET_TRACK, track: track, trackPlaying: true }
+  return function(dispatch, getState) {
+    dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+  }
 }
 
 export function deleteTrack(track) {
@@ -56,16 +58,32 @@ export function playNextTrack(direction) {
   return function(dispatch, getState){
     let nextTrack
     let currentTrackId = getState().tracks.currentTrack.id
+    let shuffleTracks = getState().tracks.shuffle
+    let randomIndex = Math.random() * (15 - 0) + 0
+
     getState().tracklist.tracks.map((track, index) => {
       if(track.id === currentTrackId) {
-        if (direction === 'next') {
+        // debugger;
+        if (shuffleTracks) {
+          nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
+        } else if(direction === 'next') {
           nextTrack = getState().tracklist.tracks[index + 1]
         } else if(direction === 'prev') {
           nextTrack = getState().tracklist.tracks[index - 1]
         }
-        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, shuffle: getState().tracks.shuffle })
       }
     })
+  }
+}
+
+export function toggleShuffleTracks() {
+  return function(dispatch, getState) {
+    if (getState().tracks.shuffle){
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: getState().tracks.trackPlaying, shuffle: false })
+    } else {
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: getState().tracks.trackPlaying, shuffle: true })
+    }
   }
 }
 
