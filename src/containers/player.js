@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack } from '../actions/tracks'
+import { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
 import TrackProgress from '../components/track-progress'
 import { playTrack, toHHMMSS } from '../utils'
 
@@ -53,35 +53,31 @@ class Player extends Component {
       this.whileTrackPlaying(players)
       oldTrackId = track.id
     }
+
     return (
         <div id="player">
-
           <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>
 
           <div id="player-track-artwork">
-
             <div id="yt_widget" className={track.kind === "yt" ? "" : "offscreen"}></div>
-
             <img
               src={track.artwork_url}
               className={track.kind === "sc" ? "" : "hide"}
-              onClick={() => this.toggleSCTrack(players.playerSC)}
-            />
-
+              onClick={() => this.toggleSCTrack(players.playerSC)} />
           </div>
+          
           <div id="player-track-info">
             <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
             <h3 className="elipsis">{track.title}</h3>
             <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
             <div id='player-track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
             <div id='player-track-controls'>
-              <i onClick={() => this.props.playPrevTrack()} id='play-prev-track' className='icon icon-skip-back'></i>
-              <i onClick={() => this.props.playToggleTrack()} id='toggle-track' className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
-              <i onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-skip-forward'></i>
+              <i onClick={() => this.props.toggleFavoriteTrack(track.id)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart' : 'icon icon-heart-outlined'}></i>
+              <i onClick={() => this.props.playPrevTrack()} className='icon icon-skip-back'></i>
+              <i onClick={() => this.props.playToggleTrack()} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
+              <i onClick={() => this.props.playNextTrack()} className='icon icon-skip-forward'></i>
             </div>
           </div>
-
-
         </div>
     )
   }
@@ -97,4 +93,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack })(Player)
+export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser })(Player)

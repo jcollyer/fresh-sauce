@@ -18,28 +18,27 @@ export function deleteTrack(track) {
   }
 }
 
-export function toggleFavoriteTrack(event, track) {
+export function toggleFavoriteTrack(trackId) {
   return function(dispatch, getState) {
     let uid = getState().auth.uid
 
     // if user is not logged in
     if (uid === null) {
-      event.preventDefault()
       dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
     } else {
 
       // convert favorites object to array
       let favArray = []
       for (let fav in getState().auth.favorites){
-        if(fav === track.id) {
+        if(fav === trackId) {
           favArray.push(fav)
         }
       }
       // check if track is already favorited
-      if (favArray.indexOf(track.id) > -1){
-        usersRef.child(uid).child('favorites').child(track.id).remove()
+      if (favArray.indexOf(trackId) > -1){
+        usersRef.child(uid).child('favorites').child(trackId).remove()
       } else {
-        usersRef.child(uid).child('favorites').child(track.id).set({ id: track.id, timestamp: Date.now() })
+        usersRef.child(uid).child('favorites').child(trackId).set({ id: trackId, timestamp: Date.now() })
       }
     }
   }
@@ -113,6 +112,23 @@ export function playToggleTrack() {
     } else {
       playTrack(playerKind, player)
       dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: true })
+    }
+  }
+}
+
+export function isTrackFavoritedByUser(trackId){
+  return function(dispatch, getState) {
+    if(getState().auth.username != 'guest'){
+      let userFavorites = getState().auth.favorites
+      // make sure user favorites is not an empty object
+      if(Object.keys(userFavorites).length > 0){
+        let userFavArray = []
+        for(let fav in userFavorites) {
+          userFavArray.push(fav)
+        }
+        console.log(trackId)
+        return userFavArray.indexOf(trackId) > -1
+      }
     }
   }
 }

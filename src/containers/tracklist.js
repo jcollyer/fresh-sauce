@@ -1,23 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTrack, deleteTrack, toggleFavoriteTrack } from '../actions/tracks'
+import { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
 import Track from '../components/track'
 import AddTrack from './add-track'
 
 class Tracklist extends Component {
-  isTrackFavoritedByUser(trackId){
-    if(this.props.user.username != 'guest'){
-      let userFavorites = this.props.user.favorites;
-      // make sure user favorites is not an empty object
-      if(Object.keys(userFavorites).length > 0){
-        let userFavArray = []
-        for(let fav in userFavorites) {
-          userFavArray.push(fav)
-        }
-        return userFavArray.indexOf(trackId) > -1
-      }
-    }
-  }
   isUserAdmin() {
     if(this.props.user.username != 'guest' && this.props.user.role === 'admin'){
       return true
@@ -32,8 +19,8 @@ class Tracklist extends Component {
         key={i}
         onPlayTrackClicked={() => this.props.setTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
-        onToggleFavoriteTrackClicked={(event) => this.props.toggleFavoriteTrack(event, track)}
-        isFavoritedByUser={this.isTrackFavoritedByUser(track.id)}
+        onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track.id)}
+        isFavoritedByUser={this.props.isTrackFavoritedByUser(track.id)}
         isAdmin={this.isUserAdmin()} />
     })//.reverse()
 
@@ -54,4 +41,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack })(Tracklist)
+export default connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser })(Tracklist)
