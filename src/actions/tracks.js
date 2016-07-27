@@ -79,6 +79,45 @@ export function playPrevTrack() {
   }
 }
 
+function playTrack(playerKind, player){
+  if(playerKind === 'sc'){
+    player.play()
+  } else {
+    player.playVideo()
+  }
+}
+
+export function pauseTrack(playerKind, player){
+  if(playerKind === 'sc'){
+    player.pause()
+  } else {
+    player.pauseVideo()
+  }
+}
+
+export function playToggleTrack() {
+  return function(dispatch, getState){
+    let trackPlaying = getState().tracks.trackPlaying
+    let player = {}
+    let playerKind = getState().tracks.currentTrack.kind
+
+    if(playerKind === 'sc'){
+      player = getState().players.playerOptions.playerSC
+    } else {
+      player = getState().players.playerOptions.playerYT
+    }
+
+    if(trackPlaying){
+      pauseTrack(playerKind, player)
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: false })
+    } else {
+      playTrack(playerKind, player)
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: true })
+    }
+  }
+}
+
+// for /tracks/<trackID> urls
 export function setTrackDetail(id) {
   return function(dispatch, getState){
     let trackDetail = {}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import { setTrackPosition, stopTrack, playNextTrack, playPrevTrack } from '../actions/tracks'
+import { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack } from '../actions/tracks'
 import TrackProgress from '../components/track-progress'
 import { playTrack, toHHMMSS } from '../utils'
 
@@ -9,18 +9,6 @@ let playingTrackInterval = undefined
 let oldTrackId = undefined
 
 class Player extends Component {
-  toggleSCTrack(player) {
-    let that = this
-    player.isPaused((paused) => {
-      if(paused == true ) {
-        player.play()
-      } else {
-        clearInterval(playingTrackInterval)
-        // this.props.stopTrack()
-        player.pause()
-      }
-    });
-  }
   whileTrackPlaying(players) {
     clearInterval(playingTrackInterval)
     playingTrackInterval = setInterval(() => {
@@ -87,6 +75,8 @@ class Player extends Component {
             <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
             <div id='track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
             <i onClick={() => this.props.playPrevTrack()} id='play-prev-track' className='icon icon-skip-back'></i>
+            <i onClick={() => this.props.playToggleTrack()} id='toggle-track' className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
+            <i onClick={() => this.props.playNextTrack()} id='play-next-track' className='icon icon-skip-forward'></i>
           </div>
 
 
@@ -105,4 +95,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playPrevTrack })(Player)
+export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playPrevTrack, playToggleTrack })(Player)
