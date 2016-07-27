@@ -52,29 +52,20 @@ export function stopTrack() {
   return { type: C.STOP_TRACK }
 }
 
-export function playNextTrack() {
+export function playNextTrack(direction) {
   return function(dispatch, getState){
-    let currentTrack = getState().tracks.currentTrack.id
     let nextTrack
+    let currentTrackId = getState().tracks.currentTrack.id
     getState().tracklist.tracks.map((track, index) => {
-      if(track.id === currentTrack) {
-        nextTrack = getState().tracklist.tracks[index + 1]
+      if(track.id === currentTrackId) {
+        if (direction === 'next') {
+          nextTrack = getState().tracklist.tracks[index + 1]
+        } else if(direction === 'prev') {
+          nextTrack = getState().tracklist.tracks[index - 1]
+        }
+        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
       }
     })
-    dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
-  }
-}
-
-export function playPrevTrack() {
-  return function(dispatch, getState){
-    let currentTrack = getState().tracks.currentTrack.id
-    let prevTrack
-    getState().tracklist.tracks.map((track, index) => {
-      if(track.id === currentTrack) {
-        prevTrack = getState().tracklist.tracks[index - 1]
-      }
-    })
-    dispatch({ type: C.SET_TRACK, track: prevTrack, trackPlaying: true })
   }
 }
 

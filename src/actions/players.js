@@ -13,7 +13,7 @@ function setSoundCloud(){
     console.log('SC Widget Ready...')
   })
   playerSC.bind(SC.Widget.Events.FINISH, () => {
-    store.dispatch(playNextTrack())
+    store.dispatch(playNextTrack('next'))
     console.log('play next track from -- SC')
   })
   return playerSC
@@ -30,7 +30,7 @@ function setYouTube(callback){
    function onPlayerStateChange(event) {
      switch(event.data) {
        case 0: // video finished
-         store.dispatch(playNextTrack())
+         store.dispatch(playNextTrack('next'))
        default: return console.log("updateYTPlayer", event.data)
      }
    }
