@@ -20,7 +20,7 @@ export default (props) => {
         </div>
       </div>
       <div className='track-item-actions'>
-        <i className={props.isFavoritedByUser ? 'icon icon-heart' : 'icon icon-heart-outlined'} onClick={props.onToggleFavoriteTrackClicked}></i>
+        <i className={props.isFavoritedByUser ? 'icon icon-heart' : 'icon icon-heart-outline'} onClick={props.onToggleFavoriteTrackClicked}></i>
         <Link to={`/tracks/${props.track.id}`}><i className='icon icon-arrow-right'></i></Link>
         <button onClick={props.onDeleteTrackClicked} className={props.isAdmin ? '' : 'hide'}>Delete track</button>
       </div>

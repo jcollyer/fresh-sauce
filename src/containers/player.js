@@ -72,11 +72,11 @@ class Player extends Component {
             <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
             <div id='player-track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
             <div id='player-track-controls'>
-              <i onClick={() => this.props.toggleFavoriteTrack(track.id)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart' : 'icon icon-heart-outlined'}></i>
-              <i onClick={() => this.props.playNextTrack('prev')} className='icon icon-skip-back'></i>
+              <i onClick={() => this.props.toggleFavoriteTrack(track.id)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart' : 'icon icon-heart-outline'}></i>
+              <i onClick={() => this.props.playNextTrack('prev')} className='icon icon-skip-prev'></i>
               <i onClick={() => this.props.playToggleTrack()} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
-              <i onClick={() => this.props.playNextTrack('next')} className='icon icon-skip-forward'></i>
-              <i onClick={() => this.props.toggleShuffleTracks()} className='icon icon-shuffle'></i>
+              <i onClick={() => this.props.playNextTrack('next')} className='icon icon-skip-next'></i>
+              <i onClick={() => this.props.toggleShuffleTracks()} className={shuffle ? 'icon icon-shuffle active' : 'icon icon-shuffle'}></i>
             </div>
           </div>
         </div>

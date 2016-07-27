@@ -23,11 +23,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-heart-outlined:before {
+
+.icon-heart:before {
   content: "\e900";
 }
-.icon-heart:before {
+.icon-heart-outline:before {
   content: "\e901";
+}
+.icon-shuffle:before {
+  content: "\e906";
+}
+.icon-pause:before {
+  content: "\e902";
+}
+.icon-play:before {
+  content: "\e903";
+}
+.icon-skip-prev:before {
+  content: "\e904";
+}
+.icon-skip-next:before {
+  content: "\e905";
 }
 .icon-video:before {
   content: "\e018";
@@ -46,21 +62,6 @@
 }
 .icon-microphone:before {
   content: "\e048";
-}
-.icon-skip-back:before {
-  content: "\e050";
-}
-.icon-play:before {
-  content: "\e052";
-}
-.icon-pause:before {
-  content: "\e053";
-}
-.icon-skip-forward:before {
-  content: "\e056";
-}
-.icon-shuffle:before {
-  content: "\e057";
 }
 .icon-repeat:before {
   content: "\e058";
