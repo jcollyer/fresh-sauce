@@ -83,6 +83,7 @@ input {
     float: right;
     #logged-in {
       #auth-button {
+        cursor: pointer;
         float: right;
         font-size: 25px;
         margin: 10px 65px 10px;
@@ -137,11 +138,18 @@ input {
     }
     #logged-out {
       #loggin-button {
+        cursor: pointer;
         float: right;
         font-size: 25px;
         margin: 10px 65px 10px;
         padding-right: 3%;
         position: relative;
+      }
+    }
+    #firebaseui-auth-container {
+      .firebaseui-container {
+        background: @hotred;
+        width: 300px;
       }
     }
   }
@@ -240,9 +248,17 @@ input {
      #auth{
        background: @hotred;
        float: auto;
+       margin-top: 0px;
        position: fixed;
        top: 0px;
        width: 100%;
+       #firebaseui-auth-container {
+         .firebaseui-container {
+           right: 0px;
+           top: 45px;
+           position: absolute;
+         }
+       }
      }
    }
    #tracklist {
@@ -302,9 +318,17 @@ input {
     #auth{
       background: none;
       float: right;
+      margin-top: 55px;
       position: relative;
       top: auto;
       width: 20%;
+      #firebaseui-auth-container {
+        .firebaseui-container {
+          right: auto;
+          top: 0px;
+          position: relative;
+        }
+      }
     }
   }
   #tracklist {
