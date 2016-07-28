@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
+import { nextPage } from '../actions/tracklist'
 import Track from '../components/track'
 import AddTrack from './add-track'
 
@@ -10,6 +11,20 @@ class Tracklist extends Component {
       return true
     }
     return false
+  }
+  getDocHeight() {
+    let D = document
+    return Math.max(
+      D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight
+    )
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', () => {
+      if(window.scrollY + window.innerHeight > this.getDocHeight() - 100 && this.props.hasreceiveddata) {
+        console.log('hit')
+        this.props.nextPage()
+      }
+    })
   }
   render() {
     const { tracklist, hasreceiveddata, user } = this.props
@@ -41,4 +56,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser })(Tracklist)
+export default connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage })(Tracklist)

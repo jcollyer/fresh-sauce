@@ -17,6 +17,7 @@ export function deleteTrack(track) {
     tracksRef.child(track.id).remove();
     idsRef.child(track.id).remove();
     dispatch({ type: C.DELETE_TRACK, track: track })
+    alert('track deleted ', track.title)
   }
 }
 
@@ -63,7 +64,6 @@ export function playNextTrack(direction) {
 
     getState().tracklist.tracks.map((track, index) => {
       if(track.id === currentTrackId) {
-        // debugger;
         if (shuffleTracks) {
           nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
         } else if(direction === 'next') {

@@ -24,7 +24,6 @@ export default class Auth extends Component {
   }
   render() {
     const { username, displayingLogInPanel, displayingAuthPanel } = this.props
-    // debugger;
     return (
       <div id='auth'>
         <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>

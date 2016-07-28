@@ -17,6 +17,7 @@ export default (props) => {
         <div className='track-item-info-detail' onClick={props.onPlayTrackClicked}>
           <h3 className='title elipsis'>{props.track.title}</h3>
           <p className='artist'>by: {props.track.artist}{trackArtist}</p>
+          <p>{props.track.id}</p>
         </div>
       </div>
       <div className='track-item-actions'>

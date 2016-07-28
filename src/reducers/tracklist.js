@@ -5,8 +5,8 @@ export default (state = initialState.tracklist, action) => {
   switch(action.type){
     case C.RECEIVE_TRACKS_DATA:
       return Object.assign({}, state, {
-        hasreceiveddata: true,
-        tracks: action.tracks
+        hasreceiveddata: action.hasreceiveddata,
+        tracks: state.tracks.concat(action.tracks)
       });
       default:
         return state;
