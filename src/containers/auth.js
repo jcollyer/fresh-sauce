@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { logoutUser, toggleLogInPanel, toggleAuthPanel } from '../actions/auth'
 // import C from '../constants'
 
@@ -23,14 +24,14 @@ export default class Auth extends Component {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
   render() {
-    const { username, displayingLogInPanel, displayingAuthPanel } = this.props
+    const { username, uid, displayingLogInPanel, displayingAuthPanel } = this.props
     return (
       <div id='auth'>
         <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>
           <div id='auth-button' className='icon icon-head' onClick={() => this.props.toggleAuthPanel()}>
             <div id='auth-menu' className={ displayingAuthPanel ? '' : 'hide'}>
             <div id='username'>hi, {username}</div>
-            <div id='profile'>Profile</div>
+            <div id='profile'><Link to={`/users/${uid}`}>Profile</Link></div>
             <div id='logout' onClick={() => this.props.logoutUser()}>Log Out</div>
             </div>
           </div>
@@ -47,6 +48,7 @@ export default class Auth extends Component {
 const mapStateToProps = (appState) => {
   return {
     username: appState.auth.username,
+    uid: appState.auth.uid,
     displayingLogInPanel: appState.auth.displayingLogInPanel,
     displayingAuthPanel: appState.auth.displayingAuthPanel
   }
