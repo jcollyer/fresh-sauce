@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300);
+@offwhite: #E7E7DE;
+@offblack: #222;
+@darkgray: #444;
+@hotblue: #01A1F7;
 
 body {
   font-family: 'Josefin Sans', sans-serif;
@@ -59,12 +63,12 @@ input {
     #player-track-prgress {
       width: 100%;
       #progress-container {
-        background: #333;
+        background: @darkgray;
         height: 3px;
         position: relative;
         width: 100%;
         #progress {
-          background: #aaa;
+          background: @hotblue;
           height: 100%;
           position: absolute;
           width: 13%;
@@ -124,7 +128,7 @@ input {
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
    #top-bar {
-     border-top: 1px solid;
+     border-top: 1px solid @darkgray;
      bottom: 0px;
      height: 70px;
      top: auto;
@@ -135,22 +139,26 @@ input {
          display: none;
        }
        #player-track-info {
+         background: @offblack;
+         color: @offwhite;
          float: auto;
+         height: 70px;
+         text-align: center;
          width: 100%;
          h3 {
+           font-weight: 300;
            font-size: 12px;
-           text-align: center;
          }
          h4 {
+           font-weight: 300;
            font-size: 10px;
-
-           text-align: center;
          }
          #player-track-controls {
+           color: @offwhite;
            margin: 0 auto;
            width: 260px;
            i.icon.active {
-             color: blue;
+             color: @hotblue;
              font-weight: 900;
            }
            i.icon {
@@ -190,7 +198,7 @@ input {
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
   #top-bar {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid @darkgray;
     bottom: auto;
     height: 100px;
     top: 0px;
@@ -201,7 +209,10 @@ input {
         display: block;
       }
       #player-track-info {
+        background: white;
+        color: @offblack;
         float: left;
+        height: 100px;
         width: ~"calc(100% - 200px)";
         h3 {
           font-size: 26px;
@@ -214,7 +225,7 @@ input {
         }
         #player-track-controls {
           i.icon {
-
+            color: @offblack;
           }
         }
         #player-track-time {
