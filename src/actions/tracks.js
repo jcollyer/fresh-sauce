@@ -117,10 +117,10 @@ export function playToggleTrack() {
 
     if(trackPlaying){
       pauseTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: false })
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, shuffle: getState().tracks.shuffle, trackPlaying: false })
     } else {
       playTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: true })
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, shuffle: getState().tracks.shuffle , trackPlaying: true })
     }
   }
 }
@@ -135,7 +135,6 @@ export function isTrackFavoritedByUser(trackId){
         for(let fav in userFavorites) {
           userFavArray.push(fav)
         }
-        console.log(trackId)
         return userFavArray.indexOf(trackId) > -1
       }
     }
