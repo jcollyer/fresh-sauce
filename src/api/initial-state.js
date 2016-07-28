@@ -6,6 +6,7 @@ export default {
     username: 'guest',
     uid: null,
     displayingLogInPanel: false,
+    displayingAuthPanel: false,
     favorites: {}
   },
   tracks: {

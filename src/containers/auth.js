@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { logoutUser, showLogInPanel } from '../actions/auth'
+import { logoutUser, toggleLogInPanel, toggleAuthPanel } from '../actions/auth'
 // import C from '../constants'
 
 export default class Auth extends Component {
@@ -23,16 +23,21 @@ export default class Auth extends Component {
     ui.start('#firebaseui-auth-container', uiConfig);
   }
   render() {
-    const { username, displayingLogInPanel } = this.props
+    const { username, displayingLogInPanel, displayingAuthPanel } = this.props
     // debugger;
     return (
       <div id='auth'>
         <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>
-          <p><i className='icon icon-head'></i>{username}</p>
-          <button onClick={() => this.props.logoutUser()}>Log Out</button>
+          <div id='auth-button' className='icon icon-head' onClick={() => this.props.toggleAuthPanel()}>
+            <div id='auth-menu' className={ displayingAuthPanel ? '' : 'hide'}>
+            <div id='username'>hi, {username}</div>
+            <div id='profile'>Profile</div>
+            <div id='logout' onClick={() => this.props.logoutUser()}>Log Out</div>
+            </div>
+          </div>
         </div>
         <div id='logged-out' className={ username === 'guest' ? '' : 'hide'}>
-          <button onClick={() => this.props.showLogInPanel()}>Log In</button>
+          <div id='loggin-button' className='icon icon-head' onClick={() => this.props.toggleLogInPanel()}></div>
         </div>
         <div id='firebaseui-auth-container' className={ displayingLogInPanel ? '' : 'hide'}></div>
       </div>
@@ -43,8 +48,9 @@ export default class Auth extends Component {
 const mapStateToProps = (appState) => {
   return {
     username: appState.auth.username,
-    displayingLogInPanel: appState.auth.displayingLogInPanel
+    displayingLogInPanel: appState.auth.displayingLogInPanel,
+    displayingAuthPanel: appState.auth.displayingAuthPanel
   }
 }
 
-export default connect(mapStateToProps, { logoutUser, showLogInPanel })(Auth)
+export default connect(mapStateToProps, { logoutUser, toggleLogInPanel, toggleAuthPanel })(Auth)

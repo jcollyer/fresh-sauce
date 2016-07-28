@@ -18,7 +18,8 @@ export default (state = initialState.auth, action) => {
         uid: action.uid || state.uid,
         role: action.role || state.role,
         favorites: action.favorites || state.favorites,
-        displayingLogInPanel: action.displayingLogInPanel || false
+        displayingLogInPanel: action.displayingLogInPanel || false,
+        displayingAuthPanel: action.displayingAuthPanel || false
       };
     case C.AUTH_LOGOUT:
       return {

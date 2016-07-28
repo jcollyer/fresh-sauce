@@ -38,9 +38,23 @@ export const logoutUser = () => {
   }
 }
 
-export const showLogInPanel = () => {
-  return (dispatch) => {
-    dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
+export const toggleLogInPanel = () => {
+  return (dispatch, getState) => {
+    if(getState().auth.displayingLogInPanel){
+      dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: false })
+    } else {
+      dispatch({ type: C.AUTH_LOGIN, displayingLogInPanel: true })
+    }
+  }
+}
+
+export const toggleAuthPanel = () => {
+  return (dispatch, getState) => {
+    if(getState().auth.displayingAuthPanel) {
+      dispatch({ type: C.AUTH_LOGIN, displayingAuthPanel: false })
+    } else {
+      dispatch({ type: C.AUTH_LOGIN, displayingAuthPanel: true })
+    }
   }
 }
 
