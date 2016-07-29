@@ -34,7 +34,7 @@ class Tracklist extends Component {
         key={i}
         onPlayTrackClicked={() => this.props.setTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
-        onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track.id)}
+        onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track)}
         isFavoritedByUser={this.props.isTrackFavoritedByUser(track.id)}
         isAdmin={this.isUserAdmin()} />
     })//.reverse()

@@ -21,7 +21,7 @@ export function deleteTrack(track) {
   }
 }
 
-export function toggleFavoriteTrack(trackId) {
+export function toggleFavoriteTrack(track) {
   return function(dispatch, getState) {
     let uid = getState().auth.uid
 
@@ -33,15 +33,15 @@ export function toggleFavoriteTrack(trackId) {
       // convert favorites object to array
       let favArray = []
       for (let fav in getState().auth.favorites){
-        if(fav === trackId) {
+        if(fav === track.id) {
           favArray.push(fav)
         }
       }
       // check if track is already favorited
-      if (favArray.indexOf(trackId) > -1){
-        usersRef.child(uid).child('favorites').child(trackId).remove()
+      if (favArray.indexOf(track.id) > -1){
+        usersRef.child(uid).child('favorites').child(track.id).remove()
       } else {
-        usersRef.child(uid).child('favorites').child(trackId).set({ id: trackId, timestamp: Date.now() })
+        usersRef.child(uid).child('favorites').child(track.id).set(track)
       }
     }
   }
