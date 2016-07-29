@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { withRouter, Link } from 'react-router'
 import { logoutUser, toggleLogInPanel, toggleAuthPanel } from '../actions/auth'
 // import C from '../constants'
 
 export default class Auth extends Component {
+  logoutUser() {
+    this.props.router.push('/')
+    this.props.logoutUser()
+  }
   componentWillMount(){
     var uiConfig = {
       'signInSuccessUrl': '/',
@@ -32,7 +36,7 @@ export default class Auth extends Component {
             <div id='auth-menu' className={ displayingAuthPanel ? '' : 'hide'}>
             <div id='username'>hi, {username}</div>
             <div id='profile'><Link to={`/users/${uid}`}>Profile</Link></div>
-            <div id='logout' onClick={() => this.props.logoutUser()}>Log Out</div>
+            <div id='logout' onClick={() => this.logoutUser()}>Log Out</div>
             </div>
           </div>
         </div>
@@ -54,4 +58,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { logoutUser, toggleLogInPanel, toggleAuthPanel })(Auth)
+export default withRouter(connect(mapStateToProps, { logoutUser, toggleLogInPanel, toggleAuthPanel })(Auth))
