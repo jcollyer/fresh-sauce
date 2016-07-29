@@ -8,7 +8,20 @@ const usersRef = ref.child('users')
 
 export function setTrack(track) {
   return function(dispatch, getState) {
-    dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+    if(track.id !== getState().tracks.currentTrack.id){
+      dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+    } else {
+      let trackPlaying = getState().tracks.trackPlaying
+      let playerKind = getState().tracks.currentTrack.kind
+      let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+      if(trackPlaying){
+        pauseTrack(playerKind, player)
+        dispatch({type: C.SET_TRACK, track: track, trackPlaying: false, shuffle: getState().tracks.shuffle })
+      } else {
+        playTrack(playerKind, player)
+        dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+      }
+    }
   }
 }
 
