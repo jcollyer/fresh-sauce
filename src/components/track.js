@@ -8,7 +8,7 @@ export default (props) => {
   props.track && props.track.kind === 'sc' ? trackArtist = props.track.artist : trackArtist = props.track.tag_list[0]
 
   return (
-    <div className='track-item'>
+    <div className={props.isCurrentTrack ? 'track-item active' : 'track-item'}>
       <div className='track-item-info'>
         <div className='track-item-info-artwork' onClick={props.onPlayTrackClicked}>
           <i className='icon icon-play'></i>

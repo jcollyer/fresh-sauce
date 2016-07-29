@@ -156,11 +156,16 @@ input {
 }
 
 #tracklist {
-  background: #aaa;
   height: 100vh;
   max-width: 930px;
   width: 70%;
+  .track-item.active {
+    .track-item-info {
+      outline: 1px solid @hotblue;
+    }
+  }
   .track-item {
+    display: block;
     .track-item-info {
       float: left;
       width: 80%;

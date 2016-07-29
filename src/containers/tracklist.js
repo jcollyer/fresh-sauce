@@ -12,6 +12,13 @@ class Tracklist extends Component {
     }
     return false
   }
+  isCurrentTrack(trackId){
+    if(this.props.currentTrack.id === trackId){
+      return true
+    } else {
+      return false
+    }
+  }
   getDocHeight() {
     let D = document
     return Math.max(
@@ -27,7 +34,7 @@ class Tracklist extends Component {
     })
   }
   render() {
-    const { tracklist, hasreceiveddata, user } = this.props
+    const { tracklist, hasreceiveddata, user, currentTrack } = this.props
     const rows = tracklist.map((track, i) => {
       return <Track
         track={track}
@@ -36,7 +43,8 @@ class Tracklist extends Component {
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
         onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track)}
         isFavoritedByUser={this.props.isTrackFavoritedByUser(track.id)}
-        isAdmin={this.isUserAdmin()} />
+        isAdmin={this.isUserAdmin()}
+        isCurrentTrack={this.isCurrentTrack(track.id)} />
     })//.reverse()
 
     return (
@@ -52,7 +60,8 @@ const mapStateToProps = (appState) => {
   return {
     tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
-    user: appState.auth
+    user: appState.auth,
+    currentTrack: appState.tracks.currentTrack
   }
 }
 
