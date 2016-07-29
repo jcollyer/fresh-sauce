@@ -11,7 +11,7 @@ export default (props) => {
     <div className={props.isCurrentTrack ? 'track-item active' : 'track-item'}>
       <div className='track-item-info'>
         <div className='track-item-info-artwork' onClick={props.onPlayTrackClicked}>
-          <i className='icon icon-play'></i>
+          <i className={props.isThisTrackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
           <img src={props.track.artwork_url} />
         </div>
         <div className='track-item-info-detail' onClick={props.onPlayTrackClicked}>

@@ -7,7 +7,6 @@ export default class TrackProgress extends Component {
     let xoffset = event.clientX - element.offsetLeft
     let duration = this.props.duration
     let position = (xoffset / width) * duration;
-    // console.log("dur", duration)
     this.props.trackProgressClick(position)
   }
   render() {
