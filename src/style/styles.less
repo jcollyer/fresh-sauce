@@ -1,11 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300);
 @offwhite: #E7E7DE;
-@offblack: #222;
+@lightgray: #F6F6F6;
+@gray: #EEE;
 @darkgray: #444;
+@offblack: #222;
 @hotblue: #01A1F7;
 @hotred: #F7174D;
 @hotyellow: #E9DE2A;
 @hotpink: #FF538F;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'Josefin Sans', sans-serif;
@@ -158,10 +164,19 @@ input {
 #tracklist {
   height: 100vh;
   max-width: 930px;
-  width: 70%;
   .track-item.active {
     .track-item-info {
-      outline: 1px solid @hotblue;
+      .track-item-info-artwork {
+        img {
+          outline: 1px solid @gray;
+        }
+        i.icon {
+          color: @hotblue;
+        }
+      }
+      .track-item-info-detail {
+        background: @lightgray;
+      }
     }
   }
   .track-item {
@@ -175,30 +190,48 @@ input {
         width: 70px;
         position: relative;
         i {
-          color: white;
-          font-size: 70px;
-          opacity: 0.6;
+          color: @lightgray;
+          font-size: 60px;
+          margin: 10px;
           position: absolute;
         }
         img {
-          width: 70px;
+          width: 100%;
         }
       }
       .track-item-info-detail {
         float: left;
-        padding: 10px;
-        width: ~"calc(100% - 90px)";
         .title {
-
+          color: @darkgray;
+          font-weight: 100;
         }
-        .detail {
-
+        .artist {
+          color: @darkgray;
+          font-weight: 900;
+          .track-by {
+            font-weight: 100;
+          }
         }
       }
     }
     .track-item-actions {
       float: left;
-      width: 20%;
+      width: 115px;
+      i.track-heart {
+        background: @lightgray;
+        float: left;
+        font-size: 40px;
+        padding: 10px 10px 5px;
+      }
+      .go-to-track-detail {
+        background: @lightgray;
+        color: #444;
+        float: left;
+        font-size: 25px;
+        margin-left: 5px;
+        padding: 15px;
+        text-decoration: none;
+      }
     }
   }
 }
@@ -209,81 +242,104 @@ input {
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
-   #top-bar {
-     border-top: 1px solid @darkgray;
-     bottom: 0px;
-     height: 70px;
-     top: auto;
-     #player {
-       float: auto;
-       width: 100%;
-       #player-track-artwork {
-         display: none;
-       }
-       #player-track-info {
-         background: @offblack;
-         color: @offwhite;
-         float: auto;
-         height: 70px;
-         text-align: center;
-         width: 100%;
-         h3 {
-           font-weight: 300;
-           font-size: 12px;
-         }
-         h4 {
-           font-weight: 300;
-           font-size: 10px;
-         }
-         #player-track-controls {
-           color: @offwhite;
-           margin: 0 auto;
-           width: 260px;
-           i.icon.active {
-             color: @hotblue;
-             font-weight: 900;
-           }
-           i.icon {
-             cursor: pointer;
-             font-size: 40px;
-             margin: 0 10px;
-           }
-         }
-         #player-track-time {
-           display: none;
-         }
-       }
-     }
-     #auth{
-       background: @hotred;
-       float: auto;
-       margin-top: 0px;
-       position: fixed;
-       top: 0px;
-       width: 100%;
-       #firebaseui-auth-container {
-         .firebaseui-container {
-           right: 0px;
-           top: 45px;
-           position: absolute;
-         }
-       }
-     }
-   }
-   #tracklist {
-     margin: 80px auto 100px;
-   }
+  #top-bar {
+    border-top: 1px solid @darkgray;
+    bottom: 0px;
+    height: 70px;
+    top: auto;
+    #player {
+      float: auto;
+      width: 100%;
+      #player-track-artwork {
+        display: none;
+      }
+      #player-track-info {
+        background: @offblack;
+        color: @offwhite;
+        float: auto;
+        height: 70px;
+        text-align: center;
+        width: 100%;
+        h3 {
+          font-weight: 300;
+          font-size: 12px;
+        }
+        h4 {
+          font-weight: 300;
+          font-size: 10px;
+        }
+        #player-track-controls {
+          color: @offwhite;
+          margin: 0 auto;
+          width: 260px;
+          i.icon.active {
+            color: @hotblue;
+            font-weight: 900;
+          }
+          i.icon {
+            cursor: pointer;
+            font-size: 40px;
+            margin: 0 10px;
+          }
+        }
+        #player-track-time {
+          display: none;
+        }
+      }
+    }
+    #auth{
+      background: @hotred;
+      float: auto;
+      margin-top: 0px;
+      position: fixed;
+      top: 0px;
+      width: 100%;
+      #firebaseui-auth-container {
+        .firebaseui-container {
+          right: 0px;
+          top: 45px;
+          position: absolute;
+        }
+      }
+    }
+  }
+  #tracklist {
+    margin: 50px auto 100px;
+    width: 95%;
+    .track-item {
+      .track-item-info {
+        float: left;
+        width: ~"calc(100% - 115px)";
+        .track-item-info-artwork {
+          width: 55px;
+          i.icon {
+            font-size: 50px;
+            margin: 8px;
+          }
+        }
+        .track-item-info-detail {
+          float: left;
+          height: 55px;
+          width: ~"calc(100% - 60px)";
+          .title {
+            font-size: 14px;
+            margin: 10px 7px 0px;
+          }
+          .artist {
+            font-size: 12px;
+            margin: 1px 7px 0px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
-
-}
+@media only screen and (min-width : 480px) {}
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-
-}
+@media only screen and (min-width : 768px) {}
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
@@ -302,7 +358,6 @@ input {
         background: white;
         color: @offblack;
         float: left;
-        height: 100px;
         width: ~"calc(100% - 200px)";
         h3 {
           font-size: 26px;
@@ -341,7 +396,31 @@ input {
     }
   }
   #tracklist {
-    margin: 100px auto 0px;
+    margin: 110px auto 0px;
+    width: 70%;
+    .track-item {
+      .track-item-info {
+        .track-item-info-artwork {
+          width: 80px;
+          i.icon {
+            font-size: 60px;
+            margin: 10px;
+          }
+        }
+        .track-item-info-detail {
+          height: 80px;
+          width: ~"calc(100% - 85px)";
+          .title {
+            font-size: 24px;
+            margin: 7px 7px 0px;
+          }
+          .artist {
+            font-size: 16px;
+            margin: 3px 11px 0px;
+          }
+        }
+      }
+    }
   }
 }
 
