@@ -24,6 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-youtube:before {
+  content: "\e907";
+}
+.icon-soundcloud:before {
+  content: "\e908";
+}
 .icon-heart:before {
   content: "\e900";
 }

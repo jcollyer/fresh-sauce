@@ -164,11 +164,11 @@ input {
 #tracklist {
   height: 100vh;
   max-width: 930px;
-  .track-item.active {
+  .track-item.active { //THIS IS ACTIVE
     .track-item-info {
       .track-item-info-artwork {
         img {
-          outline: 1px solid @gray;
+          // outline: 1px solid @gray;
         }
         i.icon {
           color: @hotblue;
@@ -180,14 +180,13 @@ input {
     }
   }
   .track-item {
-    display: block;
     .track-item-info {
       float: left;
       width: 80%;
       .track-item-info-artwork {
+        background: @offblack;
         cursor: pointer;
         float: left;
-        width: 70px;
         position: relative;
         i {
           color: @lightgray;
@@ -218,18 +217,11 @@ input {
       float: left;
       width: 115px;
       i.track-heart {
-        background: @lightgray;
         float: left;
-        font-size: 40px;
-        padding: 10px 10px 5px;
       }
       .go-to-track-detail {
-        background: @lightgray;
         color: #444;
         float: left;
-        font-size: 25px;
-        margin-left: 5px;
-        padding: 15px;
         text-decoration: none;
       }
     }
@@ -307,10 +299,12 @@ input {
     margin: 50px auto 100px;
     width: 95%;
     .track-item {
+      height: 60px;
       .track-item-info {
         float: left;
         width: ~"calc(100% - 115px)";
         .track-item-info-artwork {
+          height: 55px;
           width: 55px;
           i.icon {
             font-size: 50px;
@@ -323,12 +317,26 @@ input {
           width: ~"calc(100% - 60px)";
           .title {
             font-size: 14px;
-            margin: 10px 7px 0px;
+            margin: 15px 7px 0px;
           }
           .artist {
             font-size: 12px;
             margin: 1px 7px 0px;
           }
+          .origin-link {
+            display: none;
+          }
+        }
+      }
+      .track-item-actions {
+        i.track-heart {
+          font-size: 30px;
+          padding: 10px 10px 5px;
+        }
+        .go-to-track-detail {
+          font-size: 15px;
+          margin-left: 5px;
+          padding: 15px;
         }
       }
     }
@@ -399,12 +407,14 @@ input {
     margin: 110px auto 0px;
     width: 70%;
     .track-item {
+      height: 90px;
       .track-item-info {
         .track-item-info-artwork {
+          height: 80px;
           width: 80px;
           i.icon {
             font-size: 60px;
-            margin: 10px;
+            margin: 17px 15px 0px;
           }
         }
         .track-item-info-detail {
@@ -416,8 +426,31 @@ input {
           }
           .artist {
             font-size: 16px;
-            margin: 3px 11px 0px;
+            margin: 3px 9px 0px;
           }
+          .origin-link {
+            color: @darkgray;
+            display: block;
+            font-size: 10px;
+            margin: 0px 10px;
+            line-height: 2.5em;
+            text-decoration: none;
+            i.icon {
+              font-size: 14px;
+              margin: 3px;
+            }
+          }
+        }
+      }
+      .track-item-actions {
+        i.track-heart {
+          font-size: 40px;
+          padding: 10px 10px 5px;
+        }
+        .go-to-track-detail {
+          font-size: 25px;
+          margin-left: 5px;
+          padding: 15px;
         }
       }
     }
