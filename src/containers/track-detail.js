@@ -10,12 +10,22 @@ class TrackDetail extends Component {
   }
   render() {
     const { currentTrack } = this.props
+    let artwork_url_hires = ''
+    if (currentTrack.artwork_url) {
+      artwork_url_hires = currentTrack.artwork_url.replace('large','t300x300')
+    }
     if (currentTrack.id) {
       return (
-        <div>
+        <div id='user-detail' className='container'>
           <Link to={`/`}>Home</Link>
-          <h2>{currentTrack.title}</h2>
-          <img src={currentTrack.artwork_url} onClick={() => this.props.setTrack(currentTrack)} />
+          <div className='artwork'>
+            <img src={artwork_url_hires} onClick={() => this.props.setTrack(currentTrack)} />
+          </div>
+          <div className='info'>
+            <h2>{currentTrack.title}</h2>
+            <h3><span className='by'>by: </span>{currentTrack.artist}</h3>
+            <h6></h6>
+          </div>
         </div>
       )
     } else {

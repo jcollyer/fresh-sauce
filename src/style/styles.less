@@ -47,6 +47,11 @@ input {
   max-width: 600px;
 }
 
+.container {
+  height: 100vh;
+  max-width: 930px;
+}
+
 #top-bar{
   background: white;
   position: fixed;
@@ -162,8 +167,6 @@ input {
 }
 
 #tracklist {
-  height: 100vh;
-  max-width: 930px;
   .track-item.active { //THIS IS ACTIVE
     .track-item-info {
       .track-item-info-artwork {
@@ -229,11 +232,15 @@ input {
 }
 
 #user-detail {
-  margin-top: 100px;
+  margin-top: 110px;
 }
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
+  .container {
+    margin: 50px auto 100px;
+    width: 95%;
+  }
   #top-bar {
     border-top: 1px solid @darkgray;
     bottom: 0px;
@@ -296,8 +303,6 @@ input {
     }
   }
   #tracklist {
-    margin: 50px auto 100px;
-    width: 95%;
     .track-item {
       height: 60px;
       .track-item-info {

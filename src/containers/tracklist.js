@@ -56,7 +56,7 @@ class Tracklist extends Component {
     })//.reverse()
 
     return (
-      <div id='tracklist'>
+      <div id='tracklist' className='container'>
         <span className={this.isUserAdmin() ? '' : 'hide'}><AddTrack /></span>
         {hasreceiveddata ? rows : 'Loading tracks...'}
       </div>
