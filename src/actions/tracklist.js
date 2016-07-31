@@ -5,9 +5,50 @@ const tracksRef = new Firebase(C.FIREBASE).child('tracks')
 function loadTracks(startAt){
   console.log(startAt)
   const tracksArr = []
+  let sanitizedTrack = {}
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
     snapshot.forEach((track) => {
-      tracksArr.push(track.val())
+      if(track.val().kind === 'sc') {
+        sanitizedTrack = {
+          id: track.val().id,
+          artwork_url: track.val().artwork_url,
+          artwork_url_hires: track.val().artwork_url_hires,
+          duration: track.val().duration,
+          featured: track.val().featured,
+          genre: track.val().genre,
+          kind: track.val().kind,
+          permalink: track.val().permalink,
+          permalink_url: track.val().permalink_url,
+          tag_list: track.val().tag_list,
+          timestamp: track.val().timestamp,
+          title: track.val().title,
+          artist: track.val().artist,
+          scURL: 'https://soundcloud.com/'+ track.val().artist.replace(/\s/g, '') + '/' + track.val().permalink,
+          linkTitle: 'SoundCloud ',
+          linkIcon: 'icon icon-soundcloud '
+        }
+      } else if (track.val().kind === 'yt') {
+        sanitizedTrack = {
+          id: track.val().id,
+          artwork_url: track.val().artwork_url,
+          artwork_url_hires: track.val().artwork_url_hires,
+          duration: track.val().duration,
+          featured: track.val().featured,
+          genre: track.val().genre,
+          kind: track.val().kind,
+          permalink: track.val().permalink,
+          permalink_url: track.val().permalink_url,
+          tag_list: track.val().tag_list,
+          timestamp: track.val().timestamp,
+          title: track.val().title,
+          artist: track.val().tag_list[0],
+          scURL: 'https://www.youtube.com/watch?v='+track.val().id,
+          linkIcon: 'icon icon-youtube',
+          linkTitle: 'YouTube'
+        }
+      }
+      // debugger;
+      tracksArr.push(sanitizedTrack)
     })
   })
   return tracksArr

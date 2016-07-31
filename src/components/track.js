@@ -2,21 +2,6 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export default (props) => {
-  let trackArtist = ''
-  let scURL = ''
-  let linkIcon = ''
-  let linkTitle = ''
-  if(props.track.kind === 'sc') {
-    trackArtist = props.track.artist
-    scURL = 'https://soundcloud.com/'+ props.track.artist.replace(/\s/g, '') + '/' + props.track.permalink
-    linkTitle = 'SoundCloud '
-    linkIcon = 'icon icon-soundcloud '
-  } else if (props.track.kind === 'yt') {
-    trackArtist = props.track.tag_list[0]
-    scURL = 'https://www.youtube.com/watch?v='+props.track.id
-    linkIcon = 'icon icon-youtube'
-    linkTitle = 'YouTube'
-  }
   return (
     <div className={props.isCurrentTrack ? 'track-item active' : 'track-item'}>
       <div className='track-item-info'>
@@ -26,10 +11,10 @@ export default (props) => {
         </div>
         <div className='track-item-info-detail'>
           <h3 className='title elipsis'>{props.track.title}</h3>
-          <p className='artist'><span className='track-by'>by: </span>{props.track.artist}{trackArtist}</p>
-          <a className='origin-link' href={scURL} target='_blank'>
-            <span>{linkTitle}</span>
-            <i className={linkIcon}></i>
+          <p className='artist'><span className='track-by'>by: </span>{props.track.trackArtist}</p>
+          <a className='origin-link' href={props.track.scURL} target='_blank'>
+            <span>{props.track.linkTitle}</span>
+            <i className={props.track.linkIcon}></i>
           </a>
         </div>
       </div>

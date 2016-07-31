@@ -144,6 +144,7 @@ function formatSCData(track, data) {
   track.title = data.title;
   track.duration = data.duration;
   track.artwork_url = data.artwork_url;
+  track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large', 't500x500') : '';
   track.permalink_url = data.permalink_url;
   track.artist = data.user.username;
   track.likes = 0;
@@ -159,6 +160,7 @@ function formatYTData(track, data) {
   track.description = data.items[0].snippet.description;
   track.duration = data.items[0].contentDetails.duration;
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
+  track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url;
   track.likes = 0;
   track.featured = false;
   track.timestamp = Date.now();
