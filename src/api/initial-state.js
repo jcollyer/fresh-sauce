@@ -12,7 +12,13 @@ export default {
   tracks: {
     trackPlaying: false,
     submittingnew: false,
-    currentTrack: {id: 266853527},
+    currentTrack: {
+      id: 266853527,
+      artwork_url_hires: '',
+      provider: '',
+      artist: '',
+      icon: ''
+    },
     trackPosition: 0,
     trackPercentage: 0,
     duration: 0,
@@ -20,7 +26,7 @@ export default {
   },
   tracklist: {
     tracks: [],
-    hasreceiveddata: false,
+    hasreceiveddata: false
   },
   players: {}
 }

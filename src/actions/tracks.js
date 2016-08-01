@@ -5,6 +5,7 @@ const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
 const favoritesRef = ref.child('favorites')
 const usersRef = ref.child('users')
+import { sanitizeTrack } from './tracklist'
 
 export function setTrack(track) {
   return function(dispatch, getState) {
@@ -151,16 +152,5 @@ export function isTrackFavoritedByUser(trackId){
         return userFavArray.indexOf(trackId) > -1
       }
     }
-  }
-}
-
-// for /tracks/<trackID> urls
-export function setTrackDetail(id) {
-  return function(dispatch, getState){
-    let trackDetail = {}
-    tracksRef.orderByChild('id').equalTo(id).on("value", function(snapshot) {
-      trackDetail = snapshot.val()[Object.keys(snapshot.val())]
-      dispatch({ type: C.SET_TRACK_DETAIL, trackDetail })
-    })
   }
 }
