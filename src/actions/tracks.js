@@ -117,7 +117,8 @@ export function pauseTrack(playerKind, player){
   }
 }
 
-export function playToggleTrack() {
+export function playToggleTrack(playingTrackInterval) {
+  clearInterval(playingTrackInterval)
   return function(dispatch, getState){
     let trackPlaying = getState().tracks.trackPlaying
     let player = {}

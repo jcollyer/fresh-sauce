@@ -74,7 +74,7 @@ class Player extends Component {
             <div id='player-track-controls'>
               <i onClick={() => this.props.toggleFavoriteTrack(track)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart active' : 'icon icon-heart-outline'}></i>
               <i onClick={() => this.props.playNextTrack('prev')} className='icon icon-skip-prev'></i>
-              <i onClick={() => this.props.playToggleTrack()} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
+              <i onClick={() => this.props.playToggleTrack(playingTrackInterval)} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
               <i onClick={() => this.props.playNextTrack('next')} className='icon icon-skip-next'></i>
               <i onClick={() => this.props.toggleShuffleTracks()} className={shuffle ? 'icon icon-shuffle active' : 'icon icon-shuffle'}></i>
             </div>
