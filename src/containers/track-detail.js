@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
-import { setTrackDetail, setTrack } from '../actions/tracklist'
+import { setTrackDetail } from '../actions/tracklist'
+import { setTrack } from '../actions/tracklist'
 
 class TrackDetail extends Component {
   componentDidMount(){
@@ -10,12 +11,7 @@ class TrackDetail extends Component {
   }
   render() {
     const { currentTrack } = this.props
-    // let artwork_url_hires = ''
-    // if (currentTrack.artwork_url) {
-    //   artwork_url_hires = currentTrack.artwork_url.replace('large','t300x300')
-    // }
     if (currentTrack.id) {
-      // debugger;
       return (
         <div id='user-detail' className='container'>
           <Link to={`/`}>Home</Link>

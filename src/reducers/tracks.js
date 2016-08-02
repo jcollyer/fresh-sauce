@@ -27,7 +27,7 @@ export default (state = initialState.tracks, action) => {
     case C.SET_TRACK_DETAIL:
       return Object.assign({}, state, {
         currentTrack: action.trackDetail,
-        trackPlaying: false
+        trackPlaying: action.trackPlaying
       });
     default:
       return state;

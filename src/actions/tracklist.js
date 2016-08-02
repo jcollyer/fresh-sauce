@@ -8,8 +8,7 @@ function loadTracks(startAt){
 
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
     snapshot.forEach((track) => {
-
-      let sanitizedTrack = sanitizeTrack(track)
+      let sanitizedTrack = sanitizeTrack(track.val())
       tracksArr.push(sanitizedTrack)
     })
   })
@@ -18,41 +17,41 @@ function loadTracks(startAt){
 
 function sanitizeTrack(track) {
   let sanitizedTrack = {}
-  if(track.val().kind === 'sc') {
+  if(track.kind === 'sc') {
     sanitizedTrack = {
-      id: track.val().id,
-      artwork_url: track.val().artwork_url,
-      artwork_url_hires: track.val().artwork_url_hires,
-      duration: track.val().duration,
-      featured: track.val().featured,
-      genre: track.val().genre,
-      kind: track.val().kind,
-      permalink: track.val().permalink,
-      permalink_url: track.val().permalink_url,
-      tag_list: track.val().tag_list,
-      timestamp: track.val().timestamp,
-      title: track.val().title,
-      artist: track.val().artist,
-      scURL: 'https://soundcloud.com/'+ track.val().artist.replace(/\s/g, '') + '/' + track.val().permalink,
+      id: track.id,
+      artwork_url: track.artwork_url,
+      artwork_url_hires: track.artwork_url_hires,
+      duration: track.duration,
+      featured: track.featured,
+      genre: track.genre,
+      kind: track.kind,
+      permalink: track.permalink,
+      permalink_url: track.permalink_url,
+      tag_list: track.tag_list,
+      timestamp: track.timestamp,
+      title: track.title,
+      artist: track.artist,
+      scURL: 'https://soundcloud.com/'+ track.artist.replace(/\s/g, '') + '/' + track.permalink,
       linkTitle: 'SoundCloud ',
       linkIcon: 'icon icon-soundcloud '
     }
-  } else if (track.val().kind === 'yt') {
+  } else if (track.kind === 'yt') {
     sanitizedTrack = {
-      id: track.val().id,
-      artwork_url: track.val().artwork_url,
-      artwork_url_hires: track.val().artwork_url_hires,
-      duration: track.val().duration,
-      featured: track.val().featured,
-      genre: track.val().genre,
-      kind: track.val().kind,
-      permalink: track.val().permalink,
-      permalink_url: track.val().permalink_url,
-      tag_list: track.val().tag_list,
-      timestamp: track.val().timestamp,
-      title: track.val().title,
-      artist: track.val().tag_list[0],
-      scURL: 'https://www.youtube.com/watch?v='+track.val().id,
+      id: track.id,
+      artwork_url: track.artwork_url,
+      artwork_url_hires: track.artwork_url_hires,
+      duration: track.duration,
+      featured: track.featured,
+      genre: track.genre,
+      kind: track.kind,
+      permalink: track.permalink,
+      permalink_url: track.permalink_url,
+      tag_list: track.tag_list,
+      timestamp: track.timestamp,
+      title: track.title,
+      artist: track.tag_list[0],
+      scURL: 'https://www.youtube.com/watch?v='+track.id,
       linkIcon: 'icon icon-youtube',
       linkTitle: 'YouTube'
     }
@@ -95,8 +94,9 @@ export function setTrackDetail(id) {
     let trackDetail = {}
     let sanitizedTrack = {}
     tracksRef.orderByChild('id').equalTo(id).on("value", function(snapshot) {
-      let sanitizedTrack = sanitizeTrack(snapshot)
-      dispatch({ type: C.SET_TRACK_DETAIL, sanitizedTrack })
+      let track = snapshot.val()[Object.keys(snapshot.val())]
+      let sanitizedTrack = sanitizeTrack(track)
+      dispatch({ type: C.SET_TRACK_DETAIL, trackDetail: sanitizedTrack, trackPlaying: false })
     })
   }
 }

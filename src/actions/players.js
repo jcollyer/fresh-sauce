@@ -24,7 +24,10 @@ function setYouTube(callback){
   function onPlayerReady(event) {
     // setup Firebase listeners
     store.dispatch(startListeningToAuth())
-    store.dispatch(startListeningToTracks())
+
+    if(location.pathname == '/') {
+      store.dispatch(startListeningToTracks())
+    }
    }
 
    function onPlayerStateChange(event) {
