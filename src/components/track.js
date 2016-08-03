@@ -11,7 +11,7 @@ export default (props) => {
         </div>
         <div className='track-item-info-detail'>
           <h3 className='title elipsis'>{props.track.title}</h3>
-          <p className='artist'><span className='track-by'>by: </span>{props.track.trackArtist}</p>
+          <p className='artist'><span className='track-by'>by: </span>{props.track.artist}</p>
           <a className='origin-link' href={props.track.scURL} target='_blank'>
             <span>{props.track.linkTitle}</span>
             <i className={props.track.linkIcon}></i>

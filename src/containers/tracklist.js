@@ -35,7 +35,9 @@ class Tracklist extends Component {
   }
   componentDidMount() {
     // load tracks
-    this.props.startListeningToTracks()
+    if (!this.props.hasreceiveddata) {
+      this.props.startListeningToTracks()
+    }
     window.addEventListener('scroll', () => {
       if(window.scrollY + window.innerHeight > this.getDocHeight() - 100 && this.props.hasreceiveddata) {
         console.log('hit')

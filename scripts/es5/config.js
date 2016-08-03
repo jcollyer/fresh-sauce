@@ -149,7 +149,7 @@ function formatSCData(track, data) {
   track.artist = data.user.username;
   track.likes = 0;
   track.featured = false;
-  track.timestamp = Date.now();
+  track.timestamp = 0 - Date.now();
   track.kind = 'sc';
   return track;
 }
@@ -163,7 +163,7 @@ function formatYTData(track, data) {
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url;
   track.likes = 0;
   track.featured = false;
-  track.timestamp = Date.now();
+  track.timestamp = 0 - Date.now();
   track.kind = 'yt';
   return track;
 }
