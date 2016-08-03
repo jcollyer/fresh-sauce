@@ -49,7 +49,6 @@ input {
 }
 
 .container {
-  height: 100vh;
   max-width: 930px;
 }
 
@@ -168,6 +167,7 @@ input {
 }
 
 #tracklist {
+  height: 100vh;
   .track-item.active { //THIS IS ACTIVE
     .track-item-info {
       .track-item-info-artwork {
@@ -232,8 +232,23 @@ input {
   }
 }
 
-#user-detail {
+#track-detail {
+  #track-detail-header {
+    margin: 10px 0px;
+  }
   margin-top: 110px;
+  #track-detail-artwork {
+    float: left;
+    width: 50%;
+    img {
+      width: 100%;
+    }
+  }
+  #track-detail-info {
+    float: left;
+    padding-left: 20px;
+    width: 50%;
+  }
 }
 
 /* Custom, iPhone Retina */

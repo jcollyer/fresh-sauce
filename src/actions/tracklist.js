@@ -74,7 +74,7 @@ export function startListeningToTracks() {
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true })
       // set first track in tracklist
-      dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: true })
+      dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
   }
 }

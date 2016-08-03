@@ -13,15 +13,20 @@ class TrackDetail extends Component {
     const { currentTrack } = this.props
     if (currentTrack.id) {
       return (
-        <div id='user-detail' className='container'>
-          <Link to={`/`}>Home</Link>
-          <div className='artwork'>
-            <img src={currentTrack.artwork_url_hires} onClick={() => this.props.setTrack(currentTrack)} />
+        <div id='track-detail' className='container'>
+          <div id='track-detail-header'>
+            <Link to={`/`}>Home</Link>
           </div>
-          <div className='info'>
+          <div id='track-detail-artwork'>
+            <img src={currentTrack.artwork_url_hires} />
+          </div>
+          <div id='track-detail-info'>
             <h2>{currentTrack.title}</h2>
             <h3><span className='by'>by: </span>{currentTrack.artist}</h3>
-            <h6></h6>
+            <a className='origin-link' href={currentTrack.scURL} target='_blank'>
+              <span>{currentTrack.linkTitle}</span>
+              <i className={currentTrack.linkIcon}></i>
+            </a>
           </div>
         </div>
       )

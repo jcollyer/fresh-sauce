@@ -1,7 +1,6 @@
 import C from '../constants'
 import store from '../store'
 import { startListeningToAuth } from './auth'
-import { startListeningToTracks } from './tracklist'
 import { playNextTrack } from './tracks'
 
 let playerSC
@@ -24,10 +23,6 @@ function setYouTube(callback){
   function onPlayerReady(event) {
     // setup Firebase listeners
     store.dispatch(startListeningToAuth())
-
-    if(location.pathname == '/') {
-      store.dispatch(startListeningToTracks())
-    }
    }
 
    function onPlayerStateChange(event) {
