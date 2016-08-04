@@ -23,14 +23,6 @@ class Player extends Component {
       }
     }, 500)
   }
-  checkPlayerArtistKind() {
-    if(this.props.track && this.props.track.kind === 'sc'){ // if Soundcloud
-      return this.props.track.artist
-    } else if (this.props.track.kind === 'yt'){
-      return this.props.track.tag_list[0]
-    }
-    return ''
-  }
   trackProgressClick(position, players) {
     this.props.setTrackPosition(position)
     let trackPosition = position
@@ -69,7 +61,7 @@ class Player extends Component {
           <div id="player-track-info">
             <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
             <h3 className="elipsis">{track.title}</h3>
-            <h4><span id='by'>by:</span> {this.checkPlayerArtistKind()} </h4>
+            <h4><span id='by'>by:</span> {track.artist} </h4>
             <div id='player-track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
             <div id='player-track-controls'>
               <i onClick={() => this.props.toggleFavoriteTrack(track)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart active' : 'icon icon-heart-outline'}></i>
