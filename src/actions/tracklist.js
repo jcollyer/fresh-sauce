@@ -72,7 +72,7 @@ export function startListeningToTracks() {
       firstTimestamp = tracksOnloadArr[0].timestamp
       tracksOnloadArr = loadTracks(firstTimestamp)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
@@ -84,7 +84,17 @@ export function nextPage() {
     let lastTrackTimestamp = getState().tracklist.tracks.splice(-1)[0].timestamp
     let tracksArr = loadTracks(lastTrackTimestamp)
 
-    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true })
+    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: getState().tracklist.shuffle })
+  }
+}
+
+export function toggleShuffleTracks() {
+  return function(dispatch, getState) {
+    if (getState().tracklist.shuffle){
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: false })
+    } else {
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true })
+    }
   }
 }
 

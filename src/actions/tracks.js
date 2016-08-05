@@ -10,17 +10,17 @@ import { sanitizeTrack } from './tracklist'
 export function setTrack(track) {
   return function(dispatch, getState) {
     if(track.id !== getState().tracks.currentTrack.id){
-      dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+      dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
     } else {
       let trackPlaying = getState().tracks.trackPlaying
       let playerKind = getState().tracks.currentTrack.kind
       let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
       if(trackPlaying){
         pauseTrack(playerKind, player)
-        dispatch({type: C.SET_TRACK, track: track, trackPlaying: false, shuffle: getState().tracks.shuffle })
+        dispatch({type: C.SET_TRACK, track: track, trackPlaying: false})
       } else {
         playTrack(playerKind, player)
-        dispatch({type: C.SET_TRACK, track: track, trackPlaying: true, shuffle: getState().tracks.shuffle })
+        dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
       }
     }
   }
@@ -73,7 +73,7 @@ export function playNextTrack(direction) {
   return function(dispatch, getState){
     let nextTrack
     let currentTrackId = getState().tracks.currentTrack.id
-    let shuffleTracks = getState().tracks.shuffle
+    let shuffleTracks = getState().tracklist.shuffle
     let randomIndex = Math.random() * (15 - 0) + 0
 
     getState().tracklist.tracks.map((track, index) => {
@@ -85,19 +85,9 @@ export function playNextTrack(direction) {
         } else if(direction === 'prev') {
           nextTrack = getState().tracklist.tracks[index - 1]
         }
-        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, shuffle: getState().tracks.shuffle })
+        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
       }
     })
-  }
-}
-
-export function toggleShuffleTracks() {
-  return function(dispatch, getState) {
-    if (getState().tracks.shuffle){
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: getState().tracks.trackPlaying, shuffle: false })
-    } else {
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: getState().tracks.trackPlaying, shuffle: true })
-    }
   }
 }
 
@@ -132,10 +122,10 @@ export function playToggleTrack(playingTrackInterval) {
 
     if(trackPlaying){
       pauseTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, shuffle: getState().tracks.shuffle, trackPlaying: false })
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: false })
     } else {
       playTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, shuffle: getState().tracks.shuffle , trackPlaying: true })
+      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack , trackPlaying: true })
     }
   }
 }

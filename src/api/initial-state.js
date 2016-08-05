@@ -21,12 +21,13 @@ export default {
     },
     trackPosition: 0,
     trackPercentage: 0,
-    duration: 0,
-    shuffle: false
+    duration: 0
   },
+
   tracklist: {
     tracks: [],
-    hasreceiveddata: false
+    hasreceiveddata: false,
+    shuffle: false
   },
   players: {}
 }
