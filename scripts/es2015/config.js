@@ -121,32 +121,29 @@ function requestSoundCloudOrYouTube(id, idType) {
 }
 
 function formatSCData(track, data) {
-  track.tag_list = data.tag_list
-  track.permalink = data.permalink
-  track.genre = data.genre
-  track.title = data.title
-  track.duration = data.duration
+  track.artist = data.user.username
   track.artwork_url = data.artwork_url
   track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large','t500x500') : ''
-  track.permalink_url = data.permalink_url
-  track.artist = data.user.username
-  track.likes = 0
+  track.duration = data.duration
   track.featured = false
-  track.timestamp = 0 - Date.now()
   track.kind = 'sc'
+  track.likes = 0
+  track.tag_list = data.tag_list
+  track.timestamp = 0 - Date.now()
+  track.title = data.title
   return track
 }
 
 function formatYTData(track, data) {
-  track.tag_list = data.items[0].snippet.tags || null
-  track.title = data.items[0].snippet.title
-  track.description = data.items[0].snippet.description
-  track.duration = data.items[0].contentDetails.duration;
+  track.artist = data.items[0].snippet.tags[0] || ''
   track.artwork_url = data.items[0].snippet.thumbnails.default.url
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url
-  track.likes = 0
+  track.duration = data.items[0].contentDetails.duration;
   track.featured = false
-  track.timestamp = 0 - Date.now()
+  track.likes = 0
   track.kind = 'yt'
+  track.tag_list = data.items[0].snippet.tags || null
+  track.timestamp = 0 - Date.now()
+  track.title = data.items[0].snippet.title
   return track
 }

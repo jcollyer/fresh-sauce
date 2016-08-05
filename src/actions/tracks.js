@@ -52,6 +52,7 @@ export const toggleFavoriteTrack = (track) => {
           favArray.push(fav)
         }
       }
+      
       // check if track is already favorited
       if (favArray.indexOf(track.id) > -1){
         usersRef.child(uid).child('favorites').child(track.id).remove()

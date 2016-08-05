@@ -25,12 +25,9 @@ class AddTrack extends Component {
   }
   formatSCData(track, data, featured) {
     track.tag_list = data.tag_list
-    track.permalink = data.permalink
-    track.genre = data.genre
     track.title = data.title
     track.duration = data.duration
     track.artwork_url = data.artwork_url
-    track.permalink_url = data.permalink_url
     track.artist = data.user.username
     track.likes = 0
     track.featured = featured
