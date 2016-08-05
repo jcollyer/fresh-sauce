@@ -1,6 +1,4 @@
 import C from '../constants';
-
-// const initialState = { username: null, uid: null, status: C.AUTH_ANONYMOUS };
 import initialState from '../api/initial-state'
 
 export default (state = initialState.auth, action) => {

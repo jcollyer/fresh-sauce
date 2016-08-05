@@ -1,6 +1,7 @@
 import C from '../constants'
 import Firebase from 'firebase'
 const tracksRef = new Firebase(C.FIREBASE).child('tracks')
+import { YTDurationToSeconds } from '../utils'
 
 function loadTracks(startAt){
   console.log(startAt)
@@ -38,7 +39,7 @@ function sanitizeTrack(track) {
       id: track.id,
       artwork_url: track.artwork_url,
       artwork_url_hires: track.artwork_url_hires,
-      duration: track.duration,
+      duration: YTDurationToSeconds(track.duration),
       featured: track.featured,
       kind: track.kind,
       tag_list: track.tag_list,
