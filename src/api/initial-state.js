@@ -9,9 +9,8 @@ export default {
     displayingAuthPanel: false,
     favorites: {}
   },
-  tracks: {
+  track: {
     trackPlaying: false,
-    submittingnew: false,
     currentTrack: {
       id: 266853527,
       artwork_url_hires: '',

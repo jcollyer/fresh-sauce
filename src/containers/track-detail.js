@@ -38,7 +38,7 @@ class TrackDetail extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    currentTrack: appState.tracks.currentTrack
+    currentTrack: appState.track.currentTrack
   }
 }
 

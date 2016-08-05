@@ -74,8 +74,8 @@ const mapStateToProps = (appState) => {
     tracklist: appState.tracklist.tracks,
     hasreceiveddata: appState.tracklist.hasreceiveddata,
     user: appState.auth,
-    currentTrack: appState.tracks.currentTrack,
-    trackPlaying: appState.tracks.trackPlaying
+    currentTrack: appState.track.currentTrack,
+    trackPlaying: appState.track.trackPlaying
   }
 }
 

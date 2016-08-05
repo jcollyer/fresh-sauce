@@ -56,8 +56,8 @@ const mapStateToProps = (appState) => {
   return {
     favorites: appState.auth.favorites,
     user: appState.auth,
-    currentTrack: appState.tracks.currentTrack,
-    trackPlaying: appState.tracks.trackPlaying
+    currentTrack: appState.track.currentTrack,
+    trackPlaying: appState.track.trackPlaying
   }
 }
 

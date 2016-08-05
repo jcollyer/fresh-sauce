@@ -79,11 +79,11 @@ class Player extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    track: appState.tracks.currentTrack,
-    trackPlaying: appState.tracks.trackPlaying,
+    track: appState.track.currentTrack,
+    trackPlaying: appState.track.trackPlaying,
+    trackPosition: appState.track.trackPosition,
+    trackPercentage: appState.track.trackPercentage,
     shuffle: appState.tracklist.shuffle,
-    trackPosition: appState.tracks.trackPosition,
-    trackPercentage: appState.tracks.trackPercentage,
     players: appState.players.playerOptions
   }
 }

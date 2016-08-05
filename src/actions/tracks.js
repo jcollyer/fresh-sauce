@@ -9,11 +9,11 @@ import { sanitizeTrack } from './tracklist'
 
 export function setTrack(track) {
   return function(dispatch, getState) {
-    if(track.id !== getState().tracks.currentTrack.id){
+    if(track.id !== getState().track.currentTrack.id){
       dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
     } else {
-      let trackPlaying = getState().tracks.trackPlaying
-      let playerKind = getState().tracks.currentTrack.kind
+      let trackPlaying = getState().track.trackPlaying
+      let playerKind = getState().track.currentTrack.kind
       let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
       if(trackPlaying){
         pauseTrack(playerKind, player)
@@ -35,7 +35,8 @@ export function deleteTrack(track) {
   }
 }
 
-export function toggleFavoriteTrack(track) {
+export const toggleFavoriteTrack = (track) => {
+// export function toggleFavoriteTrack(track) {
   return function(dispatch, getState) {
     let uid = getState().auth.uid
 
@@ -72,7 +73,7 @@ export function stopTrack() {
 export function playNextTrack(direction) {
   return function(dispatch, getState){
     let nextTrack
-    let currentTrackId = getState().tracks.currentTrack.id
+    let currentTrackId = getState().track.currentTrack.id
     let shuffleTracks = getState().tracklist.shuffle
     let randomIndex = Math.random() * (15 - 0) + 0
 
@@ -110,9 +111,9 @@ export function pauseTrack(playerKind, player){
 export function playToggleTrack(playingTrackInterval) {
   clearInterval(playingTrackInterval)
   return function(dispatch, getState){
-    let trackPlaying = getState().tracks.trackPlaying
+    let trackPlaying = getState().track.trackPlaying
     let player = {}
-    let playerKind = getState().tracks.currentTrack.kind
+    let playerKind = getState().track.currentTrack.kind
 
     if(playerKind === 'sc'){
       player = getState().players.playerOptions.playerSC
@@ -122,10 +123,10 @@ export function playToggleTrack(playingTrackInterval) {
 
     if(trackPlaying){
       pauseTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack, trackPlaying: false })
+      dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack, trackPlaying: false })
     } else {
       playTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().tracks.currentTrack , trackPlaying: true })
+      dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack , trackPlaying: true })
     }
   }
 }
