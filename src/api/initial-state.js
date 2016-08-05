@@ -10,19 +10,31 @@ export default {
     favorites: {}
   },
   track: {
-    trackPlaying: false,
     currentTrack: {
-      id: 266853527,
-      artwork_url_hires: '',
-      provider: '',
       artist: '',
-      icon: ''
+      artwork_url: '',
+      artwork_url_hires: '',
+      duration: '',
+      featured: '',
+      genre: '',
+      icon: '',
+      id: 266853527,
+      kind: '',
+      linkIcon: '',
+      linkTitle: '',
+      permalink: '',
+      permalink_url: '',
+      provider: '',
+      scURL: '',
+      tag_list: '',
+      timestamp: '',
+      title: ''
     },
+    trackPlaying: false,
     trackPosition: 0,
     trackPercentage: 0,
     duration: 0
   },
-
   tracklist: {
     tracks: [],
     hasreceiveddata: false,
