@@ -99,14 +99,14 @@ export function toggleShuffleTracks() {
 }
 
 // for /tracks/<trackID> urls
-export function setTrackDetail(id) {
+export function setTrackDetailPage(id) {
   return function(dispatch, getState){
     let trackDetail = {}
     let sanitizedTrack = {}
     tracksRef.orderByChild('id').equalTo(id).on("value", function(snapshot) {
       let track = snapshot.val()[Object.keys(snapshot.val())]
       let sanitizedTrack = sanitizeTrack(track)
-      dispatch({ type: C.SET_TRACK_DETAIL, trackDetail: sanitizedTrack, trackPlaying: false })
+      dispatch({ type: C.SET_TRACK_DETAIL_PAGE, trackDetail: sanitizedTrack, trackPlaying: false })
     })
   }
 }

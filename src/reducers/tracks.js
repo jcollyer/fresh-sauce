@@ -23,7 +23,7 @@ export default (state = initialState.track, action) => {
       return Object.assign({}, state, {
         trackPlaying: false
       });
-    case C.SET_TRACK_DETAIL:
+    case C.SET_TRACK_DETAIL_PAGE:
       return Object.assign({}, state, {
         currentTrack: action.trackDetail,
         trackPlaying: action.trackPlaying
