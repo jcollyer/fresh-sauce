@@ -38,6 +38,23 @@ class Player extends Component {
   convertToPrettyTime(time) {
     return toHHMMSS(time) || '0:00'
   }
+  componentDidMount(){
+    document.addEventListener("keydown", (e) => {
+      console.log(e.keyCode)
+      switch (e.keyCode) {
+        case 32:
+          e.preventDefault()
+          this.props.playToggleTrack(playingTrackInterval)
+          break;
+        case 37:
+          this.props.playNextTrack('prev')
+          break;
+        case 39:
+          this.props.playNextTrack('next')
+          break;
+        }
+    }, false);
+  }
   render() {
     const { track, trackPlaying, shuffle, trackPosition, trackPercentage, players } = this.props
     const src = "https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F" + track.id + "&show_artwork=true";
@@ -46,7 +63,6 @@ class Player extends Component {
       this.whileTrackPlaying(players)
       oldTrackId = track.id
     }
-
     return (
         <div id="player">
           <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameBorder="no" src={src} className="offscreen"></iframe>

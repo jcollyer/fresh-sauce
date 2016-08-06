@@ -19,19 +19,18 @@ function setSoundCloud(){
 }
 
 function setYouTube(callback){
-
   function onPlayerReady(event) {
     // setup Firebase listeners
     store.dispatch(startListeningToAuth())
-   }
+  }
 
-   function onPlayerStateChange(event) {
-     switch(event.data) {
-       case 0: // video finished
-         store.dispatch(playNextTrack('next'))
-       default: return console.log("updateYTPlayer", event.data)
-     }
-   }
+  function onPlayerStateChange(event) {
+    switch(event.data) {
+      case 0: // video finished
+        store.dispatch(playNextTrack('next'))
+      default: return console.log("updateYTPlayer", event.data)
+    }
+  }
 
   //get YouTube Widget
   window.onYouTubeIframeAPIReady = function() {
@@ -52,13 +51,10 @@ function setYouTube(callback){
 export function setPlayers() {
   return function(dispatch){
     playerSC = setSoundCloud()
-
     function callback(playerYT) {
       let playerOptions = { playerSC, playerYT }
       dispatch({ type: C.SET_PLAYERS, playerOptions })
     }
-
     setYouTube(callback)
-
   }
 }

@@ -16,6 +16,7 @@ export default (props) => {
             <span>{props.track.linkTitle}</span>
             <i className={props.track.linkIcon}></i>
           </a>
+          <i className={props.track.featured ? 'icon icon-heart' : 'hide'} ></i>
         </div>
       </div>
       <div className='track-item-actions'>
