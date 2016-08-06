@@ -99,11 +99,16 @@ export function playNextTrack(direction) {
         if (shuffleTracks) {
           nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
         } else if(direction === 'next') {
-          nextTrack = getState().tracklist.tracks[index + 1]
+          if(getState().tracklist.tracks.splice(-1)[0].id != currentTrackId){ // if currentTrack is not the LAST track in playlist
+            nextTrack = getState().tracklist.tracks[index + 1]
+            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+          }
         } else if(direction === 'prev') {
-          nextTrack = getState().tracklist.tracks[index - 1]
+          if(getState().tracklist.tracks[0].id != currentTrackId){ // if currentTrack is not the FIRST track in playlist
+            nextTrack = getState().tracklist.tracks[index - 1]
+            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+          }
         }
-        dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
       }
     })
   }
