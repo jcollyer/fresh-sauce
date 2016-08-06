@@ -28,10 +28,26 @@ export function setTrack(track) {
 
 export function deleteTrack(track) {
   return function(dispatch) {
-    tracksRef.child(track.id).remove();
-    idsRef.child(track.id).remove();
+    tracksRef.child(track.id).remove()
+    idsRef.child(track.id).remove()
     dispatch({ type: C.DELETE_TRACK, track: track })
     alert('track deleted ', track.title)
+  }
+}
+
+export function toggleFeatueTrack(track) {
+  return function(dispatch, getState) {
+    getState().tracklist.tracks.map((t) => {
+      if(t.id === track.id) {
+        if(track.featured) {
+          tracksRef.child(track.id).update({featured: false})
+          alert('track un-featued: ', track.title)
+        } else {
+          tracksRef.child(track.id).update({featured: true})
+          alert('track featued: ', track.title)
+        }
+      }
+    })
   }
 }
 
@@ -52,7 +68,7 @@ export const toggleFavoriteTrack = (track) => {
           favArray.push(fav)
         }
       }
-      
+
       // check if track is already favorited
       if (favArray.indexOf(track.id) > -1){
         usersRef.child(uid).child('favorites').child(track.id).remove()

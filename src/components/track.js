@@ -22,6 +22,9 @@ export default (props) => {
         <i className={props.isFavoritedByUser ? 'track-heart icon icon-heart' : 'track-heart icon icon-heart-outline'} onClick={props.onToggleFavoriteTrackClicked}></i>
         <Link className='go-to-track-detail' to={`/tracks/${props.track.id}`}><div className='icon icon-arrow-right'></div></Link>
         <button onClick={props.onDeleteTrackClicked} className={props.isAdmin ? '' : 'hide'}>Delete track</button>
+        <div className={props.isAdmin ? '' : 'hide'}>
+          <input type='checkbox' onChange={props.onToggleFeatureTrackClicked} checked={props.track.featured} />Feature track?
+        </div>
       </div>
     </div>
   )
