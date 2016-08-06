@@ -157,10 +157,23 @@ input {
         position: relative;
       }
     }
-    #firebaseui-auth-container {
-      .firebaseui-container {
-        background: @hotred;
-        width: 300px;
+    #log-in {
+      background: #eee;
+      margin-top: 44px;
+      i {
+        color: #444;
+        cursor: pointer;
+        font-size: 22px;
+        position: absolute;
+        right: 10px;
+        top: 50px;
+        z-index: 9;
+      }
+      #firebaseui-auth-container {
+        .firebaseui-container {
+          padding-top: 20px;
+          width: 280px;
+        }
       }
     }
   }

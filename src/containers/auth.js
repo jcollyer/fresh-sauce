@@ -43,7 +43,10 @@ export default class Auth extends Component {
         <div id='logged-out' className={ username === 'guest' ? '' : 'hide'}>
           <div id='loggin-button' className='icon icon-head' onClick={() => this.props.toggleLogInPanel()}></div>
         </div>
-        <div id='firebaseui-auth-container' className={ displayingLogInPanel ? '' : 'hide'}></div>
+        <div id='log-in' className={ displayingLogInPanel ? '' : 'hide'}>
+          <i className='icon icon-circle-cross' onClick={() => this.props.toggleLogInPanel()}></i>
+          <div id='firebaseui-auth-container' ></div>
+        </div>
       </div>
     )
   }
