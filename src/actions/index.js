@@ -1,5 +1,5 @@
 import authActions from './auth'
-import tracksActions from './tracks'
+import trackActions from './track'
 import playersActions from './players'
 
-export default Object.assign({},authActions,tracksActions,playersActions)
+export default Object.assign({},authActions,trackActions,playersActions)

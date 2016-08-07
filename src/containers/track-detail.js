@@ -23,7 +23,7 @@ class TrackDetail extends Component {
           <div id='track-detail-info'>
             <h2>{currentTrack.title}</h2>
             <h3><span className='by'>by: </span>{currentTrack.artist}</h3>
-            <a className='origin-link' href={currentTrack.scURL} target='_blank'>
+            <a className='origin-link' href={currentTrack.permalink } target='_blank'>
               <span>{currentTrack.linkTitle}</span>
               <i className={currentTrack.linkIcon}></i>
             </a>

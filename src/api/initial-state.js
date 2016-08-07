@@ -21,8 +21,8 @@ export default {
       kind: '',
       linkIcon: '',
       linkTitle: '',
+      permalink: '',
       provider: '',
-      scURL: '',
       tag_list: '',
       timestamp: '',
       title: ''

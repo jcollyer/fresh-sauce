@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
+import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { startListeningToTracks } from '../actions/tracklist'
 import { nextPage } from '../actions/tracklist'
 import Track from '../components/track'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/tracks'
+import { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { toggleShuffleTracks } from '../actions/tracklist'
 import TrackProgress from '../components/track-progress'
 import { playTrack, toHHMMSS } from '../utils'

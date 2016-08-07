@@ -1,7 +1,7 @@
 import C from '../constants'
 import store from '../store'
 import { startListeningToAuth } from './auth'
-import { playNextTrack } from './tracks'
+import { playNextTrack } from './track'
 
 let playerSC
 

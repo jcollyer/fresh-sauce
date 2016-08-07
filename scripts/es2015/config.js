@@ -123,11 +123,13 @@ function requestSoundCloudOrYouTube(id, idType) {
 function formatSCData(track, data) {
   track.artist = data.user.username
   track.artwork_url = data.artwork_url
+  track.artwork_url_midres = data.artwork_url ? data.artwork_url.replace('large','t200x200') : ''
   track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large','t500x500') : ''
   track.duration = data.duration
   track.featured = false
   track.kind = 'sc'
   track.likes = 0
+  track.permalink = data.permalink_url
   track.tag_list = data.tag_list
   track.timestamp = 0 - Date.now()
   track.title = data.title
@@ -137,13 +139,16 @@ function formatSCData(track, data) {
 function formatYTData(track, data) {
   track.artist = data.items[0].snippet.tags[0] || ''
   track.artwork_url = data.items[0].snippet.thumbnails.default.url
+  track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url
   track.duration = data.items[0].contentDetails.duration;
   track.featured = false
-  track.likes = 0
   track.kind = 'yt'
+  track.likes = 0
+  track.permalink = 'https://www.youtube.com/watch?v='+data.items[0].id,
   track.tag_list = data.items[0].snippet.tags || null
   track.timestamp = 0 - Date.now()
   track.title = data.items[0].snippet.title
+  track.user = data.items[0].snippet.channelId
   return track
 }

@@ -30,7 +30,7 @@ function sanitizeTrack(track) {
       timestamp: track.timestamp,
       title: track.title,
       artist: track.artist,
-      scURL: 'https://soundcloud.com/'+ track.artist.replace(/\s/g, '') + '/' + track.permalink,
+      permalink: track.permalink,
       linkTitle: 'SoundCloud ',
       linkIcon: 'icon icon-soundcloud '
     }
@@ -46,7 +46,7 @@ function sanitizeTrack(track) {
       timestamp: track.timestamp,
       title: track.title,
       artist: track.artist,
-      scURL: 'https://www.youtube.com/watch?v='+track.id,
+      permalink: track.permalink,
       linkIcon: 'icon icon-youtube',
       linkTitle: 'YouTube'
     }
