@@ -34,9 +34,9 @@ export default class Auth extends Component {
         <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>
           <div id='auth-button' className='icon icon-user' onClick={() => this.props.toggleAuthPanel()}>
             <div id='auth-menu' className={ displayingAuthPanel ? '' : 'hide'}>
-            <div id='username'>hi, {username}</div>
-            <div id='profile'><Link to={`/users/${uid}`}>Profile</Link></div>
-            <div id='logout' onClick={() => this.logoutUser()}>Log Out</div>
+              <div id='username'>hi, {username}</div>
+              <div className='menu-link' id='profile'><Link to={`/users/${uid}`}>Profile</Link></div>
+              <div className='menu-link' id='logout' onClick={() => this.logoutUser()}>Log Out</div>
             </div>
           </div>
         </div>

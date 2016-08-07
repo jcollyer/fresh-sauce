@@ -118,16 +118,18 @@ input {
         position: relative;
       }
       #auth-menu {
-        background: @offblack;
+        background: white;
+        border: 1px solid @offwhite;
         bottom: -110px;
-        color: @offwhite;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 16px;
         height: 100px;
         margin-right: 50%;
         position: absolute;
         right: -65px;
         width: 150px;
         &:before {
-          border-bottom: 5px solid @offblack;
+          border-bottom: 5px solid white;
           border-left: 5px solid transparent;
           border-right: 5px solid transparent;
           content: '';
@@ -138,28 +140,30 @@ input {
           position: absolute;
           width: 0;
         }
-        div {
-          font-family: 'Josefin Sans', sans-serif;
-          font-size: 16px;
+        #username {
+          border-bottom: 1px solid @offwhite;
+          padding: 9px;
+        }
+        .menu-link:last-child {
+          border-bottom: none;
+        }
+        .menu-link {
+          border-bottom: 1px solid @offwhite;
+          cursor: pointer;
           padding: 9px;
           text-align: center;
           text-transform: uppercase;
-
+          a {
+            color: @offblack;
+            text-decoration: none;
+          }
+          &:hover {
+            background: @offwhite;
+          }
         }
         div#username {
           font-size: 12px;
           text-align: left;
-        }
-        div#profile {
-          cursor: pointer;
-          &:hover {
-            background: @darkgray;
-          }
-        }
-        div#logout {
-          background: @hotred;
-          cursor: pointer;
-          font-weight: 900;
         }
       }
     }
@@ -174,21 +178,30 @@ input {
       }
     }
     #log-in {
-      background: #eee;
+      background: white;
+      border-bottom: 1px solid @offwhite;
+      border-left: 1px solid @offwhite;
+      border-right: 1px solid @offwhite;
       margin-top: 44px;
-      i {
-        color: #444;
+      position: absolute;
+      right: 20px;
+      top: 2px;
+      i.icon-close {
+        color: #999;
         cursor: pointer;
         font-size: 22px;
         position: absolute;
-        right: 10px;
-        top: 50px;
+        left: 10px;
+        top: 5px;
         z-index: 9;
       }
       #firebaseui-auth-container {
         .firebaseui-container {
           padding-top: 20px;
-          width: 280px;
+          width: 235px;
+          .firebaseui-card-content {
+            padding: 0px 15px;
+          }
         }
       }
     }
@@ -292,7 +305,6 @@ input {
     height: 70px;
     top: auto;
     #player {
-      float: auto;
       width: 100%;
       #player-track-artwork {
         display: none;
@@ -300,7 +312,6 @@ input {
       #player-track-info {
         background: @offblack;
         color: @offwhite;
-        float: auto;
         height: 70px;
         text-align: center;
         width: 100%;
@@ -314,7 +325,7 @@ input {
         }
         #player-track-controls {
           color: @offwhite;
-          margin: 0 auto;
+          margin: 5px auto;
           width: 260px;
           i.icon.active {
             color: @hotblue;
@@ -322,7 +333,7 @@ input {
           }
           i.icon {
             cursor: pointer;
-            font-size: 30px;
+            font-size: 25px;
             margin: 0 10px;
           }
         }
@@ -338,13 +349,6 @@ input {
       position: fixed;
       top: 0px;
       width: 100%;
-      #firebaseui-auth-container {
-        .firebaseui-container {
-          right: 0px;
-          top: 45px;
-          position: absolute;
-        }
-      }
     }
   }
   #tracklist {
@@ -380,7 +384,7 @@ input {
       }
       .track-item-actions {
         i.track-heart {
-          font-size: 30px;
+          font-size: 20px;
           padding: 10px 10px 5px;
         }
         .go-to-track-detail {
@@ -404,7 +408,7 @@ input {
   #top-bar {
     border-bottom: 1px solid @darkgray;
     bottom: auto;
-    height: 100px;
+    height: 102px;
     top: 0px;
     #player {
       float: left;
