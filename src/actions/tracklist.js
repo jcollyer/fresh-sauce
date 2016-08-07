@@ -22,6 +22,7 @@ function sanitizeTrack(track) {
     sanitizedTrack = {
       id: track.id,
       artwork_url: track.artwork_url,
+      artwork_url_midres: track.artwork_url_midres,
       artwork_url_hires: track.artwork_url_hires,
       duration: track.duration,
       featured: track.featured,
@@ -38,6 +39,7 @@ function sanitizeTrack(track) {
     sanitizedTrack = {
       id: track.id,
       artwork_url: track.artwork_url,
+      artwork_url_midres: track.artwork_url_midres,
       artwork_url_hires: track.artwork_url_hires,
       duration: YTDurationToSeconds(track.duration),
       featured: track.featured,
