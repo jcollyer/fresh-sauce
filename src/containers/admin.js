@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
-import { startListeningToTracks } from '../actions/tracklist'
-import { nextPage } from '../actions/tracklist'
+import { withRouter, Link } from 'react-router'
+import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
+import { nextPage, startListeningToTracks } from '../actions/tracklist'
 import Track from '../components/track'
+import AddTrack from './add-track'
 
-class Tracklist extends Component {
-  isCurrentTrack(trackId){
-    if(this.props.currentTrack.id === trackId){
+class UserDetail extends Component {
+  isUserAdmin() {
+    if(this.props.user.username != 'guest' && this.props.user.role === 'admin'){
+      return true
+    }
+    return false
+  }
+  isCurrentTrack(track){
+    if(this.props.currentTrack && this.props.currentTrack.id === track.id){
       return true
     } else {
       return false
     }
   }
-  isThisTrackPlaying(trackId) {
-    if(this.props.currentTrack.id === trackId && this.props.trackPlaying){
+  isThisTrackPlaying(track) {
+    if(this.props.currentTrack && this.props.currentTrack.id === track.id && this.props.trackPlaying){
       return true
     } else {
       return false
@@ -45,15 +52,22 @@ class Tracklist extends Component {
         track={track}
         key={i}
         onPlayTrackClicked={() => this.props.setTrack(track)}
+        onDeleteTrackClicked={() => this.props.deleteTrack(track)}
+        onToggleFeatureTrackClicked={() => this.props.toggleFeatueTrack(track)}
         onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track)}
         isFavoritedByUser={this.props.isTrackFavoritedByUser(track.id)}
-        isCurrentTrack={this.isCurrentTrack(track.id)}
-        isThisTrackPlaying={this.isThisTrackPlaying(track.id)} />
-    })
+        isAdmin={this.isUserAdmin()}
+        isCurrentTrack={this.isCurrentTrack(track)}
+        isThisTrackPlaying={this.isThisTrackPlaying(track)} />
+      }).reverse()
 
     return (
-      <div id='tracklist' className='container'>
-        {hasreceiveddata ? rows : 'Loading tracks...'}
+      <div id='user-detail' className='container'>
+        <span className={this.isUserAdmin() ? '' : 'hide'}><AddTrack /></span>
+        <h3>hi, {user.username}</h3>
+        <div id='tracklist'>
+          {hasreceiveddata ? rows : 'Loading tracks...'}
+        </div>
       </div>
     )
   }
@@ -69,4 +83,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, startListeningToTracks })(Tracklist)
+export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, startListeningToTracks })(UserDetail))
