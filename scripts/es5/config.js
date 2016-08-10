@@ -154,7 +154,8 @@ function formatSCData(track, data) {
 }
 
 function formatYTData(track, data) {
-  track.artist = data.items[0].snippet.tags[0] || '';
+  console.log(data.items[0].id);
+  track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url;
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url;
@@ -162,7 +163,7 @@ function formatYTData(track, data) {
   track.featured = false;
   track.kind = 'yt';
   track.likes = 0;
-  track.permalink = 'https://www.youtube.com/watch?v=' + data.items[0].id, track.tag_list = data.items[0].snippet.tags || null;
+  track.permalink = 'https://www.youtube.com/watch?v=' + data.items[0].id, track.tag_list = data.items[0].snippet.tags || '';
   track.timestamp = 0 - Date.now();
   track.title = data.items[0].snippet.title;
   track.user = data.items[0].snippet.channelId;
