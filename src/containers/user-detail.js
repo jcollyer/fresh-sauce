@@ -42,7 +42,7 @@ class UserDetail extends Component {
       isThisTrackPlaying={this.isThisTrackPlaying(favorites[track])} />
     })
     return (
-      <div id='user-detail'>
+      <div id='user-detail' className='container'>
         <h3>hi, {user.username}</h3>
         <div id='tracklist'>
           {Object.keys(favorites).length > 0 ? favs : 'Loading tracks...'}
