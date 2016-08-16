@@ -11,7 +11,8 @@ var siteData = {
   mainSite: 'http://goodmusicallday.com/category/music/',
   mainSiteElements: '',
   subSiteElements: 'a.data-song-parent',
-  noSubSite: true
+  noSubSite: true,
+  genre: 'hip-hop'
 };
 
 function goodmusicallday() {

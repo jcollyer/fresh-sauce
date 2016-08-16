@@ -85,13 +85,13 @@ function getTrack(href, allIds, sessionIds, siteData) {
         var filteredIds = allIds.filter(function (item, pos, self) {
           return self.indexOf(item) == pos;
         });
-        pushTrack(url, sessionIds, filteredIds, allIds);
+        pushTrack(url, sessionIds, filteredIds, allIds, siteData);
       }
     });
   });
 };
 
-function pushTrack(url, sessionIds, filteredIds, allIds) {
+function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
   var idLength = void 0;
   var idType = void 0;
   var thisId = null;
@@ -110,7 +110,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds) {
   }
 
   if (thisId != null && sessionIds.indexOf(thisId) === -1 && allIds.indexOf(thisId) === -1) {
-    requestSoundCloudOrYouTube(thisId, idType);
+    requestSoundCloudOrYouTube(thisId, idType, siteData);
     sessionIds.push(thisId);
   } else {
     console.log("ID already added");
@@ -122,12 +122,13 @@ function pushTrack(url, sessionIds, filteredIds, allIds) {
   }, 5500);
 }
 
-function requestSoundCloudOrYouTube(id, idType) {
+function requestSoundCloudOrYouTube(id, idType, siteData) {
   var url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status';
   (0, _request2.default)(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);
-      var track = idType === 'sc' ? formatSCData({ id: id }, data) : formatYTData({ id: id }, data);
+      var genre = siteData.genre;
+      var track = idType === 'sc' ? formatSCData({ id: id }, data, genre) : formatYTData({ id: id }, data, genre);
 
       // Add data to firebase
       // same code found in ./src/components/add-track
@@ -138,13 +139,14 @@ function requestSoundCloudOrYouTube(id, idType) {
   });
 }
 // same code found in ./src/components/add-track
-function formatSCData(track, data) {
+function formatSCData(track, data, genre) {
   track.artist = data.user.username;
   track.artwork_url = data.artwork_url;
   track.artwork_url_midres = data.artwork_url ? data.artwork_url.replace('large', 't200x200') : '';
   track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large', 't500x500') : '';
   track.duration = data.duration;
   track.featured = false;
+  track.genre = genre;
   track.kind = 'sc';
   track.likes = 0;
   track.permalink = data.permalink_url;
@@ -155,13 +157,14 @@ function formatSCData(track, data) {
 }
 
 // same code found in ./src/components/add-track
-function formatYTData(track, data) {
+function formatYTData(track, data, genre) {
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url;
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url;
   track.duration = data.items[0].contentDetails.duration;
   track.featured = false;
+  track.genre = genre;
   track.kind = 'yt';
   track.likes = 0;
   track.permalink = 'https://www.youtube.com/watch?v=' + data.items[0].id, track.tag_list = data.items[0].snippet.tags || '';

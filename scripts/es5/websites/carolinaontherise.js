@@ -11,7 +11,8 @@ var siteData = {
   mainSite: 'http://carolinaontherise.com/',
   mainSiteElements: '.item-list a',
   subSiteElements: '.entry p',
-  noSubSite: false
+  noSubSite: false,
+  genre: 'hip-hop'
 };
 
 function carolinaontherise() {

@@ -4,7 +4,8 @@ const siteData = {
   mainSite: 'http://carolinaontherise.com/',
   mainSiteElements: '.item-list a',
   subSiteElements: '.entry p',
-  noSubSite: false
+  noSubSite: false,
+  genre: 'hip-hop'
 }
 
 export function carolinaontherise() {
