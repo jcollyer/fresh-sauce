@@ -52,7 +52,7 @@ class Tracklist extends Component {
     })
 
     return (
-      <div id='tracklist' className='container'>
+      <div id='tracklist'>
         {hasreceiveddata ? rows : 'Loading tracks...'}
       </div>
     )
