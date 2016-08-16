@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router'
 import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { nextPage, startListeningToTracks } from '../actions/tracklist'
 import Track from '../components/track'
-import AddTrack from './add-track'
+import AddTrack from '../components/add-track'
 
 class UserDetail extends Component {
   isUserAdmin() {
@@ -59,7 +59,7 @@ class UserDetail extends Component {
         isAdmin={this.isUserAdmin()}
         isCurrentTrack={this.isCurrentTrack(track)}
         isThisTrackPlaying={this.isThisTrackPlaying(track)} />
-      }).reverse()
+      })
 
     return (
       <div id='user-detail' className='container'>
@@ -83,4 +83,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, startListeningToTracks })(UserDetail))
+export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, startListeningToTracks })(UserDetail))

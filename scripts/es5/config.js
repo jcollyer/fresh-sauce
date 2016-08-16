@@ -130,13 +130,14 @@ function requestSoundCloudOrYouTube(id, idType) {
       var track = idType === 'sc' ? formatSCData({ id: id }, data) : formatYTData({ id: id }, data);
 
       // Add data to firebase
+      // same code found in ./src/components/add-track
       tracksRef.child(track.id).setWithPriority(track, Date.now());
       idsRef.child(track.id).setWithPriority({ id: track.id, displaying: true }, Date.now());
       console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind);
     }
   });
 }
-
+// same code found in ./src/components/add-track
 function formatSCData(track, data) {
   track.artist = data.user.username;
   track.artwork_url = data.artwork_url;
@@ -153,8 +154,8 @@ function formatSCData(track, data) {
   return track;
 }
 
+// same code found in ./src/components/add-track
 function formatYTData(track, data) {
-  console.log(data.items[0].id);
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url;
