@@ -5,7 +5,7 @@ const siteData = {
   mainSiteElements: '.postMain .post .more-link',
   subSiteElements: '.postMain .post',
   noSubSite: false,
-  genre: 'hip-hop'
+  genre: ['hip-hop']
 }
 
 export function anonymouslygifted() {

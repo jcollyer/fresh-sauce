@@ -12,7 +12,7 @@ var siteData = {
   mainSiteElements: '',
   subSiteElements: 'a.data-song-parent',
   noSubSite: true,
-  genre: 'hip-hop'
+  genre: ['hip-hop']
 };
 
 function goodmusicallday() {

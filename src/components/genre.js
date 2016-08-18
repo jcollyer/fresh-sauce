@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class Genre extends Component {
   setGenre(e) {
-    debugger;
+    let name = e.target.name
   }
   render() {
     return (

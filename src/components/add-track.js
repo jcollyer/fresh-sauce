@@ -8,6 +8,7 @@ const tracksRef = ref.child('tracks')
 class AddTrack extends Component {
   requestSoundCloudOrYouTube(id, idType, featured, genre) {
     let that = this
+    genre = genre.split(',')
     const url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status'
     request
       .get(url)

@@ -5,7 +5,7 @@ const siteData = {
   mainSiteElements: '.item-list a',
   subSiteElements: '.entry p',
   noSubSite: false,
-  genre: 'hip-hop'
+  genre: ['hip-hop']
 }
 
 export function carolinaontherise() {
