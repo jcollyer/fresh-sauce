@@ -161,7 +161,7 @@ function formatYTData(track, data, genre) {
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
   track.artwork_url = data.items[0].snippet.thumbnails.default.url;
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url;
-  track.artwork_url_hires = data.items[0].snippet.thumbnails.standard.url;
+  track.artwork_url_hires = data.items[0].snippet.thumbnails.standard ? data.items[0].snippet.thumbnails.standard.url : data.items[0].snippet.thumbnails.high.url;
   track.duration = data.items[0].contentDetails.duration;
   track.featured = false;
   track.genre = genre;
