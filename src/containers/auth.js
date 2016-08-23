@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router'
 import { logoutUser, toggleLogInPanel, toggleAuthPanel } from '../actions/auth'
 // import C from '../constants'
 
-export default class Auth extends Component {
+class Auth extends Component {
   logoutUser() {
     this.props.router.push('/')
     this.props.logoutUser()

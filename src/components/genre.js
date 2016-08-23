@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 
 export default class Genre extends Component {
   setGenre(e) {

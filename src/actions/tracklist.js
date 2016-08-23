@@ -26,6 +26,7 @@ function sanitizeTrack(track) {
       artwork_url_hires: track.artwork_url_hires,
       duration: track.duration,
       featured: track.featured,
+      genre: track.genre,
       kind: track.kind,
       tag_list: track.tag_list,
       timestamp: track.timestamp,
@@ -43,6 +44,7 @@ function sanitizeTrack(track) {
       artwork_url_hires: track.artwork_url_hires,
       duration: YTDurationToSeconds(track.duration),
       featured: track.featured,
+      genre: track.genre,
       kind: track.kind,
       tag_list: track.tag_list,
       timestamp: track.timestamp,
@@ -60,7 +62,6 @@ export function startListeningToTracks() {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
-
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => {
 
       snapshot.forEach((track) => {
@@ -77,6 +78,7 @@ export function startListeningToTracks() {
 }
 
 export function nextPage() {
+  debugger;
   return function(dispatch, getState){
     let lastTrackTimestamp = getState().tracklist.tracks.splice(-1)[0].timestamp
     let tracksArr = loadTracks(lastTrackTimestamp)
@@ -92,6 +94,30 @@ export function toggleShuffleTracks() {
     } else {
       dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true })
     }
+  }
+}
+
+
+export function loadTracksByGenre() {
+  debugger;
+  return function(dispatch, getState) {
+    const tracksArr = []
+
+    tracksRef.orderByChild('timestamp').on('value', (snapshot) => {
+      snapshot.forEach((track) => {
+        let sanitizedTrack = sanitizeTrack(track.val())
+        if (sanitizedTrack.genre.indexOf(genre) > -1) {
+
+          tracksArr.push(sanitizedTrack)
+        }
+      })
+    })
+    // debugger;
+    // return tracksArr
+    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: false })
+    debugger;
+    // set first track in tracklist
+    dispatch({ type: C.SET_TRACK, track: tracksArr[0], trackPlaying: false })
   }
 }
 
