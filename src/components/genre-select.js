@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 
-class Genre extends Component {
+class GenreSelect extends Component {
   setGenre(e) {
     let genre = e.target.name
     this.props.loadTracksByGenre(genre)
@@ -23,4 +23,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { loadTracksByGenre })(Genre)
+export default connect(mapStateToProps, { loadTracksByGenre })(GenreSelect)

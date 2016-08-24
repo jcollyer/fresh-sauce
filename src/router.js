@@ -4,6 +4,7 @@ import App from './components/app'
 import Home from './components/home'
 import TrackDetail from './containers/track-detail'
 import UserDetail from './containers/user-detail'
+import GenrePage from './components/genre-page'
 import Admin from './containers/admin'
 
 export default (
@@ -13,6 +14,7 @@ export default (
       <Route path='/tracks(/:id)' component={TrackDetail} />
       <Route path='/users(/:id)' component={UserDetail} />
       <Route path='/admin(/:id)' component={Admin} />
+      <Route path='/genre(/:id)' component={GenrePage} />
     </Route>
   </Router>
 )

@@ -37,7 +37,7 @@ export default {
     tracks: [],
     hasreceiveddata: false,
     shuffle: false,
-    genre: ''
+    genre: window.location.pathname.split('/')[1] === 'genre' ? window.location.pathname.split('/').splice(-1)[0] : ''
   },
   players: {}
 }
