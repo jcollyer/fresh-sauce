@@ -16,6 +16,7 @@ export default {
       artwork_url_hires: '',
       duration: '',
       featured: '',
+      genre: '',
       icon: '',
       id: 266853527,
       kind: '',
@@ -35,7 +36,8 @@ export default {
   tracklist: {
     tracks: [],
     hasreceiveddata: false,
-    shuffle: false
+    shuffle: false,
+    genre: ''
   },
   players: {}
 }

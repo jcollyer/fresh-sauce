@@ -3,14 +3,18 @@ import Firebase from 'firebase'
 const tracksRef = new Firebase(C.FIREBASE).child('tracks')
 import { YTDurationToSeconds } from '../utils'
 
-function loadTracks(startAt){
-  console.log(startAt)
-  const tracksArr = []
+function loadTracks(startAt, genre){
+  console.log('startAt: ', startAt, 'genre: ', genre)
+  let tracksArr = []
 
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       let sanitizedTrack = sanitizeTrack(track.val())
-      tracksArr.push(sanitizedTrack)
+      if (genre === '') { // if no genre set, push all tracks
+        tracksArr.push(sanitizedTrack)
+      } else if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
+        tracksArr.push(sanitizedTrack)
+      }
     })
   })
   return tracksArr
@@ -62,15 +66,16 @@ export function startListeningToTracks() {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
-    tracksRef.orderByChild('timestamp').on('value', (snapshot) => {
+    let genre = getState().tracklist.genre
 
+    tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
-      tracksOnloadArr = loadTracks(firstTimestamp)
+      tracksOnloadArr = loadTracks(firstTimestamp, genre)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: false, genre: getState().tracklist.genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
@@ -78,44 +83,32 @@ export function startListeningToTracks() {
 }
 
 export function nextPage() {
-  debugger;
   return function(dispatch, getState){
     let lastTrackTimestamp = getState().tracklist.tracks.splice(-1)[0].timestamp
-    let tracksArr = loadTracks(lastTrackTimestamp)
+    let genre = getState().tracklist.genre
+    let tracksArr = loadTracks(lastTrackTimestamp, genre)
 
-    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: getState().tracklist.shuffle })
+    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: getState().tracklist.shuffle, replace: false, genre: getState().tracklist.genre })
   }
 }
 
 export function toggleShuffleTracks() {
   return function(dispatch, getState) {
     if (getState().tracklist.shuffle){
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: false })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: false, replace: false, genre: getState().tracklist.genre })
     } else {
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true, replace: false, genre: getState().tracklist.genre })
     }
   }
 }
 
 
-export function loadTracksByGenre() {
-  debugger;
+export function loadTracksByGenre(genre) {
   return function(dispatch, getState) {
-    const tracksArr = []
-
-    tracksRef.orderByChild('timestamp').on('value', (snapshot) => {
-      snapshot.forEach((track) => {
-        let sanitizedTrack = sanitizeTrack(track.val())
-        if (sanitizedTrack.genre.indexOf(genre) > -1) {
-
-          tracksArr.push(sanitizedTrack)
-        }
-      })
-    })
-    // debugger;
+    lastTrackTimestamp = getState().tracklist.tracks[0].timestamp
+    let tracksArr = loadTracks(lastTrackTimestamp, genre)
     // return tracksArr
-    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: false })
-    debugger;
+    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
     // set first track in tracklist
     dispatch({ type: C.SET_TRACK, track: tracksArr[0], trackPlaying: false })
   }
