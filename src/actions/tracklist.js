@@ -105,7 +105,7 @@ export function toggleShuffleTracks() {
 
 export function loadTracksByGenre(genre) {
   return function(dispatch, getState) {
-    lastTrackTimestamp = getState().tracklist.tracks[0].timestamp
+    let lastTrackTimestamp = getState().tracklist.tracks[0].timestamp
     let tracksArr = loadTracks(lastTrackTimestamp, genre)
     // return tracksArr
     dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
