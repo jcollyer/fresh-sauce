@@ -10,10 +10,15 @@ class GenreSelect extends Component {
     this.props.router.push('/genre/'+genre)
   }
   render() {
+    const { genres } = this.props
+    const genreButtons = this.props.genres.map((genre)=>{
+      return (
+        <button onClick={(e) => this.setGenre(e)} name={genre.genre}>{genre.name}</button>
+      )
+    })
     return (
       <div id='genre'>
-        <button onClick={(e) => this.setGenre(e)} name='hip-hop'>Hip-Hop</button>
-        <button onClick={(e) => this.setGenre(e)} name='house'>House</button>
+        { genreButtons }
       </div>
     )
   }
@@ -21,7 +26,7 @@ class GenreSelect extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    track: appState.track.currentTrack
+    genres: appState.genres
   }
 }
 

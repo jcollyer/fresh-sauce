@@ -39,5 +39,10 @@ export default {
     shuffle: false,
     genre: window.location.pathname.split('/')[1] === 'genre' ? window.location.pathname.split('/').splice(-1)[0] : ''
   },
-  players: {}
+  players: {},
+  genres: [
+    {genre: 'hip-hop', name: 'Hip-Hop'},
+    {genre: 'house', name: 'House'},
+    {genre: 'funk', name: 'Funk'}
+  ]
 }
