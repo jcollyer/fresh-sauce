@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { startListeningToTracks, nextPage } from '../actions/tracklist'
+import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 
 class GenreSelect extends Component {
   setGenre(e) {
     let genre = e.target.name
-    debugger;
-    this.props.startListeningToTracks(genre)
+    this.props.loadTracksByGenre(genre)
     this.props.router.push('/genre/'+genre)
   }
   render() {
@@ -31,4 +30,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { startListeningToTracks })(GenreSelect))
+export default withRouter(connect(mapStateToProps, { loadTracksByGenre })(GenreSelect))
