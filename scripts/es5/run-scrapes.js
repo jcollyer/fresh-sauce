@@ -6,9 +6,12 @@ var _bound2hiphop = require('./websites/bound2hiphop.js');
 
 var _carolinaontherise = require('./websites/carolinaontherise.js');
 
+var _fivechicago = require('./websites/fivechicago.js');
+
 var _goodmusicallday = require('./websites/goodmusicallday.js');
 
 (0, _anonymouslygifted.anonymouslygifted)();
 (0, _bound2hiphop.bound2hiphop)();
 (0, _carolinaontherise.carolinaontherise)();
+(0, _fivechicago.fivechicago)();
 (0, _goodmusicallday.goodmusicallday)();

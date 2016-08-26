@@ -134,7 +134,7 @@ function requestSoundCloudOrYouTube(id, idType, siteData) {
       // same code found in ./src/components/add-track
       tracksRef.child(track.id).setWithPriority(track, Date.now());
       idsRef.child(track.id).setWithPriority({ id: track.id, displaying: true }, Date.now());
-      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind);
+      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre);
     }
   });
 }
