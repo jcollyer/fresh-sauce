@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GenreSelect from './genre-select'
+import GenreSelect from '../containers/genre-select'
 import Tracklist from '../containers/tracklist'
 
 export default class GenrePage extends Component {
