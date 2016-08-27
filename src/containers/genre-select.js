@@ -6,8 +6,8 @@ import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 class GenreSelect extends Component {
   setGenre(e) {
     let genre = e.target.name
-    this.props.loadTracksByGenre(genre)
     this.props.router.push('/genre/'+genre)
+    this.props.loadTracksByGenre(genre)
   }
   render() {
     const { genres } = this.props

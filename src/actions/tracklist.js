@@ -62,20 +62,20 @@ function sanitizeTrack(track) {
   return sanitizedTrack
 }
 
-export function startListeningToTracks() {
+export function startListeningToTracks(genre) {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
-    let genre = getState().tracklist.genre
+    let thisGenre = genre === '' ? genre : getState().tracklist.genre
 
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
-      tracksOnloadArr = loadTracks(firstTimestamp, genre)
+      tracksOnloadArr = loadTracks(firstTimestamp, thisGenre)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: false, genre: genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
