@@ -8,13 +8,14 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "watch": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run fivechicago & npm run goodmusicallday & npm run sophistefunk & npm run config & npm run run-scrapes",
+    "watch": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run fivechicago & npm run goodmusicallday & npm run sophistefunk & npm run soulmusicsongs & npm run config & npm run run-scrapes",
     "anonymouslygifted": "babel scripts/es2015/websites/anonymouslygifted.js -o scripts/es5/websites/anonymouslygifted.js -w",
     "bound2hiphop": "babel scripts/es2015/websites/bound2hiphop.js -o scripts/es5/websites/bound2hiphop.js -w",
     "carolinaontherise": "babel scripts/es2015/websites/carolinaontherise.js -o scripts/es5/websites/carolinaontherise.js -w",
     "fivechicago": "babel scripts/es2015/websites/fivechicago.js -o scripts/es5/websites/fivechicago.js -w",
     "goodmusicallday": "babel scripts/es2015/websites/goodmusicallday.js -o scripts/es5/websites/goodmusicallday.js -w",
     "sophistefunk": "babel scripts/es2015/websites/sophistefunk.js -o scripts/es5/websites/sophistefunk.js -w",
+    "soulmusicsongs": "babel scripts/es2015/websites/soulmusicsongs.js -o scripts/es5/websites/soulmusicsongs.js -w",
     "config": "babel scripts/es2015/config.js -o scripts/es5/config.js -w",
     "run-scrapes": "babel scripts/es2015/run-scrapes.js -o scripts/es5/run-scrapes.js -w",
     "scrape": "node scripts/es5/run-scrapes.js"

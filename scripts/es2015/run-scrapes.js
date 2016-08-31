@@ -4,6 +4,7 @@ import { carolinaontherise } from './websites/carolinaontherise.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { sophistefunk } from './websites/sophistefunk.js'
+import { soulmusicsongs } from './websites/soulmusicsongs.js'
 
 anonymouslygifted()
 bound2hiphop()
@@ -11,3 +12,4 @@ carolinaontherise()
 fivechicago()
 goodmusicallday()
 sophistefunk()
+soulmusicsongs()
