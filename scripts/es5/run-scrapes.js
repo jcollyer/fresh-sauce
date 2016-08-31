@@ -10,8 +10,11 @@ var _fivechicago = require('./websites/fivechicago.js');
 
 var _goodmusicallday = require('./websites/goodmusicallday.js');
 
+var _sophistefunk = require('./websites/sophistefunk.js');
+
 (0, _anonymouslygifted.anonymouslygifted)();
 (0, _bound2hiphop.bound2hiphop)();
 (0, _carolinaontherise.carolinaontherise)();
 (0, _fivechicago.fivechicago)();
 (0, _goodmusicallday.goodmusicallday)();
+(0, _sophistefunk.sophistefunk)();
