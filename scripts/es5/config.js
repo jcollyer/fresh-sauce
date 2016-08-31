@@ -103,7 +103,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
   } else if (url.split(".")[1] === "youtube") {
     idLength = 11;
     idType = "yt";
-    thisId = url.substr(url.lastIndexOf("/") + 1, idLength);
+    thisId = url.split('/')[4].substr(0, idLength);
   } else {
     console.log(url, " Not soundcloud or youtube ID");
     return;

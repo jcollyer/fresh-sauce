@@ -115,6 +115,10 @@ export function loadTracksByGenre(genre) {
       firstTimestamp = tracksOnloadArr[0].timestamp
       tracksOnloadArr = loadTracks(firstTimestamp, genre)
 
+      if (tracksOnloadArr.length === 0) { // just get current tracks if there are none with genre.
+        tracksOnloadArr = getState().tracklist.tracks
+      }
+
       dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
