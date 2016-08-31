@@ -13,7 +13,7 @@ app.get("*", function(req, res) {
   res.sendFile(__dirname + '/build/index.html')
 })
 
-app.listen(port, function(error) {
+app.listen(process.env.PORT || port, function(error) {
   if (error) {
     console.error(error)
   } else {
