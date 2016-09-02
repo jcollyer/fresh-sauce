@@ -129,7 +129,6 @@ export function toggleShuffleTracks() {
   }
 }
 
-
 export function loadTracksByGenre(genre) {
   return function(dispatch, getState){
     let tracksOnloadArr = []

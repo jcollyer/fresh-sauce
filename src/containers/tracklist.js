@@ -29,7 +29,11 @@ class Tracklist extends Component {
   componentDidMount() {
     // load tracks
     if (!this.props.hasreceiveddata) {
-      this.props.startListeningToTracks('') // load tracks with blank genre
+      if (this.props.genre != '') {
+        this.props.startListeningToTracks(this.props.genre)
+      } else {
+        this.props.startListeningToTracks('') // load tracks with blank genre
+      }
     }
     window.addEventListener('scroll', () => {
       if(window.scrollY + window.innerHeight > this.getDocHeight() - 100 && this.props.hasreceiveddata) {
