@@ -3,13 +3,34 @@ import Firebase from 'firebase'
 const tracksRef = new Firebase(C.FIREBASE).child('tracks')
 import { YTDurationToSeconds } from '../utils'
 
+function recursivelyGetTracks(startAt, genre) {
+  let tracksArr = []
+  let sanitizedTrack = {}
+  tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
+    snapshot.forEach((track) => {
+      sanitizedTrack = sanitizeTrack(track.val())
+      if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
+        tracksArr.push(sanitizedTrack)
+      }
+    })
+  })
+
+  if(tracksArr === 0) {
+    const startAt = sanitizedTrack.timestamp
+    recursivelyGetTracks(startAt, genre)
+  } else {
+    return tracksArr
+  }
+}
+
 function loadTracks(startAt, genre){
   console.log('startAt: ', startAt, 'genre: ', genre)
   let tracksArr = []
+  let sanitizedTrack = []
 
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
     snapshot.forEach((track) => {
-      let sanitizedTrack = sanitizeTrack(track.val())
+      sanitizedTrack = sanitizeTrack(track.val())
       if (genre === '') { // if no genre set, push all tracks
         tracksArr.push(sanitizedTrack)
       } else if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
@@ -17,6 +38,12 @@ function loadTracks(startAt, genre){
       }
     })
   })
+
+  if (genre != '' && tracksArr.length === 0) { // if had a genre but can't find any matching tracks in the 15 track limit
+    const startAt = sanitizedTrack.timestamp
+    tracksArr = recursivelyGetTracks(startAt, genre)
+  }
+
   return tracksArr
 }
 
@@ -114,10 +141,6 @@ export function loadTracksByGenre(genre) {
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
       tracksOnloadArr = loadTracks(firstTimestamp, genre)
-
-      if (tracksOnloadArr.length === 0) { // just get current tracks if there are none with genre.
-        tracksOnloadArr = getState().tracklist.tracks
-      }
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist

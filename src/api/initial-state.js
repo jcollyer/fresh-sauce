@@ -18,7 +18,7 @@ export default {
       featured: '',
       genre: '',
       icon: '',
-      id: 266853527,
+      id: 266853527, //so soundcloud has an ID to load the player onload
       kind: '',
       linkIcon: '',
       linkTitle: '',
