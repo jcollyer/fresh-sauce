@@ -35,10 +35,15 @@ class Tracklist extends Component {
         this.props.startListeningToTracks('') // load tracks with blank genre
       }
     }
+    var now = new Date().getTime()
     window.addEventListener('scroll', () => {
       if(window.scrollY + window.innerHeight > this.getDocHeight() - 100 && this.props.hasreceiveddata) {
-        console.log('hit')
-        this.props.nextPage()
+        if (new Date().getTime() - now > 1000) {
+          console.log('window scroll: this.props.tracklist.length - ', this.props.tracklist.length)
+          this.props.nextPage()
+
+           now = new Date().getTime()
+        }
       }
     })
   }
