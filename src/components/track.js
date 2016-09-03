@@ -12,7 +12,6 @@ export default (props) => {
         <div className='track-item-info-detail'>
           <h3 className='title elipsis'>{props.track.title}</h3>
           {props.track.genre}
-          {props.track.id}
           <p className='artist'><span className='track-by'>by: </span>{props.track.artist}</p>
           <a className='origin-link' href={props.track.permalink} target='_blank'>
             <span>{props.track.linkTitle}</span>

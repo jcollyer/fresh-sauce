@@ -35,6 +35,7 @@ export default {
   },
   tracklist: {
     tracks: [],
+    allTracks: [],
     hasreceiveddata: false,
     shuffle: false,
     genre: window.location.pathname.split('/')[1] === 'genre' ? window.location.pathname.split('/').splice(-1)[0] : ''

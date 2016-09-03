@@ -23,14 +23,16 @@ function recursivelyGetTracks(startAt, genre) {
   }
 }
 
-function loadTracks(startAt, genre){
+function loadTracks(startAt, genre) {
   console.log('startAt: ', startAt, 'genre: ', genre)
   let tracksArr = []
-  let sanitizedTrack = []
+  let sanitizedTrack
+  let allTracks = []
 
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       sanitizedTrack = sanitizeTrack(track.val())
+      allTracks.push(sanitizedTrack)
       if (genre === '') { // if no genre set, push all tracks
         tracksArr.push(sanitizedTrack)
       } else if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
@@ -44,7 +46,7 @@ function loadTracks(startAt, genre){
     tracksArr = recursivelyGetTracks(startAt, genre)
   }
 
-  return tracksArr
+  return { tracksArr: tracksArr,  allTracks: allTracks }
 }
 
 function sanitizeTrack(track) {
@@ -94,15 +96,16 @@ export function startListeningToTracks(genre) {
     let tracksOnloadArr = []
     let firstTimestamp
     let thisGenre = genre === '' ? genre : getState().tracklist.genre
+    let loadTracksObj
 
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
-      tracksOnloadArr = loadTracks(firstTimestamp, thisGenre)
+      loadTracksObj = loadTracks(firstTimestamp, thisGenre)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
@@ -111,20 +114,22 @@ export function startListeningToTracks(genre) {
 
 export function nextPage() {
   return function(dispatch, getState){
-    let lastTrackTimestamp = getState().tracklist.tracks.splice(-1)[0].timestamp
-    let genre = getState().tracklist.genre
-    let tracksArr = loadTracks(lastTrackTimestamp, genre)
+    let lastTrackTimestamp = getState().tracklist.allTracks.splice(-1)[0].timestamp
 
-    dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksArr, hasreceiveddata: true, shuffle: getState().tracklist.shuffle, replace: false, genre: getState().tracklist.genre })
+    console.log('--vs --- ', getState().tracklist.tracks.splice(-1)[0].timestamp, getState().tracklist.allTracks.splice(-1)[0].timestamp)
+    let genre = getState().tracklist.genre || ''
+    let loadTracksObj = loadTracks(lastTrackTimestamp, genre)
+
+    dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: getState().tracklist.shuffle, replace: false, genre: genre })
   }
 }
 
 export function toggleShuffleTracks() {
   return function(dispatch, getState) {
     if (getState().tracklist.shuffle){
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: false, replace: false, genre: getState().tracklist.genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: getState().tracklist.allTracks, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: false, replace: false, genre: getState().tracklist.genre })
     } else {
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true, replace: false, genre: getState().tracklist.genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: getState().tracklist.allTracks, tracks: getState().tracklist.tracks, hasreceiveddata: true, shuffle: true, replace: false, genre: getState().tracklist.genre })
     }
   }
 }
@@ -133,15 +138,16 @@ export function loadTracksByGenre(genre) {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
+    let loadTracksObj = {}
 
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
-      tracksOnloadArr = loadTracks(firstTimestamp, genre)
+      loadTracksObj = loadTracks(firstTimestamp, genre)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, tracks: tracksOnloadArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: getState().tracklist.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
