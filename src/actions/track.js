@@ -100,7 +100,7 @@ export function playNextTrack(direction) {
           nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
           dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
         } else if(direction === 'next') {
-          if(getState().tracklist.tracks.splice(-1)[0].id != currentTrackId){ // if currentTrack is not the LAST track in playlist
+          if(getState().tracklist.tracks[getState().tracklist.tracks-1].id != currentTrackId){ // if currentTrack is not the LAST track in playlist
             nextTrack = getState().tracklist.tracks[index + 1]
             dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
           }

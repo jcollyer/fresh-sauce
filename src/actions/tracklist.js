@@ -97,7 +97,6 @@ export function startListeningToTracks(genre) {
     let firstTimestamp
     let thisGenre = genre === '' ? genre : getState().tracklist.genre
     let loadTracksObj
-
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
@@ -114,9 +113,7 @@ export function startListeningToTracks(genre) {
 
 export function nextPage() {
   return function(dispatch, getState){
-    let lastTrackTimestamp = getState().tracklist.allTracks.splice(-1)[0].timestamp
-
-    console.log('--vs --- ', getState().tracklist.tracks.splice(-1)[0].timestamp, getState().tracklist.allTracks.splice(-1)[0].timestamp)
+    let lastTrackTimestamp = getState().tracklist.allTracks[getState().tracklist.allTracks.length-1].timestamp
     let genre = getState().tracklist.genre || ''
     let loadTracksObj = loadTracks(lastTrackTimestamp, genre)
 
