@@ -144,7 +144,7 @@ export function loadTracksByGenre(genre) {
       firstTimestamp = tracksOnloadArr[0].timestamp
       loadTracksObj = loadTracks(firstTimestamp, genre)
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: getState().tracklist.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
