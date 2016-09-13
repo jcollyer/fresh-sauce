@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { startListeningToTracks } from '../actions/tracklist'
+import { loadAllTracks } from '../actions/tracklist'
 
 class HomeButton extends Component {
   goHome() {
     this.props.router.push('/')
-    this.props.startListeningToTracks()
+    this.props.loadAllTracks()
   }
   render() {
     return <button onClick={()=>this.goHome()}>Home</button>
@@ -19,4 +19,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { startListeningToTracks })(HomeButton))
+export default withRouter(connect(mapStateToProps, { loadAllTracks })(HomeButton))

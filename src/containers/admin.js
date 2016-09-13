@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
-import { nextPage, startListeningToTracks } from '../actions/tracklist'
+import { nextPage, loadAllTracks } from '../actions/tracklist'
 import Track from '../components/track'
 import AddTrack from '../components/add-track'
 
@@ -36,7 +36,7 @@ class UserDetail extends Component {
   componentDidMount() {
     // load tracks
     if (!this.props.hasreceiveddata) {
-      this.props.startListeningToTracks()
+      this.props.loadAllTracks()
     }
     window.addEventListener('scroll', () => {
       if(window.scrollY + window.innerHeight > this.getDocHeight() - 100 && this.props.hasreceiveddata) {
@@ -83,4 +83,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, startListeningToTracks })(UserDetail))
+export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks })(UserDetail))

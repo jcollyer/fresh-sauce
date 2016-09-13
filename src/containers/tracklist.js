@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
-import { startListeningToTracks, loadTracksByGenre } from '../actions/tracklist'
+import { loadAllTracks, loadTracksByGenre } from '../actions/tracklist'
 import { nextPage } from '../actions/tracklist'
 import Track from '../components/track'
 
@@ -32,7 +32,7 @@ class Tracklist extends Component {
       if (this.props.genre) {
         this.props.loadTracksByGenre(this.props.genre)
       } else {
-        this.props.startListeningToTracks()
+        this.props.loadAllTracks()
       }
     }
     var now = new Date().getTime()
@@ -78,4 +78,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, startListeningToTracks, loadTracksByGenre })(Tracklist)
+export default connect(mapStateToProps, { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks, loadTracksByGenre })(Tracklist)

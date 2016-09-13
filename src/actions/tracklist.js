@@ -91,7 +91,7 @@ function sanitizeTrack(track) {
   return sanitizedTrack
 }
 
-export function startListeningToTracks() {
+export function loadAllTracks() {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
