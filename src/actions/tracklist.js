@@ -6,7 +6,7 @@ import { YTDurationToSeconds } from '../utils'
 function recursivelyGetTracks(startAt, genre) {
   let tracksArr = []
   let sanitizedTrack = {}
-  tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
+  tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(30).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       sanitizedTrack = sanitizeTrack(track.val())
       if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
@@ -29,7 +29,7 @@ function loadTracks(startAt, genre) {
   let sanitizedTrack
   let allTracks = []
 
-  tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(15).on('value', (snapshot) => {
+  tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(30).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       sanitizedTrack = sanitizeTrack(track.val())
       allTracks.push(sanitizedTrack)
@@ -41,7 +41,7 @@ function loadTracks(startAt, genre) {
     })
   })
 
-  if (genre != '' && tracksArr.length === 0) { // if had a genre but can't find any matching tracks in the 15 track limit
+  if (genre != '' && tracksArr.length === 0) { // if had a genre but can't find any matching tracks in the 30 track limit
     const startAt = sanitizedTrack.timestamp
     tracksArr = recursivelyGetTracks(startAt, genre)
   }
