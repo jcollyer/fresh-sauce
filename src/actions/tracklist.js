@@ -91,20 +91,19 @@ function sanitizeTrack(track) {
   return sanitizedTrack
 }
 
-export function startListeningToTracks(genre) {
+export function startListeningToTracks() {
   return function(dispatch, getState){
     let tracksOnloadArr = []
     let firstTimestamp
-    let thisGenre = genre === '' ? genre : getState().tracklist.genre
     let loadTracksObj
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
-      loadTracksObj = loadTracks(firstTimestamp, thisGenre)
+      loadTracksObj = loadTracks(firstTimestamp, '')
 
-      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
+      dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: '' })
       // set first track in tracklist
       dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
     })
@@ -146,7 +145,7 @@ export function loadTracksByGenre(genre) {
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
       // set first track in tracklist
-      dispatch({ type: C.SET_TRACK, track: tracksOnloadArr[0], trackPlaying: false })
+      dispatch({ type: C.SET_TRACK, track: loadTracksObj.tracksArr[0], trackPlaying: false })
     })
   }
 }
