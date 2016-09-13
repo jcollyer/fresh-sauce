@@ -135,7 +135,7 @@ export function loadTracksByGenre(genre) {
     let tracksOnloadArr = []
     let firstTimestamp
     let loadTracksObj = {}
-
+    let trackPlaying = getState().track.trackPlaying
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
         tracksOnloadArr.push(track.val())
@@ -144,8 +144,9 @@ export function loadTracksByGenre(genre) {
       loadTracksObj = loadTracks(firstTimestamp, genre)
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
-      // set first track in tracklist
-      dispatch({ type: C.SET_TRACK, track: loadTracksObj.tracksArr[0], trackPlaying: false })
+      if(!trackPlaying) { // set first track in tracklist
+        dispatch({ type: C.SET_TRACK, track: loadTracksObj.tracksArr[0], trackPlaying: false })
+      }
     })
   }
 }
