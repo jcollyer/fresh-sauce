@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
+import { loadAllTracks } from '../actions/tracklist'
 import Track from '../components/track'
 
 class UserDetail extends Component {
@@ -27,6 +28,10 @@ class UserDetail extends Component {
       return false
     }
   }
+  goHome() {
+    this.props.router.push('/')
+    this.props.loadAllTracks()
+  }
   render() {
     const { user, favorites } = this.props
     const favs = Object.keys(favorites).map((track, i) => {
@@ -44,6 +49,7 @@ class UserDetail extends Component {
     return (
       <div id='user-detail' className='container'>
         <h3>hi, {user.username}</h3>
+        <button onClick={()=>this.goHome()}>Home</button>
         <div id='tracklist'>
           {Object.keys(favorites).length > 0 ? favs : 'Loading tracks...'}
         </div>
@@ -61,4 +67,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser })(UserDetail))
+export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFavoriteTrack, isTrackFavoritedByUser, loadAllTracks })(UserDetail))
