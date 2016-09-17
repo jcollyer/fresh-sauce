@@ -3,23 +3,27 @@ import Firebase from 'firebase'
 const tracksRef = new Firebase(C.FIREBASE).child('tracks')
 import { YTDurationToSeconds } from '../utils'
 
+let recursiveTracksArr = []
+
 function recursivelyGetTracks(startAt, genre) {
-  let tracksArr = []
   let sanitizedTrack = {}
+  let allTracks = []
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(30).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       sanitizedTrack = sanitizeTrack(track.val())
-      if (sanitizedTrack.genre.indexOf(genre) > -1) { // if genre IS set, push only tracks with correct genre
-        tracksArr.push(sanitizedTrack)
+
+      allTracks.push(sanitizedTrack)
+      if (sanitizedTrack.genre.indexOf(genre) > -1) { // Push only tracks with correct genre
+        recursiveTracksArr.push(sanitizedTrack)
       }
     })
   })
 
-  if(tracksArr === 0) {
-    const startAt = sanitizedTrack.timestamp
-    recursivelyGetTracks(startAt, genre)
+  if(recursiveTracksArr.length < 5) {
+    const startAt = allTracks[allTracks.length-1].timestamp
+    return recursivelyGetTracks(startAt, genre)
   } else {
-    return tracksArr
+    return recursiveTracksArr
   }
 }
 
@@ -41,7 +45,7 @@ function loadTracks(startAt, genre) {
     })
   })
 
-  if (genre != '' && tracksArr.length === 0) { // if had a genre but can't find any matching tracks in the 30 track limit
+  if (genre && recursiveTracksArr.length < 6) { // If has a genre but can't find enough matching tracks in the 30 track limit
     const startAt = sanitizedTrack.timestamp
     tracksArr = recursivelyGetTracks(startAt, genre)
   }
