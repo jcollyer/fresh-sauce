@@ -23,4 +23,6 @@ var _stampthewax = require('./websites/stampthewax.js');
 (0, _goodmusicallday.goodmusicallday)();
 (0, _sophistefunk.sophistefunk)();
 (0, _soulmusicsongs.soulmusicsongs)();
-(0, _stampthewax.stampthewax)();
+setTimeout(function () {
+  (0, _stampthewax.stampthewax)();
+}, 10000);

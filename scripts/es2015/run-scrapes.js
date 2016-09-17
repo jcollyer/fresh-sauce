@@ -14,4 +14,6 @@ fivechicago()
 goodmusicallday()
 sophistefunk()
 soulmusicsongs()
-stampthewax()
+setTimeout(()=>{
+  stampthewax()
+},10000)
