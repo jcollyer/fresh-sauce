@@ -46,6 +46,7 @@ export default {
     {genre: 'house', name: 'House'},
     {genre: 'funk', name: 'Funk'},
     {genre: 'classic', name: 'Classic'},
-    {genre: 'bands', name: 'Bands'}
+    {genre: 'bands', name: 'Bands'},
+    {genre: 'pop', name: 'Pop'}
   ]
 }
