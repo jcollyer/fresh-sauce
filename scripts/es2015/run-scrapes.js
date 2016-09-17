@@ -1,5 +1,6 @@
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
+import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
@@ -9,6 +10,7 @@ import { stampthewax } from './websites/stampthewax.js'
 
 anonymouslygifted()
 bound2hiphop()
+emergingindiebands()
 carolinaontherise()
 fivechicago()
 goodmusicallday()
