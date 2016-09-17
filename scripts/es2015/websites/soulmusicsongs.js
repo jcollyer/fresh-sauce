@@ -5,7 +5,7 @@ const siteData = {
   mainSiteElements: '',
   subSiteElements: '.entry',
   noSubSite: true,
-  genre: ['funk']
+  genre: ['classic']
 }
 
 export function soulmusicsongs() {

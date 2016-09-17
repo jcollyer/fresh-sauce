@@ -12,7 +12,7 @@ var siteData = {
   mainSiteElements: '',
   subSiteElements: '.entry',
   noSubSite: true,
-  genre: ['funk']
+  genre: ['classic']
 };
 
 function soulmusicsongs() {
