@@ -45,7 +45,7 @@ function loadTracks(startAt, genre) {
     })
   })
 
-  if (genre && recursiveTracksArr.length < 6) { // If has a genre but can't find enough matching tracks in the 30 track limit
+  if (genre && tracksArr.length < 6) { // If has a genre but can't find enough matching tracks in the 30 track limit
     const startAt = sanitizedTrack.timestamp
     tracksArr = recursivelyGetTracks(startAt, genre)
   }
@@ -147,6 +147,7 @@ export function loadTracksByGenre(genre) {
         tracksOnloadArr.push(track.val())
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
+      recursiveTracksArr = [] //Clear out recursiveTracksArr when switching genres
       loadTracksObj = loadTracks(firstTimestamp, genre)
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
