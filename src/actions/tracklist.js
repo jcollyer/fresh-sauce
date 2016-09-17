@@ -147,7 +147,7 @@ export function loadTracksByGenre(genre) {
 
       if (loadTracksObj.tracksArr.length < 2) { // If has a genre but can't find enough matching tracks in the 30 track limit
         const startAt = loadTracksObj.allTracks[loadTracksObj.allTracks.length-1].timestamp
-        tracksArr = recursivelyGetTracks(startAt, genre)
+        loadTracksObj.tracksArr = recursivelyGetTracks(startAt, genre)
       }
 
       dispatch({ type: C.RECEIVE_TRACKS_DATA, allTracks: loadTracksObj.allTracks, tracks: loadTracksObj.tracksArr, hasreceiveddata: true, shuffle: false, replace: true, genre: genre })
