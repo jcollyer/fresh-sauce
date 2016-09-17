@@ -4,6 +4,8 @@ var _allthingsgomusic = require('./websites/allthingsgomusic.js');
 
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
 
+var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
+
 var _bound2hiphop = require('./websites/bound2hiphop.js');
 
 var _emergingindiebands = require('./websites/emergingindiebands.js');
@@ -22,6 +24,7 @@ var _stampthewax = require('./websites/stampthewax.js');
 
 (0, _allthingsgomusic.allthingsgomusic)();
 (0, _anonymouslygifted.anonymouslygifted)();
+(0, _blahblahblahsciencesoul.blahblahblahsciencesoul)();
 (0, _bound2hiphop.bound2hiphop)();
 (0, _emergingindiebands.emergingindiebands)();
 (0, _carolinaontherise.carolinaontherise)();
@@ -31,4 +34,4 @@ var _stampthewax = require('./websites/stampthewax.js');
 (0, _soulmusicsongs.soulmusicsongs)();
 setTimeout(function () {
   (0, _stampthewax.stampthewax)();
-}, 10000);
+}, 3000);

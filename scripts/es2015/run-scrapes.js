@@ -1,5 +1,6 @@
 import { allthingsgomusic } from './websites/allthingsgomusic.js'
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
+import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
@@ -11,6 +12,7 @@ import { stampthewax } from './websites/stampthewax.js'
 
 allthingsgomusic()
 anonymouslygifted()
+blahblahblahsciencesoul()
 bound2hiphop()
 emergingindiebands()
 carolinaontherise()
@@ -20,4 +22,4 @@ sophistefunk()
 soulmusicsongs()
 setTimeout(()=>{
   stampthewax()
-},10000)
+},3000)

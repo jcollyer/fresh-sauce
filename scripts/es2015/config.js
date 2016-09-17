@@ -113,13 +113,17 @@ function requestSoundCloudOrYouTube(id, idType, siteData) {
     if (!error && response.statusCode == 200) {
       const data = JSON.parse(body)
       const genre = siteData.genre
-      const track = idType === 'sc' ? formatSCData({id:id}, data, genre) : formatYTData({id:id}, data, genre)
 
-      // Add data to firebase
-      // same code found in ./src/components/add-track
-      tracksRef.child(track.id).setWithPriority(track, Date.now())
-      idsRef.child(track.id).setWithPriority({id: track.id, displaying: true}, Date.now())
-      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre)
+      if(data.items && data.items.length != 0) { // Make sure data is not empty
+        const track = idType === 'sc' ? formatSCData({id:id}, data, genre) : formatYTData({id:id}, data, genre)
+
+        // Add data to firebase
+        // same code found in ./src/components/add-track
+        tracksRef.child(track.id).setWithPriority(track, Date.now())
+        idsRef.child(track.id).setWithPriority({id: track.id, displaying: true}, Date.now())
+        console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre)
+
+      }
     }
   })
 }
