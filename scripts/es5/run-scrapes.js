@@ -14,6 +14,8 @@ var _sophistefunk = require('./websites/sophistefunk.js');
 
 var _soulmusicsongs = require('./websites/soulmusicsongs.js');
 
+var _stampthewax = require('./websites/stampthewax.js');
+
 (0, _anonymouslygifted.anonymouslygifted)();
 (0, _bound2hiphop.bound2hiphop)();
 (0, _carolinaontherise.carolinaontherise)();
@@ -21,3 +23,4 @@ var _soulmusicsongs = require('./websites/soulmusicsongs.js');
 (0, _goodmusicallday.goodmusicallday)();
 (0, _sophistefunk.sophistefunk)();
 (0, _soulmusicsongs.soulmusicsongs)();
+(0, _stampthewax.stampthewax)();

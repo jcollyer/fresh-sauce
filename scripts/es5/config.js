@@ -61,7 +61,6 @@ function requestMainSite(allIds, sessionIds, siteData) {
       method: 'GET',
       url: siteData.mainSite
     }, function (err, response, body) {
-
       if (err) return console.error(err);
 
       $ = _cheerio2.default.load(body);
@@ -78,16 +77,22 @@ function getTrack(href, allIds, sessionIds, siteData) {
   (0, _request2.default)({ url: href }, function (err, response, body) {
     if (err) return console.error(err);
     $ = _cheerio2.default.load(body);
-    $(siteData.subSiteElements).each(function () {
-      var url = $('iframe', this).attr('src');
-      if (url) {
-        // filter out duplicate IDs
-        var filteredIds = allIds.filter(function (item, pos, self) {
-          return self.indexOf(item) == pos;
-        });
-        pushTrack(url, sessionIds, filteredIds, allIds, siteData);
-      }
-    });
+    if ($(siteData.subSiteElements).length < 1) {
+      console.log('Can\'t find any "siteData.subSiteElements" elements');
+      exit();
+    } else {
+      $(siteData.subSiteElements).each(function () {
+
+        var url = $('iframe', this).attr('src');
+        if (url) {
+          // filter out duplicate IDs
+          var filteredIds = allIds.filter(function (item, pos, self) {
+            return self.indexOf(item) == pos;
+          });
+          pushTrack(url, sessionIds, filteredIds, allIds, siteData);
+        }
+      });
+    }
   });
 };
 
@@ -116,10 +121,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
     console.log("ID already added");
   }
 
-  setTimeout(function () {
-    console.log("bye...");
-    process.exit();
-  }, 5500);
+  exit();
 }
 
 function requestSoundCloudOrYouTube(id, idType, siteData) {
@@ -172,4 +174,11 @@ function formatYTData(track, data, genre) {
   track.title = data.items[0].snippet.title;
   track.user = data.items[0].snippet.channelId;
   return track;
+}
+
+function exit() {
+  setTimeout(function () {
+    console.log("bye...");
+    process.exit();
+  }, 5500);
 }
