@@ -8,11 +8,12 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "watch": "npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run emergingindiebands & npm run fivechicago & npm run goodmusicallday & npm run sophistefunk & npm run soulmusicsongs & npm run stampthewax & npm run config & npm run run-scrapes",
+    "watch": "npm run allthingsgomusic & npm run anonymouslygifted & npm run bound2hiphop & npm run carolinaontherise & npm run emergingindiebands & npm run fivechicago & npm run goodmusicallday & npm run sophistefunk & npm run soulmusicsongs & npm run stampthewax & npm run config & npm run run-scrapes",
+    "allthingsgomusic": "babel scripts/es2015/websites/allthingsgomusic.js -o scripts/es5/websites/allthingsgomusic.js -w",
     "anonymouslygifted": "babel scripts/es2015/websites/anonymouslygifted.js -o scripts/es5/websites/anonymouslygifted.js -w",
     "bound2hiphop": "babel scripts/es2015/websites/bound2hiphop.js -o scripts/es5/websites/bound2hiphop.js -w",
-    "emergingindiebands": "babel scripts/es2015/websites/emergingindiebands.js -o scripts/es5/websites/emergingindiebands.js -w",
     "carolinaontherise": "babel scripts/es2015/websites/carolinaontherise.js -o scripts/es5/websites/carolinaontherise.js -w",
+    "emergingindiebands": "babel scripts/es2015/websites/emergingindiebands.js -o scripts/es5/websites/emergingindiebands.js -w",
     "fivechicago": "babel scripts/es2015/websites/fivechicago.js -o scripts/es5/websites/fivechicago.js -w",
     "goodmusicallday": "babel scripts/es2015/websites/goodmusicallday.js -o scripts/es5/websites/goodmusicallday.js -w",
     "sophistefunk": "babel scripts/es2015/websites/sophistefunk.js -o scripts/es5/websites/sophistefunk.js -w",

@@ -1,5 +1,7 @@
 'use strict';
 
+var _allthingsgomusic = require('./websites/allthingsgomusic.js');
+
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
 
 var _bound2hiphop = require('./websites/bound2hiphop.js');
@@ -18,6 +20,7 @@ var _soulmusicsongs = require('./websites/soulmusicsongs.js');
 
 var _stampthewax = require('./websites/stampthewax.js');
 
+(0, _allthingsgomusic.allthingsgomusic)();
 (0, _anonymouslygifted.anonymouslygifted)();
 (0, _bound2hiphop.bound2hiphop)();
 (0, _emergingindiebands.emergingindiebands)();
