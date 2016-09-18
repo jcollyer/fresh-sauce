@@ -1,5 +1,7 @@
 'use strict';
 
+var _bluebird = require('bluebird');
+
 var _allthingsgomusic = require('./websites/allthingsgomusic.js');
 
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
@@ -22,16 +24,14 @@ var _soulmusicsongs = require('./websites/soulmusicsongs.js');
 
 var _stampthewax = require('./websites/stampthewax.js');
 
-(0, _allthingsgomusic.allthingsgomusic)();
-(0, _anonymouslygifted.anonymouslygifted)();
-(0, _blahblahblahsciencesoul.blahblahblahsciencesoul)();
-(0, _bound2hiphop.bound2hiphop)();
-(0, _emergingindiebands.emergingindiebands)();
-(0, _carolinaontherise.carolinaontherise)();
-(0, _fivechicago.fivechicago)();
-(0, _goodmusicallday.goodmusicallday)();
-(0, _sophistefunk.sophistefunk)();
-(0, _soulmusicsongs.soulmusicsongs)();
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax];
+
 setTimeout(function () {
-  (0, _stampthewax.stampthewax)();
-}, 3000);
+  console.log("bye...");
+  process.exit();
+}, 30000);
+
+funcs.forEach(function (func, i) {
+  console.log(func, i);
+  func();
+});

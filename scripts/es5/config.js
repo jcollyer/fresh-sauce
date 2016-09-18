@@ -67,7 +67,10 @@ function requestMainSite(allIds, sessionIds, siteData) {
 
       // get list of urls
       $(siteData.mainSiteElements).each(function () {
-        getTrack($(this).attr('href'), allIds, sessionIds, siteData);
+        var uri = $(this).attr('href');
+        if (uri) {
+          getTrack(uri, allIds, sessionIds, siteData);
+        }
       });
     });
   }
@@ -79,7 +82,6 @@ function getTrack(href, allIds, sessionIds, siteData) {
     $ = _cheerio2.default.load(body);
     if ($(siteData.subSiteElements).length < 1) {
       console.log('Can\'t find any "siteData.subSiteElements" elements');
-      exit();
     } else {
       $(siteData.subSiteElements).each(function () {
 
@@ -121,7 +123,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
     console.log("ID already added");
   }
 
-  exit();
+  // exit()
 }
 
 function requestSoundCloudOrYouTube(id, idType, siteData) {

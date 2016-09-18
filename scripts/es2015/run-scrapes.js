@@ -1,3 +1,4 @@
+import { Promise } from 'bluebird'
 import { allthingsgomusic } from './websites/allthingsgomusic.js'
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
 import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
@@ -9,17 +10,14 @@ import { goodmusicallday } from './websites/goodmusicallday.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
+const funcs = [allthingsgomusic, anonymouslygifted, blahblahblahsciencesoul, bound2hiphop, emergingindiebands, carolinaontherise, fivechicago, goodmusicallday, sophistefunk, soulmusicsongs, stampthewax]
 
-allthingsgomusic()
-anonymouslygifted()
-blahblahblahsciencesoul()
-bound2hiphop()
-emergingindiebands()
-carolinaontherise()
-fivechicago()
-goodmusicallday()
-sophistefunk()
-soulmusicsongs()
-setTimeout(()=>{
-  stampthewax()
-},3000)
+setTimeout(() => {
+  console.log("bye...")
+  process.exit()
+},30000)
+
+funcs.forEach((func, i)=>{
+  console.log(func, i)
+  func()
+})
