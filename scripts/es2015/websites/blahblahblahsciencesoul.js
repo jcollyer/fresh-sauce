@@ -3,7 +3,7 @@ import { requestWebsite } from '../config'
 const siteData = {
   mainSite: 'http://blahblahblahscience.com/category/soul',
   mainSiteElements: 'a.gridClickThru',
-  subSiteElements: '.post .entry p',
+  subSiteElements: '.post .entry',
   noSubSite: false,
   genre: ['soul']
 }

@@ -67,14 +67,16 @@ function getTrack(href, allIds, sessionIds, siteData) {
       console.log('Can\'t find any "siteData.subSiteElements" elements')
     } else {
       $(siteData.subSiteElements).each(function() {
+        const scUrl = $( 'iframe[src^="https://w.soundcloud.com/player/?"]', this ).attr('src');
+        const ytUrl = $( 'iframe[src^="https://www.youtube.com/embed/"]', this ).attr('src');
+        const filteredIds = allIds.filter((item, pos, self) => {
+          return self.indexOf(item) == pos
+        })
 
-        const url = $('iframe', this).attr('src');
-        if (url) {
-          // filter out duplicate IDs
-          const filteredIds = allIds.filter((item, pos, self) => {
-            return self.indexOf(item) == pos
-          })
-          pushTrack(url, sessionIds, filteredIds, allIds, siteData);
+        if (scUrl) {
+          pushTrack(scUrl, sessionIds, filteredIds, allIds, siteData);
+        } else if (ytUrl) {
+          pushTrack(ytUrl, sessionIds, filteredIds, allIds, siteData);
         }
       });
     }
@@ -112,11 +114,14 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
 function requestSoundCloudOrYouTube(id, idType, siteData) {
   const url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status'
   request(url, function (error, response, body) {
+    if (error) {
+      console.log('Error running requestSoundCloudOrYouTube()', error)
+    }
     if (!error && response.statusCode == 200) {
       const data = JSON.parse(body)
       const genre = siteData.genre
 
-      if(data.items && data.items.length != 0) { // Make sure data is not empty
+      if(data) { // Make sure data is not empty
         const track = idType === 'sc' ? formatSCData({id:id}, data, genre) : formatYTData({id:id}, data, genre)
 
         // Add data to firebase

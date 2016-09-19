@@ -10,7 +10,19 @@ import { goodmusicallday } from './websites/goodmusicallday.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
-const funcs = [allthingsgomusic, anonymouslygifted, blahblahblahsciencesoul, bound2hiphop, emergingindiebands, carolinaontherise, fivechicago, goodmusicallday, sophistefunk, soulmusicsongs, stampthewax]
+const funcs = [
+  allthingsgomusic,
+  anonymouslygifted,
+  blahblahblahsciencesoul,
+  bound2hiphop,
+  emergingindiebands,
+  carolinaontherise,
+  fivechicago,
+  goodmusicallday,
+  sophistefunk,
+  soulmusicsongs,
+  stampthewax
+]
 
 setTimeout(() => {
   console.log("bye...")
