@@ -11,6 +11,8 @@ import { goodmusicallday } from './websites/goodmusicallday.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
+import { wearegoingsolo } from './websites/wearegoingsolo.js'
+
 const funcs = [
   allthingsgomusic,
   anonymouslygifted,
@@ -23,7 +25,8 @@ const funcs = [
   goodmusicallday,
   sophistefunk,
   soulmusicsongs,
-  stampthewax
+  stampthewax,
+  wearegoingsolo
 ]
 
 setTimeout(() => {
