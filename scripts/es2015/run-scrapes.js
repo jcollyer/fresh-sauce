@@ -3,6 +3,7 @@ import { allthingsgomusic } from './websites/allthingsgomusic.js'
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
 import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
+import { dimestoresaints } from './websites/dimestoresaints.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
 import { fivechicago } from './websites/fivechicago.js'
@@ -15,6 +16,7 @@ const funcs = [
   anonymouslygifted,
   blahblahblahsciencesoul,
   bound2hiphop,
+  dimestoresaints,
   emergingindiebands,
   carolinaontherise,
   fivechicago,

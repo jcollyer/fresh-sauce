@@ -10,6 +10,8 @@ var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
 
 var _bound2hiphop = require('./websites/bound2hiphop.js');
 
+var _dimestoresaints = require('./websites/dimestoresaints.js');
+
 var _emergingindiebands = require('./websites/emergingindiebands.js');
 
 var _carolinaontherise = require('./websites/carolinaontherise.js');
@@ -24,7 +26,7 @@ var _soulmusicsongs = require('./websites/soulmusicsongs.js');
 
 var _stampthewax = require('./websites/stampthewax.js');
 
-var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax];
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _dimestoresaints.dimestoresaints, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax];
 
 setTimeout(function () {
   console.log("bye...");

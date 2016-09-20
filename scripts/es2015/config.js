@@ -63,6 +63,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
   request({url: href}, function(err, response, body) {
     if (err) return console.error(err);
     $ = cheerio.load(body);
+
     if($(siteData.subSiteElements).length < 1) {
       console.log('Can\'t find any "siteData.subSiteElements" elements')
     } else {
