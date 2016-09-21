@@ -48,6 +48,7 @@ export default {
     {genre: 'classic', name: 'Classic'},
     {genre: 'bands', name: 'Bands'},
     {genre: 'pop', name: 'Pop'},
-    {genre: 'soul', name: 'Soul'}
+    {genre: 'soul', name: 'Soul'},
+    {genre: 'chill', name: 'Chill'}
   ]
 }

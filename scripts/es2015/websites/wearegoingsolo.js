@@ -5,7 +5,7 @@ const siteData = {
   mainSiteElements: '.content-ombre .content-block  a',
   subSiteElements: '.content-block.single-post .block-content',
   noSubSite: false,
-  genre: ['chill', 'band']
+  genre: ['chill', 'bands']
 }
 
 export function wearegoingsolo() {
