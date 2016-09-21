@@ -82,7 +82,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
     $ = _cheerio2.default.load(body);
 
     if ($(siteData.subSiteElements).length < 1) {
-      console.log('Can\'t find any "siteData.subSiteElements" elements');
+      console.warn('Can\'t find any "siteData.subSiteElements" elements');
     } else {
       $(siteData.subSiteElements).each(function () {
         var scUrl = $('iframe[src^="https://w.soundcloud.com/player/?"]', this).attr('src');
@@ -95,6 +95,8 @@ function getTrack(href, allIds, sessionIds, siteData) {
           pushTrack(scUrl, sessionIds, filteredIds, allIds, siteData);
         } else if (ytUrl) {
           pushTrack(ytUrl, sessionIds, filteredIds, allIds, siteData);
+        } else {
+          console.warn('scUrl is undefined!');
         }
       });
     }
@@ -123,7 +125,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
     requestSoundCloudOrYouTube(thisId, idType, siteData);
     sessionIds.push(thisId);
   } else {
-    console.log("ID already added");
+    console.warn("ID already added");
   }
 
   // exit()
