@@ -9,26 +9,28 @@ import { carolinaontherise } from './websites/carolinaontherise.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { neongoldrecords } from './websites/neongoldrecords.js'
+import { nialler9hiphop } from './websites/nialler9hiphop.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
 import { wearegoingsolo } from './websites/wearegoingsolo.js'
 
 const funcs = [
-  // allthingsgomusic,
-  // anonymouslygifted,
-  // blahblahblahsciencesoul,
-  // bound2hiphop,
-  // dimestoresaints,
-  // emergingindiebands,
-  // carolinaontherise,
-  // fivechicago,
-  // goodmusicallday,
-  neongoldrecords
-  // sophistefunk,
-  // soulmusicsongs,
-  // stampthewax,
-  // wearegoingsolo
+  allthingsgomusic,
+  anonymouslygifted,
+  blahblahblahsciencesoul,
+  bound2hiphop,
+  dimestoresaints,
+  emergingindiebands,
+  carolinaontherise,
+  fivechicago,
+  goodmusicallday,
+  neongoldrecords,
+  nialler9hiphop,
+  sophistefunk,
+  soulmusicsongs,
+  stampthewax,
+  wearegoingsolo
 ]
 
 setTimeout(() => {

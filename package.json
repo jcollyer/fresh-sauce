@@ -8,7 +8,7 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "watch": "npm run allthingsgomusic & npm run anonymouslygifted & npm run bound2hiphop & npm run blahblahblahsciencesoul & npm run carolinaontherise & npm run dimestoresaints & npm run emergingindiebands & npm run fivechicago & npm run goodmusicallday & npm run neongoldrecords & npm run sophistefunk & npm run soulmusicsongs & npm run stampthewax & npm run wearegoingsolo & npm run config & npm run run-scrapes",
+    "watch": "npm run allthingsgomusic & npm run anonymouslygifted & npm run bound2hiphop & npm run blahblahblahsciencesoul & npm run carolinaontherise & npm run dimestoresaints & npm run emergingindiebands & npm run fivechicago & npm run goodmusicallday & npm run neongoldrecords & npm run nialler9hiphop & npm run sophistefunk & npm run soulmusicsongs & npm run stampthewax & npm run wearegoingsolo & npm run config & npm run run-scrapes",
     "allthingsgomusic": "babel scripts/es2015/websites/allthingsgomusic.js -o scripts/es5/websites/allthingsgomusic.js -w",
     "anonymouslygifted": "babel scripts/es2015/websites/anonymouslygifted.js -o scripts/es5/websites/anonymouslygifted.js -w",
     "blahblahblahsciencesoul": "babel scripts/es2015/websites/blahblahblahsciencesoul.js -o scripts/es5/websites/blahblahblahsciencesoul.js -w",
@@ -19,6 +19,7 @@
     "fivechicago": "babel scripts/es2015/websites/fivechicago.js -o scripts/es5/websites/fivechicago.js -w",
     "goodmusicallday": "babel scripts/es2015/websites/goodmusicallday.js -o scripts/es5/websites/goodmusicallday.js -w",
     "neongoldrecords": "babel scripts/es2015/websites/neongoldrecords.js -o scripts/es5/websites/neongoldrecords.js -w",
+    "nialler9hiphop": "babel scripts/es2015/websites/nialler9hiphop.js -o scripts/es5/websites/nialler9hiphop.js -w",
     "sophistefunk": "babel scripts/es2015/websites/sophistefunk.js -o scripts/es5/websites/sophistefunk.js -w",
     "soulmusicsongs": "babel scripts/es2015/websites/soulmusicsongs.js -o scripts/es5/websites/soulmusicsongs.js -w",
     "stampthewax": "babel scripts/es2015/websites/stampthewax.js -o scripts/es5/websites/stampthewax.js -w",
