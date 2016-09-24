@@ -12,6 +12,7 @@ import { neongoldrecords } from './websites/neongoldrecords.js'
 import { nialler9electro } from './websites/nialler9electro.js'
 import { nialler9hiphop } from './websites/nialler9hiphop.js'
 import { nialler9soul } from './websites/nialler9soul.js'
+import { repeatbutton } from './websites/repeatbutton.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
@@ -31,6 +32,7 @@ const funcs = [
   nialler9electro,
   nialler9hiphop,
   nialler9soul,
+  repeatbutton,
   sophistefunk,
   soulmusicsongs,
   stampthewax,
