@@ -9,6 +9,7 @@ import { carolinaontherise } from './websites/carolinaontherise.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { neongoldrecords } from './websites/neongoldrecords.js'
+import { nialler9electro } from './websites/nialler9electro.js'
 import { nialler9hiphop } from './websites/nialler9hiphop.js'
 import { nialler9soul } from './websites/nialler9soul.js'
 import { sophistefunk } from './websites/sophistefunk.js'
@@ -27,6 +28,7 @@ const funcs = [
   fivechicago,
   goodmusicallday,
   neongoldrecords,
+  nialler9electro,
   nialler9hiphop,
   nialler9soul,
   sophistefunk,

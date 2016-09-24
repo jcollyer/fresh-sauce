@@ -22,6 +22,8 @@ var _goodmusicallday = require('./websites/goodmusicallday.js');
 
 var _neongoldrecords = require('./websites/neongoldrecords.js');
 
+var _nialler9electro = require('./websites/nialler9electro.js');
+
 var _nialler9hiphop = require('./websites/nialler9hiphop.js');
 
 var _nialler9soul = require('./websites/nialler9soul.js');
@@ -34,7 +36,7 @@ var _stampthewax = require('./websites/stampthewax.js');
 
 var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 
-var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _dimestoresaints.dimestoresaints, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _neongoldrecords.neongoldrecords, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax, _wearegoingsolo.wearegoingsolo];
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _dimestoresaints.dimestoresaints, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _neongoldrecords.neongoldrecords, _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax, _wearegoingsolo.wearegoingsolo];
 
 setTimeout(function () {
   console.log("bye...");
