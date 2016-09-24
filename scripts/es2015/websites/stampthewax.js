@@ -5,7 +5,7 @@ const siteData = {
   mainSiteElements: '.entry-image  a',
   subSiteElements: '.single-box.clearfix.entry-content p',
   noSubSite: false,
-  genre: ['house', 'funk']
+  genre: ['funk']
 }
 
 export function stampthewax() {

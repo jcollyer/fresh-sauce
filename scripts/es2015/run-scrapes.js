@@ -10,6 +10,7 @@ import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { neongoldrecords } from './websites/neongoldrecords.js'
 import { nialler9hiphop } from './websites/nialler9hiphop.js'
+import { nialler9soul } from './websites/nialler9soul.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
@@ -27,6 +28,7 @@ const funcs = [
   goodmusicallday,
   neongoldrecords,
   nialler9hiphop,
+  nialler9soul,
   sophistefunk,
   soulmusicsongs,
   stampthewax,
