@@ -16,6 +16,7 @@ import { repeatbutton } from './websites/repeatbutton.js'
 import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
+import { thebluewalrus } from './websites/thebluewalrus.js'
 import { wearegoingsolo } from './websites/wearegoingsolo.js'
 
 const funcs = [
@@ -36,6 +37,7 @@ const funcs = [
   sophistefunk,
   soulmusicsongs,
   stampthewax,
+  thebluewalrus,
   wearegoingsolo
 ]
 
