@@ -42,7 +42,14 @@ var _thenewlofi = require('./websites/thenewlofi.js');
 
 var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 
-var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _dimestoresaints.dimestoresaints, _emergingindiebands.emergingindiebands, _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, _neongoldrecords.neongoldrecords, _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sophistefunk.sophistefunk, _soulmusicsongs.soulmusicsongs, _stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _thenewlofi.thenewlofi, _wearegoingsolo.wearegoingsolo];
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, _dimestoresaints.dimestoresaints, //1
+_emergingindiebands.emergingindiebands, //1
+_carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1
+_neongoldrecords.neongoldrecords, //1
+_nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sophistefunk.sophistefunk, //0
+_soulmusicsongs.soulmusicsongs, //1
+_stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _thenewlofi.thenewlofi, //1
+_wearegoingsolo.wearegoingsolo];
 
 setTimeout(function () {
   console.log("bye...");
