@@ -17,6 +17,7 @@ import { sophistefunk } from './websites/sophistefunk.js'
 import { soulmusicsongs } from './websites/soulmusicsongs.js'
 import { stampthewax } from './websites/stampthewax.js'
 import { thebluewalrus } from './websites/thebluewalrus.js'
+import { theburningearremix } from './websites/theburningearremix.js'
 import { thenewlofi } from './websites/thenewlofi.js'
 import { wearegoingsolo } from './websites/wearegoingsolo.js'
 
@@ -39,6 +40,7 @@ const funcs = [
   soulmusicsongs, //1
   stampthewax,
   thebluewalrus,
+  theburningearremix,
   thenewlofi, //1
   wearegoingsolo
 ]

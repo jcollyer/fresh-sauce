@@ -38,6 +38,8 @@ var _stampthewax = require('./websites/stampthewax.js');
 
 var _thebluewalrus = require('./websites/thebluewalrus.js');
 
+var _theburningearremix = require('./websites/theburningearremix.js');
+
 var _thenewlofi = require('./websites/thenewlofi.js');
 
 var _wearegoingsolo = require('./websites/wearegoingsolo.js');
@@ -48,7 +50,7 @@ _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday
 _neongoldrecords.neongoldrecords, //1
 _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sophistefunk.sophistefunk, //0
 _soulmusicsongs.soulmusicsongs, //1
-_stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _thenewlofi.thenewlofi, //1
+_stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _theburningearremix.theburningearremix, _thenewlofi.thenewlofi, //1
 _wearegoingsolo.wearegoingsolo];
 
 setTimeout(function () {
