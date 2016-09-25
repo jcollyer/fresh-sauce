@@ -10,7 +10,7 @@ class GenrePage extends Component {
       <div id='genre' className='container'>
         <GenreSelect />
         <HomeButton />
-        <h1>genre!</h1>
+        <h5>genre: {this.props.genre}</h5>
         <Tracklist genre={this.props.genre} />
       </div>
     )
