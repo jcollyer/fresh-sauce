@@ -25,23 +25,23 @@ const funcs = [
   allthingsgomusic,
   anonymouslygifted,
   blahblahblahsciencesoul,
-  bound2hiphop,
-  dimestoresaints, //1
-  emergingindiebands, //1
+  bound2hiphop, //0(w 'this')
+  dimestoresaints, //1(w/out 'this') 3(w/ 'this')
+  emergingindiebands, //1(w/out 'this')
   carolinaontherise,
   fivechicago,
-  goodmusicallday, //1
-  neongoldrecords, //1
+  goodmusicallday, //1(w/out 'this')
+  neongoldrecords, //1(w/out 'this')
   nialler9electro,
   nialler9hiphop,
   nialler9soul,
   repeatbutton,
-  sophistefunk, //0
-  soulmusicsongs, //1
+  sophistefunk, //0(w/out 'this') 0(w/ 'this')
+  soulmusicsongs, //1(w/out 'this')
   stampthewax,
   thebluewalrus,
   theburningearremix,
-  thenewlofi, //1
+  thenewlofi, //1(w/out 'this')
   wearegoingsolo
 ]
 

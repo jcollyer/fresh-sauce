@@ -85,8 +85,8 @@ function getTrack(href, allIds, sessionIds, siteData) {
       console.warn('Can\'t find any "siteData.subSiteElements" elements');
     } else {
       $(siteData.subSiteElements).each(function () {
-        var scUrl = $('iframe[src^="https://w.soundcloud.com/player"]').attr('src') || $('iframe[src^="http://w.soundcloud.com/player"]').attr('src');
-        var ytUrl = $('iframe[src^="https://www.youtube.com/embed/"]').attr('src') || $('iframe[src^="http://www.youtube.com/embed/"]').attr('src');
+        var scUrl = $('iframe[src^="https://w.soundcloud.com/player"]', this).attr('src') || $('iframe[src^="http://w.soundcloud.com/player"]', this).attr('src');
+        var ytUrl = $('iframe[src^="https://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube.com/embed/"]', this).attr('src');
         var filteredIds = allIds.filter(function (item, pos, self) {
           return self.indexOf(item) == pos;
         });
