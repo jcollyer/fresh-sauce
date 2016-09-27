@@ -1,6 +1,7 @@
 import { Promise } from 'bluebird'
 import { allthingsgomusic } from './websites/allthingsgomusic.js'
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
+import { badperm } from './websites/badperm.js'
 import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
 import { dimestoresaints } from './websites/dimestoresaints.js'
@@ -25,6 +26,7 @@ import { wearegoingsolo } from './websites/wearegoingsolo.js'
 const funcs = [
   // allthingsgomusic,
   // anonymouslygifted,
+  badperm
   // blahblahblahsciencesoul,
   // bound2hiphop, //0(w 'this')
   // dimestoresaints, //1(w/out 'this') 3(w/ 'this')
@@ -37,7 +39,7 @@ const funcs = [
   // nialler9hiphop,
   // nialler9soul,
   // repeatbutton,
-  sinimabeats
+  // sinimabeats,
   // sophistefunk, //0(w/out 'this') 0(w/ 'this')
   // soulmusicsongs, //1(w/out 'this')
   // stampthewax,

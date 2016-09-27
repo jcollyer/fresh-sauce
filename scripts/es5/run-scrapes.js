@@ -6,6 +6,8 @@ var _allthingsgomusic = require('./websites/allthingsgomusic.js');
 
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
 
+var _badperm = require('./websites/badperm.js');
+
 var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
 
 var _bound2hiphop = require('./websites/bound2hiphop.js');
@@ -49,6 +51,7 @@ var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 var funcs = [
 // allthingsgomusic,
 // anonymouslygifted,
+_badperm.badperm
 // blahblahblahsciencesoul,
 // bound2hiphop, //0(w 'this')
 // dimestoresaints, //1(w/out 'this') 3(w/ 'this')
@@ -61,7 +64,7 @@ var funcs = [
 // nialler9hiphop,
 // nialler9soul,
 // repeatbutton,
-_sinimabeats.sinimabeats
+// sinimabeats,
 // sophistefunk, //0(w/out 'this') 0(w/ 'this')
 // soulmusicsongs, //1(w/out 'this')
 // stampthewax,
