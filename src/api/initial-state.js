@@ -50,6 +50,7 @@ export default {
     {genre: 'pop', name: 'Pop'},
     {genre: 'soul', name: 'Soul'},
     {genre: 'chill', name: 'Chill'},
-    {genre: 'remix', name: 'Remix'}
+    {genre: 'remix', name: 'Remix'},
+    {genre: 'beats', name: 'Beats'}
   ]
 }
