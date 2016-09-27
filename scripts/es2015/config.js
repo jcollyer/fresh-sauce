@@ -32,7 +32,6 @@ function getAllIds(callback) {
 
     callback(ids)
   }
-
 }
 
 function requestMainSite(allIds, sessionIds, siteData) {
@@ -69,7 +68,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
     } else {
       $(siteData.subSiteElements).each(function() {
         const scUrl = $('iframe[src^="https://w.soundcloud.com/player"]', this).attr('src') || $('iframe[src^="http://w.soundcloud.com/player"]', this).attr('src');
-        const ytUrl = $('iframe[src^="https://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube.com/embed/"]', this).attr('src');
+        const ytUrl = $('iframe[src^="https://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube-nocookie.com/embed/"]', this).attr('src');
         const filteredIds = allIds.filter((item, pos, self) => {
           return self.indexOf(item) == pos
         })
@@ -95,7 +94,7 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
     idLength = 9
     idType = "sc"
     thisId = url.replace(/%2F/g,"/").substr(url.replace(/%2F/g,"/").lastIndexOf("tracks")+7, idLength)
-  } else if (url.split(".")[1] === "youtube") {
+  } else if (url.split(".")[1] === "youtube" || url.split(".")[1] === "youtube-nocookie") {
     idLength = 11
     idType = "yt"
     thisId = url.split('/')[4].substr(0,idLength)
