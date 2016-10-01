@@ -9,10 +9,10 @@ class GenreSelect extends Component {
     this.props.loadTracksByGenre(genre)
   }
   render() {
-    const { genres } = this.props
+    const { genres, currentGenre } = this.props
     const genreButtons = this.props.genres.map((genre, i)=>{
       return (
-        <button key={i} onClick={() => this.setGenre(genre.genre)} name={genre.genre} className="genrebutton">
+        <button key={i} onClick={() => this.setGenre(genre.genre)} name={genre.genre} className={currentGenre == genre.genre ? "active genrebutton" : "genrebutton"}>
           <i className={"icon-"+ genre.name}></i>
           <p>{genre.name}</p>
         </button>
@@ -28,7 +28,8 @@ class GenreSelect extends Component {
 
 const mapStateToProps = (appState) => {
   return {
-    genres: appState.genres
+    genres: appState.genres,
+    currentGenre: appState.tracklist.genre
   }
 }
 
