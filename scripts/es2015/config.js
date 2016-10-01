@@ -69,6 +69,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
       $(siteData.subSiteElements).each(function() {
         const scUrl = $('iframe[src^="https://w.soundcloud.com/player"]', this).attr('src') || $('iframe[src^="http://w.soundcloud.com/player"]', this).attr('src');
         const ytUrl = $('iframe[src^="https://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube.com/embed/"]', this).attr('src') || $('iframe[src^="http://www.youtube-nocookie.com/embed/"]', this).attr('src');
+        const vimeoUrl = $('iframe[src^="https://player.vimeo.com/video/"]', this).attr('src')
         const filteredIds = allIds.filter((item, pos, self) => {
           return self.indexOf(item) == pos
         })
@@ -77,8 +78,10 @@ function getTrack(href, allIds, sessionIds, siteData) {
           pushTrack(scUrl, sessionIds, filteredIds, allIds, siteData);
         } else if (ytUrl) {
           pushTrack(ytUrl, sessionIds, filteredIds, allIds, siteData);
+        } else if (vimeoUrl) {
+          console.warn("Vimeo URL")
         } else {
-          console.warn('"scUrl" and "ytUrl" are undefined!')
+          console.warn("'scUrl', 'ytUrl', 'vimeo' are undefined!")
         }
       });
     }
