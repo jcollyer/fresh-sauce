@@ -25,30 +25,30 @@ import { wearegoingsolo } from './websites/wearegoingsolo.js'
 import { zillanoise } from './websites/zillanoise.js'
 
 const funcs = [
-  // allthingsgomusic,
-  // anonymouslygifted,
-  // badperm,
-  // blahblahblahsciencesoul,
-  // bound2hiphop, //0(w 'this')
-  // dimestoresaints, //1(w/out 'this') 3(w/ 'this')
-  // emergingindiebands, //1(w/out 'this')
-  // carolinaontherise,
-  // fivechicago,
-  // goodmusicallday, //1(w/out 'this')
-  // neongoldrecords, //1(w/out 'this')
-  // nialler9electro,
-  // nialler9hiphop,
-  // nialler9soul,
-  // repeatbutton,
-  // sinimabeats,
-  // sophistefunk, //0(w/out 'this') 0(w/ 'this')
-  // soulmusicsongs, //1(w/out 'this')
-  // stampthewax,
-  // thebluewalrus,
-  // theburningearremix,
-  // thenewlofi, //1(w/out 'this')
-  // wearegoingsolo,
-  zillanoise
+  allthingsgomusic,
+  anonymouslygifted,
+  badperm,
+  blahblahblahsciencesoul,
+  bound2hiphop, //0(w 'this')
+  dimestoresaints, //1(w/out 'this') 3(w/ 'this')
+  emergingindiebands, //1(w/out 'this')
+  carolinaontherise,
+  fivechicago,
+  goodmusicallday, //1(w/out 'this')
+  neongoldrecords, //1(w/out 'this')
+  nialler9electro,
+  nialler9hiphop,
+  nialler9soul,
+  repeatbutton,
+  sinimabeats,
+  sophistefunk, //0(w/out 'this') 0(w/ 'this')
+  soulmusicsongs, //1(w/out 'this')
+  stampthewax,
+  thebluewalrus,
+  theburningearremix,
+  thenewlofi, //1(w/out 'this')
+  wearegoingsolo,
+  zillanoise // not testeted
 ]
 
 setTimeout(() => {

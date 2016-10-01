@@ -25,6 +25,36 @@
 }
 
 
+.icon-Bands:before {
+  content: "\e90f";
+}
+.icon-Chill:before {
+  content: "\e910";
+}
+.icon-Beats:before {
+  content: "\e911";
+}
+.icon-House:before {
+  content: "\e912";
+}
+.icon-Pop:before {
+  content: "\e913";
+}
+.icon-Remix:before {
+  content: "\e914";
+}
+.icon-Funk:before {
+  content: "\e915";
+}
+.icon-Classic:before {
+  content: "\e916";
+}
+.icon-Hip-Hop:before {
+  content: "\e917";
+}
+.icon-Soul:before {
+  content: "\e918";
+}
 .icon-close:before {
   content: "\e900";
 }

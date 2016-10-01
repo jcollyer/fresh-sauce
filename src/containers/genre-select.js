@@ -5,7 +5,8 @@ import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 
 class GenreSelect extends Component {
   setGenre(e) {
-    let genre = e.target.name
+
+    const genre = e.target.classList[0].substr(5).toLowerCase();
     this.props.router.push('/genre/'+genre)
     this.props.loadTracksByGenre(genre)
   }
@@ -13,7 +14,10 @@ class GenreSelect extends Component {
     const { genres } = this.props
     const genreButtons = this.props.genres.map((genre, i)=>{
       return (
-        <button key={i} onClick={(e) => this.setGenre(e)} name={genre.genre}>{genre.name}</button>
+        <button key={i} onClick={(e) => this.setGenre(e)} name={genre.genre} className="genrebutton">
+          <i className={"icon-"+ genre.name}></i>
+          <p>{genre.name}</p>
+        </button>
       )
     })
     return (

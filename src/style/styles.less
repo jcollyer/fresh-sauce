@@ -91,12 +91,19 @@ input {
       }
     }
     #player-track-prgress {
+      position: absolute;
+      top: 100px;
       width: 100%;
       #progress-container {
         background: @darkgray;
-        height: 3px;
+        cursor: pointer;
+        height: 4px;
         position: relative;
         width: 100%;
+        transition: height 0.1s;
+        &:hover {
+          height: 10px;
+        }
         #progress {
           background: @hotblue;
           height: 100%;
@@ -172,7 +179,7 @@ input {
         cursor: pointer;
         float: right;
         font-size: 25px;
-        margin: 10px 65px 10px;
+        margin: 17px 5px 10px;
         padding-right: 3%;
         position: relative;
       }
@@ -396,6 +403,32 @@ input {
   }
 }
 
+#genre {
+  background: white;
+  left: 0px;
+  height: 75px;
+  outline:none;
+  position: fixed;
+  top: 105px;
+  width: 100%;
+  z-index: 1;
+  .genrebutton:last-child {
+    border-right: none;
+  }
+  .genrebutton:focus {outline:0;}
+  .genrebutton {
+    background: transparent;
+    border: none;
+    border-right: 1px solid;
+    width: 10%;
+    margin: 10px 0px 40px;
+    i {
+      font-size: 35px;
+    }
+  }
+}
+
+
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {}
 
@@ -458,7 +491,7 @@ input {
     }
   }
   .container {
-    margin: 110px auto 0px;
+    margin: 180px auto 0px;
     width: 70%;
   }
   #tracklist {
@@ -486,7 +519,7 @@ input {
           }
           .origin-link {
             color: @darkgray;
-            display: block;
+            display: inline;
             font-size: 10px;
             margin: 0px 10px;
             line-height: 2.5em;

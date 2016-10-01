@@ -78,7 +78,6 @@ class Player extends Component {
           </div>
 
           <div id='player-track-info'>
-            <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
             <h3 className='elipsis'>{track.title}</h3>
             <h4><span id='by'>by:</span> {track.artist} </h4>
             <div id='player-track-time'>{this.convertToPrettyTime(trackPosition)}/{this.convertToPrettyTime(track.duration)}</div>
@@ -90,6 +89,7 @@ class Player extends Component {
               <i onClick={() => this.props.toggleShuffleTracks()} className={shuffle ? 'icon icon-shuffle-fill active' : 'icon icon-shuffle'}></i>
             </div>
           </div>
+          <TrackProgress progressPercentage={trackPercentage} duration={track.duration} trackProgressClick={(position) => this.trackProgressClick(position, players)} />
         </div>
     )
   }

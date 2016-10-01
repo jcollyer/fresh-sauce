@@ -7,7 +7,7 @@ import HomeButton from '../containers/home-button'
 class GenrePage extends Component {
   render() {
     return (
-      <div id='genre' className='container'>
+      <div id='genre-page' className='container'>
         <GenreSelect />
         <HomeButton />
         <h5>genre: {this.props.genre}</h5>
