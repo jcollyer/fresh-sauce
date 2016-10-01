@@ -22,11 +22,12 @@ import { thebluewalrus } from './websites/thebluewalrus.js'
 import { theburningearremix } from './websites/theburningearremix.js'
 import { thenewlofi } from './websites/thenewlofi.js'
 import { wearegoingsolo } from './websites/wearegoingsolo.js'
+import { zillanoise } from './websites/zillanoise.js'
 
 const funcs = [
   // allthingsgomusic,
   // anonymouslygifted,
-  badperm
+  // badperm,
   // blahblahblahsciencesoul,
   // bound2hiphop, //0(w 'this')
   // dimestoresaints, //1(w/out 'this') 3(w/ 'this')
@@ -46,7 +47,8 @@ const funcs = [
   // thebluewalrus,
   // theburningearremix,
   // thenewlofi, //1(w/out 'this')
-  // wearegoingsolo
+  // wearegoingsolo,
+  zillanoise
 ]
 
 setTimeout(() => {

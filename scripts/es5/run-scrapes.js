@@ -48,10 +48,12 @@ var _thenewlofi = require('./websites/thenewlofi.js');
 
 var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 
+var _zillanoise = require('./websites/zillanoise.js');
+
 var funcs = [
 // allthingsgomusic,
 // anonymouslygifted,
-_badperm.badperm
+// badperm,
 // blahblahblahsciencesoul,
 // bound2hiphop, //0(w 'this')
 // dimestoresaints, //1(w/out 'this') 3(w/ 'this')
@@ -71,8 +73,8 @@ _badperm.badperm
 // thebluewalrus,
 // theburningearremix,
 // thenewlofi, //1(w/out 'this')
-// wearegoingsolo
-];
+// wearegoingsolo,
+_zillanoise.zillanoise];
 
 setTimeout(function () {
   console.log("bye...");
