@@ -64,7 +64,7 @@ class Player extends Component {
       oldTrackId = track.id
     }
     return (
-        <div id='player'>
+        <div id='ui-player'>
           <iframe id='soundcloud_widget' width='100%' height='166' scrolling='no' frameBorder='no' src={src} className='offscreen'></iframe>
 
           <div id='player-track-artwork'>

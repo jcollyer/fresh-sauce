@@ -52,168 +52,164 @@ input {
   max-width: 930px;
 }
 
-#top-bar{
-  background: white;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  #player {
-    #yt_widget {
-      position: relative;
-      left: 0px;
-    }
-    #yt_widget.offscreen {
-      position: absolute;
-      left: -99999px;
-    }
-    #player-track-artwork {
-      float: left;
-      #sc-thumb {
-        height: 100px;
-        overflow: hidden;
-        img {
-          margin-top: -50px;
-          width: 200px;
-        }
-      }
-      #yt-thumb {
-        height: 100px;
-        overflow: hidden;
-        img {
-          margin-top: -25px;
-          width: 200px;
-        }
+
+#ui-player {
+  #yt_widget {
+    position: relative;
+    left: 0px;
+  }
+  #yt_widget.offscreen {
+    position: absolute;
+    left: -99999px;
+  }
+  #player-track-artwork {
+    float: left;
+    #sc-thumb {
+      height: 100px;
+      overflow: hidden;
+      img {
+        margin-top: -50px;
+        width: 200px;
       }
     }
-    #player-track-info {
-      #player-track-time {
-        float: right;
-      }
-    }
-    #player-track-prgress {
-      position: absolute;
-      top: 100px;
-      width: 100%;
-      #progress-container {
-        background: @lightgray;
-        cursor: pointer;
-        height: 4px;
-        position: relative;
-        width: 100%;
-        transition: height 0.1s;
-        &:hover {
-          height: 10px;
-        }
-        #progress {
-          background: @darkgray;
-          height: 100%;
-          position: absolute;
-          width: 13%;
-        }
+    #yt-thumb {
+      height: 100px;
+      overflow: hidden;
+      img {
+        margin-top: -25px;
+        width: 200px;
       }
     }
   }
-  #auth {
-    float: right;
-    #logged-in {
-      #auth-button {
-        cursor: pointer;
-        float: right;
-        font-size: 25px;
-        margin: 10px 65px 10px;
-        padding-right: 3%;
-        position: relative;
+  #player-track-info {
+    #player-track-time {
+      float: right;
+    }
+  }
+  #player-track-prgress {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    #progress-container {
+      background: @lightgray;
+      cursor: pointer;
+      height: 4px;
+      position: relative;
+      width: 100%;
+      transition: height 0.1s;
+      &:hover {
+        height: 10px;
       }
-      #auth-menu {
-        background: white;
-        border: 1px solid @offwhite;
-        bottom: -110px;
-        font-family: 'Josefin Sans', sans-serif;
-        font-size: 16px;
-        height: 100px;
-        margin-right: 50%;
+      #progress {
+        background: @darkgray;
+        height: 100%;
         position: absolute;
-        right: -65px;
-        width: 150px;
-        &:before {
-          border-bottom: 5px solid white;
-          border-left: 5px solid transparent;
-          border-right: 5px solid transparent;
-          content: '';
-          height: 0;
-          margin-right: 50%;
-          right: -4px;
-          top: -5px;
-          position: absolute;
-          width: 0;
-        }
-        #username {
-          border-bottom: 1px solid @offwhite;
-          padding: 9px;
-        }
-        .menu-link:last-child {
-          border-bottom: none;
-        }
-        .menu-link {
-          border-bottom: 1px solid @offwhite;
-          cursor: pointer;
-          padding: 9px;
-          text-align: center;
-          text-transform: uppercase;
-          a {
-            color: @offblack;
-            text-decoration: none;
-          }
-          &:hover {
-            background: @offwhite;
-          }
-        }
-        div#username {
-          font-size: 12px;
-          text-align: left;
-        }
+        width: 13%;
       }
     }
-    #logged-out {
-      #loggin-button {
-        cursor: pointer;
-        float: right;
-        font-size: 25px;
-        margin: 17px 5px 10px;
-        padding-right: 3%;
-        position: relative;
-      }
+  }
+}
+#auth {
+  float: right;
+  #logged-in {
+    #auth-button {
+      cursor: pointer;
+      float: right;
+      font-size: 25px;
+      margin: 10px 65px 10px;
+      padding-right: 3%;
+      position: relative;
     }
-    #log-in {
+    #auth-menu {
       background: white;
-      border-bottom: 1px solid @offwhite;
-      border-left: 1px solid @offwhite;
-      border-right: 1px solid @offwhite;
-      margin-top: 44px;
+      border: 1px solid @offwhite;
+      bottom: -110px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 16px;
+      height: 100px;
+      margin-right: 50%;
       position: absolute;
-      right: 20px;
-      top: 2px;
-      i.icon-close {
-        color: #999;
-        cursor: pointer;
-        font-size: 22px;
+      right: -65px;
+      width: 150px;
+      &:before {
+        border-bottom: 5px solid white;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        content: '';
+        height: 0;
+        margin-right: 50%;
+        right: -4px;
+        top: -5px;
         position: absolute;
-        left: 10px;
-        top: 5px;
-        z-index: 9;
+        width: 0;
       }
-      #firebaseui-auth-container {
-        .firebaseui-container {
-          padding-top: 20px;
-          width: 235px;
-          .firebaseui-card-content {
-            padding: 0px 15px;
-          }
+      #username {
+        border-bottom: 1px solid @offwhite;
+        padding: 9px;
+      }
+      .menu-link:last-child {
+        border-bottom: none;
+      }
+      .menu-link {
+        border-bottom: 1px solid @offwhite;
+        cursor: pointer;
+        padding: 9px;
+        text-align: center;
+        text-transform: uppercase;
+        a {
+          color: @offblack;
+          text-decoration: none;
+        }
+        &:hover {
+          background: @offwhite;
+        }
+      }
+      div#username {
+        font-size: 12px;
+        text-align: left;
+      }
+    }
+  }
+  #logged-out {
+    #loggin-button {
+      cursor: pointer;
+      float: right;
+      font-size: 25px;
+      margin: 17px 5px 10px;
+      padding-right: 3%;
+      position: relative;
+    }
+  }
+  #log-in {
+    background: white;
+    border-bottom: 1px solid @offwhite;
+    border-left: 1px solid @offwhite;
+    border-right: 1px solid @offwhite;
+    margin-top: 44px;
+    position: absolute;
+    right: 20px;
+    top: 2px;
+    i.icon-close {
+      color: #999;
+      cursor: pointer;
+      font-size: 22px;
+      position: absolute;
+      left: 10px;
+      top: 5px;
+      z-index: 9;
+    }
+    #firebaseui-auth-container {
+      .firebaseui-container {
+        padding-top: 20px;
+        width: 235px;
+        .firebaseui-card-content {
+          padding: 0px 15px;
         }
       }
     }
   }
 }
+
 
 #tracklist {
   height: 100vh;
@@ -283,7 +279,7 @@ input {
     }
     .track-item-actions {
       float: left;
-      width: 115px;
+      width: 50px;
       i.track-heart {
         float: left;
       }
@@ -320,64 +316,61 @@ input {
     margin: 105px auto 100px;
     width: 95%;
   }
-  #top-bar {
-    bottom: 0px;
-    height: 70px;
-    top: auto;
-    #player {
+  #ui-player {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    #player-track-artwork {
+      display: none;
+    }
+    #player-track-info {
+      background: @offblack;
+      color: @offwhite;
+      height: 70px;
+      padding: 5px;
+      text-align: center;
       width: 100%;
-      #player-track-artwork {
+      h3 {
+        font-weight: 300;
+        font-size: 12px;
+      }
+      h4 {
+        font-weight: 300;
+        font-size: 10px;
+      }
+      #player-track-controls {
+        color: @offwhite;
+        margin: 5px auto;
+        width: 260px;
+        i.icon.active {
+          color: @hotblue;
+          font-weight: 900;
+        }
+        i.icon {
+          cursor: pointer;
+          font-size: 25px;
+          margin: 0 10px;
+        }
+      }
+      #player-track-time {
         display: none;
       }
-      #player-track-info {
-        background: @offblack;
-        color: @offwhite;
-        height: 70px;
-        padding: 5px;
-        text-align: center;
-        width: 100%;
-        h3 {
-          font-weight: 300;
-          font-size: 12px;
-        }
-        h4 {
-          font-weight: 300;
-          font-size: 10px;
-        }
-        #player-track-controls {
-          color: @offwhite;
-          margin: 5px auto;
-          width: 260px;
-          i.icon.active {
-            color: @hotblue;
-            font-weight: 900;
-          }
-          i.icon {
-            cursor: pointer;
-            font-size: 25px;
-            margin: 0 10px;
-          }
-        }
-        #player-track-time {
-          display: none;
-        }
-      }
     }
-    #auth{
-      background: @hotred;
-      float: auto;
-      margin-top: 0px;
-      position: fixed;
-      top: 0px;
-      width: 100%;
-    }
+  }
+  #auth{
+    background: @hotred;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
   }
   #tracklist {
     .track-item {
       height: 60px;
       .track-item-info {
         float: left;
-        width: ~"calc(100% - 115px)";
+        width: ~"calc(100% - 50px)";
         .track-item-info-artwork {
           height: 55px;
           width: 55px;
@@ -408,13 +401,12 @@ input {
       }
       .track-item-actions {
         i.track-heart {
-          font-size: 20px;
-          padding: 10px 10px 5px;
+          font-size: 18px;
+          padding: 4px;
         }
         .go-to-track-detail {
-          font-size: 15px;
-          margin-left: 5px;
-          padding: 15px;
+          font-size: 17px;
+          padding: 3px;
         }
       }
     }
@@ -462,61 +454,54 @@ input {
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
-  #top-bar {
-    border-bottom: 1px solid @darkgray;
-    bottom: auto;
-    height: 102px;
-    top: 0px;
-    #player {
-      float: left;
-      height: 100px;
-      width: 75%;
-      #player-track-artwork {
-        display: block;
-      }
-      #player-track-info {
-        background: white;
-        color: @offblack;
-        float: left;
-        width: ~"calc(100% - 200px)";
-        h3 {
-          font-size: 26px;
-          margin: 0px;
-          padding: 7px 10px 0px;
-        }
-        h4 {
-          font-size: 16px;
-          padding: 0px 7px 5px
-        }
-        #player-track-controls {
-          i.icon {
-            color: @offblack;
-          }
-        }
-        #player-track-time {
-          display: block;
-          margin-top: 20px;
-        }
-      }
+  #ui-player {
+    background: white;
+    height: 100px;
+    top: 0;
+    #player-track-artwork {
+      display: block;
     }
-    #auth{
-      background: none;
-      float: right;
-      margin-top: 55px;
-      position: relative;
-      top: auto;
-      width: 20%;
-      #firebaseui-auth-container {
-        .firebaseui-container {
-          right: auto;
-          top: 0px;
-          position: relative;
+    #player-track-info {
+      background: white;
+      color: @offblack;
+      float: left;
+      width: ~"calc(100% - 200px)";
+      h3 {
+        font-size: 26px;
+        margin: 0px;
+        padding: 7px 10px 0px;
+      }
+      h4 {
+        font-size: 16px;
+        padding: 0px 7px 5px
+      }
+      #player-track-controls {
+        i.icon {
+          color: @offblack;
         }
+      }
+      #player-track-time {
+        display: block;
+        margin-top: 20px;
       }
     }
   }
+  #auth{
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    z-index: 2;
+    #firebaseui-auth-container {
+      .firebaseui-container {
+        right: auto;
+        top: 0px;
+        position: relative;
+      }
+    }
+  }
+
   .container {
-    margin: 180px auto 0px;
+    margin: 230px auto 0px;
     width: 70%;
   }
   #tracklist {
@@ -572,7 +557,7 @@ input {
   }
   #genre {
     height: 65px;
-    top: 104px;
+    top: 152px;
     .genrebutton {
       border-right: 1px solid @lightgray;
       i {

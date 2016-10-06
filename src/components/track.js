@@ -18,8 +18,8 @@ export default (props) => {
           </a>
           <div className='track-genre'>
             <i className="icon icon-genre"></i>
-            {props.track.genre.map((genre)=>{
-              return(<p> &nbsp; {genre} &#9834;</p>)
+            {props.track.genre.map((genre, i)=>{
+              return(<p key={i}> &nbsp; {genre} &#9834;</p>)
             })}
           </div>
           <i className={props.track.featured ? 'icon icon-heart' : 'hide'} ></i>

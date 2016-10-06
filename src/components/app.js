@@ -6,10 +6,8 @@ import Auth from '../containers/auth'
 export default function App({ children }) {
   return (
     <div id='wrapper'>
-      <div id='top-bar'>
-        <Player />
-        <Auth />
-      </div>
+      <Auth />
+      <Player />
       {children}
     </div>
   )
