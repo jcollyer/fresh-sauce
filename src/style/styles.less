@@ -231,7 +231,7 @@ input {
   .track-item {
     .track-item-info {
       float: left;
-      width: 80%;
+      width: ~"calc(100% - 50px)";
       .track-item-info-artwork {
         background: @black;
         cursor: pointer;
@@ -369,8 +369,6 @@ input {
     .track-item {
       height: 60px;
       .track-item-info {
-        float: left;
-        width: ~"calc(100% - 50px)";
         .track-item-info-artwork {
           height: 55px;
           width: 55px;
@@ -487,9 +485,7 @@ input {
     }
   }
   #auth{
-    position: fixed;
     top: 100px;
-    width: 100%;
     z-index: 2;
     #firebaseui-auth-container {
       .firebaseui-container {
@@ -508,6 +504,7 @@ input {
     .track-item {
       height: 90px;
       .track-item-info {
+        width: 80%;
         .track-item-info-artwork {
           height: 80px;
           width: 80px;
@@ -543,6 +540,7 @@ input {
         }
       }
       .track-item-actions {
+        width: 20%;
         i.track-heart {
           font-size: 30px;
           padding: 10px 10px 5px;
