@@ -10,13 +10,18 @@ export default (props) => {
           <img src={props.track.artwork_url} />
         </div>
         <div className='track-item-info-detail'>
-          <h3 className='title elipsis'>{props.track.title}</h3>
-          {props.track.genre}
-          <p className='artist'><span className='track-by'>by: </span>{props.track.artist}</p>
+          <h3 className='track-title elipsis'>{props.track.title}</h3>
+          <p className='track-artist'><span className='track-by'>by: </span>{props.track.artist}</p>
           <a className='origin-link' href={props.track.permalink} target='_blank'>
-            <span>{props.track.linkTitle}</span>
             <i className={props.track.linkIcon}></i>
+            <span>{props.track.linkTitle}</span>
           </a>
+          <div className='track-genre'>
+            <i className="icon icon-genre"></i>
+            {props.track.genre.map((genre)=>{
+              return(<p> &nbsp; {genre} &#9834;</p>)
+            })}
+          </div>
           <i className={props.track.featured ? 'icon icon-heart' : 'hide'} ></i>
         </div>
       </div>

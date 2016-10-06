@@ -25,6 +25,9 @@
 }
 
 
+.icon-genre:before {
+  content: "\e919";
+}
 .icon-Bands:before {
   content: "\e90f";
 }

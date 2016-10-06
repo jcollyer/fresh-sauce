@@ -253,15 +253,30 @@ input {
       }
       .track-item-info-detail {
         float: left;
-        .title {
+        .track-title {
           color: @darkgray;
           font-weight: 100;
         }
-        .artist {
+        .track-artist {
           color: @darkgray;
           font-weight: 900;
           .track-by {
             font-weight: 100;
+          }
+        }
+        .track-genre {
+          float: left;
+          font-size: 11px;
+          line-height: 1em;
+          margin: 0px;
+          padding: 0px 0px 0px 10px;
+          i {
+            float: left;
+            font-size: 15px;
+          }
+          p {
+            float: left;
+            margin: 5px 0px;
           }
         }
       }
@@ -375,13 +390,16 @@ input {
           float: left;
           height: 55px;
           width: ~"calc(100% - 60px)";
-          .title {
+          .track-title {
             font-size: 14px;
-            margin: 15px 7px 0px;
+            margin: 4px 7px 2px;
           }
-          .artist {
+          .track-artist {
             font-size: 12px;
-            margin: 1px 7px 0px;
+            margin: 1px 7px 3px;
+          }
+          .track-genre {
+            padding: 0 0 0 8px;
           }
           .origin-link {
             display: none;
@@ -516,20 +534,21 @@ input {
         .track-item-info-detail {
           height: 80px;
           width: ~"calc(100% - 85px)";
-          .title {
+          .track-title {
             font-size: 24px;
             margin: 7px 7px 0px;
           }
-          .artist {
+          .track-artist {
             font-size: 16px;
-            margin: 3px 9px 0px;
+            margin: 3px 9px 8px;
           }
           .origin-link {
             color: @darkgray;
             display: inline;
+            float: left;
             font-size: 10px;
-            margin: 0px 10px;
-            line-height: 2.5em;
+            margin: 0px 5px;
+            line-height: 1.5em;
             text-decoration: none;
             i.icon {
               font-size: 14px;
