@@ -28,11 +28,7 @@ export function playTrack(track, players){
   }
 
   if(track.kind === 'sc'){ // if Soundcloud
-    players.playerSC.bind(SC.Widget.Events.READY, () => {
-     players.playerSC.load("https://api.soundcloud.com/tracks/"+track.id, {
-       auto_play: true
-     })
-   })
+    players.playerSC.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track.id+'/stream'});
   } else {
     players.playerYT.cueVideoById(track.id)
     players.playerYT.playVideo()

@@ -2,19 +2,21 @@ import C from '../constants'
 import store from '../store'
 import { startListeningToAuth } from './auth'
 import { playNextTrack } from './track'
+import SoundCloudAudio from 'soundcloud-audio'
 
 let playerSC
+let scPlayer = new SoundCloudAudio('b5e21578d92314bc753b90ea7c971c1e');
 
 function setSoundCloud(){
+  playerSC = scPlayer;
   //get Soundcloud Widget
-  let playerSC = SC.Widget(document.getElementById('soundcloud_widget'))
-  playerSC.bind(SC.Widget.Events.READY, () => {
-    console.log('SC Widget Ready...')
-  })
-  playerSC.bind(SC.Widget.Events.FINISH, () => {
-    store.dispatch(playNextTrack('next'))
-    console.log('play next track from -- SC')
-  })
+  // playerSC.bind(SC.Widget.Events.READY, () => {
+  //   console.log('SC Widget Ready...')
+  // })
+  // playerSC.bind(SC.Widget.Events.FINISH, () => {
+  //   store.dispatch(playNextTrack('next'))
+  //   console.log('play next track from -- SC')
+  // })
   return playerSC
 }
 

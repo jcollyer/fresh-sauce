@@ -15,9 +15,9 @@ class Player extends Component {
     playingTrackInterval = setInterval(() => {
       if(this.props.track.kind === 'sc'){ // if Soundcloud
         let that = this
-        players.playerSC.getPosition((position) => {
-         that.props.setTrackPosition(position)
-       })
+      //   players.playerSC.getPosition((position) => {
+      //    that.props.setTrackPosition(position)
+      //  })
       } else { // else play YouTube
         let position = players.playerYT.getCurrentTime() * 1000
         this.props.setTrackPosition(position)
@@ -57,7 +57,6 @@ class Player extends Component {
   }
   render() {
     const { track, trackPlaying, shuffle, trackPosition, trackPercentage, players } = this.props
-    const src = 'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track.id + '&show_artwork=true';
     if (trackPlaying && track.id != oldTrackId) { // if track is playing, with a new track ID
       playTrack(track, players)
       this.whileTrackPlaying(players)
@@ -65,7 +64,6 @@ class Player extends Component {
     }
     return (
         <div id='ui-player'>
-          <iframe id='soundcloud_widget' width='100%' height='166' scrolling='no' frameBorder='no' src={src} className='offscreen'></iframe>
 
           <div id='player-track-artwork'>
             <div id='yt_widget' className={track.kind === 'yt' && trackPlaying === true ? '' : 'offscreen'}></div>

@@ -9,17 +9,16 @@ import { sanitizeTrack } from './tracklist'
 
 export function setTrack(track) {
   return function(dispatch, getState) {
-    if(track.id !== getState().track.currentTrack.id){
+    let playerKind = getState().track.currentTrack.kind
+    let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+    pauseTrack(playerKind, player)
+    if(track.id !== getState().track.currentTrack.id){ // if new track
       dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
     } else {
       let trackPlaying = getState().track.trackPlaying
-      let playerKind = getState().track.currentTrack.kind
-      let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
       if(trackPlaying){
-        pauseTrack(playerKind, player)
         dispatch({type: C.SET_TRACK, track: track, trackPlaying: false})
       } else {
-        playTrack(playerKind, player)
         dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
       }
     }
@@ -94,6 +93,12 @@ export function playNextTrack(direction) {
     let shuffleTracks = getState().tracklist.shuffle
     let randomIndex = Math.random() * (15 - 0) + 0
 
+    //pause current track
+    let playerKind = getState().track.currentTrack.kind
+    let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+    pauseTrack(playerKind, player)
+
+    //loop through tracklist, find current track (so you know the index) use the index to play the next/prev track
     getState().tracklist.tracks.map((track, index) => {
       if(track.id === currentTrackId) {
         if (shuffleTracks) {
@@ -115,9 +120,9 @@ export function playNextTrack(direction) {
   }
 }
 
-function playTrack(playerKind, player){
+function playTrack(playerKind, player, track){
   if(playerKind === 'sc'){
-    player.play()
+    player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
   } else {
     player.playVideo()
   }
@@ -143,12 +148,11 @@ export function playToggleTrack(playingTrackInterval) {
     } else {
       player = getState().players.playerOptions.playerYT
     }
-
     if(trackPlaying){
       pauseTrack(playerKind, player)
       dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack, trackPlaying: false })
     } else {
-      playTrack(playerKind, player)
+      playTrack(playerKind, player, getState().track.currentTrack.id)
       dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack , trackPlaying: true })
     }
   }
