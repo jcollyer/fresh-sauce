@@ -9,14 +9,13 @@ let scPlayer = new SoundCloudAudio('b5e21578d92314bc753b90ea7c971c1e');
 
 function setSoundCloud(){
   playerSC = scPlayer;
-  //get Soundcloud Widget
-  // playerSC.bind(SC.Widget.Events.READY, () => {
-  //   console.log('SC Widget Ready...')
-  // })
-  // playerSC.bind(SC.Widget.Events.FINISH, () => {
-  //   store.dispatch(playNextTrack('next'))
-  //   console.log('play next track from -- SC')
-  // })
+
+  scPlayer.on('ended', function () {
+    store.dispatch(playNextTrack('next'))
+    console.log(scPlayer.track.title + ' just ended! play next track')
+  });
+
+
   return playerSC
 }
 
