@@ -91,12 +91,13 @@ input {
     top: 100px;
     width: 100%;
     #progress-container {
-      background: @lightgray;
+      background: @gray;
       cursor: pointer;
       height: 4px;
       position: relative;
       width: 100%;
       transition: height 0.1s;
+      z-index: 3;
       &:hover {
         height: 10px;
       }
@@ -174,8 +175,8 @@ input {
     #loggin-button {
       cursor: pointer;
       float: right;
-      font-size: 25px;
-      margin: 17px 5px 10px;
+      font-size: 21px;
+      margin: 10px 5px 10px;
       padding-right: 3%;
       position: relative;
     }
@@ -485,7 +486,8 @@ input {
     }
   }
   #auth{
-    top: 100px;
+    background: @lightgray;
+    top: 104px;
     z-index: 2;
     #firebaseui-auth-container {
       .firebaseui-container {
@@ -555,7 +557,7 @@ input {
   }
   #genre {
     height: 65px;
-    top: 152px;
+    top: 145px;
     .genrebutton {
       border-right: 1px solid @lightgray;
       i {
