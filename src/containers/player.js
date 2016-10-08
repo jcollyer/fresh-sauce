@@ -14,10 +14,8 @@ class Player extends Component {
     clearInterval(playingTrackInterval)
     playingTrackInterval = setInterval(() => {
       if(this.props.track.kind === 'sc'){ // if Soundcloud
-        let that = this
-      //   players.playerSC.getPosition((position) => {
-      //    that.props.setTrackPosition(position)
-      //  })
+        let position = players.playerSC.audio.currentTime * 1000;
+        this.props.setTrackPosition(position)
       } else { // else play YouTube
         let position = players.playerYT.getCurrentTime() * 1000
         this.props.setTrackPosition(position)
@@ -32,7 +30,9 @@ class Player extends Component {
       trackPosition = trackPosition / 1000
       players.playerYT.seekTo(trackPosition)
     } else {
-      players.playerSC.seekTo(trackPosition)
+      console.log(trackPosition)
+      players.playerSC.audio.currentTime = trackPosition / 1000
+      // players.playerSC.seekTo(trackPosition)
     }
   }
   convertToPrettyTime(time) {
