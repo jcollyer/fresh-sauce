@@ -10,17 +10,28 @@ import { sanitizeTrack } from './tracklist'
 export function togglePlayTrack(track) {
   return function(dispatch, getState){
     let trackPlaying = getState().track.trackPlaying
+    let newTrack = getState().track.currentTrack.id === track.id ? false : true
+    let player = getState().track.currentTrack.kind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+    pauseTrack(getState().track.currentTrack.kind, player) //allways pause track first
 
-    if (trackPlaying) {
+    if (trackPlaying && !newTrack) {
       let playerKind = getState().track.currentTrack.kind
       let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
-      pauseTrack(playerKind, player)
       dispatch({ type: C.SET_TRACK,  track: track, trackPlaying: false, player: player })
     } else {
+
       let playerKind = track.kind
       let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
-      let currentTime = playerKind === 'sc' ? player.audio.currentTime : player.getCurrentTime()
-      let resumePlayback = currentTime > 0 ? true : false
+      let currentTime
+      let resumePlayback
+      if (newTrack) {
+        currentTime = 0
+        resumePlayback = false
+      } else {
+        currentTime = playerKind === 'sc' ? player.audio.currentTime : player.getCurrentTime()
+        resumePlayback = currentTime > 0 ? true : false
+      }
+
       dispatch({ type: C.SET_TRACK, track: track, trackPlaying: true, player: player })
       playTrack(playerKind, player, track.id, resumePlayback)
     }
@@ -110,7 +121,6 @@ export function playNextTrack(direction) {
         } else if(direction === 'next') {
           if(getState().tracklist.tracks[getState().tracklist.tracks.length-1].id != currentTrackId){ // if currentTrack is not the LAST track in playlist
             nextTrack = getState().tracklist.tracks[index + 1]
-            // debugger;
             player = nextTrack.kind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
             dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, player: player })
             playTrack(nextTrack.kind, player, nextTrack.id, false)
@@ -126,22 +136,22 @@ export function playNextTrack(direction) {
   }
 }
 
-function playTrack(playerKind, player, track, resumePlayback){
+function playTrack(playerKind, player, trackId, resumePlayback){
   if(playerKind === 'sc') {
     if (resumePlayback) { // if track is being resumed
       let currentTime = player.audio.currentTime
-      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
+      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+trackId+'/stream'});
       player.audio.currentTime = currentTime
     } else {
       let currentTime = 0
-      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
+      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+trackId+'/stream'});
       player.audio.currentTime = currentTime
     }
   } else { // YT track
     if (resumePlayback) { // if track is being resumed
       player.playVideo()
     } else {
-      player.cueVideoById(track)
+      player.cueVideoById(trackId)
       player.playVideo()
     }
   }
