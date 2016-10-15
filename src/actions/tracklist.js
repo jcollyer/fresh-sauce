@@ -145,7 +145,7 @@ export function loadTracksByGenre(genre) {
       recursiveTracksArr = [] //Clear out recursiveTracksArr when switching genres
       loadTracksObj = loadTracks(firstTimestamp, genre)
 
-      if (loadTracksObj.tracksArr.length < 2) { // If has a genre but can't find enough matching tracks in the 30 track limit
+      if (loadTracksObj.tracksArr.length < 8) { // If has a genre but can't find enough matching tracks in the 30 track limit
         const startAt = loadTracksObj.allTracks[loadTracksObj.allTracks.length-1].timestamp
         loadTracksObj.tracksArr = recursivelyGetTracks(startAt, genre)
       }

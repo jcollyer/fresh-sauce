@@ -5,6 +5,7 @@ import { loadTracksByGenre, nextPage } from '../actions/tracklist'
 
 class GenreSelect extends Component {
   setGenre(genre) {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.props.router.push('/genre/'+genre)
     this.props.loadTracksByGenre(genre)
   }
