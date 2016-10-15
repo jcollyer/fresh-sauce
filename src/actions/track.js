@@ -111,9 +111,10 @@ export function playNextTrack(direction) {
     let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
     pauseTrack(playerKind, player)
 
-    //loop through tracklist, find current track (so you know the index) use the index to play the next/prev track
-    getState().tracklist.tracks.map((track, index) => {
-      if(track.id === currentTrackId) {
+    let trackIds = []
+    getState().tracklist.tracks.map((track, index) => { //loop through tracklist, find current track (so you know the index) use the index to play the next/prev track
+      if(track.id === currentTrackId) { //find current track for index
+        trackIds.push(currentTrackId)
         if (shuffleTracks) {
           nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
 
@@ -133,6 +134,13 @@ export function playNextTrack(direction) {
         }
       }
     })
+
+    if(trackIds.length == 0) { // currentTrack is outside contexst (user went to another page after playing track)
+      let nextTrack = getState().tracklist.tracks[0]
+      let player = nextTrack.kind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+      dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, player: player })
+      playTrack(nextTrack.kind, player, nextTrack.id, false)
+    }
   }
 }
 
