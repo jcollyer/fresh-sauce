@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ReactRedux, { connect } from 'react-redux'
 import C from '../constants'
-import { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
+import { setTrackPosition, playNextTrack, togglePlayTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { toggleShuffleTracks } from '../actions/tracklist'
 import TrackProgress from '../components/track-progress'
-import { playTrack, toHHMMSS } from '../utils'
+import { toHHMMSS } from '../utils'
 
 let playingTrackInterval = undefined
 let oldTrackId = undefined
@@ -44,7 +44,7 @@ class Player extends Component {
       switch (e.keyCode) {
         case 32:
           e.preventDefault()
-          this.props.playToggleTrack(playingTrackInterval)
+          this.props.togglePlayTrack(this.props.track)
           break;
         case 37:
           this.props.playNextTrack('prev')
@@ -57,8 +57,7 @@ class Player extends Component {
   }
   render() {
     const { track, trackPlaying, shuffle, trackPosition, trackPercentage, players } = this.props
-    if (trackPlaying && track.id != oldTrackId) { // if track is playing, with a new track ID
-      playTrack(track, players)
+    if (trackPlaying) { // if track is playing, with a new track ID
       this.whileTrackPlaying(players)
       oldTrackId = track.id
     }
@@ -82,7 +81,7 @@ class Player extends Component {
             <div id='player-track-controls'>
               <i onClick={() => this.props.toggleFavoriteTrack(track)} className={this.props.isTrackFavoritedByUser(track.id) ? 'icon icon-heart-fill active' : 'icon icon-heart'}></i>
               <i onClick={() => this.props.playNextTrack('prev')} className='icon icon-previous'></i>
-              <i onClick={() => this.props.playToggleTrack(playingTrackInterval)} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
+              <i onClick={() => this.props.togglePlayTrack(track)} className={trackPlaying ? 'icon icon-pause' : 'icon icon-play'}></i>
               <i onClick={() => this.props.playNextTrack('next')} className='icon icon-next'></i>
               <i onClick={() => this.props.toggleShuffleTracks()} className={shuffle ? 'icon icon-shuffle-fill active' : 'icon icon-shuffle'}></i>
             </div>
@@ -104,4 +103,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps,  { setTrackPosition, stopTrack, playNextTrack, playToggleTrack, toggleFavoriteTrack, isTrackFavoritedByUser, toggleShuffleTracks })(Player)
+export default connect(mapStateToProps,  { setTrackPosition, playNextTrack, togglePlayTrack, toggleFavoriteTrack, isTrackFavoritedByUser, toggleShuffleTracks })(Player)

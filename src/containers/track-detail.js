@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { setTrackDetailPage } from '../actions/tracklist'
-import { setTrack } from '../actions/tracklist'
 
 class TrackDetail extends Component {
   componentDidMount(){
@@ -42,4 +41,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setTrackDetailPage, setTrack })(TrackDetail))
+export default withRouter(connect(mapStateToProps, { setTrackDetailPage })(TrackDetail))

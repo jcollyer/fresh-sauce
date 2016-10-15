@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
-import { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
+import { togglePlayTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { nextPage, loadAllTracks } from '../actions/tracklist'
 import Track from '../components/track'
 import AddTrack from '../components/add-track'
@@ -51,7 +51,7 @@ class UserDetail extends Component {
       return <Track
         track={track}
         key={i}
-        onPlayTrackClicked={() => this.props.setTrack(track)}
+        onPlayTrackClicked={() => this.props.togglePlayTrack(track)}
         onDeleteTrackClicked={() => this.props.deleteTrack(track)}
         onToggleFeatureTrackClicked={() => this.props.toggleFeatueTrack(track)}
         onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track)}
@@ -83,4 +83,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks })(UserDetail))
+export default withRouter(connect(mapStateToProps, { togglePlayTrack, deleteTrack, toggleFeatueTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks })(UserDetail))

@@ -7,7 +7,8 @@ export default (state = initialState.track, action) => {
     case C.SET_TRACK:
       return Object.assign({}, state, {
         currentTrack: action.track,
-        trackPlaying: action.trackPlaying
+        trackPlaying: action.trackPlaying,
+        player: action.player
       });
     case C.SET_TRACK_POSITION:
       let trackPercentage = 100 * (action.trackPosition / state.currentTrack.duration)

@@ -31,7 +31,8 @@ export default {
     trackPlaying: false,
     trackPosition: 0,
     trackPercentage: 0,
-    duration: 0
+    duration: 0,
+    player: {}
   },
   tracklist: {
     tracks: [],

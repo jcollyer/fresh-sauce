@@ -7,20 +7,22 @@ const favoritesRef = ref.child('favorites')
 const usersRef = ref.child('users')
 import { sanitizeTrack } from './tracklist'
 
-export function setTrack(track) {
-  return function(dispatch, getState) {
-    let playerKind = getState().track.currentTrack.kind
-    let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
-    pauseTrack(playerKind, player)
-    if(track.id !== getState().track.currentTrack.id){ // if new track
-      dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
+export function togglePlayTrack(track) {
+  return function(dispatch, getState){
+    let trackPlaying = getState().track.trackPlaying
+
+    if (trackPlaying) {
+      let playerKind = getState().track.currentTrack.kind
+      let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+      pauseTrack(playerKind, player)
+      dispatch({ type: C.SET_TRACK,  track: track, trackPlaying: false, player: player })
     } else {
-      let trackPlaying = getState().track.trackPlaying
-      if(trackPlaying){
-        dispatch({type: C.SET_TRACK, track: track, trackPlaying: false})
-      } else {
-        dispatch({type: C.SET_TRACK, track: track, trackPlaying: true})
-      }
+      let playerKind = track.kind
+      let player = playerKind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+      let currentTime = playerKind === 'sc' ? player.audio.currentTime : player.getCurrentTime()
+      let resumePlayback = currentTime > 0 ? true : false
+      dispatch({ type: C.SET_TRACK, track: track, trackPlaying: true, player: player })
+      playTrack(playerKind, player, track.id, resumePlayback)
     }
   }
 }
@@ -103,16 +105,20 @@ export function playNextTrack(direction) {
       if(track.id === currentTrackId) {
         if (shuffleTracks) {
           nextTrack = getState().tracklist.tracks[Math.floor(randomIndex)]
-          dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+
+          dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, player: player })
         } else if(direction === 'next') {
           if(getState().tracklist.tracks[getState().tracklist.tracks.length-1].id != currentTrackId){ // if currentTrack is not the LAST track in playlist
             nextTrack = getState().tracklist.tracks[index + 1]
-            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+            // debugger;
+            player = nextTrack.kind === 'sc' ? getState().players.playerOptions.playerSC : getState().players.playerOptions.playerYT
+            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, player: player })
+            playTrack(nextTrack.kind, player, nextTrack.id, false)
           }
         } else if(direction === 'prev') {
           if(getState().tracklist.tracks[0].id != currentTrackId){ // if currentTrack is not the FIRST track in playlist
             nextTrack = getState().tracklist.tracks[index - 1]
-            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true })
+            dispatch({ type: C.SET_TRACK, track: nextTrack, trackPlaying: true, player: player })
           }
         }
       }
@@ -120,11 +126,24 @@ export function playNextTrack(direction) {
   }
 }
 
-function playTrack(playerKind, player, track){
-  if(playerKind === 'sc'){
-    player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
-  } else {
-    player.playVideo()
+function playTrack(playerKind, player, track, resumePlayback){
+  if(playerKind === 'sc') {
+    if (resumePlayback) { // if track is being resumed
+      let currentTime = player.audio.currentTime
+      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
+      player.audio.currentTime = currentTime
+    } else {
+      let currentTime = 0
+      player.play({streamUrl: 'https://api.soundcloud.com/tracks/'+track+'/stream'});
+      player.audio.currentTime = currentTime
+    }
+  } else { // YT track
+    if (resumePlayback) { // if track is being resumed
+      player.playVideo()
+    } else {
+      player.cueVideoById(track)
+      player.playVideo()
+    }
   }
 }
 
@@ -133,28 +152,6 @@ export function pauseTrack(playerKind, player){
     player.pause()
   } else {
     player.pauseVideo()
-  }
-}
-
-export function playToggleTrack(playingTrackInterval) {
-  clearInterval(playingTrackInterval)
-  return function(dispatch, getState){
-    let trackPlaying = getState().track.trackPlaying
-    let player = {}
-    let playerKind = getState().track.currentTrack.kind
-
-    if(playerKind === 'sc'){
-      player = getState().players.playerOptions.playerSC
-    } else {
-      player = getState().players.playerOptions.playerYT
-    }
-    if(trackPlaying){
-      pauseTrack(playerKind, player)
-      dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack, trackPlaying: false })
-    } else {
-      playTrack(playerKind, player, getState().track.currentTrack.id)
-      dispatch({ type: C.SET_TRACK, track: getState().track.currentTrack , trackPlaying: true })
-    }
   }
 }
 

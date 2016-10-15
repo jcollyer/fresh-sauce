@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
+import { togglePlayTrack, toggleFavoriteTrack, isTrackFavoritedByUser } from '../actions/track'
 import { loadAllTracks, loadTracksByGenre } from '../actions/tracklist'
 import { nextPage } from '../actions/tracklist'
 import Track from '../components/track'
@@ -49,7 +49,7 @@ class Tracklist extends Component {
       return <Track
         track={track}
         key={i}
-        onPlayTrackClicked={() => this.props.setTrack(track)}
+        onPlayTrackClicked={() => this.props.togglePlayTrack(track)}
         onToggleFavoriteTrackClicked={() => this.props.toggleFavoriteTrack(track)}
         isFavoritedByUser={this.props.isTrackFavoritedByUser(track.id)}
         isCurrentTrack={this.isCurrentTrack(track.id)}
@@ -74,4 +74,4 @@ const mapStateToProps = (appState) => {
   }
 }
 
-export default connect(mapStateToProps, { setTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks, loadTracksByGenre })(Tracklist)
+export default connect(mapStateToProps, { togglePlayTrack, toggleFavoriteTrack, isTrackFavoritedByUser, nextPage, loadAllTracks, loadTracksByGenre })(Tracklist)
