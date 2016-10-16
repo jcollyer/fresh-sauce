@@ -8,6 +8,10 @@ var _anonymouslygifted = require('./websites/anonymouslygifted.js');
 
 var _badperm = require('./websites/badperm.js');
 
+var _beatspill = require('./websites/beatspill.js');
+
+var _beatmecca = require('./websites/beatmecca.js');
+
 var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
 
 var _bound2hiphop = require('./websites/bound2hiphop.js');
@@ -21,6 +25,8 @@ var _carolinaontherise = require('./websites/carolinaontherise.js');
 var _fivechicago = require('./websites/fivechicago.js');
 
 var _goodmusicallday = require('./websites/goodmusicallday.js');
+
+var _highyellowsoul = require('./websites/highyellowsoul.js');
 
 var _neongoldrecords = require('./websites/neongoldrecords.js');
 
@@ -50,10 +56,11 @@ var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 
 var _zillanoise = require('./websites/zillanoise.js');
 
-var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _badperm.badperm, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //0(w 'this')
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _badperm.badperm, _beatmecca.beatmecca, _beatspill.beatspill, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //0(w 'this')
 _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
 _emergingindiebands.emergingindiebands, //1(w/out 'this')
 _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
+_highyellowsoul.highyellowsoul, //new
 _neongoldrecords.neongoldrecords, //1(w/out 'this')
 _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sinimabeats.sinimabeats, _sophistefunk.sophistefunk, //0(w/out 'this') 0(w/ 'this')
 _soulmusicsongs.soulmusicsongs, //1(w/out 'this')
