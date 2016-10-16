@@ -16,6 +16,8 @@ var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
 
 var _bound2hiphop = require('./websites/bound2hiphop.js');
 
+var _bsand3s = require('./websites/bsand3s.js');
+
 var _dimestoresaints = require('./websites/dimestoresaints.js');
 
 var _emergingindiebands = require('./websites/emergingindiebands.js');
@@ -56,7 +58,9 @@ var _wearegoingsolo = require('./websites/wearegoingsolo.js');
 
 var _zillanoise = require('./websites/zillanoise.js');
 
-var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _badperm.badperm, _beatmecca.beatmecca, _beatspill.beatspill, _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //0(w 'this')
+var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _badperm.badperm, _beatmecca.beatmecca, _beatspill.beatspill, //new
+_blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //0(w 'this')
+_bsand3s.bsand3s, //new
 _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
 _emergingindiebands.emergingindiebands, //1(w/out 'this')
 _carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')

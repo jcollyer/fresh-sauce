@@ -6,6 +6,7 @@ import { beatspill } from './websites/beatspill.js'
 import { beatmecca } from './websites/beatmecca.js'
 import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
+import { bsand3s } from './websites/bsand3s.js'
 import { dimestoresaints } from './websites/dimestoresaints.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
@@ -32,9 +33,10 @@ const funcs = [
   anonymouslygifted,
   badperm,
   beatmecca,
-  beatspill,
+  beatspill, //new
   blahblahblahsciencesoul,
   bound2hiphop, //0(w 'this')
+  bsand3s, //new
   dimestoresaints, //1(w/out 'this') 3(w/ 'this')
   emergingindiebands, //1(w/out 'this')
   carolinaontherise,
