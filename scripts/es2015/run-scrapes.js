@@ -1,33 +1,3 @@
-import { Promise } from 'bluebird'
-import { allthingsgomusic } from './websites/allthingsgomusic.js'
-import { anonymouslygifted } from './websites/anonymouslygifted.js'
-import { badperm } from './websites/badperm.js'
-import { beatspill } from './websites/beatspill.js'
-import { beatmecca } from './websites/beatmecca.js'
-import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
-import { bound2hiphop } from './websites/bound2hiphop.js'
-import { bsand3s } from './websites/bsand3s.js'
-import { dimestoresaints } from './websites/dimestoresaints.js'
-import { emergingindiebands } from './websites/emergingindiebands.js'
-import { carolinaontherise } from './websites/carolinaontherise.js'
-import { fivechicago } from './websites/fivechicago.js'
-import { goodmusicallday } from './websites/goodmusicallday.js'
-import { highyellowsoul } from './websites/highyellowsoul.js'
-import { neongoldrecords } from './websites/neongoldrecords.js'
-import { nialler9electro } from './websites/nialler9electro.js'
-import { nialler9hiphop } from './websites/nialler9hiphop.js'
-import { nialler9soul } from './websites/nialler9soul.js'
-import { repeatbutton } from './websites/repeatbutton.js'
-import { sinimabeats } from './websites/sinimabeats.js'
-import { sophistefunk } from './websites/sophistefunk.js'
-import { soulmusicsongs } from './websites/soulmusicsongs.js'
-import { stampthewax } from './websites/stampthewax.js'
-import { thebluewalrus } from './websites/thebluewalrus.js'
-import { theburningearremix } from './websites/theburningearremix.js'
-import { thenewlofi } from './websites/thenewlofi.js'
-import { wearegoingsolo } from './websites/wearegoingsolo.js'
-import { zillanoise } from './websites/zillanoise.js'
-
 const funcs = [
   allthingsgomusic,
   anonymouslygifted,
@@ -59,12 +29,13 @@ const funcs = [
   zillanoise // not testeted
 ]
 
+funcs.forEach((func, i)=>{
+  import { funcs[i] } from './websites/'+functs[i]+'.js' //import files
+  console.log(func, i)
+  func() //run functions from files
+})
+
 setTimeout(() => {
   console.log("bye...")
   process.exit()
 },30000)
-
-funcs.forEach((func, i)=>{
-  console.log(func, i)
-  func()
-})
