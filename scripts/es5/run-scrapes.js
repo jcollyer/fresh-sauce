@@ -1,16 +1,14 @@
 'use strict';
 
-var _bluebird = require('bluebird');
-
 var _allthingsgomusic = require('./websites/allthingsgomusic.js');
 
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
 
 var _badperm = require('./websites/badperm.js');
 
-var _beatspill = require('./websites/beatspill.js');
-
 var _beatmecca = require('./websites/beatmecca.js');
+
+var _beatspill = require('./websites/beatspill.js');
 
 var _blahblahblahsciencesoul = require('./websites/blahblahblahsciencesoul.js');
 
@@ -23,6 +21,8 @@ var _dimestoresaints = require('./websites/dimestoresaints.js');
 var _emergingindiebands = require('./websites/emergingindiebands.js');
 
 var _carolinaontherise = require('./websites/carolinaontherise.js');
+
+var _chicityhiphop = require('./websites/chicityhiphop.js');
 
 var _fivechicago = require('./websites/fivechicago.js');
 
@@ -63,7 +63,8 @@ _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //
 _bsand3s.bsand3s, //new
 _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
 _emergingindiebands.emergingindiebands, //1(w/out 'this')
-_carolinaontherise.carolinaontherise, _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
+_carolinaontherise.carolinaontherise, _chicityhiphop.chicityhiphop, //new
+_fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
 _highyellowsoul.highyellowsoul, //new
 _neongoldrecords.neongoldrecords, //1(w/out 'this')
 _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sinimabeats.sinimabeats, _sophistefunk.sophistefunk, //0(w/out 'this') 0(w/ 'this')
@@ -72,12 +73,12 @@ _stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _theburningearremix.theb
 _wearegoingsolo.wearegoingsolo, _zillanoise.zillanoise // not testeted
 ];
 
+funcs.forEach(function (func, i) {
+  console.log(func, i);
+  func(); //run functions from files
+});
+
 setTimeout(function () {
   console.log("bye...");
   process.exit();
 }, 30000);
-
-funcs.forEach(function (func, i) {
-  console.log(func, i);
-  func();
-});
