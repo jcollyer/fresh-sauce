@@ -90,25 +90,6 @@ input {
       float: right;
     }
   }
-  #player-track-prgress {
-    position: absolute;
-    top: 100px;
-    width: 100%;
-    #progress-container {
-      background: @gray;
-      cursor: pointer;
-      height: 100%;
-      position: relative;
-      width: 100%;
-      z-index: 3;
-      #progress {
-        background: @gray-1;
-        height: 100%;
-        position: absolute;
-        width: 13%;
-      }
-    }
-  }
 }
 #auth {
   float: right;
@@ -358,6 +339,26 @@ input {
         display: none;
       }
     }
+    #player-track-prgress {
+      position: absolute;
+      top: 0px;
+      height: 4px;
+      width: 100%;
+      #progress-container {
+        background: @gray;
+        cursor: pointer;
+        height: 100%;
+        position: relative;
+        width: 100%;
+        z-index: 3;
+        #progress {
+          background: @gray-1;
+          height: 100%;
+          position: absolute;
+          width: auto;
+        }
+      }
+    }
   }
   #auth{
     background: @hotred;
@@ -486,6 +487,14 @@ input {
       #player-track-time {
         display: block;
         margin-top: 20px;
+      }
+    }
+    #player-track-prgress {
+      top: 100px;
+      transition: height 0.1s, top 0.1s;
+      &:hover {
+        top: 97px;
+        height: 10px;
       }
     }
   }
