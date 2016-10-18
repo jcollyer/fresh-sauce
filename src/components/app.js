@@ -1,12 +1,12 @@
 import React from 'react'
 import Player from '../containers/player'
-import Auth from '../containers/auth'
+import ActionBar from './action-bar'
 
 
 export default function App({ children }) {
   return (
     <div id='wrapper'>
-      <Auth />
+      <ActionBar />
       <Player />
       {children}
     </div>

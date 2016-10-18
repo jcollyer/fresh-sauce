@@ -9,7 +9,12 @@ class HomeButton extends Component {
     this.props.loadAllTracks()
   }
   render() {
-    return <button onClick={()=>this.goHome()}>Home</button>
+    return (
+      <div className="home-button" onClick={()=>this.goHome()}>
+        <i className="icon-House"></i>
+        <p>Home</p>
+      </div>
+    )
   }
 }
 

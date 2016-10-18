@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300);
 //white to black
-@offwhite: #E7E7DE;
 @lightgray: #F6F6F6;
 @gray: #EEE;
 @gray-1: #BBB;
@@ -92,19 +91,17 @@ input {
   }
 }
 #auth {
-  float: right;
   #logged-in {
     #auth-button {
       cursor: pointer;
       float: right;
       font-size: 25px;
-      margin: 10px 65px 10px;
-      padding-right: 3%;
+      margin: 7px 0 8px;
       position: relative;
     }
     #auth-menu {
       background: white;
-      border: 1px solid @offwhite;
+      border: 1px solid @lightgray;
       bottom: -110px;
       font-family: 'Josefin Sans', sans-serif;
       font-size: 16px;
@@ -126,14 +123,14 @@ input {
         width: 0;
       }
       #username {
-        border-bottom: 1px solid @offwhite;
+        border-bottom: 1px solid @lightgray;
         padding: 9px;
       }
       .menu-link:last-child {
         border-bottom: none;
       }
       .menu-link {
-        border-bottom: 1px solid @offwhite;
+        border-bottom: 1px solid @lightgray;
         cursor: pointer;
         padding: 9px;
         text-align: center;
@@ -143,7 +140,7 @@ input {
           text-decoration: none;
         }
         &:hover {
-          background: @offwhite;
+          background: @lightgray;
         }
       }
       div#username {
@@ -156,18 +153,14 @@ input {
     #loggin-button {
       cursor: pointer;
       float: right;
-      font-size: 21px;
-      margin: 10px 5px 10px;
-      padding-right: 3%;
+      font-size: 25px;
+      margin: 7px 0 8px;
       position: relative;
     }
   }
   #log-in {
-    background: white;
-    border-bottom: 1px solid @offwhite;
-    border-left: 1px solid @offwhite;
-    border-right: 1px solid @offwhite;
-    margin-top: 44px;
+    background: @lightgray;
+    margin-top: 38px;
     position: absolute;
     right: 20px;
     top: 2px;
@@ -266,6 +259,7 @@ input {
         float: left;
       }
       .go-to-track-detail {
+        display:none;
         color: #444;
         float: left;
         text-decoration: none;
@@ -308,7 +302,7 @@ input {
     }
     #player-track-info {
       background: @offblack;
-      color: @offwhite;
+      color: @lightgray;
       height: 70px;
       padding: 5px;
       text-align: center;
@@ -322,7 +316,7 @@ input {
         font-size: 10px;
       }
       #player-track-controls {
-        color: @offwhite;
+        color: @lightgray;
         margin: 5px auto;
         width: 260px;
         i.icon.active {
@@ -360,12 +354,24 @@ input {
       }
     }
   }
-  #auth{
+  #action-bar {
     background: @hotred;
     position: fixed;
     top: 0px;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
+    .home-button {
+      cursor: pointer;
+      float: right;
+      margin: 4px 15px 0px 15px;
+      i {
+        font-size: 21px;
+      }
+      p {
+        font-size: 10px;
+        margin: 0px;
+      }
+    }
   }
   #tracklist {
     .track-item {
@@ -467,19 +473,21 @@ input {
     }
     #player-track-info {
       background: white;
-      color: @offblack;
+      color: @darkgray;
       float: left;
       width: ~"calc(100% - 200px)";
       h3 {
         font-size: 26px;
         margin: 0px;
-        padding: 7px 10px 0px;
+        padding: 3px 100px 2px 0px;
       }
       h4 {
         font-size: 16px;
-        padding: 0px 7px 5px
+        padding: 0px 100px 4px 0px;
       }
       #player-track-controls {
+        padding-right: 100px;
+        width: 330px;
         i.icon {
           color: @offblack;
         }
@@ -498,16 +506,18 @@ input {
       }
     }
   }
-  #auth{
+  #action-bar {
     background: @lightgray;
     border-bottom: 1px solid white;
     top: 104px;
     z-index: 2;
-    #firebaseui-auth-container {
-      .firebaseui-container {
-        right: auto;
-        top: 0px;
-        position: relative;
+    #auth{
+      #firebaseui-auth-container {
+        .firebaseui-container {
+          right: auto;
+          top: 0px;
+          position: relative;
+        }
       }
     }
   }
