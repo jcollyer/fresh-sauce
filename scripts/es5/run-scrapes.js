@@ -16,10 +16,6 @@ var _bound2hiphop = require('./websites/bound2hiphop.js');
 
 var _bsand3s = require('./websites/bsand3s.js');
 
-var _dimestoresaints = require('./websites/dimestoresaints.js');
-
-var _emergingindiebands = require('./websites/emergingindiebands.js');
-
 var _carolinaontherise = require('./websites/carolinaontherise.js');
 
 var _chicityhiphop = require('./websites/chicityhiphop.js');
@@ -27,6 +23,12 @@ var _chicityhiphop = require('./websites/chicityhiphop.js');
 var _chineurdesonschill = require('./websites/chineurdesonschill.js');
 
 var _chineurdesonsremix = require('./websites/chineurdesonsremix.js');
+
+var _cream = require('./websites/cream.js');
+
+var _dimestoresaints = require('./websites/dimestoresaints.js');
+
+var _emergingindiebands = require('./websites/emergingindiebands.js');
 
 var _fivechicago = require('./websites/fivechicago.js');
 
@@ -65,11 +67,11 @@ var _zillanoise = require('./websites/zillanoise.js');
 var funcs = [_allthingsgomusic.allthingsgomusic, _anonymouslygifted.anonymouslygifted, _badperm.badperm, _beatmecca.beatmecca, _beatspill.beatspill, //new
 _blahblahblahsciencesoul.blahblahblahsciencesoul, _bound2hiphop.bound2hiphop, //0(w 'this')
 _bsand3s.bsand3s, //new
-_dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
-_emergingindiebands.emergingindiebands, //1(w/out 'this')
 _carolinaontherise.carolinaontherise, _chicityhiphop.chicityhiphop, //new
 _chineurdesonschill.chineurdesonschill, //new
 _chineurdesonsremix.chineurdesonsremix, //new
+_cream.cream, _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
+_emergingindiebands.emergingindiebands, //1(w/out 'this')
 _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
 _highyellowsoul.highyellowsoul, //new
 _neongoldrecords.neongoldrecords, //1(w/out 'this')

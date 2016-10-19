@@ -6,12 +6,13 @@ import { beatspill } from './websites/beatspill.js'
 import { blahblahblahsciencesoul } from './websites/blahblahblahsciencesoul.js'
 import { bound2hiphop } from './websites/bound2hiphop.js'
 import { bsand3s } from './websites/bsand3s.js'
-import { dimestoresaints } from './websites/dimestoresaints.js'
-import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
 import { chicityhiphop } from './websites/chicityhiphop.js'
 import { chineurdesonschill } from './websites/chineurdesonschill.js'
 import { chineurdesonsremix } from './websites/chineurdesonsremix.js'
+import { cream } from './websites/cream.js'
+import { dimestoresaints } from './websites/dimestoresaints.js'
+import { emergingindiebands } from './websites/emergingindiebands.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { highyellowsoul } from './websites/highyellowsoul.js'
@@ -39,12 +40,13 @@ const funcs = [
   blahblahblahsciencesoul,
   bound2hiphop, //0(w 'this')
   bsand3s, //new
-  dimestoresaints, //1(w/out 'this') 3(w/ 'this')
-  emergingindiebands, //1(w/out 'this')
   carolinaontherise,
   chicityhiphop, //new
   chineurdesonschill, //new
   chineurdesonsremix, //new
+  cream,
+  dimestoresaints, //1(w/out 'this') 3(w/ 'this')
+  emergingindiebands, //1(w/out 'this')
   fivechicago,
   goodmusicallday, //1(w/out 'this')
   highyellowsoul, //new
