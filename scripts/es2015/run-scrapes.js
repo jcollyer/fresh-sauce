@@ -10,6 +10,8 @@ import { dimestoresaints } from './websites/dimestoresaints.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { carolinaontherise } from './websites/carolinaontherise.js'
 import { chicityhiphop } from './websites/chicityhiphop.js'
+import { chineurdesonschill } from './websites/chineurdesonschill.js'
+import { chineurdesonsremix } from './websites/chineurdesonsremix.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
 import { highyellowsoul } from './websites/highyellowsoul.js'
@@ -41,6 +43,8 @@ const funcs = [
   emergingindiebands, //1(w/out 'this')
   carolinaontherise,
   chicityhiphop, //new
+  chineurdesonschill, //new
+  chineurdesonsremix, //new
   fivechicago,
   goodmusicallday, //1(w/out 'this')
   highyellowsoul, //new

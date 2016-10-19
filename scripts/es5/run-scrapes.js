@@ -24,6 +24,10 @@ var _carolinaontherise = require('./websites/carolinaontherise.js');
 
 var _chicityhiphop = require('./websites/chicityhiphop.js');
 
+var _chineurdesonschill = require('./websites/chineurdesonschill.js');
+
+var _chineurdesonsremix = require('./websites/chineurdesonsremix.js');
+
 var _fivechicago = require('./websites/fivechicago.js');
 
 var _goodmusicallday = require('./websites/goodmusicallday.js');
@@ -64,6 +68,8 @@ _bsand3s.bsand3s, //new
 _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
 _emergingindiebands.emergingindiebands, //1(w/out 'this')
 _carolinaontherise.carolinaontherise, _chicityhiphop.chicityhiphop, //new
+_chineurdesonschill.chineurdesonschill, //new
+_chineurdesonsremix.chineurdesonsremix, //new
 _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
 _highyellowsoul.highyellowsoul, //new
 _neongoldrecords.neongoldrecords, //1(w/out 'this')
