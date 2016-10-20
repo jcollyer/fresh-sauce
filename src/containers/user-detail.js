@@ -20,8 +20,6 @@ class UserDetail extends Component {
     }
   }
   isThisTrackPlaying(track) {
-    console.log(track.id)
-    console.log(this.props.currentTrack)
     if(this.props.currentTrack && this.props.currentTrack.id === track.id && this.props.trackPlaying){
       return true
     } else {

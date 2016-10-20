@@ -30,7 +30,6 @@ class Player extends Component {
       trackPosition = trackPosition / 1000
       players.playerYT.seekTo(trackPosition)
     } else {
-      console.log(trackPosition)
       players.playerSC.audio.currentTime = trackPosition / 1000
       // players.playerSC.seekTo(trackPosition)
     }
@@ -69,7 +68,7 @@ class Player extends Component {
             <div id='yt-thumb' className={track.kind === 'yt' ? '' : 'hide'}>
               <img src={track.artwork_url} className={trackPlaying === true ? 'hide' : ''} />
             </div>
-            <div id='sc-thumb'>
+            <div id='sc-thumb' className={track.kind === 'sc' ? '' : 'hide'}>
               <img src={track.artwork_url_midres} className={track.kind === 'sc' ? '' : 'hide'} onClick={() => this.toggleSCTrack(players.playerSC)} />
             </div>
           </div>

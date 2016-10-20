@@ -30,9 +30,8 @@ function recursivelyGetTracks(startAt, genre) {
 function loadTracks(startAt, genre) {
   console.log('startAt: ', startAt, 'genre: ', genre)
   let tracksArr = []
-  let sanitizedTrack
+  let sanitizedTrack = {}
   let allTracks = []
-
   tracksRef.orderByChild('timestamp').startAt(startAt).limitToFirst(30).on('value', (snapshot) => {
     snapshot.forEach((track) => {
       sanitizedTrack = sanitizeTrack(track.val())
@@ -98,7 +97,7 @@ export function loadAllTracks() {
     let trackPlaying = getState().track.trackPlaying
     tracksRef.orderByChild('timestamp').on('value', (snapshot) => { // get snapshot to determine timestamp of first track
       snapshot.forEach((track) => {
-        tracksOnloadArr.push(track.val())
+        tracksOnloadArr.push(sanitizeTrack(track.val()))
       })
       firstTimestamp = tracksOnloadArr[0].timestamp
       loadTracksObj = loadTracks(firstTimestamp, '')
