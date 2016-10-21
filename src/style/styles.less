@@ -95,17 +95,24 @@ input {
     #auth-button {
       cursor: pointer;
       float: right;
-      font-size: 25px;
-      margin: 7px 0 8px;
+      margin: 6px 5px 0px 0px;
       position: relative;
+      i {
+        float: left;
+        font-size: 25px;
+      }
+      p {
+        float: left;
+        line-height: 1.5em;
+        margin-right: 10px;
+      }
     }
     #auth-menu {
       background: white;
-      border: 1px solid @lightgray;
-      bottom: -110px;
+      border: 1px solid @gray;
+      bottom: -41px;
       font-family: 'Josefin Sans', sans-serif;
       font-size: 16px;
-      height: 100px;
       margin-right: 50%;
       position: absolute;
       right: -65px;
@@ -121,10 +128,6 @@ input {
         top: -5px;
         position: absolute;
         width: 0;
-      }
-      #username {
-        border-bottom: 1px solid @lightgray;
-        padding: 9px;
       }
       .menu-link:last-child {
         border-bottom: none;
@@ -143,19 +146,22 @@ input {
           background: @lightgray;
         }
       }
-      div#username {
-        font-size: 12px;
-        text-align: left;
-      }
     }
   }
   #logged-out {
     #loggin-button {
       cursor: pointer;
       float: right;
-      font-size: 25px;
-      margin: 7px 0 8px;
       position: relative;
+      margin: 3px 5px 0px 0px;
+      i {
+        font-size: 21px;
+      }
+      p {
+        font-size: 10px;
+        margin: 0px;
+        text-transform: capitalize;
+      }
     }
   }
   #log-in {

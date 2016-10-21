@@ -32,16 +32,20 @@ class Auth extends Component {
     return (
       <div id='auth'>
         <div id='logged-in' className={ username === 'guest' ? 'hide' : ''}>
-          <div id='auth-button' className='icon icon-user' onClick={() => this.props.toggleAuthPanel()}>
+          <div id='auth-button' onClick={() => this.props.toggleAuthPanel()}>
+            <Link to={`/users/${uid}`}><p>{username}</p></Link>
+            <i className='icon icon-user'></i>
+
             <div id='auth-menu' className={ displayingAuthPanel ? '' : 'hide'}>
-              <div id='username'>hi, {username}</div>
-              <div className='menu-link' id='profile'><Link to={`/users/${uid}`}>Profile</Link></div>
               <div className='menu-link' id='logout' onClick={() => this.logoutUser()}>Log Out</div>
             </div>
           </div>
         </div>
         <div id='logged-out' className={ username === 'guest' ? '' : 'hide'}>
-          <div id='loggin-button' className='icon icon-user' onClick={() => this.props.toggleLogInPanel()}></div>
+          <div id='loggin-button' onClick={() => this.props.toggleLogInPanel()}>
+            <i className='icon icon-user'></i>
+            <p>{username}</p>
+          </div>
         </div>
         <div id='log-in' className={ displayingLogInPanel ? '' : 'hide'}>
           <i className='icon icon-close' onClick={() => this.props.toggleLogInPanel()}></i>
