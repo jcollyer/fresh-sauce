@@ -5,7 +5,6 @@ const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
 const favoritesRef = ref.child('favorites')
 const usersRef = ref.child('users')
-import { sanitizeTrack } from './tracklist'
 
 export function togglePlayTrack(track) {
   return function(dispatch, getState){
