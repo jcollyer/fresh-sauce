@@ -14,6 +14,7 @@ import { crackedatoms } from './websites/crackedatoms.js'
 import { cream } from './websites/cream.js'
 import { dimestoresaints } from './websites/dimestoresaints.js'
 import { djbooth } from './websites/djbooth.js'
+import { dotgotit } from './websites/dotgotit.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
@@ -50,6 +51,7 @@ const funcs = [
   cream,
   dimestoresaints, //1(w/out 'this') 3(w/ 'this')
   djbooth,
+  dotgotit,
   emergingindiebands, //1(w/out 'this')
   fivechicago,
   goodmusicallday, //1(w/out 'this')
