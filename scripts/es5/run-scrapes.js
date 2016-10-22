@@ -24,6 +24,8 @@ var _chineurdesonschill = require('./websites/chineurdesonschill.js');
 
 var _chineurdesonsremix = require('./websites/chineurdesonsremix.js');
 
+var _crackedatoms = require('./websites/crackedatoms.js');
+
 var _cream = require('./websites/cream.js');
 
 var _dimestoresaints = require('./websites/dimestoresaints.js');
@@ -70,11 +72,12 @@ _bsand3s.bsand3s, //new
 _carolinaontherise.carolinaontherise, _chicityhiphop.chicityhiphop, //new
 _chineurdesonschill.chineurdesonschill, //new
 _chineurdesonsremix.chineurdesonsremix, //new
+_crackedatoms.crackedatoms, //new
 _cream.cream, _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
 _emergingindiebands.emergingindiebands, //1(w/out 'this')
 _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
 _highyellowsoul.highyellowsoul, //new
-_neongoldrecords.neongoldrecords, //1(w/out 'this')
+// neongoldrecords, //1(w/out 'this')
 _nialler9electro.nialler9electro, _nialler9hiphop.nialler9hiphop, _nialler9soul.nialler9soul, _repeatbutton.repeatbutton, _sinimabeats.sinimabeats, _sophistefunk.sophistefunk, //0(w/out 'this') 0(w/ 'this')
 _soulmusicsongs.soulmusicsongs, //1(w/out 'this')
 _stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _theburningearremix.theburningearremix, _thenewlofi.thenewlofi, //1(w/out 'this')

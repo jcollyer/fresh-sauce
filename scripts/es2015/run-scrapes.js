@@ -10,6 +10,7 @@ import { carolinaontherise } from './websites/carolinaontherise.js'
 import { chicityhiphop } from './websites/chicityhiphop.js'
 import { chineurdesonschill } from './websites/chineurdesonschill.js'
 import { chineurdesonsremix } from './websites/chineurdesonsremix.js'
+import { crackedatoms } from './websites/crackedatoms.js'
 import { cream } from './websites/cream.js'
 import { dimestoresaints } from './websites/dimestoresaints.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
@@ -44,6 +45,7 @@ const funcs = [
   chicityhiphop, //new
   chineurdesonschill, //new
   chineurdesonsremix, //new
+  crackedatoms, //new
   cream,
   dimestoresaints, //1(w/out 'this') 3(w/ 'this')
   emergingindiebands, //1(w/out 'this')
