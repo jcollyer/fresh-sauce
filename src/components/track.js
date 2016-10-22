@@ -22,9 +22,9 @@ export default (props) => {
               return(<p key={i}> &nbsp; {genre} &#9834;</p>)
             })}
           </div>
-          <a className='origin-link' href={props.track.sourceUrl || "" } target='_blank'>
-            {props.track.sourceUrl || "" }
+          <a className='origin-link' href={props.track.href} target='_blank'>
             <i className="icon icon-goto"></i>
+            {props.track.href.replace(/^https?\:\/\//i, "").replace("www.","").replace(/^/,'www.').split("/")[0]}
           </a>
           <i className={props.track.featured ? 'icon icon-heart' : 'hide'} ></i>
         </div>

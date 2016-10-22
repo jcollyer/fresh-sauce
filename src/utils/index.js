@@ -33,7 +33,8 @@ export function sanitizeTrack(track) {
       artist: track.artist,
       permalink: track.permalink,
       linkTitle: 'SoundCloud ',
-      linkIcon: 'icon icon-soundcloud '
+      linkIcon: 'icon icon-soundcloud ',
+      href: track.href || ""
     }
   } else if (track.kind === 'yt') {
     sanitizedTrack = {
@@ -51,7 +52,8 @@ export function sanitizeTrack(track) {
       artist: track.artist,
       permalink: track.permalink,
       linkIcon: 'icon icon-youtube',
-      linkTitle: 'YouTube'
+      linkTitle: 'YouTube',
+      href: track.href || ""
     }
   }
   return sanitizedTrack

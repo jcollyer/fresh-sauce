@@ -62,7 +62,6 @@ function getTrack(href, allIds, sessionIds, siteData) {
   request({url: href}, function(err, response, body) {
     if (err) return console.error(err);
     $ = cheerio.load(body);
-
     if($(siteData.subSiteElements).length < 1) {
       console.warn('Can\'t find any "siteData.subSiteElements" elements')
     } else {
@@ -75,9 +74,9 @@ function getTrack(href, allIds, sessionIds, siteData) {
         })
 
         if (scUrl) {
-          pushTrack(scUrl, sessionIds, filteredIds, allIds, siteData);
+          pushTrack(scUrl, sessionIds, filteredIds, allIds, siteData, href);
         } else if (ytUrl) {
-          pushTrack(ytUrl, sessionIds, filteredIds, allIds, siteData);
+          pushTrack(ytUrl, sessionIds, filteredIds, allIds, siteData, href);
         } else if (vimeoUrl) {
           console.warn("Vimeo URL")
         } else {
@@ -88,7 +87,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
   });
 };
 
-function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
+function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
   let idLength
   let idType
   let thisId = null
@@ -107,14 +106,14 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData) {
   }
 
   if(thisId != null && sessionIds.indexOf(thisId) === -1 && allIds.indexOf(thisId) === -1) {
-    requestSoundCloudOrYouTube(thisId, idType, siteData)
+    requestSoundCloudOrYouTube(thisId, idType, siteData, href)
     sessionIds.push(thisId)
   } else {
     console.warn("ID already added")
   }
 }
 
-function requestSoundCloudOrYouTube(id, idType, siteData) {
+function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   const url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status'
   request(url, function (error, response, body) {
     if (error) {
@@ -125,7 +124,7 @@ function requestSoundCloudOrYouTube(id, idType, siteData) {
       const genre = siteData.genre
 
       if(data) { // Make sure data is not empty
-        const track = idType === 'sc' ? formatSCData({id:id}, data, genre) : formatYTData({id:id}, data, genre)
+        const track = idType === 'sc' ? formatSCData({id:id}, data, genre, href) : formatYTData({id:id}, data, genre, href)
 
         // Add data to firebase
         // same code found in ./src/components/add-track
@@ -137,7 +136,7 @@ function requestSoundCloudOrYouTube(id, idType, siteData) {
   })
 }
 // same code found in ./src/components/add-track
-function formatSCData(track, data, genre) {
+function formatSCData(track, data, genre, href) {
   track.artist = data.user.username
   track.artwork_url = data.artwork_url
   track.artwork_url_midres = data.artwork_url ? data.artwork_url.replace('large','t200x200') : ''
@@ -151,11 +150,12 @@ function formatSCData(track, data, genre) {
   track.tag_list = data.tag_list
   track.timestamp = 0 - Date.now()
   track.title = data.title
+  track.href = href
   return track
 }
 
 // same code found in ./src/components/add-track
-function formatYTData(track, data, genre) {
+function formatYTData(track, data, genre, href) {
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : ''
   track.artwork_url = data.items[0].snippet.thumbnails.default.url
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url
@@ -170,6 +170,7 @@ function formatYTData(track, data, genre) {
   track.timestamp = 0 - Date.now()
   track.title = data.items[0].snippet.title
   track.user = data.items[0].snippet.channelId
+  track.href = href
   return track
 }
 

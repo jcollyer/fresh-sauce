@@ -50,7 +50,7 @@ const funcs = [
   fivechicago,
   goodmusicallday, //1(w/out 'this')
   highyellowsoul, //new
-  neongoldrecords, //1(w/out 'this')
+  // neongoldrecords, //1(w/out 'this')
   nialler9electro,
   nialler9hiphop,
   nialler9soul,
