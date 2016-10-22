@@ -30,6 +30,8 @@ var _cream = require('./websites/cream.js');
 
 var _dimestoresaints = require('./websites/dimestoresaints.js');
 
+var _djbooth = require('./websites/djbooth.js');
+
 var _emergingindiebands = require('./websites/emergingindiebands.js');
 
 var _fivechicago = require('./websites/fivechicago.js');
@@ -74,7 +76,7 @@ _chineurdesonschill.chineurdesonschill, //new
 _chineurdesonsremix.chineurdesonsremix, //new
 _crackedatoms.crackedatoms, //new
 _cream.cream, _dimestoresaints.dimestoresaints, //1(w/out 'this') 3(w/ 'this')
-_emergingindiebands.emergingindiebands, //1(w/out 'this')
+_djbooth.djbooth, _emergingindiebands.emergingindiebands, //1(w/out 'this')
 _fivechicago.fivechicago, _goodmusicallday.goodmusicallday, //1(w/out 'this')
 _highyellowsoul.highyellowsoul, //new
 // neongoldrecords, //1(w/out 'this')

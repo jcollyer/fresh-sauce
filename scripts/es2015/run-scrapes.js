@@ -13,6 +13,7 @@ import { chineurdesonsremix } from './websites/chineurdesonsremix.js'
 import { crackedatoms } from './websites/crackedatoms.js'
 import { cream } from './websites/cream.js'
 import { dimestoresaints } from './websites/dimestoresaints.js'
+import { djbooth } from './websites/djbooth.js'
 import { emergingindiebands } from './websites/emergingindiebands.js'
 import { fivechicago } from './websites/fivechicago.js'
 import { goodmusicallday } from './websites/goodmusicallday.js'
@@ -48,6 +49,7 @@ const funcs = [
   crackedatoms, //new
   cream,
   dimestoresaints, //1(w/out 'this') 3(w/ 'this')
+  djbooth,
   emergingindiebands, //1(w/out 'this')
   fivechicago,
   goodmusicallday, //1(w/out 'this')
