@@ -64,9 +64,11 @@ class Player extends Component {
         <div id='ui-player'>
 
           <div id='player-track-artwork'>
-            <div id='yt_widget' className={track.kind === 'yt' && trackPlaying === true ? '' : 'offscreen'}></div>
-            <div id='yt-thumb' className={track.kind === 'yt' ? '' : 'hide'}>
-              <img src={track.artwork_url} className={trackPlaying === true ? 'hide' : ''} />
+            <div id='yt_widget' className={track.kind === 'yt' && trackPlaying ? '' : 'offscreen'}></div>
+            <div className={track.kind === 'yt' ? '' : 'hide'}>
+              <div id='yt-thumb' className={trackPlaying ? 'hide' : ''}>
+                <img src={track.artwork_url}  />
+              </div>
             </div>
             <div id='sc-thumb' className={track.kind === 'sc' ? '' : 'hide'}>
               <img src={track.artwork_url_midres} className={track.kind === 'sc' ? '' : 'hide'} onClick={() => this.toggleSCTrack(players.playerSC)} />
