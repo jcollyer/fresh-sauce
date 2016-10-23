@@ -135,8 +135,12 @@ function requestSoundCloudOrYouTube(id, idType, siteData, href) {
     }
   })
 }
-// same code found in ./src/components/add-track
+
 function formatSCData(track, data, genre, href) {
+  if (data.title && data.title.indexOf("remix" || "Remix") > -1 && genre.indexOf("remix" || "Remix") < 0){ // add remix genre if title includes string 'remix' and not already remix genre
+    genre.push("remix")
+  }
+
   track.artist = data.user.username
   track.artwork_url = data.artwork_url
   track.artwork_url_midres = data.artwork_url ? data.artwork_url.replace('large','t200x200') : ''
@@ -154,8 +158,11 @@ function formatSCData(track, data, genre, href) {
   return track
 }
 
-// same code found in ./src/components/add-track
 function formatYTData(track, data, genre, href) {
+  if (data.items[0] && data.items[0].snippet.title.indexOf("remix" || "Remix") > -1 && genre.indexOf("remix" || "Remix") < 0){ // add remix genre if title includes string 'remix' and not already remix genre
+    genre.push("remix")
+  }
+
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : ''
   track.artwork_url = data.items[0].snippet.thumbnails.default.url
   track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url
