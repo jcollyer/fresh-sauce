@@ -15,6 +15,6 @@ var siteData = {
   genre: ['remix']
 };
 
-function theburningearremix() {
-  (0, _config.requestWebsite)(siteData);
+function theburningearremix(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

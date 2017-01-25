@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function carolinaontherise() {
-  (0, _config.requestWebsite)(siteData);
+function carolinaontherise(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

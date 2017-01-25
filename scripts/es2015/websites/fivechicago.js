@@ -8,6 +8,6 @@ const siteData = {
   genre: ['house']
 }
 
-export function fivechicago() {
-  requestWebsite(siteData)
+export function fivechicago(allIds) {
+  requestWebsite(siteData, allIds)
 }

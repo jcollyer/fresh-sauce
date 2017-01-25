@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function beatspill() {
-  requestWebsite(siteData)
+export function beatspill(allIds) {
+  requestWebsite(siteData, allIds)
 }

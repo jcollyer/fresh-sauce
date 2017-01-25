@@ -15,6 +15,6 @@ var siteData = {
   genre: ['bands']
 };
 
-function emergingindiebands() {
-  (0, _config.requestWebsite)(siteData);
+function emergingindiebands(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

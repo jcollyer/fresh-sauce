@@ -15,6 +15,6 @@ var siteData = {
   genre: ['chill']
 };
 
-function dimestoresaints() {
-  (0, _config.requestWebsite)(siteData);
+function dimestoresaints(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

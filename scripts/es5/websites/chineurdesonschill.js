@@ -15,6 +15,6 @@ var siteData = {
   genre: ['chill']
 };
 
-function chineurdesonschill() {
-  (0, _config.requestWebsite)(siteData);
+function chineurdesonschill(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

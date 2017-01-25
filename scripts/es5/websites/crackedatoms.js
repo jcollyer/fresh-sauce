@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop', 'pop']
 };
 
-function crackedatoms() {
-  (0, _config.requestWebsite)(siteData);
+function crackedatoms(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

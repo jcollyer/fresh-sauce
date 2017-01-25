@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function bsand3s() {
-  (0, _config.requestWebsite)(siteData);
+function bsand3s(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['funk']
 }
 
-export function stampthewax() {
-  requestWebsite(siteData)
+export function stampthewax(allIds) {
+  requestWebsite(siteData, allIds)
 }

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['beats']
 }
 
-export function sinimabeats() {
-  requestWebsite(siteData)
+export function sinimabeats(allIds) {
+  requestWebsite(siteData, allIds)
 }

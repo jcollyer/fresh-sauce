@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function bound2hiphop() {
-  (0, _config.requestWebsite)(siteData);
+function bound2hiphop(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

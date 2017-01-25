@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function anonymouslygifted() {
-  requestWebsite(siteData)
+export function anonymouslygifted(allIds) {
+  requestWebsite(siteData, allIds)
 }

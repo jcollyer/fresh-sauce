@@ -15,6 +15,6 @@ var siteData = {
   genre: ['bands']
 };
 
-function thenewlofi() {
-  (0, _config.requestWebsite)(siteData);
+function thenewlofi(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

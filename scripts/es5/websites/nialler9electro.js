@@ -15,6 +15,6 @@ var siteData = {
   genre: ['chill']
 };
 
-function nialler9electro() {
-  (0, _config.requestWebsite)(siteData);
+function nialler9electro(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

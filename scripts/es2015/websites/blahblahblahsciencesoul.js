@@ -8,6 +8,6 @@ const siteData = {
   genre: ['soul']
 }
 
-export function blahblahblahsciencesoul() {
-  requestWebsite(siteData)
+export function blahblahblahsciencesoul(allIds) {
+  requestWebsite(siteData, allIds)
 }

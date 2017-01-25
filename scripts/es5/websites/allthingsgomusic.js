@@ -15,6 +15,6 @@ var siteData = {
   genre: ['pop']
 };
 
-function allthingsgomusic() {
-  (0, _config.requestWebsite)(siteData);
+function allthingsgomusic(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

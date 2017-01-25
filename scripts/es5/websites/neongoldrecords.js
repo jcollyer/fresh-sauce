@@ -15,6 +15,6 @@ var siteData = {
   genre: ['pop']
 };
 
-function neongoldrecords() {
-  (0, _config.requestWebsite)(siteData);
+function neongoldrecords(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

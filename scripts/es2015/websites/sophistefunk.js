@@ -8,6 +8,6 @@ const siteData = {
   genre: ['funk']
 }
 
-export function sophistefunk() {
-  requestWebsite(siteData)
+export function sophistefunk(allIds) {
+  requestWebsite(siteData, allIds)
 }

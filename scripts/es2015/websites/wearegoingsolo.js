@@ -8,6 +8,6 @@ const siteData = {
   genre: ['chill', 'bands']
 }
 
-export function wearegoingsolo() {
-  requestWebsite(siteData)
+export function wearegoingsolo(allIds) {
+  requestWebsite(siteData, allIds)
 }

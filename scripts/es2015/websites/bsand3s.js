@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function bsand3s() {
-  requestWebsite(siteData)
+export function bsand3s(allIds) {
+  requestWebsite(siteData, allIds)
 }

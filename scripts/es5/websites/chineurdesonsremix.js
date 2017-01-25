@@ -15,6 +15,6 @@ var siteData = {
   genre: ['remix']
 };
 
-function chineurdesonsremix() {
-  (0, _config.requestWebsite)(siteData);
+function chineurdesonsremix(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

@@ -1,5 +1,7 @@
 'use strict';
 
+var _config = require('./config.js');
+
 var _allthingsgomusic = require('./websites/allthingsgomusic.js');
 
 var _anonymouslygifted = require('./websites/anonymouslygifted.js');
@@ -88,9 +90,11 @@ _stampthewax.stampthewax, _thebluewalrus.thebluewalrus, _theburningearremix.theb
 _wearegoingsolo.wearegoingsolo, _zillanoise.zillanoise // not testeted
 ];
 
-funcs.forEach(function (func, i) {
-  console.log(func, i);
-  func(); //run functions from files
+_config.getAllTheIdsPromise.then(function (allIds) {
+  funcs.forEach(function (func, i) {
+    console.log(func, 1 + i);
+    func(allIds);
+  });
 });
 
 setTimeout(function () {

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['pop']
 }
 
-export function neongoldrecords() {
-  requestWebsite(siteData)
+export function neongoldrecords(allIds) {
+  requestWebsite(siteData, allIds)
 }

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function zillanoise() {
-  requestWebsite(siteData)
+export function zillanoise(allIds) {
+  requestWebsite(siteData, allIds)
 }

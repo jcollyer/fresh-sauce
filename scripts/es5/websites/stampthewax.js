@@ -15,6 +15,6 @@ var siteData = {
   genre: ['funk']
 };
 
-function stampthewax() {
-  (0, _config.requestWebsite)(siteData);
+function stampthewax(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

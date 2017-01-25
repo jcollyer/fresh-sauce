@@ -15,6 +15,6 @@ var siteData = {
   genre: ['chill', 'bands']
 };
 
-function wearegoingsolo() {
-  (0, _config.requestWebsite)(siteData);
+function wearegoingsolo(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

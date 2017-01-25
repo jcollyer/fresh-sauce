@@ -8,6 +8,6 @@ const siteData = {
   genre: ['bands']
 }
 
-export function thenewlofi() {
-  requestWebsite(siteData)
+export function thenewlofi(allIds) {
+  requestWebsite(siteData, allIds)
 }

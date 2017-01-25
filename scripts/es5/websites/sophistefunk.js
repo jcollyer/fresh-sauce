@@ -15,6 +15,6 @@ var siteData = {
   genre: ['funk']
 };
 
-function sophistefunk() {
-  (0, _config.requestWebsite)(siteData);
+function sophistefunk(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['soul']
 }
 
-export function thebluewalrus() {
-  requestWebsite(siteData)
+export function thebluewalrus(allIds) {
+  requestWebsite(siteData, allIds)
 }

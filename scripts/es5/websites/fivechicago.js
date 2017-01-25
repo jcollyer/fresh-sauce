@@ -15,6 +15,6 @@ var siteData = {
   genre: ['house']
 };
 
-function fivechicago() {
-  (0, _config.requestWebsite)(siteData);
+function fivechicago(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

@@ -8,6 +8,6 @@ const siteData = {
   genre: ['remix']
 }
 
-export function theburningearremix() {
-  requestWebsite(siteData)
+export function theburningearremix(allIds) {
+  requestWebsite(siteData, allIds)
 }

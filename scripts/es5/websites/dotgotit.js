@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function dotgotit() {
-  (0, _config.requestWebsite)(siteData);
+function dotgotit(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

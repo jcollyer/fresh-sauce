@@ -1,3 +1,4 @@
+import { getAllTheIdsPromise } from './config.js'
 import { allthingsgomusic } from './websites/allthingsgomusic.js'
 import { anonymouslygifted } from './websites/anonymouslygifted.js'
 import { badperm } from './websites/badperm.js'
@@ -72,9 +73,11 @@ const funcs = [
   zillanoise // not testeted
 ]
 
-funcs.forEach((func, i)=>{
-  console.log(func, i)
-  func() //run functions from files
+getAllTheIdsPromise.then((allIds)=>{
+  funcs.forEach((func, i)=>{
+    console.log(func, 1 + i)
+    func(allIds)
+  })
 })
 
 setTimeout(() => {

@@ -4,35 +4,27 @@ import Firebase from 'firebase'
 const ref = new Firebase('https://fresh-sauce.firebaseio.com/')
 const idsRef = ref.child('ids')
 const tracksRef = ref.child('tracks')
-const sessionIds = []
-let $
+let $, sessionIds = []
 
-export function requestWebsite(siteData) {
-  getAllIds((allIds) => {
-    requestMainSite(allIds, sessionIds, siteData)
-  })
+export function requestWebsite(siteData, allIds) {
+  requestMainSite(allIds, sessionIds, siteData)
 }
 
-function getAllIds(callback) {
+export var getAllTheIdsPromise = new Promise((resolve, reject)=>{
   idsRef.once('value', (snapshot) => {
     let filteredIds = [];
 
     if(snapshot.val() === null) {
-      callback(filteredIds)
+      console.log('no ids!')
     } else {
-      getIds(snapshot.val())
+      const tracksObj = snapshot.val()
+      const ids = Object.keys(tracksObj).map((track) => {
+        return track
+      })
+      resolve(ids)
     }
   })
-
-  function getIds(obj) {
-    const ids = []
-    Object.keys(obj).map((track) => {
-      ids.push(obj[track].id)
-    })
-
-    callback(ids)
-  }
-}
+})
 
 function requestMainSite(allIds, sessionIds, siteData) {
   // skip url lookup if its not needed

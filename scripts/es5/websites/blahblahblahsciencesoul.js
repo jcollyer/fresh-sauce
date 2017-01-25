@@ -15,6 +15,6 @@ var siteData = {
   genre: ['soul']
 };
 
-function blahblahblahsciencesoul() {
-  (0, _config.requestWebsite)(siteData);
+function blahblahblahsciencesoul(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

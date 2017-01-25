@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function beatspill() {
-  (0, _config.requestWebsite)(siteData);
+function beatspill(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getAllTheIdsPromise = undefined;
 exports.requestWebsite = requestWebsite;
 
 var _request = require('request');
@@ -22,35 +23,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ref = new _firebase2.default('https://fresh-sauce.firebaseio.com/');
 var idsRef = ref.child('ids');
 var tracksRef = ref.child('tracks');
-var sessionIds = [];
-var $ = void 0;
+var $ = void 0,
+    sessionIds = [];
 
-function requestWebsite(siteData) {
-  getAllIds(function (allIds) {
-    requestMainSite(allIds, sessionIds, siteData);
-  });
+function requestWebsite(siteData, allIds) {
+  requestMainSite(allIds, sessionIds, siteData);
 }
 
-function getAllIds(callback) {
+var getAllTheIdsPromise = exports.getAllTheIdsPromise = new Promise(function (resolve, reject) {
   idsRef.once('value', function (snapshot) {
     var filteredIds = [];
 
     if (snapshot.val() === null) {
-      callback(filteredIds);
+      console.log('no ids!');
     } else {
-      getIds(snapshot.val());
+      var tracksObj = snapshot.val();
+      var ids = Object.keys(tracksObj).map(function (track) {
+        return track;
+      });
+      resolve(ids);
     }
   });
-
-  function getIds(obj) {
-    var ids = [];
-    Object.keys(obj).map(function (track) {
-      ids.push(obj[track].id);
-    });
-
-    callback(ids);
-  }
-}
+});
 
 function requestMainSite(allIds, sessionIds, siteData) {
   // skip url lookup if its not needed

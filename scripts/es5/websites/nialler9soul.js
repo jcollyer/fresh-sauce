@@ -15,6 +15,6 @@ var siteData = {
   genre: ['soul']
 };
 
-function nialler9soul() {
-  (0, _config.requestWebsite)(siteData);
+function nialler9soul(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

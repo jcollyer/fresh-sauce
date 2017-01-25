@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function carolinaontherise() {
-  requestWebsite(siteData)
+export function carolinaontherise(allIds) {
+  requestWebsite(siteData, allIds)
 }

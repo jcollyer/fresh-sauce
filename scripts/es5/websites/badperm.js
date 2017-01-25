@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function badperm() {
-  (0, _config.requestWebsite)(siteData);
+function badperm(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

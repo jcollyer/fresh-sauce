@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function chicityhiphop() {
-  requestWebsite(siteData)
+export function chicityhiphop(allIds) {
+  requestWebsite(siteData, allIds)
 }

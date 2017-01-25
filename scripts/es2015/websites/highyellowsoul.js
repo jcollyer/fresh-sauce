@@ -8,6 +8,6 @@ const siteData = {
   genre: ['soul']
 }
 
-export function highyellowsoul() {
-  requestWebsite(siteData)
+export function highyellowsoul(allIds) {
+  requestWebsite(siteData, allIds)
 }

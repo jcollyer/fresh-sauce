@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function cream() {
-  requestWebsite(siteData)
+export function cream(allIds) {
+  requestWebsite(siteData, allIds)
 }

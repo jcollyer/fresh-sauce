@@ -8,6 +8,6 @@ const siteData = {
   genre: ['beats']
 }
 
-export function beatmecca() {
-  requestWebsite(siteData)
+export function beatmecca(allIds) {
+  requestWebsite(siteData, allIds)
 }

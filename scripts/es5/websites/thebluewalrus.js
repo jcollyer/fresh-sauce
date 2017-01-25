@@ -15,6 +15,6 @@ var siteData = {
   genre: ['soul']
 };
 
-function thebluewalrus() {
-  (0, _config.requestWebsite)(siteData);
+function thebluewalrus(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

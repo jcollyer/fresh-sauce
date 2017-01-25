@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function djbooth() {
-  requestWebsite(siteData)
+export function djbooth(allIds) {
+  requestWebsite(siteData, allIds)
 }

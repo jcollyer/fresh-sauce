@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function anonymouslygifted() {
-  (0, _config.requestWebsite)(siteData);
+function anonymouslygifted(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

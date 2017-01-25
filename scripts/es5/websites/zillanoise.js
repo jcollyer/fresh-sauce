@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function zillanoise() {
-  (0, _config.requestWebsite)(siteData);
+function zillanoise(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

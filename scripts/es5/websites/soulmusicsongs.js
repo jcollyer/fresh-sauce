@@ -15,6 +15,6 @@ var siteData = {
   genre: ['classic']
 };
 
-function soulmusicsongs() {
-  (0, _config.requestWebsite)(siteData);
+function soulmusicsongs(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

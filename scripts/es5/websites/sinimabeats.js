@@ -15,6 +15,6 @@ var siteData = {
   genre: ['beats']
 };
 
-function sinimabeats() {
-  (0, _config.requestWebsite)(siteData);
+function sinimabeats(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

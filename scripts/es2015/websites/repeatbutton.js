@@ -8,6 +8,6 @@ const siteData = {
   genre: ['pop']
 }
 
-export function repeatbutton() {
-  requestWebsite(siteData)
+export function repeatbutton(allIds) {
+  requestWebsite(siteData, allIds)
 }

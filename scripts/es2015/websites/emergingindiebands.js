@@ -8,6 +8,6 @@ const siteData = {
   genre: ['bands']
 }
 
-export function emergingindiebands() {
-  requestWebsite(siteData)
+export function emergingindiebands(allIds) {
+  requestWebsite(siteData, allIds)
 }

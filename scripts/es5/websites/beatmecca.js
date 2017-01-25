@@ -15,6 +15,6 @@ var siteData = {
   genre: ['beats']
 };
 
-function beatmecca() {
-  (0, _config.requestWebsite)(siteData);
+function beatmecca(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

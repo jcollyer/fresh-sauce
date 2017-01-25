@@ -8,6 +8,6 @@ const siteData = {
   genre: ['chill']
 }
 
-export function dimestoresaints() {
-  requestWebsite(siteData)
+export function dimestoresaints(allIds) {
+  requestWebsite(siteData, allIds)
 }

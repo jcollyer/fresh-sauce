@@ -8,6 +8,6 @@ const siteData = {
   genre: ['pop']
 }
 
-export function allthingsgomusic() {
-  requestWebsite(siteData)
+export function allthingsgomusic(allIds) {
+  requestWebsite(siteData, allIds)
 }

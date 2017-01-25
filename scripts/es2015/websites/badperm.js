@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop']
 }
 
-export function badperm() {
-  requestWebsite(siteData)
+export function badperm(allIds) {
+  requestWebsite(siteData, allIds)
 }

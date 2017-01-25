@@ -8,6 +8,6 @@ const siteData = {
   genre: ['hip-hop', 'pop']
 }
 
-export function crackedatoms() {
-  requestWebsite(siteData)
+export function crackedatoms(allIds) {
+  requestWebsite(siteData, allIds)
 }

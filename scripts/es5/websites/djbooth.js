@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function djbooth() {
-  (0, _config.requestWebsite)(siteData);
+function djbooth(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

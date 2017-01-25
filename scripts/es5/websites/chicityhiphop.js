@@ -15,6 +15,6 @@ var siteData = {
   genre: ['hip-hop']
 };
 
-function chicityhiphop() {
-  (0, _config.requestWebsite)(siteData);
+function chicityhiphop(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

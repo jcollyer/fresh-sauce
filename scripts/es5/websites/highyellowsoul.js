@@ -15,6 +15,6 @@ var siteData = {
   genre: ['soul']
 };
 
-function highyellowsoul() {
-  (0, _config.requestWebsite)(siteData);
+function highyellowsoul(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }

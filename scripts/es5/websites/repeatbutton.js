@@ -15,6 +15,6 @@ var siteData = {
   genre: ['pop']
 };
 
-function repeatbutton() {
-  (0, _config.requestWebsite)(siteData);
+function repeatbutton(allIds) {
+  (0, _config.requestWebsite)(siteData, allIds);
 }
