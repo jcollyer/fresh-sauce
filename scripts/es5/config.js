@@ -32,8 +32,6 @@ function requestWebsite(siteData, allIds) {
 
 var getAllTheIdsPromise = exports.getAllTheIdsPromise = new Promise(function (resolve, reject) {
   idsRef.once('value', function (snapshot) {
-    var filteredIds = [];
-
     if (snapshot.val() === null) {
       console.log('no ids!');
     } else {
@@ -41,6 +39,7 @@ var getAllTheIdsPromise = exports.getAllTheIdsPromise = new Promise(function (re
       var ids = Object.keys(tracksObj).map(function (track) {
         return track;
       });
+      console.log('---------- Got All Existing Ids ---------------');
       resolve(ids);
     }
   });
@@ -100,10 +99,9 @@ function getTrack(href, allIds, sessionIds, siteData) {
 };
 
 function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
-  var idLength = void 0;
-  var idType = void 0;
-  var thisId = null;
-
+  var idLength = void 0,
+      idType = void 0,
+      thisId = null;
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9;
     idType = "sc";
@@ -111,7 +109,8 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
   } else if (url.split(".")[1] === "youtube" || url.split(".")[1] === "youtube-nocookie") {
     idLength = 11;
     idType = "yt";
-    thisId = url.split('/')[4].substr(0, idLength);
+    // set to null if not correct YT id
+    thisId = url.split('/embed/')[1].substr(0, idLength) === 'videoseries' ? null : url.split('/embed/')[1].substr(0, idLength);
   } else {
     console.log(url, " Not soundcloud or youtube ID");
     return;

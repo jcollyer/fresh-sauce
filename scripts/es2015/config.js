@@ -12,15 +12,12 @@ export function requestWebsite(siteData, allIds) {
 
 export var getAllTheIdsPromise = new Promise((resolve, reject)=>{
   idsRef.once('value', (snapshot) => {
-    let filteredIds = [];
-
     if(snapshot.val() === null) {
       console.log('no ids!')
     } else {
       const tracksObj = snapshot.val()
-      const ids = Object.keys(tracksObj).map((track) => {
-        return track
-      })
+      const ids = Object.keys(tracksObj).map((track) => track)
+      console.log('---------- Got All Existing Ids ---------------')
       resolve(ids)
     }
   })
@@ -80,10 +77,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
 };
 
 function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
-  let idLength
-  let idType
-  let thisId = null
-
+  let idLength, idType, thisId = null
   if (url.split(".")[1] === "soundcloud") {
     idLength = 9
     idType = "sc"
@@ -91,7 +85,8 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
   } else if (url.split(".")[1] === "youtube" || url.split(".")[1] === "youtube-nocookie") {
     idLength = 11
     idType = "yt"
-    thisId = url.split('/')[4].substr(0,idLength)
+    // set to null if not correct YT id
+    thisId = url.split('/embed/')[1].substr(0,idLength) === 'videoseries' ? null : url.split('/embed/')[1].substr(0,idLength)
   } else {
     console.log(url, " Not soundcloud or youtube ID")
     return
