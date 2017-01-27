@@ -33,31 +33,39 @@ function requestWebsite(siteData, allIds) {
 var getAllTheIdsPromise = exports.getAllTheIdsPromise = new Promise(function (resolve, reject) {
   idsRef.once('value', function (snapshot) {
     if (snapshot.val() === null) {
-      console.log('no ids!');
+      console.warn('No IDs!');
     } else {
       var tracksObj = snapshot.val();
       var ids = Object.keys(tracksObj).map(function (track) {
         return track;
       });
-      console.log('---------- Got All Existing Ids ---------------');
+      console.warn('---------- Got All Existing Ids ---------------');
       resolve(ids);
     }
   });
 });
+
+function asyncCall(url, returnType) {
+  return new Promise(function (resolve, reject) {
+    (0, _request2.default)({ url: url }, function (err, response, body) {
+      if (err || response.statusCode !== 200) return console.error(err);
+      if (returnType === 'json') {
+        var data = JSON.parse(body);
+        resolve(data);
+      } else if (returnType === 'dom') {
+        $ = _cheerio2.default.load(body);
+        resolve($);
+      }
+    });
+  });
+}
 
 function requestMainSite(allIds, sessionIds, siteData) {
   // skip url lookup if its not needed
   if (siteData.noSubSite) {
     getTrack(siteData.mainSite, allIds, sessionIds, siteData);
   } else {
-    (0, _request2.default)({
-      method: 'GET',
-      url: siteData.mainSite
-    }, function (err, response, body) {
-      if (err) return console.error(err);
-
-      $ = _cheerio2.default.load(body);
-
+    asyncCall(siteData.mainSite, 'dom').then(function ($) {
       // get list of urls
       $(siteData.mainSiteElements).each(function () {
         var uri = $(this).attr('href');
@@ -70,9 +78,7 @@ function requestMainSite(allIds, sessionIds, siteData) {
 }
 
 function getTrack(href, allIds, sessionIds, siteData) {
-  (0, _request2.default)({ url: href }, function (err, response, body) {
-    if (err) return console.error(err);
-    $ = _cheerio2.default.load(body);
+  asyncCall(href, 'dom').then(function ($) {
     if ($(siteData.subSiteElements).length < 1) {
       console.warn('Can\'t find any "siteData.subSiteElements" elements');
     } else {
@@ -126,24 +132,18 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
 
 function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   var url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status';
-  (0, _request2.default)(url, function (error, response, body) {
-    if (error) {
-      console.log('Error running requestSoundCloudOrYouTube()', error);
-    }
-    if (!error && response.statusCode == 200) {
-      var data = JSON.parse(body);
-      var genre = siteData.genre;
+  asyncCall(url, 'json').then(function (data) {
+    var genre = siteData.genre;
 
-      if (data) {
-        // Make sure data is not empty
-        var track = idType === 'sc' ? formatSCData({ id: id }, data, genre, href) : formatYTData({ id: id }, data, genre, href);
+    if (data) {
+      // Make sure data is not empty
+      var track = idType === 'sc' ? formatSCData({ id: id }, data, genre, href) : formatYTData({ id: id }, data, genre, href);
 
-        // Add data to firebase
-        // same code found in ./src/components/add-track
-        tracksRef.child(track.id).setWithPriority(track, Date.now());
-        idsRef.child(track.id).setWithPriority({ id: track.id, displaying: true }, Date.now());
-        console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre);
-      }
+      // Add data to firebase
+      // same code found in ./src/components/add-track
+      tracksRef.child(track.id).setWithPriority(track, Date.now());
+      idsRef.child(track.id).setWithPriority({ id: track.id, displaying: true }, Date.now());
+      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre);
     }
   });
 }

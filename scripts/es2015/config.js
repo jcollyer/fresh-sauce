@@ -13,29 +13,37 @@ export function requestWebsite(siteData, allIds) {
 export var getAllTheIdsPromise = new Promise((resolve, reject)=>{
   idsRef.once('value', (snapshot) => {
     if(snapshot.val() === null) {
-      console.log('no ids!')
+      console.warn('No IDs!')
     } else {
       const tracksObj = snapshot.val()
       const ids = Object.keys(tracksObj).map((track) => track)
-      console.log('---------- Got All Existing Ids ---------------')
+      console.warn('---------- Got All Existing Ids ---------------')
       resolve(ids)
     }
   })
 })
+
+function asyncCall(url, returnType){
+  return new Promise((resolve, reject)=>{
+    request({url: url}, function(err, response, body) {
+      if (err || response.statusCode !== 200) return console.error(err);
+      if(returnType === 'json'){
+        const data = JSON.parse(body)
+        resolve(data)
+      } else if(returnType === 'dom') {
+        $ = cheerio.load(body);
+        resolve($)
+      }
+    })
+  })
+}
 
 function requestMainSite(allIds, sessionIds, siteData) {
   // skip url lookup if its not needed
   if(siteData.noSubSite) {
     getTrack(siteData.mainSite, allIds, sessionIds, siteData);
   } else {
-    request({
-      method: 'GET',
-      url: siteData.mainSite
-    }, function (err, response, body) {
-      if (err) return console.error(err);
-
-      $ = cheerio.load(body);
-
+    asyncCall(siteData.mainSite, 'dom').then(($) => {
       // get list of urls
       $(siteData.mainSiteElements).each(function() {
         let uri = $(this).attr('href')
@@ -48,9 +56,7 @@ function requestMainSite(allIds, sessionIds, siteData) {
 }
 
 function getTrack(href, allIds, sessionIds, siteData) {
-  request({url: href}, function(err, response, body) {
-    if (err) return console.error(err);
-    $ = cheerio.load(body);
+  asyncCall(href, 'dom').then(($) => {
     if($(siteData.subSiteElements).length < 1) {
       console.warn('Can\'t find any "siteData.subSiteElements" elements')
     } else {
@@ -73,7 +79,7 @@ function getTrack(href, allIds, sessionIds, siteData) {
         }
       });
     }
-  });
+  })
 };
 
 function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
@@ -102,23 +108,17 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
 
 function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   const url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/'+id+'.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id='+id+'&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status'
-  request(url, function (error, response, body) {
-    if (error) {
-      console.log('Error running requestSoundCloudOrYouTube()', error)
-    }
-    if (!error && response.statusCode == 200) {
-      const data = JSON.parse(body)
-      const genre = siteData.genre
+  asyncCall(url, 'json').then((data)=>{
+    const genre = siteData.genre
 
-      if(data) { // Make sure data is not empty
-        const track = idType === 'sc' ? formatSCData({id:id}, data, genre, href) : formatYTData({id:id}, data, genre, href)
+    if(data) { // Make sure data is not empty
+      const track = idType === 'sc' ? formatSCData({id:id}, data, genre, href) : formatYTData({id:id}, data, genre, href)
 
-        // Add data to firebase
-        // same code found in ./src/components/add-track
-        tracksRef.child(track.id).setWithPriority(track, Date.now())
-        idsRef.child(track.id).setWithPriority({id: track.id, displaying: true}, Date.now())
-        console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre)
-      }
+      // Add data to firebase
+      // same code found in ./src/components/add-track
+      tracksRef.child(track.id).setWithPriority(track, Date.now())
+      idsRef.child(track.id).setWithPriority({id: track.id, displaying: true}, Date.now())
+      console.log('Added Track ID: ', track.id, ' TYPE: ', track.kind, 'GENRE: ', genre)
     }
   })
 }
