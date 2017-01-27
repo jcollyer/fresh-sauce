@@ -133,11 +133,10 @@ function pushTrack(url, sessionIds, filteredIds, allIds, siteData, href) {
 function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   var url = idType === 'sc' ? 'https://api.soundcloud.com/tracks/' + id + '.json?client_id=b5e21578d92314bc753b90ea7c971c1e' : 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyDCoZw9dsD8pz3WxDOyQa_542XCDfpCwB4&part=snippet,contentDetails,statistics,status';
   asyncCall(url, 'json').then(function (data) {
-    var genre = siteData.genre;
-
     if (data) {
       // Make sure data is not empty
-      var track = idType === 'sc' ? formatSCData({ id: id }, data, genre, href) : formatYTData({ id: id }, data, genre, href);
+      var trackBase = { id: id, genre: siteData.genre };
+      var track = idType === 'sc' ? formatSCData(trackBase, data, href) : formatYTData(trackBase, data, href);
 
       // Add data to firebase
       // same code found in ./src/components/add-track
@@ -148,10 +147,10 @@ function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   });
 }
 
-function formatSCData(track, data, genre, href) {
-  if (data.title && data.title.indexOf("remix" || "Remix") > -1 && genre.indexOf("remix" || "Remix") < 0) {
+function formatSCData(track, data, href) {
+  if (data.title && data.title.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
     // add remix genre if title includes string 'remix' and not already remix genre
-    genre.push("remix");
+    track.genre.push('remix');
   }
 
   track.artist = data.user.username;
@@ -160,7 +159,6 @@ function formatSCData(track, data, genre, href) {
   track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large', 't500x500') : '';
   track.duration = data.duration;
   track.featured = false;
-  track.genre = genre;
   track.kind = 'sc';
   track.likes = 0;
   track.permalink = data.permalink_url;
@@ -171,10 +169,10 @@ function formatSCData(track, data, genre, href) {
   return track;
 }
 
-function formatYTData(track, data, genre, href) {
-  if (data.items[0] && data.items[0].snippet.title.indexOf("remix" || "Remix") > -1 && genre.indexOf("remix" || "Remix") < 0) {
+function formatYTData(track, data, href) {
+  if (data.items[0] && data.items[0].snippet.title.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
     // add remix genre if title includes string 'remix' and not already remix genre
-    genre.push("remix");
+    track.genre.push('remix');
   }
 
   track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
@@ -183,7 +181,6 @@ function formatYTData(track, data, genre, href) {
   track.artwork_url_hires = data.items[0].snippet.thumbnails.standard ? data.items[0].snippet.thumbnails.standard.url : data.items[0].snippet.thumbnails.high.url;
   track.duration = data.items[0].contentDetails.duration;
   track.featured = false;
-  track.genre = genre;
   track.kind = 'yt';
   track.likes = 0;
   track.permalink = 'https://www.youtube.com/watch?v=' + data.items[0].id, track.tag_list = data.items[0].snippet.tags || '';
@@ -192,11 +189,4 @@ function formatYTData(track, data, genre, href) {
   track.user = data.items[0].snippet.channelId;
   track.href = href;
   return track;
-}
-
-function exit() {
-  setTimeout(function () {
-    console.log("bye...");
-    process.exit();
-  }, 5500);
 }
