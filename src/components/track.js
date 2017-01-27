@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export default (props) => {
+  const href = props.track.href ? props.track.href.replace(/^https?\:\/\//i, "").replace("www.","").replace(/^/,'www.').split("/")[0] : ''
   return (
     <div className={props.isCurrentTrack ? 'track-item active' : 'track-item'}>
       <div className='track-item-info'>
@@ -24,7 +25,7 @@ export default (props) => {
           </div>
           <a className='origin-link' href={props.track.href} target='_blank'>
             <i className="icon icon-goto"></i>
-            {props.track.href.replace(/^https?\:\/\//i, "").replace("www.","").replace(/^/,'www.').split("/")[0]}
+            { href }
           </a>
           <i className={props.track.featured ? 'icon icon-heart' : 'hide'} ></i>
         </div>
