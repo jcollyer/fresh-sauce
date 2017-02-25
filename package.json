@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/jcollyer/freshsauce",
   "engines": {
-    "node": "4.1.1"
+    "node": "7.4.0"
   },
   "scripts": {
     "watch": "babel scripts/es2015 --out-dir scripts/es5 -w",
@@ -50,7 +50,7 @@
     "bluebird": "^3.4.6",
     "express": "^4.13.3",
     "node-libs-browser": "^0.5.2",
-    "webpack": "^1.9.11",
-    "webpack-dev-middleware": "^1.2.0"
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.1"
   }
 }
