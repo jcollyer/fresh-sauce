@@ -1,50 +1,81 @@
-var Webpack = require('webpack');
+const Webpack = require('webpack');
+const path = require('path');
+
+const sourcePath = path.join(__dirname, './src');
+const buildPath = path.join(__dirname, './build');
+const plugins = [new Webpack.HotModuleReplacementPlugin()]
 
 module.exports = {
   devtool: 'eval',
-  entry: ['./src/index.js'],
+  context: sourcePath,
+  entry: {
+    js: './index.js',
+    vendor: ['react']
+  },
   output: {
-    path: '/build',
-    filename: 'bundle.js'
+    path: buildPath,
+    filename: '[name].bundle.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015']
-        }
+         test: /\.(js|jsx)$/,
+         exclude: /node_modules/,
+         use: [
+           'babel-loader'
+         ]
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader','less-loader']
       }, {
-        test: /\.less$/, loader: 'style-loader!css-loader!less-loader'
-      }, {
-        test: /\.css$/, loader: 'style-loader!css-loader!'
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }, {
         test: /\.svg/,
-        loader: 'url-loader?limit=10000&minetype=image/svg+xml'
+        use: ['url-loader?limit=10000&minetype=image/svg+xml']
       }, {
         test: /\.eot/,
-        loader: 'url-loader?limit=10000&minetype=application/vnd.ms-fontobject'
+        use: ['url-loader?limit=10000&minetype=application/vnd.ms-fontobject']
       }, {
         test: /\.ttf|otf/,
-        loader: 'url-loader?limit=10000&minetype=application/font-sfnt'
+        use: ['url-loader?limit=10000&minetype=application/font-sfnt']
       }, {
         test: /\.woff/,
-        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+        use: ['url-loader?limit=10000&minetype=application/font-woff']
       }, {
         test: /\.gif/,
-        loader: 'url-loader?limit=10000&minetype=image/gif'
+        use: ['url-loader?limit=10000&minetype=image/gif']
       }, {
         test: /\.jpg/,
-        loader: 'url-loader?limit=10000&minetype=image/jpg'
+        use: ['url-loader?limit=10000&minetype=image/jpg']
       }, {
         test: /\.png/,
-        loader: 'url-loader?limit=10000&minetype=image/png'
-    }]
+        use: ['url-loader?limit=10000&minetype=image/png']
+      }
+    ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
-  plugins: [new Webpack.HotModuleReplacementPlugin()]
+  plugins,
+
+  devServer: {
+  contentBase: './src',
+  port: 3000,
+    stats: {
+      assets: true,
+      children: false,
+      chunks: false,
+      hash: false,
+      modules: false,
+      publicPath: false,
+      timings: true,
+      version: false,
+      warnings: true,
+      colors: {
+        green: '\u001b[32m',
+      }
+    }
+  }
 };
