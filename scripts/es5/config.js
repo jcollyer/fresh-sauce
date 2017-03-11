@@ -23,6 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ref = new _firebase2.default('https://fresh-sauce.firebaseio.com/');
 var idsRef = ref.child('ids');
 var tracksRef = ref.child('tracks');
+var genresRef = ref.child('genres');
 var $ = void 0,
     sessionIds = [];
 
@@ -147,46 +148,67 @@ function requestSoundCloudOrYouTube(id, idType, siteData, href) {
   });
 }
 
+function test() {
+
+  tracksRef.on('value', function (snapshot) {
+    snapshot.forEach(function (theItem) {
+
+      var item = theItem.val();
+
+      var track = item.kind === 'sc' ? formatSCData({ id: item.id, genre: item.genre }, item) : formatYTData({ id: item.id, genre: item.genre }, item);
+      track.genre.forEach(function (genre) {
+        // console.log(track)
+        genresRef.child(genre).child(track.id).setWithPriority(track, track.timestamp);
+      });
+    });
+  });
+}
+test();
+
 function formatSCData(track, data, href) {
-  if (data.title && data.title.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
+  if (data.title.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
     // add remix genre if title includes string 'remix' and not already remix genre
+    console.log('--------------------------remix true');
     track.genre.push('remix');
   }
 
-  track.artist = data.user.username;
-  track.artwork_url = data.artwork_url;
-  track.artwork_url_midres = data.artwork_url ? data.artwork_url.replace('large', 't200x200') : '';
-  track.artwork_url_hires = data.artwork_url ? data.artwork_url.replace('large', 't500x500') : '';
+  track.artist = data.artist;
+  track.artwork_url = data.artwork_url || null;
+  track.artwork_url_midres = data.artwork_url_midres || null;
+  track.artwork_url_hires = data.artwork_url_hires || null;
   track.duration = data.duration;
   track.featured = false;
   track.kind = 'sc';
   track.likes = 0;
-  track.permalink = data.permalink_url;
+  track.permalink = data.permalink || null;
   track.tag_list = data.tag_list;
-  track.timestamp = 0 - Date.now();
+  track.timestamp = 0 - data.timestamp;
   track.title = data.title;
-  track.href = href;
+  track.href = data.href || null;
   return track;
 }
 
 function formatYTData(track, data, href) {
-  if (data.items[0] && data.items[0].snippet.title.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
+  // console.log('-------------------',data)
+  if (data.genre.indexOf("remix" || "Remix") > -1 && track.genre.indexOf("remix" || "Remix") < 0) {
     // add remix genre if title includes string 'remix' and not already remix genre
+    console.log('------------------------remix true');
     track.genre.push('remix');
   }
 
-  track.artist = data.items[0].snippet.tags ? data.items[0].snippet.tags[0] : '';
-  track.artwork_url = data.items[0].snippet.thumbnails.default.url;
-  track.artwork_url_midres = data.items[0].snippet.thumbnails.medium.url;
-  track.artwork_url_hires = data.items[0].snippet.thumbnails.standard ? data.items[0].snippet.thumbnails.standard.url : data.items[0].snippet.thumbnails.high.url;
-  track.duration = data.items[0].contentDetails.duration;
+  track.artist = data.artist;
+  track.artwork_url = data.artwork_url || null;
+  track.artwork_url_midres = data.artwork_url_midres || null;
+  track.artwork_url_hires = data.artwork_url_hires || null;
+  track.duration = data.duration || null;
   track.featured = false;
   track.kind = 'yt';
   track.likes = 0;
-  track.permalink = 'https://www.youtube.com/watch?v=' + data.items[0].id, track.tag_list = data.items[0].snippet.tags || '';
-  track.timestamp = 0 - Date.now();
-  track.title = data.items[0].snippet.title;
-  track.user = data.items[0].snippet.channelId;
-  track.href = href;
+  track.permalink = data.permalink || null;
+  track.tag_list = data.tag_list;
+  track.timestamp = 0 - data.timestamp;
+  track.title = data.title;
+  track.user = data.user;
+  track.href = data.href || null;
   return track;
 }
